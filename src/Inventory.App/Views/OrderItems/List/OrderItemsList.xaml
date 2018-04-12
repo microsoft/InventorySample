@@ -1,0 +1,80 @@
+﻿<UserControl
+    x:Class="Inventory.Views.OrderItemsList"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:Inventory.Models"
+    xmlns:controls="using:Inventory.Controls"
+    mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="400">
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="HeaderTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="48"/>
+                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="12*"/>
+                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="8*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="Product ID" Style="{StaticResource ColumnHeaderStyle}" />
+                <TextBlock Grid.Column="2" Text="Product Name" Style="{StaticResource ColumnHeaderStyle}" />
+                <TextBlock Grid.Column="3" Text="Order Line" Style="{StaticResource ColumnHeaderRightStyle}" />
+                <TextBlock Grid.Column="4" Text="Unit Price" Style="{StaticResource ColumnHeaderRightStyle}" />
+                <TextBlock Grid.Column="5" Text="Quantity" Style="{StaticResource ColumnHeaderRightStyle}" />
+                <TextBlock Grid.Column="6" Text="Discount" Style="{StaticResource ColumnHeaderRightStyle}" />
+                <TextBlock Grid.Column="7" Text="Subtotal" Style="{StaticResource ColumnHeaderRightStyle}" />
+                <TextBlock Grid.Column="8" Text="Total" Style="{StaticResource ColumnHeaderRightStyle}" />
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ItemTemplate" x:DataType="models:OrderItemModel">
+            <Grid BorderThickness="0,0,0,1" BorderBrush="LightGray">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="48"/>
+                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="12*"/>
+                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="8*"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Padding="1" Height="31">
+                    <Image Source="{x:Bind Product.ThumbnailBitmap}" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" x:Phase="2" />
+                </Border>
+                <TextBlock Grid.Column="1" Text="{x:Bind ProductID}" Style="{StaticResource ColumnValueStyle}" />
+                <TextBlock Grid.Column="2" Text="{x:Bind Product.Name}" Style="{StaticResource ColumnValueStyle}" />
+                <TextBlock Grid.Column="3" Text="{x:Bind OrderLine, Mode=OneWay}" Style="{StaticResource ColumnValueRightStyle}" />
+                <TextBlock Grid.Column="4" Text="{x:Bind UnitPrice, Mode=OneWay}" Style="{StaticResource ColumnValueRightStyle}" />
+                <TextBlock Grid.Column="5" Text="{x:Bind Quantity, Mode=OneWay}" Style="{StaticResource ColumnValueRightStyle}" />
+                <TextBlock Grid.Column="6" Text="{x:Bind Discount, Mode=OneWay}" Style="{StaticResource ColumnValueRightStyle}" />
+                <TextBlock Grid.Column="7" Text="{x:Bind Subtotal, Mode=OneWay}" Style="{StaticResource ColumnValueRightStyle}" />
+                <TextBlock Grid.Column="8" Text="{x:Bind Total, Mode=OneWay}" Style="{StaticResource ColumnValueRightStyle}" />
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <controls:DataList ItemsSource="{x:Bind ViewModel.Items, Mode=OneWay}"
+                       NewLabel="New Order Item"
+                       SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay}"
+                       HeaderTemplate="{StaticResource HeaderTemplate}"
+                       ItemTemplate="{StaticResource ItemTemplate}"
+                       IsMultipleSelection="{x:Bind ViewModel.IsMultipleSelection, Mode=TwoWay}"
+                       ItemsCount="{x:Bind ViewModel.ItemsCount, Mode=OneWay}"
+                       NewCommand="{x:Bind ViewModel.NewCommand}"
+                       RefreshCommand="{x:Bind ViewModel.RefreshCommand}"
+                       Query="{x:Bind ViewModel.Query, Mode=TwoWay}"
+                       QuerySubmittedCommand="{x:Bind ViewModel.RefreshCommand}"
+                       StartSelectionCommand="{x:Bind ViewModel.StartSelectionCommand}"
+                       CancelSelectionCommand="{x:Bind ViewModel.CancelSelectionCommand}"
+                       SelectItemsCommand="{x:Bind ViewModel.SelectItemsCommand}"
+                       DeselectItemsCommand="{x:Bind ViewModel.DeselectItemsCommand}"
+                       DeleteCommand="{x:Bind ViewModel.DeleteSelectionCommand}" />
+</UserControl>

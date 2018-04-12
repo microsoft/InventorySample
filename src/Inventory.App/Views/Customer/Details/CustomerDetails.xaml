@@ -1,0 +1,98 @@
+﻿<UserControl
+    x:Class="Inventory.Views.CustomerDetails"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Inventory.Controls"
+    xmlns:views="using:Inventory.Views"
+    xmlns:viewmodels="using:Inventory.ViewModels"
+    mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600">
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="DetailsTemplate" x:DataType="viewmodels:CustomerDetailsViewModel">
+            <StackPanel Spacing="6" Margin="0,6">
+                <TextBlock Text="Personal Information" FontSize="16" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
+                <Grid ColumnSpacing="6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" MaxWidth="400" />
+                        <ColumnDefinition Width="*" MaxWidth="400" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Spacing="6">
+                        <controls:LabelTextBox Label="First Name" Text="{x:Bind Item.FirstName, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="Middle Name" Text="{x:Bind Item.MiddleName, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="Last Name" Text="{x:Bind Item.LastName, Mode=TwoWay}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Spacing="6">
+                        <controls:LabelTextBox Label="Title" Text="{x:Bind Item.Title, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="Email Address" Text="{x:Bind Item.EmailAddress, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="Phone" Text="{x:Bind Item.Phone, Mode=TwoWay}" />
+                    </StackPanel>
+                </Grid>
+
+                <Rectangle Margin="6" />
+                <TextBlock Text="Customer Address" FontSize="16" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
+                <Grid ColumnSpacing="6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" MaxWidth="400" />
+                        <ColumnDefinition Width="*" MaxWidth="400" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Spacing="6">
+                        <controls:LabelTextBox Label="Address Line 1" Text="{x:Bind Item.AddressLine1, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="Address Line 2" Text="{x:Bind Item.AddressLine2, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="City" Text="{x:Bind Item.City, Mode=TwoWay}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Spacing="6">
+                        <controls:LabelTextBox Label="Region" Text="{x:Bind Item.Region, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="Postal Code" Text="{x:Bind Item.PostalCode, Mode=TwoWay}" />
+                        <controls:LabelComboBox Label="Country" ItemsSource="{x:Bind DataHelper.CountryCodes}"
+                                                    SelectedValue="{x:Bind Item.CountryCode, Mode=TwoWay}" SelectedValuePath="CountryCodeID" DisplayMemberPath="Name" />
+                    </StackPanel>
+                </Grid>
+
+                <Rectangle Margin="6" />
+                <TextBlock Text="Customer Demographic" FontSize="16" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
+                <Grid ColumnSpacing="6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" MaxWidth="400" />
+                        <ColumnDefinition Width="*" MaxWidth="400" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Spacing="6">
+                        <controls:LabelCalendar Label="BirthDate" Date="{x:Bind Item.BirthDate, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="Occupation" Text="{x:Bind Item.Occupation, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="Education" Text="{x:Bind Item.Education, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="YearlyIncome" Text="{x:Bind Item.YearlyIncome, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" ValueType="Decimal" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Spacing="6">
+                        <controls:LabelTextBox Label="NumberCarsOwned" Text="{x:Bind Item.NumberCarsOwned, Mode=TwoWay, Converter={StaticResource Int32Converter}}" ValueType="Int32" />
+                        <controls:LabelTextBox Label="MaritalStatus" Text="{x:Bind Item.MaritalStatus, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="TotalChildren" Text="{x:Bind Item.TotalChildren, Mode=TwoWay, Converter={StaticResource Int32Converter}}" ValueType="Int32" />
+                        <controls:LabelTextBox Label="ChildrenAtHome" Text="{x:Bind Item.ChildrenAtHome, Mode=TwoWay, Converter={StaticResource Int32Converter}}" ValueType="Int32" />
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid ColumnSpacing="6">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="320"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Margin="6" Background="WhiteSmoke">
+            <views:CustomerCard Margin="6" Item="{x:Bind ViewModel.Item, Mode=OneWay}" />
+        </Grid>
+
+        <controls:Details x:Name="details" Grid.Column="1" Margin="6"
+                          DetailsContent="{x:Bind ViewModel}"
+                          DetailsTemplate="{StaticResource DetailsTemplate}"
+                          CanGoBack="{x:Bind ViewModel.CanGoBack}"
+                          IsEditMode="{x:Bind ViewModel.IsEditMode, Mode=OneWay}"
+                          BackCommand="{x:Bind ViewModel.BackCommand}"
+                          EditCommand="{x:Bind ViewModel.EditCommand}"
+                          DeleteCommand="{x:Bind ViewModel.DeleteCommand}"
+                          SaveCommand="{x:Bind ViewModel.SaveCommand}"
+                          CancelCommand="{x:Bind ViewModel.CancelCommand}" />
+    </Grid>
+</UserControl>

@@ -1,0 +1,79 @@
+﻿<UserControl
+    x:Class="Inventory.Views.OrderDetails"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Inventory.Controls"
+    xmlns:views="using:Inventory.Views"
+    xmlns:viewmodels="using:Inventory.ViewModels"
+    mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600">
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="DetailsTemplate" x:DataType="viewmodels:OrderDetailsViewModel">
+            <StackPanel Spacing="6" Margin="0,6">
+                <Grid ColumnSpacing="6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" MaxWidth="400" />
+                        <ColumnDefinition Width="*" MaxWidth="400" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <StackPanel Grid.Column="0" Spacing="6">
+                        <TextBlock Text="Customer Information" FontSize="16" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
+                        <controls:CustomerSuggestBox DisplayText="{x:Bind Item.Customer.FullName, Mode=OneWay}"
+                                                 CustomerSelectedCommand="{x:Bind CustomerSelectedCommand}"
+                                                 IsReadOnly="{x:Bind Item.CanEditCustomer, Mode=OneWay, Converter={StaticResource BoolNegationConverter}}" />
+                        <controls:LabelTextBox Label="Ship Address" Text="{x:Bind Item.ShipAddress, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="Ship Postal Code" Text="{x:Bind Item.ShipPostalCode, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="Ship City" Text="{x:Bind Item.ShipCity, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="Ship Region" Text="{x:Bind Item.ShipRegion, Mode=TwoWay}" />
+                        <controls:LabelComboBox Label="Ship Country" ItemsSource="{x:Bind DataHelper.CountryCodes}"
+                                            SelectedValue="{x:Bind Item.ShipCountryCode, Mode=TwoWay}" SelectedValuePath="CountryCodeID" DisplayMemberPath="Name" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Spacing="6">
+                        <TextBlock Text="Order Status" FontSize="16" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
+                        <controls:LabelComboBox Label="Status" ItemsSource="{x:Bind DataHelper.OrderStatus}"
+                                            SelectedValue="{x:Bind Item.Status, Mode=TwoWay, Converter={StaticResource Int32Converter}}"
+                                            SelectedValuePath="Status" DisplayMemberPath="Name" />
+                        <controls:LabelComboBox Label="Payment Type" ItemsSource="{x:Bind DataHelper.PaymentTypes}"
+                                            SelectedValue="{x:Bind Item.PaymentType, Mode=TwoWay, Converter={StaticResource Int32Converter}}"
+                                            SelectedValuePath="PaymentTypeID" DisplayMemberPath="Name"
+                                            Visibility="{x:Bind Item.CanEditPayment, Mode=OneWay}"/>
+                        <controls:LabelCalendar Label="Shipped Date" Date="{x:Bind Item.ShippedDate, Mode=TwoWay}"
+                                            MinDate="{x:Bind Item.OrderDate, Mode=OneWay, Converter={StaticResource DateTimeOffsetConverter}}"
+                                            Visibility="{x:Bind Item.CanEditShipping, Mode=OneWay}"/>
+                        <controls:LabelComboBox Label="Shipper" ItemsSource="{x:Bind DataHelper.Shippers}"
+                                            SelectedValue="{x:Bind Item.ShipVia, Mode=TwoWay, Converter={StaticResource Int32Converter}}" SelectedValuePath="ShipperID" DisplayMemberPath="Name"
+                                            Visibility="{x:Bind Item.CanEditShipping, Mode=OneWay}"/>
+                        <controls:LabelCalendar Label="Delivered Date" Date="{x:Bind Item.DeliveredDate, Mode=TwoWay}"
+                                            MinDate="{x:Bind Item.ShippedDate, Mode=OneWay, Converter={StaticResource DateTimeOffsetConverter}}"
+                                            Visibility="{x:Bind Item.CanEditDelivery, Mode=OneWay}"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid ColumnSpacing="6">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="320"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Margin="6" Background="WhiteSmoke">
+            <views:OrderCard Margin="6" Item="{x:Bind ViewModel.Item, Mode=OneWay}" />
+        </Grid>
+
+        <controls:Details x:Name="details" Grid.Column="1" Margin="6"
+                          DetailsContent="{x:Bind ViewModel}"
+                          DetailsTemplate="{StaticResource DetailsTemplate}"
+                          CanGoBack="{x:Bind ViewModel.CanGoBack}"
+                          IsEditMode="{x:Bind ViewModel.IsEditMode, Mode=OneWay}"
+                          BackCommand="{x:Bind ViewModel.BackCommand}"
+                          EditCommand="{x:Bind ViewModel.EditCommand}"
+                          DeleteCommand="{x:Bind ViewModel.DeleteCommand}"
+                          SaveCommand="{x:Bind ViewModel.SaveCommand}"
+                          CancelCommand="{x:Bind ViewModel.CancelCommand}" />
+    </Grid>
+</UserControl>

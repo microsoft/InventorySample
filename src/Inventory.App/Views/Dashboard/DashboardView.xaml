@@ -1,0 +1,52 @@
+﻿<Page
+    x:Class="Inventory.Views.DashboardView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="using:Inventory.Views"
+    xmlns:controls="using:Inventory.Controls"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style x:Key="GridItemStyle" TargetType="GridViewItem">
+            <Setter Property="Margin" Value="6" />
+            <Setter Property="Width" Value="440" />
+            <Setter Property="Height" Value="260" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="LightGray" />
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="WhiteSmoke">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <TextBlock Margin="12" Text="VanArsdel Inventory" FontSize="36" Foreground="#444" />
+        </Grid>
+
+        <TextBlock Grid.Row="1" Margin="12,12,12,0" Text="Dashboard" FontSize="22" Foreground="#666" />
+
+        <GridView Grid.Row="2" Margin="6" ItemContainerStyle="{StaticResource GridItemStyle}" SelectionMode="None" IsItemClickEnabled="True" ItemClick="OnItemClick">
+            <GridViewItem>
+                <views:CustomersPane Margin="12" ItemsSource="{x:Bind ViewModel.Customers, Mode=OneWay}" Tag="Customers" />
+            </GridViewItem>
+            <GridViewItem>
+                <views:ProductsPane Margin="12" ItemsSource="{x:Bind ViewModel.Products, Mode=OneWay}" Tag="Products" />
+            </GridViewItem>
+            <GridViewItem>
+                <views:OrdersPane Margin="12" ItemsSource="{x:Bind ViewModel.Orders, Mode=OneWay}" Tag="Orders" />
+            </GridViewItem>
+            <GridViewItem IsHitTestVisible="False">
+                <views:ChartPane Margin="12,12,12,0" Tag="Charts" />
+            </GridViewItem>
+        </GridView>
+    </Grid>
+</Page>

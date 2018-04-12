@@ -1,0 +1,55 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Inventory.Controls">
+
+    <Style TargetType="controls:IconButton">
+        <Setter Property="Padding" Value="8,7" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:IconButton">
+                    <Button x:Name="button" Padding="{TemplateBinding Padding}" Style="{StaticResource PlainButtonStyle}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
+                        <FontIcon Glyph="{TemplateBinding Glyph}" FontSize="{TemplateBinding FontSize}" />
+                    </Button>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:IconLabel">
+        <Setter Property="GlyphSize" Value="18" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:IconLabel">
+                    <StackPanel Padding="{TemplateBinding Padding}" Orientation="{TemplateBinding Orientation}" Background="{TemplateBinding Background}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <FontIcon x:Name="icon" Glyph="{TemplateBinding Glyph}" FontSize="{TemplateBinding GlyphSize}" />
+                        <TextBlock x:Name="text" Text="{TemplateBinding Label}" VerticalAlignment="Center" FontSize="{TemplateBinding FontSize}" />
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:IconLabelButton">
+        <Setter Property="Padding" Value="8,5" />
+        <Setter Property="GlyphSize" Value="18" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:IconLabelButton">
+                    <Border Background="{TemplateBinding Background}">
+                        <Button x:Name="button" Style="{StaticResource PlainButtonStyle}" BorderBrush="{TemplateBinding BorderBrush}" HorizontalContentAlignment="Left">
+                            <controls:IconLabel Padding="{TemplateBinding Padding}" Glyph="{TemplateBinding Glyph}" GlyphSize="{TemplateBinding GlyphSize}" Label="{TemplateBinding Label}" FontSize="{TemplateBinding FontSize}" Orientation="{TemplateBinding Orientation}" />
+                        </Button>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

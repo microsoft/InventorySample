@@ -1,0 +1,18 @@
+﻿<UserControl
+    x:Class="Inventory.Controls.Search"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="40">
+
+    <AutoSuggestBox PlaceholderText="Search" QueryIcon="Find" Text="{x:Bind Query, Mode=TwoWay}" QuerySubmitted="OnQuerySubmitted">
+        <AutoSuggestBox.TextBoxStyle>
+            <Style TargetType="TextBox" BasedOn="{StaticResource AutoSuggestBoxTextBoxStyle}">
+                <Setter Property="Padding" Value="10,4" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+        </AutoSuggestBox.TextBoxStyle>
+    </AutoSuggestBox>
+</UserControl>

@@ -1,0 +1,81 @@
+# Index
+
+- [MVVM](chapters/mvvm.md#mvvm)
+    - [The MVVM pattern](chapters/mvvm.md#the-mvvm-pattern)
+    - [Model](chapters/mvvm.md#model)
+    - [View](chapters/mvvm.md#view)
+    - [View Model](chapters/mvvm.md#view-model)
+    - [Data Binding](chapters/mvvm.md#data-binding)
+    - [Commands](chapters/mvvm.md#commands)
+- [Dependency Injection](chapters/dependency-injection.md)
+    - [What is Dependency Injection](chapters/dependency-injection.md#what-is-dependency-injection)
+    - [Advantages of using DI](chapters/dependency-injection.md#advantages-of-using-di)
+    - [Microsoft.Extensions.DependencyInjection](chapters/dependency-injection.md#microsoft.extensions.dependencyInjection)
+        - [How to use it](chapters/dependency-injection.md#how-to-use-it)
+- [.Net Standard](chapters/netstandard.md)
+    - [What is .Net Standard](chapters/netstandard.md#what-is-.net-standard)
+    - [Why .Net Standard?](chapters/netstandard.md#why-.net-standard)
+        - [Comparation with PCLs](chapters/netstandard.md#comparation-with-pcls)
+- What's the Universal Windows Platform? *Pending*
+    - Device Families
+    - Enterprise app ditribution: https://docs.microsoft.com/en-us/windows/uwp/publish/distribute-lob-apps-to-enterprises
+- [Windows 10 Binding](chapters/windows-10-binding.md)
+    - [Binding Elements](chapters/windows-10-binding.md#binding-elements)
+    - [Dependecy property](chapters/windows-10-binding.md#dependency-property)
+    - [Difference between x:Bind and Binding](chapters/windows-10-binding.md#Difference-between-x:Bind-and-Binding)
+    - [Binding markup extension](chapters/windows-10-binding.md#Binding-markup-extension)
+    - [x:Bind markup extension](chapters/windows-10-binding.md#x:bind-markup-extension)
+    - [Value Converters](chapters/windows-10-binding.md#value-converters)
+- Windows 10 Accessibility
+    - Access Keys 
+- [Van Arsdel Inventory Architecture](chapters/architecture/architecture.md)
+    - Description 
+    - Solution Structure
+    - Authentication and Authorization
+    - Navigation
+    - Difference between Data Source Models and App Models
+    - [Data Access](chapters/architecture/dataaccess.md#data-access)
+        - [Data Providers](chapters/architecture/dataaccess.md#data-providers)
+        - [Data Services](chapters/architecture/dataaccess.md#data-services)
+    - Localization
+    - ...
+- [Data Access](chapters/dataaccess.md)
+    - [Entity Framework Core](chapters/dataaccess.md#entity-framework-core)
+    - [Models definitions](chapters/dataaccess.md#models-definitions)
+        - [Data Annotations](chapters/dataaccess.md#data-annotations)
+    - [DbContext](chapters/dataaccess.md#dbcontext)
+        - [Lifetime](chapters/dataaccess.md#lifetime)
+        - [DbSet](chapters/dataaccess.md#dbset)
+        - [Commit changes to database](chapters/dataaccess.md#commit-changes-to-database)
+        - [Other considerations](chapters/dataaccess.md#other-considerations)
+- [Fluent Design](chapters/fluent-design/overview.md)
+    - [Brushes](chapters/fluent-design/brushes.md)
+    - [Animations](chapters/fluent-design/animations.md)
+      - [Connected Animations](chapters/fluent-design/animations.md#connected-animations)
+    - [Multiple Windows](chapters/fluent-design/multiple-windows.md)
+    - [Responsive Design (Adaptive Layout)](chapters/fluent-design/responsive.md)
+    - [Visual Layer (AKA Composition API)](chapters/fluent-design/visual-layer.md)
+- Windows 10 Universal Controls 
+  - NavigationView
+  - AutoSuggestBox
+  - SplitView
+  - PersonPicture
+  - CalendarDatePicker
+  - ParallaxView
+- [Windows Hello](chapters/windows-hello.md)
+  - [What is Windows Hello?](chapters/windows-hello.md#what-is-windows-hello)
+	- [Authenticating with Hello](chapters/windows-hello.md#authenticating-with-hello)
+	- [How it works](chapters/windows-hello.md#how-it-works)
+		- [How keys are protected](chapters/windows-hello.md#how-keys-are-protected)
+		- [Authentication stage](chapters/windows-hello.md#authentication-stage)
+	- [Use cases](chapters/windows-hello.md#use-cases)
+  - [Implementing Windows Hello](chapters/windows-hello.md#implementing-windows-hello)
+	- [Enrolling new users](chapters/windows-hello.md#enrolling-new-users)
+		- [Attestation](chapters/windows-hello.md#attestation)
+	- [Logging on with Windows Hello](chapters/windows-hello.md#logging-on-with-windows-hello)
+	- [Forced sign-in](chapters/windows-hello.md#forced-sign-in)
+	- [Authentication at the backend side](chapters/windows-hello.md#authentication-at-the-backend-side)
+	- [Enrolling multiple devices](chapters/windows-hello.md#enrolling-multiple-devices)
+	- [Using multiple accounts](chapters/windows-hello.md#using-multiple-accounts)
+- UWP Community Toolkit
+    - *Pending for approval*

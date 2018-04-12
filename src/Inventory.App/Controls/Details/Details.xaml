@@ -1,0 +1,18 @@
+﻿<UserControl
+    x:Class="Inventory.Controls.Details"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Inventory.Controls"
+    mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="400">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <controls:DetailToolbar ToolbarMode="{x:Bind ToolbarMode, Mode=OneWay}" ButtonClick="OnToolbarClick" />
+        <ContentControl x:Name="container" Grid.Row="1" Content="{x:Bind DetailsContent}" ContentTemplate="{x:Bind DetailsTemplate}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
+    </Grid>
+</UserControl>

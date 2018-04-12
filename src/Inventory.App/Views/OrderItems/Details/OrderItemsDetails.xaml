@@ -1,0 +1,58 @@
+﻿<UserControl
+    x:Class="Inventory.Views.OrderItemsDetails"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Inventory.Controls"
+    xmlns:views="using:Inventory.Views"
+    xmlns:viewmodels="using:Inventory.ViewModels"
+    mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="400">
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="DetailsTemplate" x:DataType="viewmodels:OrderItemDetailsViewModel">
+            <StackPanel Spacing="6" Margin="0,6">
+                <Grid ColumnSpacing="6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" MaxWidth="400" />
+                        <ColumnDefinition Width="*" MaxWidth="400" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Spacing="6">
+                        <controls:LabelTextBox Label="Quantity" Text="{x:Bind Item.Quantity, Mode=TwoWay, Converter={StaticResource Int32Converter}}" ValueType="Int32" />
+                        <controls:LabelTextBox Label="Discount" Text="{x:Bind Item.Discount, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" ValueType="Decimal" />
+                        <controls:LabelComboBox Label="Tax Type" ItemsSource="{x:Bind DataHelper.TaxTypes}"
+                                            SelectedValue="{x:Bind Item.TaxType, Mode=TwoWay, Converter={StaticResource Int32Converter}}"
+                                            SelectedValuePath="TaxTypeID" DisplayMemberPath="Name" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Spacing="6">
+                        <controls:LabelTextBlock Label="Unit Price" Text="{x:Bind Item.UnitPrice, Mode=OneWay, Converter={StaticResource DecimalConverter}}" />
+                        <controls:LabelTextBlock Label="Subtotal" Text="{x:Bind Item.Subtotal, Mode=OneWay, Converter={StaticResource DecimalConverter}}" />
+                        <controls:LabelTextBlock Label="Total" Text="{x:Bind Item.Total, Mode=OneWay, Converter={StaticResource DecimalConverter}}" />
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid ColumnSpacing="6">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Background="WhiteSmoke">
+            <views:OrderItemsCard Margin="6,12" Item="{x:Bind ViewModel.Item, Mode=OneWay}" />
+        </Grid>
+
+        <controls:Details x:Name="details" Grid.Column="1" Margin="6,0,0,0"
+                          DetailsContent="{x:Bind ViewModel}"
+                          DetailsTemplate="{StaticResource DetailsTemplate}"
+                          IsEditMode="{x:Bind ViewModel.IsEditMode, Mode=OneWay}"
+                          EditCommand="{x:Bind ViewModel.EditCommand}"
+                          DeleteCommand="{x:Bind ViewModel.DeleteCommand}"
+                          SaveCommand="{x:Bind ViewModel.SaveCommand}"
+                          CancelCommand="{x:Bind ViewModel.CancelCommand}" />
+    </Grid>
+</UserControl>

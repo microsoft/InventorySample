@@ -1,0 +1,23 @@
+﻿<UserControl
+    x:Class="Inventory.Controls.ListToolbar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Inventory.Controls"
+    mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="36">
+
+    <CommandBar x:Name="commandBar" Height="36" DefaultLabelPosition="Right" Style="{StaticResource ToolBarStyle}" Background="Transparent">
+        <AppBarButton x:Name="buttonCancel" Icon="Cancel" Label="Cancel" LabelPosition="Default" HorizontalAlignment="Left" Style="{StaticResource ToolBarButtonStyle}" Tag="cancel" />
+        <AppBarButton x:Name="buttonNew" Icon="Add" Label="{x:Bind NewLabel, Mode=OneWay}" LabelPosition="Default" HorizontalAlignment="Left" Style="{StaticResource ToolBarButtonStyle}" Tag="default" />
+        <AppBarButton x:Name="buttonEdit" Icon="Edit" Label="Edit" LabelPosition="Default" HorizontalAlignment="Left" Style="{StaticResource ToolBarButtonStyle}" Tag="edit" />
+        <AppBarButton x:Name="buttonDelete" Icon="Delete" Label="Delete" LabelPosition="Default" HorizontalAlignment="Left" Style="{StaticResource ToolBarButtonStyle}" Tag="delete" />
+        <CommandBar.Content>
+            <StackPanel Orientation="Horizontal">
+                <AppBarButton x:Name="buttonSelect" Icon="List" Label="Label" LabelPosition="Collapsed" Style="{StaticResource ToolBarButtonCollapsedStyle}" Tag="default" />
+                <AppBarButton x:Name="buttonRefresh" Icon="Refresh" Label="Label" LabelPosition="Collapsed" Style="{StaticResource ToolBarButtonCollapsedStyle}" Tag="default" />
+                <controls:Search x:Name="search" Margin="6,0,0,0" Query="{x:Bind Query, Mode=TwoWay}" Width="240" VerticalAlignment="Center" Tag="default" QuerySubmitted="OnQuerySubmitted" />
+            </StackPanel>
+        </CommandBar.Content>
+    </CommandBar>
+</UserControl>

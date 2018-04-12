@@ -1,0 +1,48 @@
+﻿<UserControl
+    x:Class="Inventory.Views.ProductsList"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:Inventory.Models"
+    xmlns:controls="using:Inventory.Controls"
+    mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="400">
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="ItemTemplate" x:DataType="models:ProductModel">
+            <Grid BorderThickness="1" BorderBrush="Gainsboro" Background="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Image Source="{x:Bind ThumbnailBitmap}" />
+                </Grid>
+                <Grid Grid.Row="1" Background="WhiteSmoke">
+                    <StackPanel Margin="6" VerticalAlignment="Center">
+                        <TextBlock Text="{x:Bind Name}" FontSize="12" FontWeight="SemiBold" />
+                        <TextBlock Text="{x:Bind CategoryName}" FontSize="12" Foreground="Gray" />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <controls:DataGrid ItemsSource="{x:Bind ViewModel.Items, Mode=OneWay}"
+                       NewLabel="New Product"
+                       SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay}"
+                       ItemTemplate="{StaticResource ItemTemplate}"
+                       IsMultipleSelection="{x:Bind ViewModel.IsMultipleSelection, Mode=TwoWay}"
+                       ItemsCount="{x:Bind ViewModel.ItemsCount, Mode=OneWay}"
+                       NewCommand="{x:Bind ViewModel.NewCommand}"
+                       RefreshCommand="{x:Bind ViewModel.RefreshCommand}"
+                       Query="{x:Bind ViewModel.Query, Mode=TwoWay}"
+                       QuerySubmittedCommand="{x:Bind ViewModel.RefreshCommand}"
+                       StartSelectionCommand="{x:Bind ViewModel.StartSelectionCommand}"
+                       CancelSelectionCommand="{x:Bind ViewModel.CancelSelectionCommand}"
+                       SelectItemsCommand="{x:Bind ViewModel.SelectItemsCommand}"
+                       DeselectItemsCommand="{x:Bind ViewModel.DeselectItemsCommand}"
+                       SelectRangesCommand="{x:Bind ViewModel.SelectRangesCommand}"
+                       ItemInvokedCommand="{x:Bind ViewModel.ItemInvokedCommand}"
+                       DeleteCommand="{x:Bind ViewModel.DeleteSelectionCommand}" />
+</UserControl>

@@ -1,0 +1,17 @@
+﻿<Page
+    x:Class="Inventory.Views.ProductView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Inventory.Controls"
+    xmlns:views="using:Inventory.Views"
+    mc:Ignorable="d">
+
+    <Grid Background="WhiteSmoke">
+        <controls:Section Margin="6" Header="{x:Bind ViewModel.Title, Mode=OneWay}" IsEnabled="{x:Bind ViewModel.IsEnabled, Mode=OneWay}"
+                          HeaderButtonGlyph="&#xE2B4;" HeaderButtonClick="OpenInNewView" IsButtonVisible="{x:Bind ViewModel.IsMainView}">
+            <views:ProductDetails x:Name="details" ViewModel="{x:Bind ViewModel, Mode=OneWay}" />
+        </controls:Section>
+    </Grid>
+</Page>

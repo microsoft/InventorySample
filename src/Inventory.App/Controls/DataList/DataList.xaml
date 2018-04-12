@@ -1,0 +1,55 @@
+﻿<UserControl
+    x:Class="Inventory.Controls.DataList"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Inventory.Controls"
+    mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="400">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="28"/>
+        </Grid.RowDefinitions>
+
+        <!--Toolbar-->
+        <controls:ListToolbar
+            NewLabel="{x:Bind NewLabel, Mode=OneWay}"
+            Query="{x:Bind Query, Mode=TwoWay}"
+            QuerySubmitted="OnQuerySubmitted"
+            ToolbarMode="{x:Bind ToolbarMode, Mode=OneWay}"
+            ButtonClick="OnToolbarClick" />
+
+        <!--Header-->
+        <ContentControl Grid.Row="1" ContentTemplate="{x:Bind HeaderTemplate}" HorizontalContentAlignment="Stretch" />
+
+        <!--List Content-->
+        <Grid Grid.Row="2">
+            <ListView x:Name="listview"
+                  ItemsSource="{x:Bind ItemsSource, Mode=OneWay}"
+                  ItemTemplate="{x:Bind ItemTemplate}"
+                  ItemContainerStyle="{StaticResource RowItemStyle}"
+                  SelectedItem="{x:Bind SelectedItem, Mode=TwoWay}"
+                  SelectionMode="{x:Bind SelectionMode, Mode=OneWay}"
+                  SelectionChanged="OnSelectionChanged"
+                  Visibility="{x:Bind IsDataAvailable, Mode=OneWay}" />
+            <TextBlock Margin="6" Text="{x:Bind DataUnavailableMessage, Mode=OneWay}" Visibility="{x:Bind IsDataUnavailable, Mode=OneWay}"/>
+        </Grid>
+
+        <!--Footer-->
+        <Grid Grid.Row="3" Margin="2" Visibility="{x:Bind IsDataAvailable, Mode=OneWay}">
+            <TextBlock FontSize="14" VerticalAlignment="Bottom" Opacity="0.75" Visibility="{x:Bind IsMultipleSelection, Mode=OneWay}">
+                <Run Text="{x:Bind SelectedItemsCount, Mode=OneWay}" />
+                <Run Text="items selected." />
+            </TextBlock>
+            <TextBlock FontSize="14" VerticalAlignment="Bottom" Opacity="0.75" Visibility="{x:Bind IsSingleSelection, Mode=OneWay}">
+                <Run Text="Total" />
+                <Run Text="{x:Bind ItemsCount, Mode=OneWay}" />
+                <Run Text="items." />
+            </TextBlock>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,60 @@
+﻿<UserControl
+    x:Class="Inventory.Views.CustomersDetails"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Inventory.Controls"
+    xmlns:views="using:Inventory.Views"
+    xmlns:viewmodels="using:Inventory.ViewModels"
+    mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="400">
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="DetailsTemplate" x:DataType="viewmodels:CustomerDetailsViewModel">
+            <Grid Margin="0,12,0,0" ColumnSpacing="6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" MaxWidth="400" />
+                    <ColumnDefinition Width="*" MaxWidth="400" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Spacing="6">
+                    <controls:LabelTextBox Label="First Name" Text="{x:Bind Item.FirstName, Mode=TwoWay}" />
+                    <controls:LabelTextBox Label="Middle Name" Text="{x:Bind Item.MiddleName, Mode=TwoWay}" />
+                    <controls:LabelTextBox Label="Last Name" Text="{x:Bind Item.LastName, Mode=TwoWay}" />
+                    <controls:LabelTextBox Label="EMail Address" Text="{x:Bind Item.EmailAddress, Mode=TwoWay}" />
+                    <controls:LabelTextBox Label="Phone" Text="{x:Bind Item.Phone, Mode=TwoWay}" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Spacing="6">
+                    <controls:LabelTextBox Label="Address" Text="{x:Bind Item.AddressLine1, Mode=TwoWay}" />
+                    <controls:LabelTextBox Label="Postal Code" Text="{x:Bind Item.PostalCode, Mode=TwoWay}" />
+                    <controls:LabelTextBox Label="City" Text="{x:Bind Item.City, Mode=TwoWay}" />
+                    <controls:LabelTextBox Label="Region" Text="{x:Bind Item.Region, Mode=TwoWay}" />
+                    <controls:LabelComboBox Label="Country" ItemsSource="{x:Bind DataHelper.CountryCodes}"
+                                            SelectedValue="{x:Bind Item.CountryCode, Mode=TwoWay}"
+                                            SelectedValuePath="CountryCodeID" DisplayMemberPath="Name" />
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid ColumnSpacing="6" Visibility="{x:Bind ViewModel.Item.IsEmpty, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Background="WhiteSmoke">
+            <views:CustomersCard Margin="6,12" Item="{x:Bind ViewModel.Item, Mode=OneWay}" />
+        </Grid>
+
+        <controls:Details x:Name="details" Grid.Column="1" Margin="6,0,0,0"
+                          DetailsContent="{x:Bind ViewModel}"
+                          DetailsTemplate="{StaticResource DetailsTemplate}"
+                          IsEditMode="{x:Bind ViewModel.IsEditMode, Mode=OneWay}"
+                          EditCommand="{x:Bind ViewModel.EditCommand}"
+                          DeleteCommand="{x:Bind ViewModel.DeleteCommand}"
+                          SaveCommand="{x:Bind ViewModel.SaveCommand}"
+                          CancelCommand="{x:Bind ViewModel.CancelCommand}" />
+    </Grid>
+</UserControl>
