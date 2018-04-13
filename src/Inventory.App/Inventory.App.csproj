@@ -413,9 +413,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="VanArsdel.Inventory_TemporaryKey.pfx" />
-  </ItemGroup>
-  <ItemGroup>
     <Page Include="Controls\DataGrid\DataGrid.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -3,7 +3,6 @@
 using Windows.UI.Xaml.Data;
 using Windows.System.UserProfile;
 using Windows.Globalization.DateTimeFormatting;
-using System.Globalization;
 
 namespace Inventory.Converters
 {
@@ -25,7 +24,7 @@ namespace Inventory.Converters
                     return "N/A";
                 }
             }
-            return "N/A";
+            return "";
         }
 
         
