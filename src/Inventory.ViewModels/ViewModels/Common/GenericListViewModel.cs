@@ -80,6 +80,7 @@ namespace Inventory.ViewModels
         virtual protected void OnStartSelection()
         {
             StatusMessage("Start selection");
+            SelectedItem = null;
             SelectedItems = new List<TModel>();
             SelectedIndexRanges = null;
             IsMultipleSelection = true;
