@@ -100,17 +100,9 @@ namespace Inventory.ViewModels
         private async Task<IList<ProductModel>> GetItemsAsync()
         {
             if (ViewModelArgs.IsEmpty)
-            {
                 return new List<ProductModel>();
-            }
 
-            var request = new DataRequest<Product>()
-            {
-                Query = Query,
-                OrderBy = ViewModelArgs.OrderBy,
-                OrderByDesc = ViewModelArgs.OrderByDesc
-            };
-
+            DataRequest<Product> request = BuildDataRequest();
             return await ProductService.GetProductsAsync(request);
         }
 
@@ -168,16 +160,21 @@ namespace Inventory.ViewModels
 
         private async Task DeleteRangesAsync(IEnumerable<IndexRange> ranges)
         {
-            var request = new DataRequest<Product>()
+            DataRequest<Product> request = BuildDataRequest();
+            foreach (var range in ranges)
+            {
+                await ProductService.DeleteProductRangeAsync(range.Index, range.Length, request);
+            }
+        }
+
+        private DataRequest<Product> BuildDataRequest()
+        {
+            return new DataRequest<Product>()
             {
                 Query = Query,
                 OrderBy = ViewModelArgs.OrderBy,
                 OrderByDesc = ViewModelArgs.OrderByDesc
             };
-            foreach (var range in ranges)
-            {
-                await ProductService.DeleteProductRangeAsync(range.Index, range.Length, request);
-            }
         }
 
         private async void OnMessage(ViewModelBase sender, string message, object args)

@@ -103,27 +103,14 @@ namespace Inventory.ViewModels
         private async Task<IList<OrderItemModel>> GetItemsAsync()
         {
             if (ViewModelArgs.IsEmpty)
-            {
                 return new List<OrderItemModel>();
-            }
 
-            var request = new DataRequest<OrderItem>()
-            {
-                Query = Query,
-                OrderBy = ViewModelArgs.OrderBy,
-                OrderByDesc = ViewModelArgs.OrderByDesc
-            };
-            if (ViewModelArgs.OrderID > 0)
-            {
-                request.Where = (r) => r.OrderID == ViewModelArgs.OrderID;
-            }
-
+            DataRequest<OrderItem> request = BuildDataRequest();
             return await OrderItemService.GetOrderItemsAsync(request);
         }
 
         protected override async void OnNew()
         {
-
             if (IsMainView)
             {
                 await NavigationService.CreateNewViewAsync<OrderItemDetailsViewModel>(new OrderItemDetailsArgs { OrderID = ViewModelArgs.OrderID });
@@ -175,16 +162,26 @@ namespace Inventory.ViewModels
 
         private async Task DeleteRangesAsync(IEnumerable<IndexRange> ranges)
         {
+            DataRequest<OrderItem> request = BuildDataRequest();
+            foreach (var range in ranges)
+            {
+                await OrderItemService.DeleteOrderItemRangeAsync(range.Index, range.Length, request);
+            }
+        }
+
+        private DataRequest<OrderItem> BuildDataRequest()
+        {
             var request = new DataRequest<OrderItem>()
             {
                 Query = Query,
                 OrderBy = ViewModelArgs.OrderBy,
                 OrderByDesc = ViewModelArgs.OrderByDesc
             };
-            foreach (var range in ranges)
+            if (ViewModelArgs.OrderID > 0)
             {
-                await OrderItemService.DeleteOrderItemRangeAsync(range.Index, range.Length, request);
+                request.Where = (r) => r.OrderID == ViewModelArgs.OrderID;
             }
+            return request;
         }
 
         private async void OnMessage(ViewModelBase sender, string message, object args)

@@ -93,23 +93,14 @@ namespace Inventory.ViewModels
         private async Task<IList<CustomerModel>> GetItemsAsync()
         {
             if (ViewModelArgs.IsEmpty)
-            {
                 return new List<CustomerModel>();
-            }
 
-            var request = new DataRequest<Customer>()
-            {
-                Query = Query,
-                OrderBy = ViewModelArgs.OrderBy,
-                OrderByDesc = ViewModelArgs.OrderByDesc
-            };
-
+            DataRequest<Customer> request = BuildDataRequest();
             return await CustomerService.GetCustomersAsync(request);
         }
 
         protected override async void OnNew()
         {
-
             if (IsMainView)
             {
                 await NavigationService.CreateNewViewAsync<CustomerDetailsViewModel>(new CustomerDetailsArgs());
@@ -161,16 +152,21 @@ namespace Inventory.ViewModels
 
         private async Task DeleteRangesAsync(IEnumerable<IndexRange> ranges)
         {
-            var request = new DataRequest<Customer>()
+            DataRequest<Customer> request = BuildDataRequest();
+            foreach (var range in ranges)
+            {
+                await CustomerService.DeleteCustomerRangeAsync(range.Index, range.Length, request);
+            }
+        }
+
+        private DataRequest<Customer> BuildDataRequest()
+        {
+            return new DataRequest<Customer>()
             {
                 Query = Query,
                 OrderBy = ViewModelArgs.OrderBy,
                 OrderByDesc = ViewModelArgs.OrderByDesc
             };
-            foreach (var range in ranges)
-            {
-                await CustomerService.DeleteCustomerRangeAsync(range.Index, range.Length, request);
-            }
         }
 
         private async void OnMessage(ViewModelBase sender, string message, object args)

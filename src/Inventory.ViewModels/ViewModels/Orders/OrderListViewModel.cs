@@ -103,21 +103,9 @@ namespace Inventory.ViewModels
         private async Task<IList<OrderModel>> GetItemsAsync()
         {
             if (ViewModelArgs.IsEmpty)
-            {
                 return new List<OrderModel>();
-            }
 
-            var request = new DataRequest<Order>()
-            {
-                Query = Query,
-                OrderBy = ViewModelArgs.OrderBy,
-                OrderByDesc = ViewModelArgs.OrderByDesc
-            };
-            if (ViewModelArgs.CustomerID > 0)
-            {
-                request.Where = (r) => r.CustomerID == ViewModelArgs.CustomerID;
-            }
-
+            DataRequest<Order> request = BuildDataRequest();
             return await OrderService.GetOrdersAsync(request);
         }
 
@@ -174,16 +162,26 @@ namespace Inventory.ViewModels
 
         private async Task DeleteRangesAsync(IEnumerable<IndexRange> ranges)
         {
+            DataRequest<Order> request = BuildDataRequest();
+            foreach (var range in ranges)
+            {
+                await OrderService.DeleteOrderRangeAsync(range.Index, range.Length, request);
+            }
+        }
+
+        private DataRequest<Order> BuildDataRequest()
+        {
             var request = new DataRequest<Order>()
             {
                 Query = Query,
                 OrderBy = ViewModelArgs.OrderBy,
                 OrderByDesc = ViewModelArgs.OrderByDesc
             };
-            foreach (var range in ranges)
+            if (ViewModelArgs.CustomerID > 0)
             {
-                await OrderService.DeleteOrderRangeAsync(range.Index, range.Length, request);
+                request.Where = (r) => r.CustomerID == ViewModelArgs.CustomerID;
             }
+            return request;
         }
 
         private async void OnMessage(ViewModelBase sender, string message, object args)
