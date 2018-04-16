@@ -43,7 +43,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid Margin="6" Background="WhiteSmoke">
-            <views:OrderItemCard Margin="6" Item="{x:Bind ViewModel.Item, Mode=OneWay}" />
+            <views:OrderItemCard Margin="6" Item="{x:Bind ViewModel.ItemReadOnly, Mode=OneWay}" />
         </Grid>
 
         <controls:Details x:Name="details" Grid.Column="1" Margin="6"

@@ -49,6 +49,15 @@
             <TextBlock Grid.Column="1" Text="{x:Bind Item.Product.ListPrice, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" />
         </Grid>
 
+        <Grid Margin="6,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="Total:" FontSize="14" FontWeight="SemiBold" />
+            <TextBlock Grid.Column="1" Text="{x:Bind Item.Total, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" />
+        </Grid>
+
         <StackPanel Margin="6,2">
             <Image Margin="0,6" Source="{x:Bind Item.Product.PictureSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" Width="180" />
             <TextBlock Grid.Column="1" Text="{x:Bind Item.Product.Name, Mode=OneWay}" TextAlignment="Center" TextWrapping="WrapWholeWords" IsTextSelectionEnabled="True" FontSize="14" />
