@@ -9,6 +9,8 @@
     mc:Ignorable="d">
 
     <Grid Background="WhiteSmoke">
+        <controls:WindowTitle Title="{x:Bind ViewModel.Title, Mode=OneWay}" />
+
         <controls:Section Margin="6" Header="{x:Bind ViewModel.Title, Mode=OneWay}" IsEnabled="{x:Bind ViewModel.IsEnabled, Mode=OneWay}"
                           HeaderButtonGlyph="&#xE2B4;" HeaderButtonClick="OpenInNewView" IsButtonVisible="{x:Bind ViewModel.IsMainView}">
             <views:CustomerDetails x:Name="details" ViewModel="{x:Bind ViewModel, Mode=OneWay}" />

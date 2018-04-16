@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 using Inventory.Services;
 using Inventory.ViewModels;
-using Inventory.Providers;
 
 namespace Inventory
 {
@@ -19,13 +18,20 @@ namespace Inventory
 
         static public void Configure(IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSingleton<IDataProviderFactory, DataProviderFactory>();
+            serviceCollection.AddSingleton<IDataServiceFactory, DataServiceFactory>();
+            serviceCollection.AddSingleton<ILookupTables, LookupTables>();
+            serviceCollection.AddSingleton<ICustomerService, CustomerService>();
+            serviceCollection.AddSingleton<IOrderService, OrderService>();
+            serviceCollection.AddSingleton<IOrderItemService, OrderItemService>();
+            serviceCollection.AddSingleton<IProductService, ProductService>();
+
             serviceCollection.AddSingleton<IMessageService, MessageService>();
             serviceCollection.AddSingleton<ILogService, LogService>();
 
+            serviceCollection.AddScoped<IContextService, ContextService>();
             serviceCollection.AddScoped<INavigationService, NavigationService>();
             serviceCollection.AddScoped<IDialogService, DialogService>();
-            serviceCollection.AddScoped<IServiceManager, ServiceManager>();
+            serviceCollection.AddScoped<ICommonServices, CommonServices>();
 
             serviceCollection.AddTransient<ShellViewModel>();
             serviceCollection.AddTransient<MainShellViewModel>();

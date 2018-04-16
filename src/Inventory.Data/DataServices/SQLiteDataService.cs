@@ -1,4 +1,6 @@
-﻿namespace Inventory.Data.Services
+﻿using System;
+
+namespace Inventory.Data.Services
 {
     public class SQLiteDataService : DataServiceBase
     {

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Numerics;
+
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Hosting;
 using Windows.UI.Composition;
+
 using Microsoft.Graphics.Canvas.Effects;
 
 namespace Inventory.Animations

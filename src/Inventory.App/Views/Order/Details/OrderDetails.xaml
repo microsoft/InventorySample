@@ -27,23 +27,23 @@
                         <controls:LabelTextBox Label="Ship Postal Code" Text="{x:Bind Item.ShipPostalCode, Mode=TwoWay}" />
                         <controls:LabelTextBox Label="Ship City" Text="{x:Bind Item.ShipCity, Mode=TwoWay}" />
                         <controls:LabelTextBox Label="Ship Region" Text="{x:Bind Item.ShipRegion, Mode=TwoWay}" />
-                        <controls:LabelComboBox Label="Ship Country" ItemsSource="{x:Bind DataHelper.CountryCodes}"
+                        <controls:LabelComboBox Label="Ship Country" ItemsSource="{x:Bind LookupTables.CountryCodes}"
                                             SelectedValue="{x:Bind Item.ShipCountryCode, Mode=TwoWay}" SelectedValuePath="CountryCodeID" DisplayMemberPath="Name" />
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" Spacing="6">
                         <TextBlock Text="Order Status" FontSize="16" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
-                        <controls:LabelComboBox Label="Status" ItemsSource="{x:Bind DataHelper.OrderStatus}"
+                        <controls:LabelComboBox Label="Status" ItemsSource="{x:Bind LookupTables.OrderStatus}"
                                             SelectedValue="{x:Bind Item.Status, Mode=TwoWay, Converter={StaticResource Int32Converter}}"
                                             SelectedValuePath="Status" DisplayMemberPath="Name" />
-                        <controls:LabelComboBox Label="Payment Type" ItemsSource="{x:Bind DataHelper.PaymentTypes}"
+                        <controls:LabelComboBox Label="Payment Type" ItemsSource="{x:Bind LookupTables.PaymentTypes}"
                                             SelectedValue="{x:Bind Item.PaymentType, Mode=TwoWay, Converter={StaticResource Int32Converter}}"
                                             SelectedValuePath="PaymentTypeID" DisplayMemberPath="Name"
                                             Visibility="{x:Bind Item.CanEditPayment, Mode=OneWay}"/>
                         <controls:LabelCalendar Label="Shipped Date" Date="{x:Bind Item.ShippedDate, Mode=TwoWay}"
                                             MinDate="{x:Bind Item.OrderDate, Mode=OneWay, Converter={StaticResource DateTimeOffsetConverter}}"
                                             Visibility="{x:Bind Item.CanEditShipping, Mode=OneWay}"/>
-                        <controls:LabelComboBox Label="Shipper" ItemsSource="{x:Bind DataHelper.Shippers}"
+                        <controls:LabelComboBox Label="Shipper" ItemsSource="{x:Bind LookupTables.Shippers}"
                                             SelectedValue="{x:Bind Item.ShipVia, Mode=TwoWay, Converter={StaticResource Int32Converter}}" SelectedValuePath="ShipperID" DisplayMemberPath="Name"
                                             Visibility="{x:Bind Item.CanEditShipping, Mode=OneWay}"/>
                         <controls:LabelCalendar Label="Delivered Date" Date="{x:Bind Item.DeliveredDate, Mode=TwoWay}"

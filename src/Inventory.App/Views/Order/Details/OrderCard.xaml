@@ -46,7 +46,7 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
-            <PersonPicture ProfilePicture="{x:Bind Item.Customer.ThumbnailBitmap, Mode=OneWay}" Initials="{x:Bind Item.Customer.Initials, Mode=OneWay}" Width="64" Height="64" />
+            <PersonPicture ProfilePicture="{x:Bind Item.Customer.ThumbnailSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" Initials="{x:Bind Item.Customer.Initials, Mode=OneWay}" Width="64" Height="64" />
             <StackPanel Grid.Column="1" VerticalAlignment="Center">
                 <TextBlock Text="{x:Bind Item.Customer.FullName, Mode=OneWay}" TextAlignment="Center" TextWrapping="WrapWholeWords" FontWeight="SemiBold" FontSize="14" IsTextSelectionEnabled="True" />
                 <TextBlock Text="{x:Bind Item.Customer.EmailAddress, Mode=OneWay}" TextAlignment="Center" TextWrapping="WrapWholeWords" FontSize="13" IsTextSelectionEnabled="True" />

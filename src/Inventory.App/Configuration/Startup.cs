@@ -24,6 +24,7 @@ namespace Inventory
             ConfigureNavigation();
 
             await EnsureDatabaseAsync();
+            await ConfigureDataHelper();
         }
 
         private static void ConfigureNavigation()
@@ -46,6 +47,13 @@ namespace Inventory
             NavigationService.Register<ProductDetailsViewModel, ProductView>();
 
             NavigationService.Register<SettingsViewModel, SettingsView>();
+        }
+
+        static private async Task ConfigureDataHelper()
+        {
+            var lookupTables = ServiceLocator.Current.GetService<ILookupTables>();
+            await lookupTables.InitializeAsync();
+            LookupTablesProxy.Instance = lookupTables;
         }
 
         static private async Task EnsureDatabaseAsync()

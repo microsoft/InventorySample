@@ -52,7 +52,7 @@
                     <TextBlock Grid.Column="4" Text="{x:Bind ShippedDate, Mode=OneWay, Converter={StaticResource DateTimeFormatConverter}}" Style="{StaticResource ColumnValueStyle}" />
                     <TextBlock Grid.Column="5" Text="{x:Bind DeliveredDate, Mode=OneWay, Converter={StaticResource DateTimeFormatConverter}}" Style="{StaticResource ColumnValueStyle}" />
                     <TextBlock Grid.Column="6" Text="{x:Bind ShipRegion, Mode=OneWay}" Style="{StaticResource ColumnValueStyle}" />
-                    <TextBlock Grid.Column="7" Text="{x:Bind DataHelper.GetCountry(ShipCountryCode), Mode=OneWay}" Style="{StaticResource ColumnValueStyle}" />
+                    <TextBlock Grid.Column="7" Text="{x:Bind ShipCountryName, Mode=OneWay}" Style="{StaticResource ColumnValueStyle}" />
                 </Grid>
             </Grid>
         </DataTemplate>

@@ -30,7 +30,7 @@
                     <ColumnDefinition Width="15*"/>
                     <ColumnDefinition Width="6*"/>
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" Margin="1" Source="{x:Bind ThumbnailBitmap, Mode=OneWay}" Width="28" Height="28" />
+                <Image Grid.Column="0" Margin="1" Source="{x:Bind ThumbnailSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" Width="28" Height="28" />
                 <TextBlock Grid.Column="1" Text="{x:Bind ProductID}" Style="{StaticResource ColumnValueStyle}" />
                 <TextBlock Grid.Column="2" Text="{x:Bind Name}" Style="{StaticResource ColumnValueStyle}" />
                 <TextBlock Grid.Column="3" Text="{x:Bind ListPrice}" Style="{StaticResource ColumnValueStyle}" />

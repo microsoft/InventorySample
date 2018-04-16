@@ -4,9 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Inventory.Controls"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <controls:WindowTitle Title="Settings" />
+
         <StackPanel VerticalAlignment="Center">
             <TextBlock Text="VanArsdel Inventory Preview" FontSize="24" HorizontalAlignment="Center" />
             <TextBlock Text="{x:Bind ViewModel.Version}" FontSize="18" HorizontalAlignment="Center" />

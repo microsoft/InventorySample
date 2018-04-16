@@ -20,7 +20,7 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" Spacing="6">
                         <controls:LabelTextBox Label="Name" Text="{x:Bind Item.Name, Mode=TwoWay}" />
-                        <controls:LabelComboBox Label="Category" ItemsSource="{x:Bind DataHelper.Categories}"
+                        <controls:LabelComboBox Label="Category" ItemsSource="{x:Bind LookupTables.Categories}"
                                                 SelectedValue="{x:Bind Item.CategoryID, Mode=TwoWay}" SelectedValuePath="CategoryID" DisplayMemberPath="Name" />
                     </StackPanel>
                     <StackPanel Grid.Column="1" Spacing="6">

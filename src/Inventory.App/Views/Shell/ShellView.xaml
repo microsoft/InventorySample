@@ -24,7 +24,8 @@
         </Grid>
 
         <Grid Grid.Row="1" Background="{ThemeResource SystemControlAccentAcrylicElementAccentMediumHighBrush}">
-            <TextBlock Margin="6,4" Text="{x:Bind ViewModel.StatusMessage, Mode=OneWay}" Foreground="WhiteSmoke" FontSize="12" />
+            <Rectangle Fill="IndianRed" Visibility="{x:Bind ViewModel.IsError, Mode=OneWay}" />
+            <TextBlock Margin="6,4" Text="{x:Bind ViewModel.Message, Mode=OneWay}" Foreground="White" FontSize="12" />
         </Grid>
     </Grid>
 </Page>

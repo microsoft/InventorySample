@@ -26,13 +26,9 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <NavigationView x:Name="navigationView" 
-                        MenuItemsSource="{x:Bind ViewModel.Items}" 
-                        MenuItemTemplate="{StaticResource NavigationViewItem}"
-                        SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay}" 
-                        SelectionChanged="OnSelectionChanged"
-                        IsPaneOpen="{x:Bind ViewModel.IsPaneOpen, Mode=TwoWay}" 
-                        AlwaysShowHeader="False">
+        <NavigationView x:Name="navigationView" MenuItemsSource="{x:Bind ViewModel.Items}" MenuItemTemplate="{StaticResource NavigationViewItem}"
+                        SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay}" SelectionChanged="OnSelectionChanged"
+                        IsPaneOpen="{x:Bind ViewModel.IsPaneOpen, Mode=TwoWay}" AlwaysShowHeader="False">
 
             <Grid>
                 <ProgressRing IsActive="{x:Bind ViewModel.IsBusy}" />
@@ -47,7 +43,8 @@
         </NavigationView>
 
         <Grid Grid.Row="1" Background="{ThemeResource SystemControlAccentAcrylicElementAccentMediumHighBrush}">
-            <TextBlock Margin="6,4" Text="{x:Bind ViewModel.StatusMessage, Mode=OneWay}" Foreground="WhiteSmoke" FontSize="12" />
+            <Rectangle Fill="IndianRed" Visibility="{x:Bind ViewModel.IsError, Mode=OneWay}" />
+            <TextBlock Margin="6,4" Text="{x:Bind ViewModel.Message, Mode=OneWay}" Foreground="White" FontSize="12" />
         </Grid>
     </Grid>
 </Page>

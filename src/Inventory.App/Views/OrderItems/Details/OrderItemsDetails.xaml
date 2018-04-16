@@ -21,9 +21,9 @@
                     <StackPanel Grid.Column="0" Spacing="6">
                         <controls:LabelTextBox Label="Quantity" Text="{x:Bind Item.Quantity, Mode=TwoWay, Converter={StaticResource Int32Converter}}" ValueType="Int32" />
                         <controls:LabelTextBox Label="Discount" Text="{x:Bind Item.Discount, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" ValueType="Decimal" />
-                        <controls:LabelComboBox Label="Tax Type" ItemsSource="{x:Bind DataHelper.TaxTypes}"
-                                            SelectedValue="{x:Bind Item.TaxType, Mode=TwoWay, Converter={StaticResource Int32Converter}}"
-                                            SelectedValuePath="TaxTypeID" DisplayMemberPath="Name" />
+                        <controls:LabelComboBox Label="Tax Type" ItemsSource="{x:Bind LookupTables.TaxTypes}"
+                                                SelectedValue="{x:Bind Item.TaxType, Mode=TwoWay, Converter={StaticResource Int32Converter}}"
+                                                SelectedValuePath="TaxTypeID" DisplayMemberPath="Name" />
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" Spacing="6">

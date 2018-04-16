@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -24,51 +23,31 @@ namespace Inventory.Views
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            ViewModel.OrderList.PropertyChanged += OnViewModelPropertyChanged;
-            await ViewModel.LoadAsync(e.Parameter as OrdersViewState);
-            UpdateTitle();
+            ViewModel.Subscribe();
+            await ViewModel.LoadAsync(e.Parameter as OrderListArgs);
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            ViewModel.CancelEdit();
             ViewModel.Unload();
-            ViewModel.OrderList.PropertyChanged -= OnViewModelPropertyChanged;
-        }
-
-        private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(ViewModel.OrderList.Title))
-            {
-                UpdateTitle();
-            }
-        }
-
-        private void UpdateTitle()
-        {
-            this.SetTitle($"Orders {ViewModel.OrderList.Title}".Trim());
-        }
-
-        private async void OnItemDeleted(object sender, EventArgs e)
-        {
-            await ViewModel.RefreshAsync();
+            ViewModel.Unsubscribe();
         }
 
         private async void OpenInNewView(object sender, RoutedEventArgs e)
         {
-            await NavigationService.CreateNewViewAsync<OrdersViewModel>(ViewModel.OrderList.GetCurrentState());
+            await NavigationService.CreateNewViewAsync<OrdersViewModel>(ViewModel.OrderList.CreateArgs());
         }
 
         private async void OpenDetailsInNewView(object sender, RoutedEventArgs e)
         {
-            ViewModel.OrderDetails.IsEditMode = false;
+            ViewModel.OrderDetails.CancelEdit();
             if (pivot.SelectedIndex == 0)
             {
-                await NavigationService.CreateNewViewAsync<OrderDetailsViewModel>(new OrderViewState(ViewModel.OrderDetails.Item.CustomerID) { OrderID = ViewModel.OrderDetails.Item.OrderID });
+                await NavigationService.CreateNewViewAsync<OrderDetailsViewModel>(ViewModel.OrderDetails.CreateArgs());
             }
             else
             {
-                await NavigationService.CreateNewViewAsync<OrderItemsViewModel>(ViewModel.OrderItemList.ViewState.Clone());
+                await NavigationService.CreateNewViewAsync<OrderItemsViewModel>(ViewModel.OrderItemList.CreateArgs());
             }
         }
 

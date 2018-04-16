@@ -22,7 +22,7 @@ namespace Inventory
         }
 
         private Type EntryViewModel => typeof(DashboardViewModel);
-        private object EntryViewState => new DashboardViewState();
+        private object EntryArgs => null;
 
         protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
@@ -40,12 +40,12 @@ namespace Inventory
 
                 if (frame.Content == null)
                 {
-                    var viewState = new ShellViewState
+                    var args = new ShellArgs
                     {
                         ViewModel = EntryViewModel,
-                        Parameter = EntryViewState
+                        Parameter = EntryArgs
                     };
-                    frame.Navigate(typeof(MainShellView), viewState);
+                    frame.Navigate(typeof(MainShellView), args);
                 }
                 Window.Current.Activate();
             }

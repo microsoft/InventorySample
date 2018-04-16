@@ -3,13 +3,12 @@ using System.Linq;
 
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.ViewManagement;
 using Windows.UI.Core;
+using Windows.ApplicationModel.Core;
 
 using Inventory.ViewModels;
 using Inventory.Services;
-using Windows.UI.Xaml.Input;
-using Windows.System;
-using Windows.Foundation.Metadata;
 
 namespace Inventory.Views
 {
@@ -20,6 +19,7 @@ namespace Inventory.Views
         public MainShellView()
         {
             ViewModel = ServiceLocator.Current.GetService<MainShellViewModel>();
+            InitializeContext();
             InitializeComponent();
             InitializeNavigation();
         }
@@ -27,6 +27,12 @@ namespace Inventory.Views
         public MainShellViewModel ViewModel { get; }
 
         private SystemNavigationManager CurrentView => SystemNavigationManager.GetForCurrentView();
+
+        private void InitializeContext()
+        {
+            var context = ServiceLocator.Current.GetService<IContextService>();
+            context.Initialize(Dispatcher, ApplicationView.GetForCurrentView().Id, CoreApplication.GetCurrentView().IsMain);
+        }
 
         private void InitializeNavigation()
         {
@@ -38,12 +44,14 @@ namespace Inventory.Views
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            await ViewModel.LoadAsync(e.Parameter as ShellViewState);
+            await ViewModel.LoadAsync(e.Parameter as ShellArgs);
+            ViewModel.Subscribe();
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             ViewModel.Unload();
+            ViewModel.Unsubscribe();
         }
 
         private void OnSelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
@@ -67,15 +75,6 @@ namespace Inventory.Views
             }
         }
 
-        private void OnKeyboardAcceleratorsBackInvoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
-        {
-            if (_navigationService.CanGoBack)
-            {
-                _navigationService.GoBack();
-            }
-            args.Handled = true;
-        }
-
         private void OnFrameNavigated(object sender, NavigationEventArgs e)
         {
             var targetType = NavigationService.GetViewModel(e.SourcePageType);
@@ -88,7 +87,6 @@ namespace Inventory.Views
                     ViewModel.SelectedItem = ViewModel.Items.Where(r => r.ViewModel == targetType).FirstOrDefault();
                     break;
             }
-
             CurrentView.AppViewBackButtonVisibility = _navigationService.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
         }
     }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -24,45 +23,25 @@ namespace Inventory.Views
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            ViewModel.OrderItemList.PropertyChanged += OnViewModelPropertyChanged;
-            await ViewModel.LoadAsync(e.Parameter as OrderItemsViewState);
-            UpdateTitle();
+            ViewModel.Subscribe();
+            await ViewModel.LoadAsync(e.Parameter as OrderItemListArgs);
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            ViewModel.CancelEdit();
             ViewModel.Unload();
-            ViewModel.OrderItemList.PropertyChanged -= OnViewModelPropertyChanged;
-        }
-
-        private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(ViewModel.OrderItemList.Title))
-            {
-                UpdateTitle();
-            }
-        }
-
-        private void UpdateTitle()
-        {
-            this.SetTitle($"Order Items {ViewModel.OrderItemList.Title}".Trim());
-        }
-
-        private async void OnItemDeleted(object sender, EventArgs e)
-        {
-            await ViewModel.RefreshAsync();
+            ViewModel.Unsubscribe();
         }
 
         private async void OpenInNewView(object sender, RoutedEventArgs e)
         {
-            await NavigationService.CreateNewViewAsync<OrderItemsViewModel>(ViewModel.OrderItemList.GetCurrentState());
+            await NavigationService.CreateNewViewAsync<OrderItemsViewModel>(ViewModel.OrderItemList.CreateArgs());
         }
 
         private async void OpenDetailsInNewView(object sender, RoutedEventArgs e)
         {
-            ViewModel.OrderItemDetails.IsEditMode = false;
-            await NavigationService.CreateNewViewAsync<OrderItemDetailsViewModel>(new OrderItemViewState(ViewModel.OrderItemDetails.Item.OrderID) { OrderLine = ViewModel.OrderItemDetails.Item.OrderLine });
+            ViewModel.OrderItemDetails.CancelEdit();
+            await NavigationService.CreateNewViewAsync<OrderItemDetailsViewModel>(ViewModel.OrderItemDetails.CreateArgs());
         }
 
         public int GetRowSpan(bool isMultipleSelection)

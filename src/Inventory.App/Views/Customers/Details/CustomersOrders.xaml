@@ -43,7 +43,7 @@
                 <TextBlock Grid.Column="2" Text="{x:Bind ShippedDate, Mode=OneWay, Converter={StaticResource DateTimeFormatConverter}}" Style="{StaticResource ColumnValueStyle}" />
                 <TextBlock Grid.Column="3" Text="{x:Bind DeliveredDate, Mode=OneWay, Converter={StaticResource DateTimeFormatConverter}}" Style="{StaticResource ColumnValueStyle}" />
                 <TextBlock Grid.Column="4" Text="{x:Bind ShipRegion}" Style="{StaticResource ColumnValueStyle}" />
-                <TextBlock Grid.Column="5" Text="{x:Bind DataHelper.GetCountry(ShipCountryCode)}" Style="{StaticResource ColumnValueStyle}" />
+                <TextBlock Grid.Column="5" Text="{x:Bind ShipCountryName, Mode=OneWay}" Style="{StaticResource ColumnValueStyle}" />
             </Grid>
         </DataTemplate>
     </UserControl.Resources>

@@ -8,7 +8,7 @@ using Windows.UI.Xaml.Controls;
 
 using Inventory.Data;
 using Inventory.Models;
-using Inventory.Providers;
+using Inventory.Services;
 
 namespace Inventory.Controls
 {
@@ -16,11 +16,11 @@ namespace Inventory.Controls
     {
         public ProductSuggestBox()
         {
-            ProviderFactory = ServiceLocator.Current.GetService<IDataProviderFactory>();
+            ProductService = ServiceLocator.Current.GetService<IProductService>();
             InitializeComponent();
         }
 
-        private IDataProviderFactory ProviderFactory { get; }
+        private IProductService ProductService { get; }
 
         #region Items
         public IList<ProductModel> Items
@@ -81,15 +81,12 @@ namespace Inventory.Controls
 
         private async Task<IList<ProductModel>> GetItems(string query)
         {
-            using (var dataProvider = ProviderFactory.CreateDataProvider())
+            var request = new DataRequest<Product>()
             {
-                var request = new DataRequest<Product>()
-                {
-                    Query = query,
-                    OrderBy = r => r.Name
-                };
-                return await dataProvider.GetProductsAsync(0, 20, request);
-            }
+                Query = query,
+                OrderBy = r => r.Name
+            };
+            return await ProductService.GetProductsAsync(0, 20, request);
         }
 
         private void OnSuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)

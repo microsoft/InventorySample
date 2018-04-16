@@ -19,6 +19,8 @@
     </UserControl.Resources>
 
     <Grid Background="WhiteSmoke">
+        <controls:WindowTitle Prefix="Customers" Title="{x:Bind ViewModel.CustomerList.Title, Mode=OneWay}" />
+        
         <Grid Margin="6" RowSpacing="6">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>

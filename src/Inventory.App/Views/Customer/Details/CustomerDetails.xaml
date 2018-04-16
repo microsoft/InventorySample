@@ -45,7 +45,7 @@
                     <StackPanel Grid.Column="1" Spacing="6">
                         <controls:LabelTextBox Label="Region" Text="{x:Bind Item.Region, Mode=TwoWay}" />
                         <controls:LabelTextBox Label="Postal Code" Text="{x:Bind Item.PostalCode, Mode=TwoWay}" />
-                        <controls:LabelComboBox Label="Country" ItemsSource="{x:Bind DataHelper.CountryCodes}"
+                        <controls:LabelComboBox Label="Country" ItemsSource="{x:Bind LookupTables.CountryCodes}"
                                                     SelectedValue="{x:Bind Item.CountryCode, Mode=TwoWay}" SelectedValuePath="CountryCodeID" DisplayMemberPath="Name" />
                     </StackPanel>
                 </Grid>
@@ -81,7 +81,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid Margin="6" Background="WhiteSmoke">
-            <views:CustomerCard Margin="6" Item="{x:Bind ViewModel.Item, Mode=OneWay}" />
+            <views:CustomerCard Margin="6" Item="{x:Bind ViewModel.ItemReadOnly, Mode=OneWay}" />
         </Grid>
 
         <controls:Details x:Name="details" Grid.Column="1" Margin="6"

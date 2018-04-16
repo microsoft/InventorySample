@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Threading.Tasks;
 
 using Windows.UI.Xaml;
@@ -25,42 +24,26 @@ namespace Inventory.Views
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            ViewModel.PropertyChanged += OnPropertyChanged;
-            ViewModel.ItemDeleted += OnItemDeleted;
+            ViewModel.Subscribe();
+            await ViewModel.LoadAsync(e.Parameter as ProductDetailsArgs);
 
-            var state = e.Parameter as ProductViewState;
-            state = state ?? ProductViewState.CreateDefault();
-            await ViewModel.LoadAsync(state);
-            UpdateTitle();
-
-            if (state.IsNew)
+            if (ViewModel.IsEditMode)
             {
                 await Task.Delay(100);
                 details.SetFocus();
             }
-
-            Bindings.Update();
         }
 
-        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            UpdateTitle();
-        }
-
-        private void UpdateTitle()
-        {
-            this.SetTitle(ViewModel.Title);
-        }
-
-        private async void OnItemDeleted(object sender, EventArgs e)
-        {
-            await NavigationService.CloseViewAsync();
+            ViewModel.Unload();
+            ViewModel.Unsubscribe();
         }
 
         private async void OpenInNewView(object sender, RoutedEventArgs e)
         {
             ViewModel.IsEditMode = false;
-            await NavigationService.CreateNewViewAsync<ProductView>(new ProductViewState { ProductID = ViewModel.Item.ProductID });
+            await NavigationService.CreateNewViewAsync<ProductView>(ViewModel.CreateArgs());
             NavigationService.GoBack();
         }
     }

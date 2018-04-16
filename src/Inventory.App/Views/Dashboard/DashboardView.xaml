@@ -22,31 +22,35 @@
     </Page.Resources>
 
     <Grid Background="WhiteSmoke">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <controls:WindowTitle Title="" />
 
-        <Grid Grid.Row="0">
-            <TextBlock Margin="12" Text="VanArsdel Inventory" FontSize="36" Foreground="#444" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <TextBlock Margin="12" Text="VanArsdel Inventory" FontSize="36" Foreground="#444" />
+            </Grid>
+
+            <TextBlock Grid.Row="1" Margin="12,12,12,0" Text="Dashboard" FontSize="22" Foreground="#666" />
+
+            <GridView Grid.Row="2" Margin="6" ItemContainerStyle="{StaticResource GridItemStyle}" SelectionMode="None" IsItemClickEnabled="True" ItemClick="OnItemClick">
+                <GridViewItem>
+                    <views:CustomersPane Margin="12" ItemsSource="{x:Bind ViewModel.Customers, Mode=OneWay}" Tag="Customers" />
+                </GridViewItem>
+                <GridViewItem>
+                    <views:ProductsPane Margin="12" ItemsSource="{x:Bind ViewModel.Products, Mode=OneWay}" Tag="Products" />
+                </GridViewItem>
+                <GridViewItem>
+                    <views:OrdersPane Margin="12" ItemsSource="{x:Bind ViewModel.Orders, Mode=OneWay}" Tag="Orders" />
+                </GridViewItem>
+                <GridViewItem IsHitTestVisible="False">
+                    <views:ChartPane Margin="12,12,12,0" Tag="Charts" />
+                </GridViewItem>
+            </GridView>
         </Grid>
-
-        <TextBlock Grid.Row="1" Margin="12,12,12,0" Text="Dashboard" FontSize="22" Foreground="#666" />
-
-        <GridView Grid.Row="2" Margin="6" ItemContainerStyle="{StaticResource GridItemStyle}" SelectionMode="None" IsItemClickEnabled="True" ItemClick="OnItemClick">
-            <GridViewItem>
-                <views:CustomersPane Margin="12" ItemsSource="{x:Bind ViewModel.Customers, Mode=OneWay}" Tag="Customers" />
-            </GridViewItem>
-            <GridViewItem>
-                <views:ProductsPane Margin="12" ItemsSource="{x:Bind ViewModel.Products, Mode=OneWay}" Tag="Products" />
-            </GridViewItem>
-            <GridViewItem>
-                <views:OrdersPane Margin="12" ItemsSource="{x:Bind ViewModel.Orders, Mode=OneWay}" Tag="Orders" />
-            </GridViewItem>
-            <GridViewItem IsHitTestVisible="False">
-                <views:ChartPane Margin="12,12,12,0" Tag="Charts" />
-            </GridViewItem>
-        </GridView>
     </Grid>
 </Page>

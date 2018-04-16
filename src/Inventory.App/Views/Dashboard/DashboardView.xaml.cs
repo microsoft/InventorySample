@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
 
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 using Windows.UI.Xaml.Navigation;
@@ -22,8 +20,6 @@ namespace Inventory.Views
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            this.SetTitle("");
-            await Task.Delay(100);
             await ViewModel.LoadAsync();
         }
 

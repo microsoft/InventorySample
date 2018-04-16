@@ -50,7 +50,7 @@
         </Grid>
 
         <StackPanel Margin="6,2">
-            <Image Margin="0,6" Source="{x:Bind Item.Product.PictureBitmap, Mode=OneWay}" Width="180" />
+            <Image Margin="0,6" Source="{x:Bind Item.Product.PictureSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" Width="180" />
             <TextBlock Grid.Column="1" Text="{x:Bind Item.Product.Name, Mode=OneWay}" TextAlignment="Center" TextWrapping="WrapWholeWords" IsTextSelectionEnabled="True" FontSize="14" />
         </StackPanel>
     </StackPanel>

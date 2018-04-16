@@ -4,10 +4,15 @@ using System.IO;
 using Windows.Storage;
 using Windows.ApplicationModel;
 
-using Inventory.Providers;
-
 namespace Inventory
 {
+    public enum DataProviderType
+    {
+        SQLite,
+        SQLServer,
+        WebAPI
+    }
+
     public class AppSettings
     {
         const string DB_NAME = "VanArsdel";

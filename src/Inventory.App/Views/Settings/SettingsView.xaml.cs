@@ -20,7 +20,7 @@ namespace Inventory.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            ViewModel.LoadAsync(e.Parameter as SettingsViewState);
+            ViewModel.LoadAsync(e.Parameter as SettingsArgs);
         }
     }
 }

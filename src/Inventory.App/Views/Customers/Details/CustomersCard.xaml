@@ -7,7 +7,7 @@
     mc:Ignorable="d" d:DesignWidth="260" d:DesignHeight="400">
 
     <StackPanel Spacing="2">
-        <PersonPicture Margin="12" ProfilePicture="{x:Bind Item.PictureBitmap, Mode=OneWay}" Initials="{x:Bind Item.Initials, Mode=OneWay}" Width="96" Height="96" />
+        <PersonPicture Margin="12" ProfilePicture="{x:Bind Item.PictureSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" Initials="{x:Bind Item.Initials, Mode=OneWay}" Width="96" Height="96" />
         <TextBlock Margin="0" Text="{x:Bind Item.FullName, Mode=OneWay}" TextAlignment="Center" TextWrapping="WrapWholeWords" HorizontalAlignment="Stretch" FontSize="18" FontWeight="SemiBold" IsTextSelectionEnabled="True" />
         <TextBlock Margin="0" Text="{x:Bind Item.EmailAddress, Mode=OneWay}" TextAlignment="Center" TextWrapping="WrapWholeWords" HorizontalAlignment="Stretch" FontSize="14" IsTextSelectionEnabled="True" />
         <Rectangle Margin="6" />

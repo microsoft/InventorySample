@@ -17,7 +17,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0" Margin="6,0">
-                    <PersonPicture ProfilePicture="{x:Bind ThumbnailBitmap}" Width="34" Height="34" />
+                    <PersonPicture ProfilePicture="{x:Bind ThumbnailSource, Converter={StaticResource ObjectToImageConverter}}" Width="34" Height="34" />
                 </Grid>
 
                 <StackPanel Grid.Column="1" Margin="4">

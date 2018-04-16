@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -24,44 +23,25 @@ namespace Inventory.Views
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            ViewModel.ProductList.PropertyChanged += OnViewModelPropertyChanged;
-            await ViewModel.LoadAsync(e.Parameter as ProductsViewState);
-            UpdateTitle();
+            ViewModel.Subscribe();
+            await ViewModel.LoadAsync(e.Parameter as ProductListArgs);
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            ViewModel.CancelEdit();
             ViewModel.Unload();
-            ViewModel.ProductList.PropertyChanged -= OnViewModelPropertyChanged;
-        }
-
-        private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(ViewModel.ProductList.Title))
-            {
-                UpdateTitle();
-            }
-        }
-
-        private void UpdateTitle()
-        {
-            this.SetTitle($"Products {ViewModel.ProductList.Title}".Trim());
-        }
-
-        private async void OnItemDeleted(object sender, EventArgs e)
-        {
-            await ViewModel.RefreshAsync();
+            ViewModel.Unsubscribe();
         }
 
         private async void OpenInNewView(object sender, RoutedEventArgs e)
         {
-            await NavigationService.CreateNewViewAsync<ProductsViewModel>(ViewModel.ProductList.GetCurrentState());
+            await NavigationService.CreateNewViewAsync<ProductsViewModel>(ViewModel.ProductList.CreateArgs());
         }
 
         private async void OpenDetailsInNewView(object sender, RoutedEventArgs e)
         {
-            await NavigationService.CreateNewViewAsync<ProductDetailsViewModel>(new ProductViewState { ProductID = ViewModel.ProductDetails.Item.ProductID });
+            ViewModel.ProductDetails.CancelEdit();
+            await NavigationService.CreateNewViewAsync<ProductDetailsViewModel>(ViewModel.ProductDetails.CreateArgs());
         }
 
         public int GetRowSpan(bool isMultipleSelection)
