@@ -59,6 +59,34 @@ namespace Inventory.Services
             }
         }
 
+        public async Task<OrderModel> CreateNewOrderAsync(long customerID)
+        {
+            var model = new OrderModel
+            {
+                CustomerID = customerID,
+                OrderDate = DateTime.UtcNow,
+                Status = 0
+            };
+            if (customerID > 0)
+            {
+                using (var dataService = DataServiceFactory.CreateDataService())
+                {
+                    var parent = await dataService.GetCustomerAsync(customerID);
+                    if (parent != null)
+                    {
+                        model.CustomerID = customerID;
+                        model.ShipAddress = parent.AddressLine1;
+                        model.ShipCity = parent.City;
+                        model.ShipRegion = parent.Region;
+                        model.ShipCountryCode = parent.CountryCode;
+                        model.ShipPostalCode = parent.PostalCode;
+                        model.Customer = await CustomerService.CreateCustomerModelAsync(parent, includeAllFields: true);
+                    }
+                }
+            }
+            return model;
+        }
+
         public async Task<int> UpdateOrderAsync(OrderModel model)
         {
             long id = model.OrderID;

@@ -14,6 +14,7 @@ namespace Inventory.Services
         Task<IList<OrderModel>> GetOrdersAsync(int skip, int take, DataRequest<Order> request);
         Task<int> GetOrdersCountAsync(DataRequest<Order> request);
 
+        Task<OrderModel> CreateNewOrderAsync(long customerID);
         Task<int> UpdateOrderAsync(OrderModel model);
 
         Task<int> DeleteOrderAsync(OrderModel model);

@@ -56,7 +56,7 @@ namespace Inventory.ViewModels
 
             if (ViewModelArgs.IsNew)
             {
-                Item = new OrderModel();
+                Item = await OrderService.CreateNewOrderAsync(ViewModelArgs.CustomerID);
                 IsEditMode = true;
             }
             else
