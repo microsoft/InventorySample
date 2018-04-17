@@ -46,7 +46,6 @@ namespace Inventory.ViewModels
             NavigationService.Navigate(ViewModelArgs.ViewModel, ViewModelArgs.Parameter);
             return Task.CompletedTask;
         }
-
         virtual public void Unload()
         {
         }
@@ -55,7 +54,6 @@ namespace Inventory.ViewModels
         {
             MessageService.Subscribe<ViewModelBase, String>(this, OnMessage);
         }
-
         public void Unsubscribe()
         {
             MessageService.Unsubscribe(this);

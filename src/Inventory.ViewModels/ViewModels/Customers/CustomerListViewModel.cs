@@ -43,7 +43,7 @@ namespace Inventory.ViewModels
         public async Task LoadAsync(CustomerListArgs args)
         {
             ViewModelArgs = args ?? CustomerListArgs.CreateEmpty();
-            Query = args.Query;
+            Query = ViewModelArgs.Query;
 
             StartStatusMessage("Loading customers...");
             await RefreshAsync();

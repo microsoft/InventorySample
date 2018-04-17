@@ -45,7 +45,6 @@ namespace Inventory.ViewModels
             Items = GetItems().ToArray();
             return base.LoadAsync(args);
         }
-
         public override void Unload()
         {
             base.Unload();

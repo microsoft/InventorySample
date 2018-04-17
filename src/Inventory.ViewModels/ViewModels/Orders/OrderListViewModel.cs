@@ -45,7 +45,7 @@ namespace Inventory.ViewModels
         public async Task LoadAsync(OrderListArgs args, bool silent = false)
         {
             ViewModelArgs = args ?? OrderListArgs.CreateEmpty();
-            Query = args.Query;
+            Query = ViewModelArgs.Query;
 
             if (silent)
             {
