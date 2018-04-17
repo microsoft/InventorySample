@@ -128,6 +128,7 @@ namespace Inventory.ViewModels
 
             Item.Merge(EditableItem);
             Item.NotifyChanges();
+            NotifyPropertyChanged(nameof(Title));
             EditableItem = Item;
 
             // TODO: Discrimine if New or Modified

@@ -93,7 +93,6 @@ namespace Inventory.ViewModels
             StartStatusMessage("Saving order item...");
             await Task.Delay(100);
             await OrderItemService.UpdateOrderItemAsync(model);
-            NotifyPropertyChanged(nameof(Title));
             EndStatusMessage("Order item saved");
         }
 
@@ -139,6 +138,7 @@ namespace Inventory.ViewModels
                                 item = item ?? new OrderItemModel { OrderID = OrderID, OrderLine = ViewModelArgs.OrderLine, IsEmpty = true };
                                 current.Merge(item);
                                 current.NotifyChanges();
+                                NotifyPropertyChanged(nameof(Title));
                                 if (IsEditMode)
                                 {
                                     StatusMessage("WARNING: This orderItem has been modified externally");

@@ -76,7 +76,6 @@ namespace Inventory.ViewModels
             StartStatusMessage("Saving product...");
             await Task.Delay(100);
             await ProductService.UpdateProductAsync(model);
-            NotifyPropertyChanged(nameof(Title));
             EndStatusMessage("Product saved");
         }
 
@@ -118,6 +117,7 @@ namespace Inventory.ViewModels
                                 item = item ?? new ProductModel { ProductID = current.ProductID, IsEmpty = true };
                                 current.Merge(item);
                                 current.NotifyChanges();
+                                NotifyPropertyChanged(nameof(Title));
                                 if (IsEditMode)
                                 {
                                     StatusMessage("WARNING: This product has been modified externally");

@@ -76,7 +76,6 @@ namespace Inventory.ViewModels
             StartStatusMessage("Saving customer...");
             await Task.Delay(100);
             await CustomerService.UpdateCustomerAsync(model);
-            NotifyPropertyChanged(nameof(Title));
             EndStatusMessage("Customer saved");
         }
 
@@ -124,6 +123,7 @@ namespace Inventory.ViewModels
                                 item = item ?? new CustomerModel { CustomerID = current.CustomerID, IsEmpty = true };
                                 current.Merge(item);
                                 current.NotifyChanges();
+                                NotifyPropertyChanged(nameof(Title));
                                 if (IsEditMode)
                                 {
                                     StatusMessage("WARNING: This customer has been modified externally");
