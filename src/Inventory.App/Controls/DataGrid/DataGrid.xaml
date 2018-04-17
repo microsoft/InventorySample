@@ -28,6 +28,7 @@
             <controls:AdaptiveGridView x:Name="gridview"
                                        DesiredWidth="240"
                                        ItemHeight="220"
+                                       StretchContentForSingleRow="False"
                                        ItemsSource="{x:Bind ItemsSource, Mode=OneWay}"
                                        ItemTemplate="{x:Bind ItemTemplate}"
                                        ItemContainerStyle="{StaticResource GridItemStyle}"

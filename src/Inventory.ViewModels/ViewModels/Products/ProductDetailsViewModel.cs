@@ -95,8 +95,8 @@ namespace Inventory.ViewModels
 
         override protected IEnumerable<IValidationConstraint<ProductModel>> GetValidationConstraints(ProductModel model)
         {
-            // TODOX: 
-            yield break;
+            yield return new RequiredConstraint<ProductModel>("Name", m => m.Name);
+            yield return new RequiredGreaterThanZeroConstraint<ProductModel>("Category", m => m.CategoryID);
         }
 
         /*
