@@ -32,7 +32,7 @@ namespace Inventory.ViewModels
 
         override public string Title => (Item?.IsNew ?? true) ? TitleNew : TitleEdit;
         public string TitleNew => $"New Order Item, Order #{OrderID}";
-        public string TitleEdit => $"Order Item #{Item?.OrderID} - {Item?.OrderLine}" ?? String.Empty;
+        public string TitleEdit => $"Order Line {Item?.OrderLine}, #{Item?.OrderID}" ?? String.Empty;
 
         public OrderItemDetailsArgs ViewModelArgs { get; private set; }
 

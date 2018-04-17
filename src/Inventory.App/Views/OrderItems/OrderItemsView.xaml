@@ -19,6 +19,8 @@
     </UserControl.Resources>
 
     <Grid Background="WhiteSmoke">
+        <controls:WindowTitle Prefix="Order Items" Title="{x:Bind ViewModel.OrderItemList.Title, Mode=OneWay}" />
+
         <Grid Margin="6" RowSpacing="6">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
