@@ -2,7 +2,7 @@
 
 The data we use in the Van Arsdel Inventory app is located in a SQLite local database and we are usnig *Entity Framework Core* to manage the data access.
 
-We will explain the arquitecture of the [.NetStandard](**PENDING_Link_to_NetStandard_section**) project **VanArsdelData** included in the app. This project holds the data access logic of the app and it's a cross-platform library that can be shared for example with a Xamarin mobile app, a WPF desktop app, etc. 
+We will explain the arquitecture of the [.NetStandard](netstandard.md) project **VanArsdelData** included in the app. This project holds the data access logic of the app and it's a cross-platform library that can be shared for example with a Xamarin mobile app, a WPF desktop app, etc. 
 
 Let's explain *Entity Framework Core* first and then we will review how the data access has been implemented in detail. 
 
@@ -47,7 +47,7 @@ public partial class CountryCode
 }
 ```
 
-Let's explain now the *Data Annotations* attributes that we use to define our models.
+Let's explain now the *Data Annotations* attributes that we used to define our models.
 
 ### Data Annotations
 
@@ -64,7 +64,7 @@ In the model defined above we can distinguish the folowing attirbutes:
 
 There's also available to use:
 
-- `Timestamp`: Can be applied to a property to specify the data type of a corresponding column in the database as rowversion.
+- `Timestamp`: Can be applied to a property to specify the data type of the corresponding column in the database as rowversion.
 - `ConcurrencyCheck`: Can be applied to a property to specify that the corresponding column should be included in the optimistic concurrency check.
 - `MinLength`: Can be applied to a property to specify the minimum string length allowed in the corresponding column in the database.
 - `StringLength`: Can be applied to a property to specify the maximum string length allowed in the corresponding column in the database.
@@ -133,7 +133,7 @@ The principal methods of the `DbContext` class are:
 
 ### Lifetime
 
-The lifetime of the context begins when the context is declared and finishes when the context is disposed or when is garbage-collected. Therefore the correct way to use it is with a `using` clause to make sure that the context is disposed after operate with the database:
+The lifetime of the context begins when the context is declared and finishes when the context is disposed or when is garbage-collected. Therefore, the correct way to use it is with a `using` clause to make sure that the context is disposed after operate with the database:
 
 ```c#
 using (var context = new SQLiteDb())
@@ -145,7 +145,7 @@ using (var context = new SQLiteDb())
 
 ### DbSet
 
-A `DbSet` property is exposed in the `DbContext` class as follow:
+A `DbSet` property is exposed in the `DbContext` class as follows:
 
 `public DbSet<Customer> Customers { get; set; }`
 
