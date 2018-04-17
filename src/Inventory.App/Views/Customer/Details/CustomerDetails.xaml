@@ -19,14 +19,14 @@
                         <ColumnDefinition Width="*" MaxWidth="400" />
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" Spacing="6">
-                        <controls:LabelTextBox Label="First Name" Text="{x:Bind Item.FirstName, Mode=TwoWay}" />
-                        <controls:LabelTextBox Label="Middle Name" Text="{x:Bind Item.MiddleName, Mode=TwoWay}" />
-                        <controls:LabelTextBox Label="Last Name" Text="{x:Bind Item.LastName, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="First Name" Text="{x:Bind EditableItem.FirstName, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="Middle Name" Text="{x:Bind EditableItem.MiddleName, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="Last Name" Text="{x:Bind EditableItem.LastName, Mode=TwoWay}" />
                     </StackPanel>
                     <StackPanel Grid.Column="1" Spacing="6">
-                        <controls:LabelTextBox Label="Title" Text="{x:Bind Item.Title, Mode=TwoWay}" />
-                        <controls:LabelTextBox Label="Email Address" Text="{x:Bind Item.EmailAddress, Mode=TwoWay}" />
-                        <controls:LabelTextBox Label="Phone" Text="{x:Bind Item.Phone, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="Title" Text="{x:Bind EditableItem.Title, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="Email Address" Text="{x:Bind EditableItem.EmailAddress, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="Phone" Text="{x:Bind EditableItem.Phone, Mode=TwoWay}" />
                     </StackPanel>
                 </Grid>
 
@@ -38,15 +38,15 @@
                         <ColumnDefinition Width="*" MaxWidth="400" />
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" Spacing="6">
-                        <controls:LabelTextBox Label="Address Line 1" Text="{x:Bind Item.AddressLine1, Mode=TwoWay}" />
-                        <controls:LabelTextBox Label="Address Line 2" Text="{x:Bind Item.AddressLine2, Mode=TwoWay}" />
-                        <controls:LabelTextBox Label="City" Text="{x:Bind Item.City, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="Address Line 1" Text="{x:Bind EditableItem.AddressLine1, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="Address Line 2" Text="{x:Bind EditableItem.AddressLine2, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="City" Text="{x:Bind EditableItem.City, Mode=TwoWay}" />
                     </StackPanel>
                     <StackPanel Grid.Column="1" Spacing="6">
-                        <controls:LabelTextBox Label="Region" Text="{x:Bind Item.Region, Mode=TwoWay}" />
-                        <controls:LabelTextBox Label="Postal Code" Text="{x:Bind Item.PostalCode, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="Region" Text="{x:Bind EditableItem.Region, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="Postal Code" Text="{x:Bind EditableItem.PostalCode, Mode=TwoWay}" />
                         <controls:LabelComboBox Label="Country" ItemsSource="{x:Bind LookupTables.CountryCodes}"
-                                                    SelectedValue="{x:Bind Item.CountryCode, Mode=TwoWay}" SelectedValuePath="CountryCodeID" DisplayMemberPath="Name" />
+                                                    SelectedValue="{x:Bind EditableItem.CountryCode, Mode=TwoWay}" SelectedValuePath="CountryCodeID" DisplayMemberPath="Name" />
                     </StackPanel>
                 </Grid>
 
@@ -58,16 +58,16 @@
                         <ColumnDefinition Width="*" MaxWidth="400" />
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" Spacing="6">
-                        <controls:LabelCalendar Label="BirthDate" Date="{x:Bind Item.BirthDate, Mode=TwoWay}" />
-                        <controls:LabelTextBox Label="Occupation" Text="{x:Bind Item.Occupation, Mode=TwoWay}" />
-                        <controls:LabelTextBox Label="Education" Text="{x:Bind Item.Education, Mode=TwoWay}" />
-                        <controls:LabelTextBox Label="YearlyIncome" Text="{x:Bind Item.YearlyIncome, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" ValueType="Decimal" />
+                        <controls:LabelCalendar Label="BirthDate" Date="{x:Bind EditableItem.BirthDate, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="Occupation" Text="{x:Bind EditableItem.Occupation, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="Education" Text="{x:Bind EditableItem.Education, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="YearlyIncome" Text="{x:Bind EditableItem.YearlyIncome, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" ValueType="Decimal" />
                     </StackPanel>
                     <StackPanel Grid.Column="1" Spacing="6">
-                        <controls:LabelTextBox Label="NumberCarsOwned" Text="{x:Bind Item.NumberCarsOwned, Mode=TwoWay, Converter={StaticResource Int32Converter}}" ValueType="Int32" />
-                        <controls:LabelTextBox Label="MaritalStatus" Text="{x:Bind Item.MaritalStatus, Mode=TwoWay}" />
-                        <controls:LabelTextBox Label="TotalChildren" Text="{x:Bind Item.TotalChildren, Mode=TwoWay, Converter={StaticResource Int32Converter}}" ValueType="Int32" />
-                        <controls:LabelTextBox Label="ChildrenAtHome" Text="{x:Bind Item.ChildrenAtHome, Mode=TwoWay, Converter={StaticResource Int32Converter}}" ValueType="Int32" />
+                        <controls:LabelTextBox Label="NumberCarsOwned" Text="{x:Bind EditableItem.NumberCarsOwned, Mode=TwoWay, Converter={StaticResource Int32Converter}}" ValueType="Int32" />
+                        <controls:LabelTextBox Label="MaritalStatus" Text="{x:Bind EditableItem.MaritalStatus, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="TotalChildren" Text="{x:Bind EditableItem.TotalChildren, Mode=TwoWay, Converter={StaticResource Int32Converter}}" ValueType="Int32" />
+                        <controls:LabelTextBox Label="ChildrenAtHome" Text="{x:Bind EditableItem.ChildrenAtHome, Mode=TwoWay, Converter={StaticResource Int32Converter}}" ValueType="Int32" />
                     </StackPanel>
                 </Grid>
             </StackPanel>
@@ -81,7 +81,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid Margin="6" Background="WhiteSmoke">
-            <views:CustomerCard Margin="6" Item="{x:Bind ViewModel.ItemReadOnly, Mode=OneWay}" />
+            <views:CustomerCard Margin="6" Item="{x:Bind ViewModel.Item, Mode=OneWay}" />
         </Grid>
 
         <controls:Details x:Name="details" Grid.Column="1" Margin="6"

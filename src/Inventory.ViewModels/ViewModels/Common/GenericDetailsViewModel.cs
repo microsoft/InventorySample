@@ -9,7 +9,7 @@ using Inventory.Services;
 
 namespace Inventory.ViewModels
 {
-    abstract public partial class GenericDetailsViewModel<TModel> : ViewModelBase where TModel : ModelBase
+    abstract public partial class GenericDetailsViewModel<TModel> : ViewModelBase where TModel : ModelBase, new()
     {
         public GenericDetailsViewModel(ICommonServices commonServices) : base(commonServices)
         {
@@ -22,8 +22,6 @@ namespace Inventory.ViewModels
 
         public bool CanGoBack => !IsMainView && NavigationService.CanGoBack;
 
-        virtual protected IEnumerable<IValidationConstraint<TModel>> ValidationConstraints => Enumerable.Empty<IValidationConstraint<TModel>>();
-
         private TModel _item = null;
         public TModel Item
         {
@@ -32,7 +30,7 @@ namespace Inventory.ViewModels
             {
                 if (Set(ref _item, value))
                 {
-                    ItemReadOnly = _item;
+                    EditableItem = _item;
                     IsEnabled = (!_item?.IsEmpty) ?? false;
                     NotifyPropertyChanged(nameof(IsDataAvailable));
                     NotifyPropertyChanged(nameof(IsDataUnavailable));
@@ -41,11 +39,11 @@ namespace Inventory.ViewModels
             }
         }
 
-        private TModel _itemReadOnly = null;
-        public TModel ItemReadOnly
+        private TModel _editableItem = null;
+        public TModel EditableItem
         {
-            get => _itemReadOnly;
-            set => Set(ref _itemReadOnly, value);
+            get => _editableItem;
+            set => Set(ref _editableItem, value);
         }
 
         private bool _isEditMode = false;
@@ -84,8 +82,10 @@ namespace Inventory.ViewModels
             if (!IsEditMode)
             {
                 IsEditMode = true;
-                _item = _item.Clone() as TModel;
-                NotifyPropertyChanged(nameof(Item));
+                // Create a copy for edit
+                var editableItem = new TModel();
+                editableItem.Merge(Item);
+                EditableItem = editableItem;
             }
         }
 
@@ -100,7 +100,7 @@ namespace Inventory.ViewModels
         {
             if (IsEditMode)
             {
-                Item = ItemReadOnly;
+                EditableItem = Item;
             }
             IsEditMode = false;
         }
@@ -109,7 +109,7 @@ namespace Inventory.ViewModels
         virtual protected async void OnSave()
         {
             StatusReady();
-            var result = Validate(Item);
+            var result = Validate(EditableItem);
             if (result.IsOk)
             {
                 await SaveAsync();
@@ -122,21 +122,16 @@ namespace Inventory.ViewModels
         }
         virtual public async Task SaveAsync()
         {
-            var original = _itemReadOnly;
-            var modified = _item;
-            if (modified != null)
-            {
-                IsEnabled = false;
-                await SaveItemAsync(modified);
-                IsEnabled = true;
+            IsEnabled = false;
+            await SaveItemAsync(EditableItem);
+            IsEnabled = true;
 
-                original?.Merge(modified);
-                original?.NotifyChanges();
-                Item = original;
+            Item.Merge(EditableItem);
+            Item.NotifyChanges();
+            EditableItem = Item;
 
-                // TODO: Discrimine if New or Modified
-                MessageService.Send(this, "ItemChanged", original);
-            }
+            // TODO: Discrimine if New or Modified
+            MessageService.Send(this, "ItemChanged", Item);
             IsEditMode = false;
         }
 
@@ -163,7 +158,7 @@ namespace Inventory.ViewModels
 
         virtual public Result Validate(TModel model)
         {
-            foreach (var constraint in ValidationConstraints)
+            foreach (var constraint in GetValidationConstraints(model))
             {
                 if (!constraint.Validate(model))
                 {
@@ -172,6 +167,8 @@ namespace Inventory.ViewModels
             }
             return Result.Ok();
         }
+
+        virtual protected IEnumerable<IValidationConstraint<TModel>> GetValidationConstraints(TModel model) => Enumerable.Empty<IValidationConstraint<TModel>>();
 
         abstract protected Task SaveItemAsync(TModel model);
         abstract protected Task DeleteItemAsync(TModel model);

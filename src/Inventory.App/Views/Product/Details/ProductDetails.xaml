@@ -19,9 +19,9 @@
                         <ColumnDefinition Width="*" MaxWidth="400" />
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" Spacing="6">
-                        <controls:LabelTextBox Label="Name" Text="{x:Bind Item.Name, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="Name" Text="{x:Bind EditableItem.Name, Mode=TwoWay}" />
                         <controls:LabelComboBox Label="Category" ItemsSource="{x:Bind LookupTables.Categories}"
-                                                SelectedValue="{x:Bind Item.CategoryID, Mode=TwoWay}" SelectedValuePath="CategoryID" DisplayMemberPath="Name" />
+                                                SelectedValue="{x:Bind EditableItem.CategoryID, Mode=TwoWay}" SelectedValuePath="CategoryID" DisplayMemberPath="Name" />
                     </StackPanel>
                     <StackPanel Grid.Column="1" Spacing="6">
                     </StackPanel>
@@ -34,9 +34,9 @@
                         <ColumnDefinition Width="*" MaxWidth="400" />
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" Spacing="6">
-                        <controls:LabelTextBox Label="ListPrice" Text="{x:Bind Item.ListPrice, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" ValueType="Decimal" />
-                        <controls:LabelTextBox Label="DealerPrice" Text="{x:Bind Item.DealerPrice, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" ValueType="Decimal" />
-                        <controls:LabelTextBox Label="Discount" Text="{x:Bind Item.Discount, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" ValueType="Decimal" />
+                        <controls:LabelTextBox Label="ListPrice" Text="{x:Bind EditableItem.ListPrice, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" ValueType="Decimal" />
+                        <controls:LabelTextBox Label="DealerPrice" Text="{x:Bind EditableItem.DealerPrice, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" ValueType="Decimal" />
+                        <controls:LabelTextBox Label="Discount" Text="{x:Bind EditableItem.Discount, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" ValueType="Decimal" />
                     </StackPanel>
                     <StackPanel Grid.Column="1" Spacing="6">
                     </StackPanel>
@@ -52,7 +52,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid Margin="6" Background="WhiteSmoke">
-            <views:ProductCard Margin="6" Item="{x:Bind ViewModel.ItemReadOnly, Mode=OneWay}" />
+            <views:ProductCard Margin="6" Item="{x:Bind ViewModel.Item, Mode=OneWay}" />
         </Grid>
 
         <controls:Details x:Name="details" Grid.Column="1" Margin="6"

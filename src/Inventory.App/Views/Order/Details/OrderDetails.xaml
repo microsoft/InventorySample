@@ -20,35 +20,35 @@
                     
                     <StackPanel Grid.Column="0" Spacing="6">
                         <TextBlock Text="Customer Information" FontSize="16" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
-                        <controls:CustomerSuggestBox DisplayText="{x:Bind Item.Customer.FullName, Mode=OneWay}"
+                        <controls:CustomerSuggestBox DisplayText="{x:Bind EditableItem.Customer.FullName, Mode=OneWay}"
                                                  CustomerSelectedCommand="{x:Bind CustomerSelectedCommand}"
-                                                 IsReadOnly="{x:Bind Item.CanEditCustomer, Mode=OneWay, Converter={StaticResource BoolNegationConverter}}" />
-                        <controls:LabelTextBox Label="Ship Address" Text="{x:Bind Item.ShipAddress, Mode=TwoWay}" />
-                        <controls:LabelTextBox Label="Ship Postal Code" Text="{x:Bind Item.ShipPostalCode, Mode=TwoWay}" />
-                        <controls:LabelTextBox Label="Ship City" Text="{x:Bind Item.ShipCity, Mode=TwoWay}" />
-                        <controls:LabelTextBox Label="Ship Region" Text="{x:Bind Item.ShipRegion, Mode=TwoWay}" />
+                                                 IsReadOnly="{x:Bind EditableItem.CanEditCustomer, Mode=OneWay, Converter={StaticResource BoolNegationConverter}}" />
+                        <controls:LabelTextBox Label="Ship Address" Text="{x:Bind EditableItem.ShipAddress, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="Ship Postal Code" Text="{x:Bind EditableItem.ShipPostalCode, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="Ship City" Text="{x:Bind EditableItem.ShipCity, Mode=TwoWay}" />
+                        <controls:LabelTextBox Label="Ship Region" Text="{x:Bind EditableItem.ShipRegion, Mode=TwoWay}" />
                         <controls:LabelComboBox Label="Ship Country" ItemsSource="{x:Bind LookupTables.CountryCodes}"
-                                            SelectedValue="{x:Bind Item.ShipCountryCode, Mode=TwoWay}" SelectedValuePath="CountryCodeID" DisplayMemberPath="Name" />
+                                            SelectedValue="{x:Bind EditableItem.ShipCountryCode, Mode=TwoWay}" SelectedValuePath="CountryCodeID" DisplayMemberPath="Name" />
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" Spacing="6">
                         <TextBlock Text="Order Status" FontSize="16" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
                         <controls:LabelComboBox Label="Status" ItemsSource="{x:Bind LookupTables.OrderStatus}"
-                                            SelectedValue="{x:Bind Item.Status, Mode=TwoWay, Converter={StaticResource Int32Converter}}"
+                                            SelectedValue="{x:Bind EditableItem.Status, Mode=TwoWay, Converter={StaticResource Int32Converter}}"
                                             SelectedValuePath="Status" DisplayMemberPath="Name" />
                         <controls:LabelComboBox Label="Payment Type" ItemsSource="{x:Bind LookupTables.PaymentTypes}"
-                                            SelectedValue="{x:Bind Item.PaymentType, Mode=TwoWay, Converter={StaticResource Int32Converter}}"
+                                            SelectedValue="{x:Bind EditableItem.PaymentType, Mode=TwoWay, Converter={StaticResource Int32Converter}}"
                                             SelectedValuePath="PaymentTypeID" DisplayMemberPath="Name"
-                                            Visibility="{x:Bind Item.CanEditPayment, Mode=OneWay}"/>
-                        <controls:LabelCalendar Label="Shipped Date" Date="{x:Bind Item.ShippedDate, Mode=TwoWay}"
-                                            MinDate="{x:Bind Item.OrderDate, Mode=OneWay, Converter={StaticResource DateTimeOffsetConverter}}"
-                                            Visibility="{x:Bind Item.CanEditShipping, Mode=OneWay}"/>
+                                            Visibility="{x:Bind EditableItem.CanEditPayment, Mode=OneWay}"/>
+                        <controls:LabelCalendar Label="Shipped Date" Date="{x:Bind EditableItem.ShippedDate, Mode=TwoWay}"
+                                            MinDate="{x:Bind EditableItem.OrderDate, Mode=OneWay, Converter={StaticResource DateTimeOffsetConverter}}"
+                                            Visibility="{x:Bind EditableItem.CanEditShipping, Mode=OneWay}"/>
                         <controls:LabelComboBox Label="Shipper" ItemsSource="{x:Bind LookupTables.Shippers}"
-                                            SelectedValue="{x:Bind Item.ShipVia, Mode=TwoWay, Converter={StaticResource Int32Converter}}" SelectedValuePath="ShipperID" DisplayMemberPath="Name"
-                                            Visibility="{x:Bind Item.CanEditShipping, Mode=OneWay}"/>
-                        <controls:LabelCalendar Label="Delivered Date" Date="{x:Bind Item.DeliveredDate, Mode=TwoWay}"
-                                            MinDate="{x:Bind Item.ShippedDate, Mode=OneWay, Converter={StaticResource DateTimeOffsetConverter}}"
-                                            Visibility="{x:Bind Item.CanEditDelivery, Mode=OneWay}"/>
+                                            SelectedValue="{x:Bind EditableItem.ShipVia, Mode=TwoWay, Converter={StaticResource Int32Converter}}" SelectedValuePath="ShipperID" DisplayMemberPath="Name"
+                                            Visibility="{x:Bind EditableItem.CanEditShipping, Mode=OneWay}"/>
+                        <controls:LabelCalendar Label="Delivered Date" Date="{x:Bind EditableItem.DeliveredDate, Mode=TwoWay}"
+                                            MinDate="{x:Bind EditableItem.ShippedDate, Mode=OneWay, Converter={StaticResource DateTimeOffsetConverter}}"
+                                            Visibility="{x:Bind EditableItem.CanEditDelivery, Mode=OneWay}"/>
                     </StackPanel>
                 </Grid>
             </StackPanel>
@@ -62,7 +62,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid Margin="6" Background="WhiteSmoke">
-            <views:OrderCard Margin="6" Item="{x:Bind ViewModel.ItemReadOnly, Mode=OneWay}" />
+            <views:OrderCard Margin="6" Item="{x:Bind ViewModel.Item, Mode=OneWay}" />
         </Grid>
 
         <controls:Details x:Name="details" Grid.Column="1" Margin="6"

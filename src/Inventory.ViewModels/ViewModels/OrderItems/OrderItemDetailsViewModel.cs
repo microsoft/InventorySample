@@ -110,17 +110,14 @@ namespace Inventory.ViewModels
             return await DialogService.ShowAsync("Confirm Delete", "Are you sure you want to delete current order item?", "Ok", "Cancel");
         }
 
-        override protected IEnumerable<IValidationConstraint<OrderItemModel>> ValidationConstraints
+        override protected IEnumerable<IValidationConstraint<OrderItemModel>> GetValidationConstraints(OrderItemModel model)
         {
-            get
-            {
-                yield return new RequiredConstraint<OrderItemModel>("Product", m => m.ProductID);
-                yield return new NonZeroConstraint<OrderItemModel>("Quantity", m => m.Quantity);
-                yield return new PositiveConstraint<OrderItemModel>("Quantity", m => m.Quantity);
-                yield return new LessThanConstraint<OrderItemModel>("Quantity", m => m.Quantity, 100);
-                yield return new PositiveConstraint<OrderItemModel>("Discount", m => m.Discount);
-                yield return new NonGreaterThanConstraint<OrderItemModel>("Discount", m => m.Discount, (double)Item.Subtotal, "'Subtotal'");
-            }
+            yield return new RequiredConstraint<OrderItemModel>("Product", m => m.ProductID);
+            yield return new NonZeroConstraint<OrderItemModel>("Quantity", m => m.Quantity);
+            yield return new PositiveConstraint<OrderItemModel>("Quantity", m => m.Quantity);
+            yield return new LessThanConstraint<OrderItemModel>("Quantity", m => m.Quantity, 100);
+            yield return new PositiveConstraint<OrderItemModel>("Discount", m => m.Discount);
+            yield return new NonGreaterThanConstraint<OrderItemModel>("Discount", m => m.Discount, (double)model.Subtotal, "'Subtotal'");
         }
 
         /*
@@ -128,10 +125,10 @@ namespace Inventory.ViewModels
          ****************************************************************/
         private async void OnDetailsMessage(OrderItemDetailsViewModel sender, string message, OrderItemModel changed)
         {
-            var current = ItemReadOnly;
+            var current = Item;
             if (current != null)
             {
-                if (changed != null && changed.OrderID == ItemReadOnly?.OrderID && changed.OrderLine == ItemReadOnly?.OrderLine)
+                if (changed != null && changed.OrderID == current?.OrderID && changed.OrderLine == current?.OrderLine)
                 {
                     switch (message)
                     {
@@ -166,14 +163,14 @@ namespace Inventory.ViewModels
                     case "ItemsDeleted":
                         if (args is IList<OrderItemModel> deletedModels)
                         {
-                            if (deletedModels.Any(r => r.OrderID == Item.OrderID && r.OrderLine == Item.OrderLine))
+                            if (deletedModels.Any(r => r.OrderID == current.OrderID && r.OrderLine == current.OrderLine))
                             {
                                 await OnItemDeletedExternally();
                             }
                         }
                         break;
                     case "ItemRangesDeleted":
-                        var model = await OrderItemService.GetOrderItemAsync(Item.OrderID, Item.OrderLine);
+                        var model = await OrderItemService.GetOrderItemAsync(current.OrderID, current.OrderLine);
                         if (model == null)
                         {
                             await OnItemDeletedExternally();

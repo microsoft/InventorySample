@@ -93,13 +93,10 @@ namespace Inventory.ViewModels
             return await DialogService.ShowAsync("Confirm Delete", "Are you sure you want to delete current product?", "Ok", "Cancel");
         }
 
-        override protected IEnumerable<IValidationConstraint<ProductModel>> ValidationConstraints
+        override protected IEnumerable<IValidationConstraint<ProductModel>> GetValidationConstraints(ProductModel model)
         {
-            get
-            {
-                // TODOX: 
-                yield break;
-            }
+            // TODOX: 
+            yield break;
         }
 
         /*
@@ -107,10 +104,10 @@ namespace Inventory.ViewModels
          ****************************************************************/
         private async void OnDetailsMessage(ProductDetailsViewModel sender, string message, ProductModel changed)
         {
-            var current = ItemReadOnly;
+            var current = Item;
             if (current != null)
             {
-                if (changed != null && changed.ProductID == ItemReadOnly?.ProductID)
+                if (changed != null && changed.ProductID == current?.ProductID)
                 {
                     switch (message)
                     {
@@ -145,14 +142,14 @@ namespace Inventory.ViewModels
                     case "ItemsDeleted":
                         if (args is IList<ProductModel> deletedModels)
                         {
-                            if (deletedModels.Any(r => r.ProductID == Item.ProductID))
+                            if (deletedModels.Any(r => r.ProductID == current.ProductID))
                             {
                                 await OnItemDeletedExternally();
                             }
                         }
                         break;
                     case "ItemRangesDeleted":
-                        var model = await ProductService.GetProductAsync(Item.ProductID);
+                        var model = await ProductService.GetProductAsync(current.ProductID);
                         if (model == null)
                         {
                             await OnItemDeletedExternally();

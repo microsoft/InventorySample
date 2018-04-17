@@ -18,19 +18,19 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0" Spacing="6">
-                    <controls:ProductSuggestBox DisplayText="{x:Bind Item.Product.Name, Mode=OneWay}"
+                    <controls:ProductSuggestBox DisplayText="{x:Bind EditableItem.Product.Name, Mode=OneWay}"
                                                 ProductSelectedCommand="{x:Bind ProductSelectedCommand}" />
-                    <controls:LabelTextBox Label="Quantity" Text="{x:Bind Item.Quantity, Mode=TwoWay, Converter={StaticResource Int32Converter}}" ValueType="Int32" />
-                    <controls:LabelTextBox Label="Discount" Text="{x:Bind Item.Discount, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" ValueType="Decimal" />
+                    <controls:LabelTextBox Label="Quantity" Text="{x:Bind EditableItem.Quantity, Mode=TwoWay, Converter={StaticResource Int32Converter}}" ValueType="Int32" />
+                    <controls:LabelTextBox Label="Discount" Text="{x:Bind EditableItem.Discount, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" ValueType="Decimal" />
                     <controls:LabelComboBox Label="Tax Type" ItemsSource="{x:Bind LookupTables.TaxTypes}"
-                                            SelectedValue="{x:Bind Item.TaxType, Mode=TwoWay, Converter={StaticResource Int32Converter}}"
+                                            SelectedValue="{x:Bind EditableItem.TaxType, Mode=TwoWay, Converter={StaticResource Int32Converter}}"
                                             SelectedValuePath="TaxTypeID" DisplayMemberPath="Name" />
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" Spacing="6">
-                    <controls:LabelTextBlock Label="Unit Price" Text="{x:Bind Item.UnitPrice, Mode=OneWay, Converter={StaticResource DecimalConverter}}" />
-                    <controls:LabelTextBlock Label="Subtotal" Text="{x:Bind Item.Subtotal, Mode=OneWay, Converter={StaticResource DecimalConverter}}" />
-                    <controls:LabelTextBlock Label="Total" Text="{x:Bind Item.Total, Mode=OneWay, Converter={StaticResource DecimalConverter}}" />
+                    <controls:LabelTextBlock Label="Unit Price" Text="{x:Bind EditableItem.UnitPrice, Mode=OneWay, Converter={StaticResource DecimalConverter}}" />
+                    <controls:LabelTextBlock Label="Subtotal" Text="{x:Bind EditableItem.Subtotal, Mode=OneWay, Converter={StaticResource DecimalConverter}}" />
+                    <controls:LabelTextBlock Label="Total" Text="{x:Bind EditableItem.Total, Mode=OneWay, Converter={StaticResource DecimalConverter}}" />
                 </StackPanel>
             </Grid>
         </DataTemplate>
@@ -43,7 +43,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid Margin="6" Background="WhiteSmoke">
-            <views:OrderItemCard Margin="6" Item="{x:Bind ViewModel.ItemReadOnly, Mode=OneWay}" />
+            <views:OrderItemCard Margin="6" Item="{x:Bind ViewModel.Item, Mode=OneWay}" />
         </Grid>
 
         <controls:Details x:Name="details" Grid.Column="1" Margin="6"

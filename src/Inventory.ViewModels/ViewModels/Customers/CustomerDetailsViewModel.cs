@@ -93,19 +93,16 @@ namespace Inventory.ViewModels
             return await DialogService.ShowAsync("Confirm Delete", "Are you sure you want to delete current customer?", "Ok", "Cancel");
         }
 
-        override protected IEnumerable<IValidationConstraint<CustomerModel>> ValidationConstraints
+        override protected IEnumerable<IValidationConstraint<CustomerModel>> GetValidationConstraints(CustomerModel model)
         {
-            get
-            {
-                yield return new RequiredConstraint<CustomerModel>("First Name", m => m.FirstName);
-                yield return new RequiredConstraint<CustomerModel>("Last Name", m => m.LastName);
-                yield return new RequiredConstraint<CustomerModel>("Email Address", m => m.EmailAddress);
-                yield return new RequiredConstraint<CustomerModel>("Address Line 1", m => m.AddressLine1);
-                yield return new RequiredConstraint<CustomerModel>("City", m => m.City);
-                yield return new RequiredConstraint<CustomerModel>("Region", m => m.Region);
-                yield return new RequiredConstraint<CustomerModel>("Postal Code", m => m.PostalCode);
-                yield return new RequiredConstraint<CustomerModel>("Country", m => m.CountryCode);
-            }
+            yield return new RequiredConstraint<CustomerModel>("First Name", m => m.FirstName);
+            yield return new RequiredConstraint<CustomerModel>("Last Name", m => m.LastName);
+            yield return new RequiredConstraint<CustomerModel>("Email Address", m => m.EmailAddress);
+            yield return new RequiredConstraint<CustomerModel>("Address Line 1", m => m.AddressLine1);
+            yield return new RequiredConstraint<CustomerModel>("City", m => m.City);
+            yield return new RequiredConstraint<CustomerModel>("Region", m => m.Region);
+            yield return new RequiredConstraint<CustomerModel>("Postal Code", m => m.PostalCode);
+            yield return new RequiredConstraint<CustomerModel>("Country", m => m.CountryCode);
         }
 
         /*
@@ -113,10 +110,10 @@ namespace Inventory.ViewModels
          ****************************************************************/
         private async void OnDetailsMessage(CustomerDetailsViewModel sender, string message, CustomerModel changed)
         {
-            var current = ItemReadOnly;
+            var current = Item;
             if (current != null)
             {
-                if (changed != null && changed.CustomerID == ItemReadOnly?.CustomerID)
+                if (changed != null && changed.CustomerID == current?.CustomerID)
                 {
                     switch (message)
                     {
@@ -151,14 +148,14 @@ namespace Inventory.ViewModels
                     case "ItemsDeleted":
                         if (args is IList<CustomerModel> deletedModels)
                         {
-                            if (deletedModels.Any(r => r.CustomerID == Item.CustomerID))
+                            if (deletedModels.Any(r => r.CustomerID == current.CustomerID))
                             {
                                 await OnItemDeletedExternally();
                             }
                         }
                         break;
                     case "ItemRangesDeleted":
-                        var model = await CustomerService.GetCustomerAsync(Item.CustomerID);
+                        var model = await CustomerService.GetCustomerAsync(current.CustomerID);
                         if (model == null)
                         {
                             await OnItemDeletedExternally();

@@ -18,20 +18,20 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0" Spacing="6">
-                    <controls:LabelTextBox Label="First Name" Text="{x:Bind Item.FirstName, Mode=TwoWay}" />
-                    <controls:LabelTextBox Label="Middle Name" Text="{x:Bind Item.MiddleName, Mode=TwoWay}" />
-                    <controls:LabelTextBox Label="Last Name" Text="{x:Bind Item.LastName, Mode=TwoWay}" />
-                    <controls:LabelTextBox Label="EMail Address" Text="{x:Bind Item.EmailAddress, Mode=TwoWay}" />
-                    <controls:LabelTextBox Label="Phone" Text="{x:Bind Item.Phone, Mode=TwoWay}" />
+                    <controls:LabelTextBox Label="First Name" Text="{x:Bind EditableItem.FirstName, Mode=TwoWay}" />
+                    <controls:LabelTextBox Label="Middle Name" Text="{x:Bind EditableItem.MiddleName, Mode=TwoWay}" />
+                    <controls:LabelTextBox Label="Last Name" Text="{x:Bind EditableItem.LastName, Mode=TwoWay}" />
+                    <controls:LabelTextBox Label="EMail Address" Text="{x:Bind EditableItem.EmailAddress, Mode=TwoWay}" />
+                    <controls:LabelTextBox Label="Phone" Text="{x:Bind EditableItem.Phone, Mode=TwoWay}" />
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" Spacing="6">
-                    <controls:LabelTextBox Label="Address" Text="{x:Bind Item.AddressLine1, Mode=TwoWay}" />
-                    <controls:LabelTextBox Label="Postal Code" Text="{x:Bind Item.PostalCode, Mode=TwoWay}" />
-                    <controls:LabelTextBox Label="City" Text="{x:Bind Item.City, Mode=TwoWay}" />
-                    <controls:LabelTextBox Label="Region" Text="{x:Bind Item.Region, Mode=TwoWay}" />
+                    <controls:LabelTextBox Label="Address" Text="{x:Bind EditableItem.AddressLine1, Mode=TwoWay}" />
+                    <controls:LabelTextBox Label="Postal Code" Text="{x:Bind EditableItem.PostalCode, Mode=TwoWay}" />
+                    <controls:LabelTextBox Label="City" Text="{x:Bind EditableItem.City, Mode=TwoWay}" />
+                    <controls:LabelTextBox Label="Region" Text="{x:Bind EditableItem.Region, Mode=TwoWay}" />
                     <controls:LabelComboBox Label="Country" ItemsSource="{x:Bind LookupTables.CountryCodes}"
-                                            SelectedValue="{x:Bind Item.CountryCode, Mode=TwoWay}"
+                                            SelectedValue="{x:Bind EditableItem.CountryCode, Mode=TwoWay}"
                                             SelectedValuePath="CountryCodeID" DisplayMemberPath="Name" />
                 </StackPanel>
             </Grid>
@@ -45,7 +45,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid Background="WhiteSmoke">
-            <views:CustomersCard Margin="6,12" Item="{x:Bind ViewModel.ItemReadOnly, Mode=OneWay}" />
+            <views:CustomersCard Margin="6,12" Item="{x:Bind ViewModel.Item, Mode=OneWay}" />
         </Grid>
 
         <controls:Details x:Name="details" Grid.Column="1" Margin="6,0,0,0"

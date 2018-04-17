@@ -11,11 +11,6 @@ namespace Inventory.Models
 
         public bool IsEmpty { get; set; }
 
-        public ModelBase Clone()
-        {
-            return MemberwiseClone() as ModelBase;
-        }
-
         virtual public void Merge(ModelBase source) { }
 
         protected bool Set<T>(ref T field, T newValue = default(T), [CallerMemberName] string propertyName = null)
