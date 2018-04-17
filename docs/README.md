@@ -35,8 +35,9 @@
     - Navigation
     - Difference between Data Source Models and App Models
     - [Data Access](chapters/architecture/dataaccess.md#data-access)
-        - [Data Providers](chapters/architecture/dataaccess.md#data-providers)
-        - [Data Services](chapters/architecture/dataaccess.md#data-services)
+        - [Inventory.Data project](chapters/architecture/dataaccess.md#inventory.data-project)
+         - [Accessing the data from the app](chapters/architecture/dataaccess.md#accessing-the-data-from-the-app)
+         - [Data Service Factory](chapters/architecture/dataaccess.md#data-service-factory)
     - Localization
     - ...
 - [Data Access](chapters/dataaccess.md)

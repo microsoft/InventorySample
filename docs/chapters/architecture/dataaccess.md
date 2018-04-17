@@ -1,75 +1,26 @@
 ## Data Access
 
-One of the most important parts of the *Van Arsdel Arquitecture* is how we access to the different Data Sources and how this logic is decoupled from the rest of the app.
+One of the most important parts of the *Inventory Sample app* is how we access to the different Data Sources and how this logic is decoupled from the rest of the app.
 
-We will review in detail how to use the existing the different *data sources* as *Data Providers*, and how we use *Entity Framework Core* for databases as SQLite or SQL server.
+We will review in detail the *Inventory.Data* project and how we use it in the application.
 
-### Data Providers
+### Inventory.Data project
 
-In the *Van Arsdel Inventory* app we have different data sources that we could use to extract the data:
+When our *data source* is a relational database, we are using [Entity Framework Core](../dataaccess.md) to manipulate the data and expose it.
 
-- *SQLite database*
-- *SQL Server database*
-- *Web API REST*
+Wer can split the project in three principal parts:
 
-The data we are going to display and manipulate in the app is manage for the contract `IDataProvider` and each *data source* has to implement this *interface*:
+#### Data
 
-```c#
-public interface IDataProvider : IDisposable
-{
-    Task<IList<CountryCodeModel>> GetCountryCodesAsync();
-    Task<IList<OrderStatusModel>> GetOrderStatusAsync();
-    Task<IList<PaymentTypeModel>> GetPaymentTypesAsync();
-    Task<IList<ShipperModel>> GetShippersAsync();
-    Task<IList<TaxTypeModel>> GetTaxTypesAsync();
+Inside the *Data* folder are located all the data models, representing each table of the database:
 
-    Task<PageResult<CustomerModel>> GetCustomersAsync(PageRequest<Customer> request);
-    Task<CustomerModel> GetCustomerAsync(long id);
-    Task<int> UpdateCustomerAsync(CustomerModel model);
-    Task<int> DeleteCustomerAsync(CustomerModel model);
+![data](../img/datamodels.png)
 
-    Task<PageResult<OrderModel>> GetOrdersAsync(PageRequest<Order> request);
-    Task<OrderModel> GetOrderAsync(long id);
-    Task<OrderModel> CreateNewOrderAsync(long customerID);
-    Task<int> UpdateOrderAsync(OrderModel model);
-    Task<int> DeleteOrderAsync(OrderModel model);
+These models will be our *Data Transfer Objects* or *DTOs* of our app.
 
-    Task<PageResult<OrderItemModel>> GetOrderItemsAsync(PageRequest<OrderItem> request);
-    Task<OrderItemModel> GetOrderItemAsync(long customerID, int orderLine);
-    Task<int> UpdateOrderItemAsync(OrderItemModel model);
-    Task<int> DeleteOrderItemAsync(OrderItemModel model);
+#### IDataSource 
 
-    Task<PageResult<ProductModel>> GetProductsAsync(PageRequest<Product> request);
-    Task<ProductModel> GetProductAsync(string id);
-    Task<int> UpdateProductAsync(ProductModel model);
-    Task<int> DeleteProductAsync(ProductModel model);
-}
-```
-
-The interface `IDataProvider` allows us:
-
-- To introduce new data sources of your prefference.
-- It will act as the *Mapper* between the data source *entity models* and the *models* that our app will actually use. 
-
-The way to change the default data source that we are going to use in the app is declaring the corresponding *Data Provider* in the following class:
-
-```c#
-public class DataProviderFactory : IDataProviderFactory
-{
-    public IDataProvider CreateDataProvider()
-    {
-        // TODO: Return selected DataProvider in configuration
-        return new SQLiteDataProvider(AppSettings.SQLiteConnectionString);
-        //return new SQLServerDataProvider(AppSettings.SQLServerConnectionString);
-    }
-}
-```
-
-### Data Services
-
-When our *data source* is a relational database, we are using [Entity Framework Core](dataaccess.md) to manipulate the data and expose it to our *Data Provider*. Due that we have more than one *data source* with this characteristics, there's an abstraction to use databases implemented in the **VanArsdel.Data** project.
-
-We will have a class implementing `IDataSource` for each *context* representing a database.
+It represents the *Entity Framework context* or the *database source*. We will have a class implementing `IDataSource` for each *context* representing a database.
 
 ```c#
 public interface IDataSource : IDisposable
@@ -89,67 +40,112 @@ public interface IDataSource : IDisposable
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken));
 }
-``` 
+```
+We have two implementations of this interface: `SQLiteDb` and `SQLServerDb`, representing two different databases that will share the same logic to access, manipulate and expose the data.
 
-Let's see how the SQLite context is implemented:
+#### IDataService
+
+This is the contract that is has to be used to access the database of the application.
 
 ```c#
-public class SQLiteDb : DbContext, IDataSource
+public interface IDataService : IDisposable
 {
-    private string _connectionString = null;
+    Task<Customer> GetCustomerAsync(long id);
+    Task<IList<Customer>> GetCustomersAsync(int skip, int take, DataRequest<Customer> request);
+    Task<IList<Customer>> GetCustomerKeysAsync(int skip, int take, DataRequest<Customer> request);
+    Task<int> GetCustomersCountAsync(DataRequest<Customer> request);
+    Task<int> UpdateCustomerAsync(Customer customer);
+    Task<int> DeleteCustomersAsync(params Customer[] customers);
 
-    public SQLiteDb(string connectionString)
-    {
-        _connectionString = connectionString;
-    }
+    Task<Order> GetOrderAsync(long id);
+    Task<IList<Order>> GetOrdersAsync(int skip, int take, DataRequest<Order> request);
+    Task<IList<Order>> GetOrderKeysAsync(int skip, int take, DataRequest<Order> request);
+    Task<int> GetOrdersCountAsync(DataRequest<Order> request);
+    Task<int> UpdateOrderAsync(Order order);
+    Task<int> DeleteOrdersAsync(params Order[] orders);
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseSqlite(_connectionString);
-    }
+    Task<OrderItem> GetOrderItemAsync(long orderID, int orderLine);
+    Task<IList<OrderItem>> GetOrderItemsAsync(int skip, int take, DataRequest<OrderItem> request);
+    Task<IList<OrderItem>> GetOrderItemKeysAsync(int skip, int take, DataRequest<OrderItem> request);
+    Task<int> GetOrderItemsCountAsync(DataRequest<OrderItem> request);
+    Task<int> UpdateOrderItemAsync(OrderItem orderItem);
+    Task<int> DeleteOrderItemsAsync(params OrderItem[] orderItems);
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<SubCategory>().HasKey(e => new { e.CategoryID, e.SubCategoryID });
-        modelBuilder.Entity<OrderItem>().HasKey(e => new { e.OrderID, e.OrderLine });
-    }
+    Task<Product> GetProductAsync(string id);
+    Task<IList<Product>> GetProductsAsync(int skip, int take, DataRequest<Product> request);
+    Task<IList<Product>> GetProductKeysAsync(int skip, int take, DataRequest<Product> request);
+    Task<int> GetProductsCountAsync(DataRequest<Product> request);
+    Task<int> UpdateProductAsync(Product product);
+    Task<int> DeleteProductsAsync(params Product[] products);
 
-    public DbSet<Customer> Customers { get; set; }
-    public DbSet<Product> Products { get; set; }
-    public DbSet<Order> Orders { get; set; }
-    public DbSet<OrderItem> OrderItems { get; set; }
 
-    public DbSet<Category> Categories { get; set; }
-    public DbSet<SubCategory> SubCategories { get; set; }
-
-    public DbSet<CountryCode> CountryCodes { get; set; }
-    public DbSet<PaymentType> PaymentTypes { get; set; }
-    public DbSet<TaxType> TaxTypes { get; set; }
-    public DbSet<OrderStatus> OrderStatus { get; set; }
-    public DbSet<Shipper> Shippers { get; set; }
+    Task<IList<Category>> GetCategoriesAsync();
+    Task<IList<CountryCode>> GetCountryCodesAsync();
+    Task<IList<OrderStatus>> GetOrderStatusAsync();
+    Task<IList<PaymentType>> GetPaymentTypesAsync();
+    Task<IList<Shipper>> GetShippersAsync();
+    Task<IList<TaxType>> GetTaxTypesAsync();
 }
 ```
 
-There's also one last thing to note. The real diference between this *SQLite context* and the *SQL Server context* is the parameter *connectionString* that we are passing in the constructor of the class. Therefore the data will be delivered exactly with the same implementation for both *contexts*. We will have a base class `DataServiceBase` and two derived classes representing each *data source*:
+### Accessing the data from the app 
+
+The way that we are accessing the data is through the following services, one per functionality of the app and we can find them in the *Services* folder inside the *Inventory.ViewModels* project:
+
+![data services](../img/data-services.png)
+
+Let's have a look a one of them:
 
 ```c#
-public class SQLiteDataService : DataServiceBase
+public interface ICustomerService
 {
-    public SQLiteDataService(string connectionString)
-        : base(new SQLiteDb(connectionString))
-    {
-    }
+    Task<CustomerModel> GetCustomerAsync(long id);
+    Task<IList<CustomerModel>> GetCustomersAsync(DataRequest<Customer> request);
+    Task<IList<CustomerModel>> GetCustomersAsync(int skip, int take, DataRequest<Customer> request);
+    Task<int> GetCustomersCountAsync(DataRequest<Customer> request);
+
+    Task<int> UpdateCustomerAsync(CustomerModel model);
+
+    Task<int> DeleteCustomerAsync(CustomerModel model);
+    Task<int> DeleteCustomerRangeAsync(int index, int length, DataRequest<Customer> request);
 }
 ```
 
-Once the we have a commun way to expose the data for both *contexts*, we will use it in our implementations of `IDataProvider`.
+This *contract* is not only accessing the data source, it is also acting as a mapper between our DTOs models and the Models that we used to represent the data visually. 
+
+There are some advantajes in map our DTOs models to *visual models* like:
+
+- Not all the info of the DTO needs to be displayed in our views.
+- DTOs should be normally simple classes with no behaviour defined in order to facilitate serialization.
+
+### Data Service Factory
+
+Finally, we just need to review the interface `IDataServiceFactory` which is the one responsable of provide the *Data source* that we use in the app. 
 
 ```c#
-public class SQLiteDataProvider : SQLBaseProvider
+public interface IDataServiceFactory
 {
-    public SQLiteDataProvider(string connectionString)
-        : base(new SQLiteDataService(connectionString))
-    {
-    }
+    IDataService CreateDataService();
+}
+```
+
+The possible *data providers* that we are offering to be used in the app are: `SQLite`, `SQLServer` and `WebAPI`, and are defined by the following enum class:
+
+```c#
+public enum DataProviderType
+{
+    SQLite,
+    SQLServer,
+    WebAPI
+}
+```
+
+To establish the Data Source to use, we just need to set the property `DataProvider` of the `AppSettings` class. By default, we are loading the `SQLite` data provider:
+
+```c#
+public DataProviderType DataProvider
+{
+    get => (DataProviderType)GetSettingsValue("DataProvider", (int)DataProviderType.SQLite);
+    set => LocalSettings.Values["DataProvider"] = (int)value;
 }
 ```
