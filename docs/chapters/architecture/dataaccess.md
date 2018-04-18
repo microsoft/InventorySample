@@ -22,7 +22,7 @@ These models will be our *Data Transfer Objects* or *DTOs* of our app.
 
 This interface represents the *database context*. We will have a class implementing `IDataSource` for each *context* representing a database.
 
-```c#
+```csharp
 public interface IDataSource : IDisposable
 {
     DbSet<CountryCode> CountryCodes { get; }
@@ -47,7 +47,7 @@ We can find two implementations of this interface: `SQLiteDb` and `SQLServerDb`,
 
 The interface `IDataService` is used for access and manipulate data from the database.
 
-```c#
+```csharp
 public interface IDataService : IDisposable
 {
     Task<Customer> GetCustomerAsync(long id);
@@ -93,14 +93,14 @@ public interface IDataService : IDisposable
 #### Data Service Factory
 
 The first thing we have to define in the app, it's the source of the data we are going to consume. The interface `IDataServiceFactory` is the one responsable of provide the inplementation of `IDataService` that we use in the app. 
-```c#
+```csharp
 public interface IDataServiceFactory
 {
     IDataService CreateDataService();
 }
 ```
 The possible *data services* to be used in the app are: `SQLite` and `SQLServer`, and they are defined in the following enum class:
-```c#
+```csharp
 public enum DataProviderType
 {
     SQLite,
@@ -108,7 +108,7 @@ public enum DataProviderType
 }
 ```
 To establish the Data Service to use, we just need to set the property `DataProvider` of the `AppSettings` class. By default, we are loading the `SQLite` data provider:
-```c#
+```csharp
 public DataProviderType DataProvider
 {
     get => (DataProviderType)GetSettingsValue("DataProvider", (int)DataProviderType.SQLite);
@@ -124,7 +124,7 @@ We have additional services, one per functionality of the app located in the *Se
 ![data services](../img/data-services.png)
 
 Let's have a look a one of them:
-```c#
+```csharp
 public interface ICustomerService
 {
     Task<CustomerModel> GetCustomerAsync(long id);
@@ -147,7 +147,7 @@ Also, these services are not only accessing the data source, they are also actin
 - The *Models* are the ones implementing the interface `INotifyPropertyChanged`, reducing complexity in our DTOs.
 
 Let's check the inplementation of the `ICustomerService`:
-```c#
+```csharp
 public class CustomerService : ICustomerService
 {
     public CustomerService(IDataServiceFactory dataServiceFactory)
@@ -176,7 +176,7 @@ As you can see, we are using the `IDataServiceFactory` to get the `IDataService`
 
 Finally, we just need to check how we are injecting this `ICustomerService` in the `CustomerDetailViewModel` class to check how all the pieces are connected:
 
-```c#
+```csharp
 public class CustomerDetailsViewModel : GenericDetailsViewModel<CustomerModel>
 {
     public CustomerDetailsViewModel(ICustomerService customerService, ICommonServices commonServices) : base(commonServices)

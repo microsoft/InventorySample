@@ -77,9 +77,6 @@ View First / ViewModel First refers to whether you build the app top down or bot
 
 - *View Model first*: The ViewModel is the first element created during development and then the View that matches. The ViewModel is responsable of creating the View associated with it. We will also need to create an abstraction of the Navigation between Views, and manage this Navigation in our ViewModels (usually through an IoC container or a Service Locator pattern).
 
-The app we are using as the base of this documentation, the Van Arsdell Inventory app (**PENDING**: Include the final link to the public reporsitory), we are using *View first* development, but there are a lot of examples out there on how to implement *View Model first*.
-
-
 ## Binding object
 
 *Binding object* is the piece that transfers data values from the source to the target, and optionally from the target back to the source.
@@ -94,7 +91,7 @@ In order for the view model to participate in data binding with the view, its pr
 
 This is an example of how to implement the `INotifyPropertyChanged` interface:
 
-```c#
+```csharp
 public class ModelBase : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler PropertyChanged;
