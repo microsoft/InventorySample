@@ -32,12 +32,14 @@
     - Description 
     - Solution Structure
     - Authentication and Authorization
-    - Navigation
+    - [Navigation](chapters/architecture/navigation.md)
+        - [INavigationService](chapters/architecture/navigation.md#inavigationservice)
+        - [INavigationService implementation](chapters/architecture/navigation.md#inavigationservice-implementation)
+        - [Additional functionalities](chapters/architecture/navigation.md#additional-functionalities)
     - Difference between Data Source Models and App Models
     - [Data Access](chapters/architecture/dataaccess.md#data-access)
         - [Inventory.Data project](chapters/architecture/dataaccess.md#inventory.data-project)
-         - [Accessing the data from the app](chapters/architecture/dataaccess.md#accessing-the-data-from-the-app)
-         - [Data Service Factory](chapters/architecture/dataaccess.md#data-service-factory)
+        - [Accessing the data from the app](chapters/architecture/dataaccess.md#accessing-the-data-from-the-app)
     - Localization
     - ...
 - [Data Access](chapters/dataaccess.md)
