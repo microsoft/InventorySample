@@ -33,10 +33,14 @@
     - Solution Structure
     - Authentication and Authorization
     - [Navigation](chapters/architecture/navigation.md)
-        - [INavigationService](chapters/architecture/navigation.md#inavigationservice)
-        - [INavigationService implementation](chapters/architecture/navigation.md#inavigationservice-implementation)
-        - [Additional functionalities](chapters/architecture/navigation.md#additional-functionalities)
-    - Difference between Data Source Models and App Models
+        - [Navigation Service](chapters/architecture/navigation-service.md)
+            - [INavigationService](chapters/architecture/navigation-service.md#inavigationservice)
+            - [INavigationService implementation](chapters/architecture/navigation-service.md#inavigationservice-implementation)
+            - [Additional functionalities](chapters/architecture/navigation-service.md#additional-functionalities)
+        - [App Shell views and Navigation](chapters/architecture/navigation-app.md)
+            - [MainShellView](chapters/architecture/navigation-app.md#mainshellview)
+            - [ShellView](chapters/architecture/navigation-app.md#shellview)
+            - [Frame Navigation](chapters/architecture/navigation-app.md#frame-navigation)
     - [Data Access](chapters/architecture/dataaccess.md#data-access)
         - [Inventory.Data project](chapters/architecture/dataaccess.md#inventory.data-project)
         - [Accessing the data from the app](chapters/architecture/dataaccess.md#accessing-the-data-from-the-app)
