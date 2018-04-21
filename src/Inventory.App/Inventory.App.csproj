@@ -157,15 +157,16 @@
     <Compile Include="Extensions\ItemIndexRangeExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CustomerService.cs" />
+    <Compile Include="Services\DataServiceFactory\DataServiceFactory.cs" />
+    <Compile Include="Services\DataServiceFactory\IDataServiceFactory.cs" />
     <Compile Include="Services\Infrastructure\CommonServices.cs" />
     <Compile Include="Services\Infrastructure\ContextService.cs" />
-    <Compile Include="Services\Infrastructure\DataServiceFactory\DataServiceFactory.cs" />
-    <Compile Include="Services\Infrastructure\DataServiceFactory\IDataServiceFactory.cs" />
     <Compile Include="Services\Infrastructure\DialogService.cs" />
     <Compile Include="Services\Infrastructure\LogService\LogCollection.cs" />
     <Compile Include="Services\Infrastructure\LogService\LogService.cs" />
     <Compile Include="Services\Infrastructure\MessageService.cs" />
     <Compile Include="Services\Infrastructure\NavigationService.cs" />
+    <Compile Include="Services\Infrastructure\SettingsService.cs" />
     <Compile Include="Services\LookupTables.cs" />
     <Compile Include="Services\OrderItemService.cs" />
     <Compile Include="Services\OrderService.cs" />
@@ -315,6 +316,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\AppLogo.png" />
     <Content Include="Assets\Html\ChartHtmlControl.html" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />

@@ -10,9 +10,15 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <controls:WindowTitle Title="Settings" />
 
-        <StackPanel VerticalAlignment="Center">
-            <TextBlock Text="VanArsdel Inventory Preview" FontSize="24" HorizontalAlignment="Center" />
-            <TextBlock Text="{x:Bind ViewModel.Version}" FontSize="18" HorizontalAlignment="Center" />
+        <Image Source="ms-appx:///Assets/AppLogo.png" HorizontalAlignment="Center" VerticalAlignment="Top" Stretch="None" />
+        <StackPanel Margin="24,220" VerticalAlignment="Top">
+            <TextBlock Text="VanArsdel Inventory" FontSize="18" HorizontalAlignment="Center" />
+            <TextBlock Text="{x:Bind ViewModel.Version}" FontSize="15" HorizontalAlignment="Center" />
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Enable random error generation for testing purposes." />
+            <ToggleSwitch IsOn="{x:Bind ViewModel.IsRandomErrorsEnabled, Mode=TwoWay}" />
         </StackPanel>
     </Grid>
 </Page>

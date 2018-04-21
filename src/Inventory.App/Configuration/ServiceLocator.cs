@@ -18,6 +18,7 @@ namespace Inventory
 
         static public void Configure(IServiceCollection serviceCollection)
         {
+            serviceCollection.AddSingleton<ISettingsService, SettingsService>();
             serviceCollection.AddSingleton<IDataServiceFactory, DataServiceFactory>();
             serviceCollection.AddSingleton<ILookupTables, LookupTables>();
             serviceCollection.AddSingleton<ICustomerService, CustomerService>();

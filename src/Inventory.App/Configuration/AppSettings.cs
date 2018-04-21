@@ -46,11 +46,11 @@ namespace Inventory
             }
         }
 
-        //public DataProviderType DataProvider
-        //{
-        //    get => (DataProviderType)GetSettingsValue("DataProvider", (int)DataProviderType.SQLite);
-        //    set => LocalSettings.Values["DataProvider"] = (int)value;
-        //}
+        public DataProviderType DataProvider
+        {
+            get => (DataProviderType)GetSettingsValue("DataProvider", (int)DataProviderType.SQLite);
+            set => LocalSettings.Values["DataProvider"] = (int)value;
+        }
 
         public string SQLServerConnectionString
         {

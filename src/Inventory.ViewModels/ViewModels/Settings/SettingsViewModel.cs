@@ -8,22 +8,32 @@ namespace Inventory.ViewModels
     #region SettingsArgs
     public class SettingsArgs
     {
+        static public SettingsArgs CreateDefault() => new SettingsArgs();
     }
     #endregion
 
     public class SettingsViewModel : ViewModelBase
     {
-        public SettingsViewModel(ICommonServices commonServices) : base(commonServices)
+        public SettingsViewModel(ISettingsService settingsService, ICommonServices commonServices) : base(commonServices)
         {
+            SettingsService = settingsService;
         }
 
-        public string Version => "";
+        public ISettingsService SettingsService { get; }
+
+        public string Version => $"v{SettingsService.Version}";
+
+        public bool IsRandomErrorsEnabled
+        {
+            get { return SettingsService.IsRandomErrorsEnabled; }
+            set { SettingsService.IsRandomErrorsEnabled = value; }
+        }
 
         public SettingsArgs ViewModelArgs { get; private set; }
 
         public Task LoadAsync(SettingsArgs args)
         {
-            ViewModelArgs = args;
+            ViewModelArgs = args ?? SettingsArgs.CreateDefault();
             StatusReady();
             return Task.CompletedTask;
         }
