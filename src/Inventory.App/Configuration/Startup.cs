@@ -3,6 +3,8 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 
+using Windows.UI.ViewManagement;
+using Windows.Foundation;
 using Windows.Storage;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +31,8 @@ namespace Inventory
 
             var logService = ServiceLocator.Current.GetService<ILogService>();
             await logService.WriteAsync(Data.LogType.Information, "Startup", "Configuration", "Application Start", $"Application started by [User].");
+
+            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(500, 500));
         }
 
         private static void ConfigureNavigation()

@@ -159,6 +159,7 @@
     <Compile Include="Services\CustomerService.cs" />
     <Compile Include="Services\DataServiceFactory\DataServiceFactory.cs" />
     <Compile Include="Services\DataServiceFactory\IDataServiceFactory.cs" />
+    <Compile Include="Services\Infrastructure\ActivationService.cs" />
     <Compile Include="Services\Infrastructure\CommonServices.cs" />
     <Compile Include="Services\Infrastructure\ContextService.cs" />
     <Compile Include="Services\Infrastructure\DialogService.cs" />

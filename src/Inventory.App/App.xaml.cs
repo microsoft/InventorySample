@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -25,36 +26,42 @@ namespace Inventory
             this.UnhandledException += OnUnhandledException;
         }
 
-        private Type EntryViewModel => typeof(DashboardViewModel);
-        private object EntryArgs => null;
-
         protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
-            var frame = Window.Current.Content as Frame;
+            await ActivateAsync(e);
+        }
 
+        protected override async void OnActivated(IActivatedEventArgs e)
+        {
+            await ActivateAsync(e);
+        }
+
+        private async Task ActivateAsync(IActivatedEventArgs e)
+        {
+            var activationInfo = ActivationService.GetActivationInfo(e);
+
+            var frame = Window.Current.Content as Frame;
             if (frame == null)
             {
                 frame = new Frame();
                 Window.Current.Content = frame;
-            }
 
-            if (e.PrelaunchActivated == false)
-            {
                 await Startup.ConfigureAsync();
 
-                if (frame.Content == null)
+                var shellArgs = new ShellArgs
                 {
-                    var args = new ShellArgs
-                    {
-                        ViewModel = EntryViewModel,
-                        Parameter = EntryArgs
-                    };
-                    frame.Navigate(typeof(MainShellView), args);
-                }
+                    ViewModel = activationInfo.EntryViewModel,
+                    Parameter = activationInfo.EntryArgs
+                };
+                frame.Navigate(typeof(MainShellView), shellArgs);
+
                 Window.Current.Activate();
             }
-
-            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(500, 500));
+            else
+            {
+                var navigationService = ServiceLocator.Current.GetService<INavigationService>();
+                await navigationService.CreateNewViewAsync(activationInfo.EntryViewModel, activationInfo.EntryArgs);
+            }
         }
 
         private async void OnSuspending(object sender, SuspendingEventArgs e)

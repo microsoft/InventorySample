@@ -42,8 +42,11 @@ namespace Inventory.ViewModels
 
         virtual public Task LoadAsync(ShellArgs args)
         {
-            ViewModelArgs = args ?? new ShellArgs();
-            NavigationService.Navigate(ViewModelArgs.ViewModel, ViewModelArgs.Parameter);
+            ViewModelArgs = args;
+            if (ViewModelArgs != null)
+            {
+                NavigationService.Navigate(ViewModelArgs.ViewModel, ViewModelArgs.Parameter);
+            }
             return Task.CompletedTask;
         }
         virtual public void Unload()
