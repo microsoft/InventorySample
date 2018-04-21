@@ -12,12 +12,20 @@ namespace Inventory.Converters
         {
             try
             {
-                if (value is DateTimeOffset dateTime)
+                if (value is DateTime dateTime)
+                {
+                    if (dateTime == DateTime.MinValue)
+                    {
+                        return "";
+                    }
+                    value = new DateTimeOffset(dateTime);
+                }
+                if (value is DateTimeOffset dateTimeOffset)
                 {
                     string format = parameter as String ?? "shortdate";
                     var userLanguages = GlobalizationPreferences.Languages;
                     var dateFormatter = new DateTimeFormatter(format, userLanguages);
-                    return dateFormatter.Format(dateTime);
+                    return dateFormatter.Format(dateTimeOffset.ToLocalTime());
                 }
                 return "N/A";
             }

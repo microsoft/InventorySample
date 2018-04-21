@@ -75,8 +75,15 @@ namespace Inventory.ViewModels
 
         private async Task PopulateDetails(ProductModel selected)
         {
-            var model = await ProductService.GetProductAsync(selected.ProductID);
-            selected.Merge(model);
+            try
+            {
+                var model = await ProductService.GetProductAsync(selected.ProductID);
+                selected.Merge(model);
+            }
+            catch (Exception ex)
+            {
+                LogException("Products", "Load Details", ex);
+            }
         }
     }
 }

@@ -50,6 +50,9 @@ namespace Inventory
             serviceCollection.AddTransient<ProductsViewModel>();
             serviceCollection.AddTransient<ProductDetailsViewModel>();
 
+            serviceCollection.AddTransient<AppLogsViewModel>();
+            //serviceCollection.AddTransient<AppLogDetailsViewModel>();
+
             serviceCollection.AddTransient<SettingsViewModel>();
 
             _rootServiceProvider = serviceCollection.BuildServiceProvider();

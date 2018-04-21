@@ -11,8 +11,6 @@
     <Page.Resources>
         <Style x:Key="GridItemStyle" TargetType="GridViewItem">
             <Setter Property="Margin" Value="6" />
-            <Setter Property="Width" Value="440" />
-            <Setter Property="Height" Value="260" />
             <Setter Property="Background" Value="White" />
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="VerticalContentAlignment" Value="Stretch"/>
@@ -31,13 +29,17 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0">
-                <TextBlock Margin="12" Text="VanArsdel Inventory" FontSize="36" Foreground="#444" />
+            <Grid Grid.Row="0" Width="320" Height="120" HorizontalAlignment="Left">
+                <Image Source="ms-appx:///Assets/AppLogo.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill" />
             </Grid>
 
-            <TextBlock Grid.Row="1" Margin="12,12,12,0" Text="Dashboard" FontSize="22" Foreground="#666" />
+            <TextBlock Grid.Row="1" Margin="12,0" Text="Dashboard" FontSize="22" Foreground="Gray" />
 
-            <GridView Grid.Row="2" Margin="6" ItemContainerStyle="{StaticResource GridItemStyle}" SelectionMode="None" IsItemClickEnabled="True" ItemClick="OnItemClick">
+            <controls:AdaptiveGridView Grid.Row="2" Margin="6" ItemContainerStyle="{StaticResource GridItemStyle}"
+                                       DesiredWidth="440"
+                                       ItemHeight="260"
+                                       StretchContentForSingleRow="False"
+                                       SelectionMode="None" IsItemClickEnabled="True" ItemClick="OnItemClick">
                 <GridViewItem>
                     <views:CustomersPane Margin="12" ItemsSource="{x:Bind ViewModel.Customers, Mode=OneWay}" Tag="Customers" />
                 </GridViewItem>
@@ -50,7 +52,7 @@
                 <GridViewItem IsHitTestVisible="False">
                     <views:ChartPane Margin="12,12,12,0" Tag="Charts" />
                 </GridViewItem>
-            </GridView>
+            </controls:AdaptiveGridView>
         </Grid>
     </Grid>
 </Page>

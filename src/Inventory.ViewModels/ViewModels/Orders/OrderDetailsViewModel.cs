@@ -61,8 +61,15 @@ namespace Inventory.ViewModels
             }
             else
             {
-                var item = await OrderService.GetOrderAsync(ViewModelArgs.OrderID);
-                Item = item ?? new OrderModel { OrderID = ViewModelArgs.OrderID, IsEmpty = true };
+                try
+                {
+                    var item = await OrderService.GetOrderAsync(ViewModelArgs.OrderID);
+                    Item = item ?? new OrderModel { OrderID = ViewModelArgs.OrderID, IsEmpty = true };
+                }
+                catch (Exception ex)
+                {
+                    LogException("Order", "Load", ex);
+                }
             }
             if (Item != null)
             {
@@ -94,20 +101,42 @@ namespace Inventory.ViewModels
             };
         }
 
-        protected override async Task SaveItemAsync(OrderModel model)
+        protected override async Task<bool> SaveItemAsync(OrderModel model)
         {
-            StartStatusMessage("Saving order...");
-            await Task.Delay(100);
-            await OrderService.UpdateOrderAsync(model);
-            EndStatusMessage("Order saved");
+            try
+            {
+                StartStatusMessage("Saving order...");
+                await Task.Delay(100);
+                await OrderService.UpdateOrderAsync(model);
+                EndStatusMessage("Order saved");
+                LogInformation("Order", "Save", "Order saved successfully", $"Order #{model.OrderID} was saved successfully.");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                StatusError($"Error saving Order: {ex.Message}");
+                LogException("Order", "Save", ex);
+                return false;
+            }
         }
 
-        protected override async Task DeleteItemAsync(OrderModel model)
+        protected override async Task<bool> DeleteItemAsync(OrderModel model)
         {
-            StartStatusMessage("Deleting order...");
-            await Task.Delay(100);
-            await OrderService.DeleteOrderAsync(model);
-            EndStatusMessage("Order deleted");
+            try
+            {
+                StartStatusMessage("Deleting order...");
+                await Task.Delay(100);
+                await OrderService.DeleteOrderAsync(model);
+                EndStatusMessage("Order deleted");
+                LogWarning("Order", "Delete", "Order deleted", $"Order #{model.OrderID} was deleted.");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                StatusError($"Error deleting Order: {ex.Message}");
+                LogException("Order", "Delete", ex);
+                return false;
+            }
         }
 
         protected override async Task<bool> ConfirmDeleteAsync()
@@ -145,14 +174,21 @@ namespace Inventory.ViewModels
                         case "ItemChanged":
                             await ContextService.RunAsync(async () =>
                             {
-                                var item = await OrderService.GetOrderAsync(current.OrderID);
-                                item = item ?? new OrderModel { OrderID = current.OrderID, IsEmpty = true };
-                                current.Merge(item);
-                                current.NotifyChanges();
-                                NotifyPropertyChanged(nameof(Title));
-                                if (IsEditMode)
+                                try
                                 {
-                                    StatusMessage("WARNING: This order has been modified externally");
+                                    var item = await OrderService.GetOrderAsync(current.OrderID);
+                                    item = item ?? new OrderModel { OrderID = current.OrderID, IsEmpty = true };
+                                    current.Merge(item);
+                                    current.NotifyChanges();
+                                    NotifyPropertyChanged(nameof(Title));
+                                    if (IsEditMode)
+                                    {
+                                        StatusMessage("WARNING: This order has been modified externally");
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    LogException("Order", "Handle Changes", ex);
                                 }
                             });
                             break;
@@ -181,10 +217,17 @@ namespace Inventory.ViewModels
                         }
                         break;
                     case "ItemRangesDeleted":
-                        var model = await OrderService.GetOrderAsync(current.OrderID);
-                        if (model == null)
+                        try
                         {
-                            await OnItemDeletedExternally();
+                            var model = await OrderService.GetOrderAsync(current.OrderID);
+                            if (model == null)
+                            {
+                                await OnItemDeletedExternally();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            LogException("Order", "Handle Ranges Deleted", ex);
                         }
                         break;
                 }

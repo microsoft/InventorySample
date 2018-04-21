@@ -23,8 +23,12 @@ namespace Inventory
 
             ConfigureNavigation();
 
+            await EnsureLogDbAsync();
             await EnsureDatabaseAsync();
-            await ConfigureDataHelper();
+            await ConfigureLookupTables();
+
+            var logService = ServiceLocator.Current.GetService<ILogService>();
+            await logService.WriteAsync(Data.LogType.Information, "Startup", "Configuration", "Application Start", $"Application started by [User].");
         }
 
         private static void ConfigureNavigation()
@@ -46,14 +50,21 @@ namespace Inventory
             NavigationService.Register<ProductsViewModel, ProductsView>();
             NavigationService.Register<ProductDetailsViewModel, ProductView>();
 
+            NavigationService.Register<AppLogsViewModel, AppLogsView>();
+
             NavigationService.Register<SettingsViewModel, SettingsView>();
         }
 
-        static private async Task ConfigureDataHelper()
+        static private async Task EnsureLogDbAsync()
         {
-            var lookupTables = ServiceLocator.Current.GetService<ILookupTables>();
-            await lookupTables.InitializeAsync();
-            LookupTablesProxy.Instance = lookupTables;
+            var localFolder = ApplicationData.Current.LocalFolder;
+            var appLogFolder = await localFolder.CreateFolderAsync(AppSettings.AppLogPath, CreationCollisionOption.OpenIfExists);
+            if (await appLogFolder.TryGetItemAsync(AppSettings.AppLogName) == null)
+            {
+                var sourceLogFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/AppLog/AppLog.db"));
+                var targetLogFile = await appLogFolder.CreateFileAsync(AppSettings.AppLogName, CreationCollisionOption.ReplaceExisting);
+                await sourceLogFile.CopyAndReplaceAsync(targetLogFile);
+            }
         }
 
         static private async Task EnsureDatabaseAsync()
@@ -79,6 +90,13 @@ namespace Inventory
                 var targetFile = await databaseFolder.CreateFileAsync(AppSettings.DatabaseName, CreationCollisionOption.ReplaceExisting);
                 await sourceFile.CopyAndReplaceAsync(targetFile);
             }
+        }
+
+        static private async Task ConfigureLookupTables()
+        {
+            var lookupTables = ServiceLocator.Current.GetService<ILookupTables>();
+            await lookupTables.InitializeAsync();
+            LookupTablesProxy.Instance = lookupTables;
         }
     }
 }

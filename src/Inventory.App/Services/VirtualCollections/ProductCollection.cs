@@ -11,7 +11,7 @@ namespace Inventory.Services
     {
         private DataRequest<Product> _dataRequest = null;
 
-        public ProductCollection(IProductService productService)
+        public ProductCollection(IProductService productService, ILogService logService) : base(logService)
         {
             ProductService = productService;
         }
@@ -23,14 +23,30 @@ namespace Inventory.Services
 
         public async Task LoadAsync(DataRequest<Product> dataRequest)
         {
-            _dataRequest = dataRequest;
-            Count = await ProductService.GetProductsCountAsync(_dataRequest);
-            Ranges[0] = await FetchDataAsync(0, RangeSize);
+            try
+            {
+                _dataRequest = dataRequest;
+                Count = await ProductService.GetProductsCountAsync(_dataRequest);
+                Ranges[0] = await ProductService.GetProductsAsync(0, RangeSize, _dataRequest);
+            }
+            catch (Exception ex)
+            {
+                Count = 0;
+                throw ex;
+            }
         }
 
         protected override async Task<IList<ProductModel>> FetchDataAsync(int rangeIndex, int rangeSize)
         {
-            return await ProductService.GetProductsAsync(rangeIndex * rangeSize, rangeSize, _dataRequest);
+            try
+            {
+                return await ProductService.GetProductsAsync(rangeIndex * rangeSize, rangeSize, _dataRequest);
+            }
+            catch (Exception ex)
+            {
+                LogException("ProductCollection", "Fetch", ex);
+            }
+            return null;
         }
     }
 }

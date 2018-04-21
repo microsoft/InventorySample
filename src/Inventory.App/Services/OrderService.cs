@@ -4,35 +4,42 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Inventory.Data;
+using Inventory.Data.Services;
 using Inventory.Models;
 
 namespace Inventory.Services
 {
     public class OrderService : IOrderService
     {
-        public OrderService(IDataServiceFactory dataServiceFactory)
+        public OrderService(IDataServiceFactory dataServiceFactory, ILogService logService)
         {
             DataServiceFactory = dataServiceFactory;
+            LogService = logService;
         }
 
         public IDataServiceFactory DataServiceFactory { get; }
+        public ILogService LogService { get; }
 
         public async Task<OrderModel> GetOrderAsync(long id)
         {
             using (var dataService = DataServiceFactory.CreateDataService())
             {
-                var item = await dataService.GetOrderAsync(id);
-                if (item != null)
-                {
-                    return await CreateOrderModelAsync(item, includeAllFields: true);
-                }
-                return null;
+                return await GetOrderAsync(dataService, id);
             }
+        }
+        static private async Task<OrderModel> GetOrderAsync(IDataService dataService, long id)
+        {
+            var item = await dataService.GetOrderAsync(id);
+            if (item != null)
+            {
+                return await CreateOrderModelAsync(item, includeAllFields: true);
+            }
+            return null;
         }
 
         public async Task<IList<OrderModel>> GetOrdersAsync(DataRequest<Order> request)
         {
-            var collection = new OrderCollection(this);
+            var collection = new OrderCollection(this, LogService);
             await collection.LoadAsync(request);
             return collection;
         }
@@ -97,7 +104,7 @@ namespace Inventory.Services
                 {
                     UpdateOrderFromModel(order, model);
                     await dataService.UpdateOrderAsync(order);
-                    model.Merge(await GetOrderAsync(order.OrderID));
+                    model.Merge(await GetOrderAsync(dataService, order.OrderID));
                 }
                 return 0;
             }
@@ -121,7 +128,7 @@ namespace Inventory.Services
             }
         }
 
-        private async Task<OrderModel> CreateOrderModelAsync(Order source, bool includeAllFields)
+        static public async Task<OrderModel> CreateOrderModelAsync(Order source, bool includeAllFields)
         {
             var model = new OrderModel()
             {

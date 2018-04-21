@@ -17,6 +17,7 @@
 
         <!--Toolbar-->
         <controls:ListToolbar
+            DefaultCommands="{x:Bind DefaultCommands, Mode=OneWay}"
             NewLabel="{x:Bind NewLabel, Mode=OneWay}"
             Query="{x:Bind Query, Mode=TwoWay}"
             QuerySubmitted="OnQuerySubmitted"

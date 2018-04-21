@@ -59,29 +59,50 @@ namespace Inventory.ViewModels
 
         private async Task LoadCustomersAsync()
         {
-            var request = new DataRequest<Customer>
+            try
             {
-                OrderByDesc = r => r.CreatedOn
-            };
-            Customers = await CustomerService.GetCustomersAsync(0, 5, request);
+                var request = new DataRequest<Customer>
+                {
+                    OrderByDesc = r => r.CreatedOn
+                };
+                Customers = await CustomerService.GetCustomersAsync(0, 5, request);
+            }
+            catch (Exception ex)
+            {
+                LogException("Dashboard", "Load Customers", ex);
+            }
         }
 
         private async Task LoadOrdersAsync()
         {
-            var request = new DataRequest<Order>
+            try
             {
-                OrderByDesc = r => r.OrderDate
-            };
-            Orders = await OrderService.GetOrdersAsync(0, 5, request);
+                var request = new DataRequest<Order>
+                {
+                    OrderByDesc = r => r.OrderDate
+                };
+                Orders = await OrderService.GetOrdersAsync(0, 5, request);
+            }
+            catch (Exception ex)
+            {
+                LogException("Dashboard", "Load Orders", ex);
+            }
         }
 
         private async Task LoadProductsAsync()
         {
-            var request = new DataRequest<Product>
+            try
             {
-                OrderByDesc = r => r.CreatedOn
-            };
-            Products = await ProductService.GetProductsAsync(0, 5, request);
+                var request = new DataRequest<Product>
+                {
+                    OrderByDesc = r => r.CreatedOn
+                };
+                Products = await ProductService.GetProductsAsync(0, 5, request);
+            }
+            catch (Exception ex)
+            {
+                LogException("Dashboard", "Load Products", ex);
+            }
         }
 
         public void ItemSelected(string item)

@@ -54,8 +54,10 @@ namespace Inventory.ViewModels
             else
             {
                 StartStatusMessage("Loading order items...");
-                await RefreshAsync();
-                EndStatusMessage("OrderItems loaded");
+                if (await RefreshAsync())
+                {
+                    EndStatusMessage("OrderItems loaded");
+                }
             }
         }
         public void Unload()
@@ -84,29 +86,44 @@ namespace Inventory.ViewModels
             };
         }
 
-        public async Task RefreshAsync()
+        public async Task<bool> RefreshAsync()
         {
+            bool isOk = true;
+
             Items = null;
             ItemsCount = 0;
             SelectedItem = null;
 
-            Items = await GetItemsAsync();
+            try
+            {
+                Items = await GetItemsAsync();
+            }
+            catch (Exception ex)
+            {
+                Items = new List<OrderItemModel>();
+                StatusError($"Error loading Order items: {ex.Message}");
+                LogException("OrderItems", "Refresh", ex);
+                isOk = false;
+            }
+
             ItemsCount = Items.Count;
             if (!IsMultipleSelection)
             {
                 SelectedItem = Items.FirstOrDefault();
             }
-
             NotifyPropertyChanged(nameof(Title));
+
+            return isOk;
         }
 
         private async Task<IList<OrderItemModel>> GetItemsAsync()
         {
-            if (ViewModelArgs.IsEmpty)
-                return new List<OrderItemModel>();
-
-            DataRequest<OrderItem> request = BuildDataRequest();
-            return await OrderItemService.GetOrderItemsAsync(request);
+            if (!ViewModelArgs.IsEmpty)
+            {
+                DataRequest<OrderItem> request = BuildDataRequest();
+                return await OrderItemService.GetOrderItemsAsync(request);
+            }
+            return new List<OrderItemModel>();
         }
 
         protected override async void OnNew()
@@ -126,8 +143,10 @@ namespace Inventory.ViewModels
         protected override async void OnRefresh()
         {
             StartStatusMessage("Loading order items...");
-            await RefreshAsync();
-            EndStatusMessage("Order items loaded");
+            if (await RefreshAsync())
+            {
+                EndStatusMessage("Order items loaded");
+            }
         }
 
         protected override async void OnDeleteSelection()
@@ -135,20 +154,33 @@ namespace Inventory.ViewModels
             StatusReady();
             if (await DialogService.ShowAsync("Confirm Delete", "Are you sure you want to delete selected order items?", "Ok", "Cancel"))
             {
-                if (SelectedIndexRanges != null)
+                int count = 0;
+                try
                 {
-                    await DeleteRangesAsync(SelectedIndexRanges);
-                    await RefreshAsync();
-                    MessageService.Send(this, "ItemRangesDeleted", SelectedIndexRanges);
-                    SelectedIndexRanges = null;
+                    if (SelectedIndexRanges != null)
+                    {
+                        count = SelectedIndexRanges.Sum(r => r.Length);
+                        StartStatusMessage($"Deleting {count} order items...");
+                        await DeleteRangesAsync(SelectedIndexRanges);
+                        MessageService.Send(this, "ItemRangesDeleted", SelectedIndexRanges);
+                    }
+                    else if (SelectedItems != null)
+                    {
+                        count = SelectedItems.Count();
+                        StartStatusMessage($"Deleting {count} order items...");
+                        await DeleteItemsAsync(SelectedItems);
+                        MessageService.Send(this, "ItemsDeleted", SelectedItems);
+                    }
+                    EndStatusMessage($"{count} order items deleted");
                 }
-                else if (SelectedItems != null)
+                catch (Exception ex)
                 {
-                    await DeleteItemsAsync(SelectedItems);
-                    await RefreshAsync();
-                    MessageService.Send(this, "ItemsDeleted", SelectedItems);
-                    SelectedItems = null;
+                    StatusError($"Error deleting {count} order items: {ex.Message}");
+                    LogException("OrderItems", "Delete", ex);
                 }
+                await RefreshAsync();
+                SelectedIndexRanges = null;
+                SelectedItems = null;
             }
         }
 

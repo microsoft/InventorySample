@@ -30,7 +30,7 @@ namespace Inventory
         {
             if (elem.Tag is String tag)
             {
-                return tag.Split(' ').Any(s => categories.Any(c => s == c));
+                return tag.Split(' ').Any(s => categories.Any(c => s == c.Trim()));
             }
             return false;
         }

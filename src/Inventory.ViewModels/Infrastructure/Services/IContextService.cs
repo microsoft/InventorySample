@@ -5,13 +5,11 @@ namespace Inventory.Services
 {
     public interface IContextService
     {
-        int ViewID { get; }
+        int ContextID { get; }
 
         bool IsMainView { get; }
 
-        string Version { get; }
-
-        void Initialize(object dispatcher, int viewID, bool isMainView);
+        void Initialize(object dispatcher, int contextID, bool isMainView);
 
         Task RunAsync(Action action);
     }

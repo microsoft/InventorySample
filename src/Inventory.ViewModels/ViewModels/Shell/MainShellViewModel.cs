@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+using Inventory.Data;
 using Inventory.Services;
 
 namespace Inventory.ViewModels
@@ -13,6 +14,7 @@ namespace Inventory.ViewModels
         private readonly NavigationItem CustomersItem = new NavigationItem(0xE716, "Customers", typeof(CustomersViewModel));
         private readonly NavigationItem OrdersItem = new NavigationItem(0xE14C, "Orders", typeof(OrdersViewModel));
         private readonly NavigationItem ProductsItem = new NavigationItem(0xECAA, "Products", typeof(ProductsViewModel));
+        private readonly NavigationItem AppLogsItem = new NavigationItem(0xE7BA, "Activity Log", typeof(AppLogsViewModel));
         private readonly NavigationItem SettingsItem = new NavigationItem(0x0000, "Settings", typeof(SettingsViewModel));
 
         public MainShellViewModel(ICommonServices commonServices) : base(commonServices)
@@ -40,17 +42,30 @@ namespace Inventory.ViewModels
             set => Set(ref _items, value);
         }
 
-        public override Task LoadAsync(ShellArgs args)
+        public override async Task LoadAsync(ShellArgs args)
         {
             Items = GetItems().ToArray();
-            return base.LoadAsync(args);
+            await UpdateAppLogBadge();
+            await base.LoadAsync(args);
         }
+
+        override public void Subscribe()
+        {
+            MessageService.Subscribe<ILogService, AppLog>(this, OnLogServiceMessage);
+            base.Subscribe();
+        }
+
+        override public void Unsubscribe()
+        {
+            base.Unsubscribe();
+        }
+
         public override void Unload()
         {
             base.Unload();
         }
 
-        public void NavigateTo(Type viewModel)
+        public async void NavigateTo(Type viewModel)
         {
             switch (viewModel.Name)
             {
@@ -66,6 +81,11 @@ namespace Inventory.ViewModels
                 case "ProductsViewModel":
                     NavigationService.Navigate(viewModel, new ProductListArgs());
                     break;
+                case "AppLogsViewModel":
+                    NavigationService.Navigate(viewModel, new AppLogListArgs());
+                    await LogService.MarkAllAsReadAsync();
+                    await UpdateAppLogBadge();
+                    break;
                 case "SettingsViewModel":
                     NavigationService.Navigate(viewModel, new SettingsArgs());
                     break;
@@ -80,6 +100,24 @@ namespace Inventory.ViewModels
             yield return CustomersItem;
             yield return OrdersItem;
             yield return ProductsItem;
+            yield return AppLogsItem;
+        }
+
+        private async void OnLogServiceMessage(ILogService logService, string message, AppLog log)
+        {
+            if (message == "LogAdded")
+            {
+                await ContextService.RunAsync(async () =>
+                {
+                    await UpdateAppLogBadge();
+                });
+            }
+        }
+
+        private async Task UpdateAppLogBadge()
+        {
+            int count = await LogService.GetLogsCountAsync(new DataRequest<AppLog> { Where = r => !r.IsRead });
+            AppLogsItem.Badge = count > 0 ? count.ToString() : null;
         }
     }
 }

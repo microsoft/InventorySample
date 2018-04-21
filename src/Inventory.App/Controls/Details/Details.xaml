@@ -12,7 +12,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <controls:DetailToolbar ToolbarMode="{x:Bind ToolbarMode, Mode=OneWay}" ButtonClick="OnToolbarClick" />
+        <controls:DetailToolbar ToolbarMode="{x:Bind ToolbarMode, Mode=OneWay}" DefaultCommands="{x:Bind DefaultCommands, Mode=OneWay}" ButtonClick="OnToolbarClick" />
         <ContentControl x:Name="container" Grid.Row="1" Content="{x:Bind DetailsContent}" ContentTemplate="{x:Bind DetailsTemplate}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
     </Grid>
 </UserControl>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
+using Inventory.Data;
 using Inventory.Models;
 using Inventory.Services;
 
@@ -29,13 +30,31 @@ namespace Inventory.ViewModels
 
         virtual public string Title => String.Empty;
 
+        public async void LogInformation(string source, string action, string message, string description)
+        {
+            await LogService.WriteAsync(LogType.Information, source, action, message, description);
+        }
+
+        public async void LogWarning(string source, string action, string message, string description)
+        {
+            await LogService.WriteAsync(LogType.Warning, source, action, message, description);
+        }
+
+        public void LogException(string source, string action, Exception exception)
+        {
+            LogError(source, action, exception.Message, exception.ToString());
+        }
+        public async void LogError(string source, string action, string message, string description)
+        {
+            await LogService.WriteAsync(LogType.Error, source, action, message, description);
+        }
+
         public void StartStatusMessage(string message)
         {
             StatusMessage(message);
             _stopwatch.Reset();
             _stopwatch.Start();
         }
-
         public void EndStatusMessage(string message)
         {
             _stopwatch.Stop();
@@ -46,12 +65,10 @@ namespace Inventory.ViewModels
         {
             MessageService.Send(this, "StatusMessage", "Ready");
         }
-
         public void StatusMessage(string message)
         {
             MessageService.Send(this, "StatusMessage", message);
         }
-
         public void StatusError(string message)
         {
             MessageService.Send(this, "StatusError", message);

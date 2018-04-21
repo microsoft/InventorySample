@@ -44,8 +44,15 @@ namespace Inventory.ViewModels
             }
             else
             {
-                var item = await ProductService.GetProductAsync(ViewModelArgs.ProductID);
-                Item = item ?? new ProductModel { ProductID = ViewModelArgs.ProductID, IsEmpty = true };
+                try
+                {
+                    var item = await ProductService.GetProductAsync(ViewModelArgs.ProductID);
+                    Item = item ?? new ProductModel { ProductID = ViewModelArgs.ProductID, IsEmpty = true };
+                }
+                catch (Exception ex)
+                {
+                    LogException("Product", "Load", ex);
+                }
             }
         }
         public void Unload()
@@ -71,20 +78,42 @@ namespace Inventory.ViewModels
             };
         }
 
-        protected override async Task SaveItemAsync(ProductModel model)
+        protected override async Task<bool> SaveItemAsync(ProductModel model)
         {
-            StartStatusMessage("Saving product...");
-            await Task.Delay(100);
-            await ProductService.UpdateProductAsync(model);
-            EndStatusMessage("Product saved");
+            try
+            {
+                StartStatusMessage("Saving product...");
+                await Task.Delay(100);
+                await ProductService.UpdateProductAsync(model);
+                EndStatusMessage("Product saved");
+                LogInformation("Product", "Save", "Product saved successfully", $"Product {model.ProductID} '{model.Name}' was saved successfully.");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                StatusError($"Error saving Product: {ex.Message}");
+                LogException("Product", "Save", ex);
+                return false;
+            }
         }
 
-        protected override async Task DeleteItemAsync(ProductModel model)
+        protected override async Task<bool> DeleteItemAsync(ProductModel model)
         {
-            StartStatusMessage("Deleting product...");
-            await Task.Delay(100);
-            await ProductService.DeleteProductAsync(model);
-            EndStatusMessage("Product deleted");
+            try
+            {
+                StartStatusMessage("Deleting product...");
+                await Task.Delay(100);
+                await ProductService.DeleteProductAsync(model);
+                EndStatusMessage("Product deleted");
+                LogWarning("Product", "Delete", "Product deleted", $"Product {model.ProductID} '{model.Name}' was deleted.");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                StatusError($"Error deleting Product: {ex.Message}");
+                LogException("Product", "Delete", ex);
+                return false;
+            }
         }
 
         protected override async Task<bool> ConfirmDeleteAsync()
@@ -113,14 +142,21 @@ namespace Inventory.ViewModels
                         case "ItemChanged":
                             await ContextService.RunAsync(async () =>
                             {
-                                var item = await ProductService.GetProductAsync(current.ProductID);
-                                item = item ?? new ProductModel { ProductID = current.ProductID, IsEmpty = true };
-                                current.Merge(item);
-                                current.NotifyChanges();
-                                NotifyPropertyChanged(nameof(Title));
-                                if (IsEditMode)
+                                try
                                 {
-                                    StatusMessage("WARNING: This product has been modified externally");
+                                    var item = await ProductService.GetProductAsync(current.ProductID);
+                                    item = item ?? new ProductModel { ProductID = current.ProductID, IsEmpty = true };
+                                    current.Merge(item);
+                                    current.NotifyChanges();
+                                    NotifyPropertyChanged(nameof(Title));
+                                    if (IsEditMode)
+                                    {
+                                        StatusMessage("WARNING: This product has been modified externally");
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    LogException("Product", "Handle Changes", ex);
                                 }
                             });
                             break;
@@ -149,10 +185,17 @@ namespace Inventory.ViewModels
                         }
                         break;
                     case "ItemRangesDeleted":
-                        var model = await ProductService.GetProductAsync(current.ProductID);
-                        if (model == null)
+                        try
                         {
-                            await OnItemDeletedExternally();
+                            var model = await ProductService.GetProductAsync(current.ProductID);
+                            if (model == null)
+                            {
+                                await OnItemDeletedExternally();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            LogException("Product", "Handle Ranges Deleted", ex);
                         }
                         break;
                 }

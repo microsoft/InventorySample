@@ -17,7 +17,7 @@ namespace Inventory.ViewModels
         {
         }
 
-        public string Version => $"v{ContextService.Version}";
+        public string Version => "";
 
         public SettingsArgs ViewModelArgs { get; private set; }
 

@@ -6,11 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid x:Name="RootGridLayout">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <Grid x:Name="RootGridLayout" Height="260">
         <TextBlock Margin="6,0" Text="Top Category Sales" FontSize="18" />
     </Grid>
 </UserControl>

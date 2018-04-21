@@ -1,24 +1,25 @@
 ﻿using System;
+using System.Threading.Tasks;
+
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.Storage;
-using System.Threading.Tasks;
 
 namespace Inventory.Views
 {
     public sealed partial class ChartPane : UserControl
     {
-        WebView _webView;
+        private WebView _webView;
+
         public ChartPane()
         {
             InitializeComponent();
-            this.Loaded += OnLoaded;
+            Loaded += OnLoaded;
 
             //Initialze the WebView in a separate thread and Add it to the grid
             _webView = new WebView(WebViewExecutionMode.SeparateThread);
             _webView.SetValue(Grid.RowProperty, 1);
             _webView.NavigationCompleted += OnNavigationCompleted;
-
         }
 
         private void OnNavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
@@ -35,8 +36,8 @@ namespace Inventory.Views
         public static async Task<string> LoadStringFromPackageFileAsync(string name)
         {
             // Using the storage classes to read the content from a file as a string.
-            StorageFile f = await StorageFile.GetFileFromApplicationUriAsync(new Uri($"ms-appx:///html/{name}"));
-            return await FileIO.ReadTextAsync(f);
+            StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri($"ms-appx:///Assets/Html/{name}"));
+            return await FileIO.ReadTextAsync(file);
         }
     }
 }

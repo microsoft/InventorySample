@@ -24,7 +24,7 @@
         </Grid>
 
         <Grid Grid.Row="1" Background="{ThemeResource SystemControlAccentAcrylicElementAccentMediumHighBrush}">
-            <Rectangle Fill="IndianRed" Visibility="{x:Bind ViewModel.IsError, Mode=OneWay}" />
+            <Rectangle Fill="{StaticResource Error}" Visibility="{x:Bind ViewModel.IsError, Mode=OneWay}" />
             <TextBlock Margin="6,4" Text="{x:Bind ViewModel.Message, Mode=OneWay}" Foreground="White" FontSize="12" />
         </Grid>
     </Grid>

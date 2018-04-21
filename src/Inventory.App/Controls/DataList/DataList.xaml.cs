@@ -82,6 +82,15 @@ namespace Inventory.Controls
         public static readonly DependencyProperty ItemTemplateProperty = DependencyProperty.Register(nameof(ItemTemplate), typeof(DataTemplate), typeof(DataList), new PropertyMetadata(null));
         #endregion
 
+        #region DefaultCommands
+        public string DefaultCommands
+        {
+            get { return (string)GetValue(DefaultCommandsProperty); }
+            set { SetValue(DefaultCommandsProperty, value); }
+        }
+
+        public static readonly DependencyProperty DefaultCommandsProperty = DependencyProperty.Register(nameof(DefaultCommands), typeof(string), typeof(DataList), new PropertyMetadata("new,select,refresh,search"));
+        #endregion
 
         #region SelectedItem
         public object SelectedItem

@@ -9,8 +9,8 @@
 
     <CommandBar x:Name="commandBar" Height="36" DefaultLabelPosition="Right" Style="{StaticResource ToolBarStyle}" Background="Transparent">
         <AppBarButton x:Name="buttonBack" Icon="Back" Label="Back" LabelPosition="Default" HorizontalAlignment="Left" Style="{StaticResource ToolBarButtonStyle}" Tag="back" />
-        <AppBarButton x:Name="buttonEdit" Icon="Edit" Label="Edit" LabelPosition="Default" HorizontalAlignment="Left" Style="{StaticResource ToolBarButtonStyle}" Tag="default edit" />
-        <AppBarButton x:Name="buttonDelete" Icon="Delete" Label="Delete" LabelPosition="Default" HorizontalAlignment="Left" Style="{StaticResource ToolBarButtonStyle}" Tag="default delete" />
+        <AppBarButton x:Name="buttonEdit" Icon="Edit" Label="Edit" LabelPosition="Default" HorizontalAlignment="Left" Style="{StaticResource ToolBarButtonStyle}" Tag="edit" />
+        <AppBarButton x:Name="buttonDelete" Icon="Delete" Label="Delete" LabelPosition="Default" HorizontalAlignment="Left" Style="{StaticResource ToolBarButtonStyle}" Tag="delete" />
         <AppBarButton x:Name="buttonCancel" Icon="Cancel" Label="Cancel" LabelPosition="Default" HorizontalAlignment="Left" Style="{StaticResource ToolBarButtonStyle}" Tag="cancel" />
         <AppBarButton x:Name="buttonSave" Icon="Save" Label="Save" LabelPosition="Default" HorizontalAlignment="Left" Style="{StaticResource ToolBarButtonStyle}" Tag="save" />
     </CommandBar>

@@ -53,8 +53,10 @@ namespace Inventory.ViewModels
             Query = ViewModelArgs.Query;
 
             StartStatusMessage("Loading products...");
-            await RefreshAsync();
-            EndStatusMessage("Products loaded");
+            if (await RefreshAsync())
+            {
+                EndStatusMessage("Products loaded");
+            }
         }
         public void Unload()
         {
@@ -81,29 +83,44 @@ namespace Inventory.ViewModels
             };
         }
 
-        public async Task RefreshAsync()
+        public async Task<bool> RefreshAsync()
         {
+            bool isOk = true;
+
             Items = null;
             ItemsCount = 0;
             SelectedItem = null;
 
-            Items = await GetItemsAsync();
+            try
+            {
+                Items = await GetItemsAsync();
+            }
+            catch (Exception ex)
+            {
+                Items = new List<ProductModel>();
+                StatusError($"Error loading Products: {ex.Message}");
+                LogException("Products", "Refresh", ex);
+                isOk = false;
+            }
+
             ItemsCount = Items.Count;
             if (!IsMultipleSelection)
             {
                 SelectedItem = Items.FirstOrDefault();
             }
-
             NotifyPropertyChanged(nameof(Title));
+
+            return isOk;
         }
 
         private async Task<IList<ProductModel>> GetItemsAsync()
         {
-            if (ViewModelArgs.IsEmpty)
-                return new List<ProductModel>();
-
-            DataRequest<Product> request = BuildDataRequest();
-            return await ProductService.GetProductsAsync(request);
+            if (!ViewModelArgs.IsEmpty)
+            {
+                DataRequest<Product> request = BuildDataRequest();
+                return await ProductService.GetProductsAsync(request);
+            }
+            return new List<ProductModel>();
         }
 
         protected override async void OnNew()
@@ -124,8 +141,10 @@ namespace Inventory.ViewModels
         protected override async void OnRefresh()
         {
             StartStatusMessage("Loading products...");
-            await RefreshAsync();
-            EndStatusMessage("Products loaded");
+            if (await RefreshAsync())
+            {
+                EndStatusMessage("Products loaded");
+            }
         }
 
         protected override async void OnDeleteSelection()
@@ -133,20 +152,33 @@ namespace Inventory.ViewModels
             StatusReady();
             if (await DialogService.ShowAsync("Confirm Delete", "Are you sure you want to delete selected products?", "Ok", "Cancel"))
             {
-                if (SelectedIndexRanges != null)
+                int count = 0;
+                try
                 {
-                    await DeleteRangesAsync(SelectedIndexRanges);
-                    await RefreshAsync();
-                    MessageService.Send(this, "ItemRangesDeleted", SelectedIndexRanges);
-                    SelectedIndexRanges = null;
+                    if (SelectedIndexRanges != null)
+                    {
+                        count = SelectedIndexRanges.Sum(r => r.Length);
+                        StartStatusMessage($"Deleting {count} products...");
+                        await DeleteRangesAsync(SelectedIndexRanges);
+                        MessageService.Send(this, "ItemRangesDeleted", SelectedIndexRanges);
+                    }
+                    else if (SelectedItems != null)
+                    {
+                        count = SelectedItems.Count();
+                        StartStatusMessage($"Deleting {count} products...");
+                        await DeleteItemsAsync(SelectedItems);
+                        MessageService.Send(this, "ItemsDeleted", SelectedItems);
+                    }
+                    EndStatusMessage($"{count} products deleted");
                 }
-                else if (SelectedItems != null)
+                catch (Exception ex)
                 {
-                    await DeleteItemsAsync(SelectedItems);
-                    await RefreshAsync();
-                    MessageService.Send(this, "ItemsDeleted", SelectedItems);
-                    SelectedItems = null;
+                    StatusError($"Error deleting {count} Products: {ex.Message}");
+                    LogException("Products", "Delete", ex);
                 }
+                await RefreshAsync();
+                SelectedIndexRanges = null;
+                SelectedItems = null;
             }
         }
 

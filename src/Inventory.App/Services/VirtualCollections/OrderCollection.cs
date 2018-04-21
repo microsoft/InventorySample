@@ -11,7 +11,7 @@ namespace Inventory.Services
     {
         private DataRequest<Order> _dataRequest = null;
 
-        public OrderCollection(IOrderService orderService)
+        public OrderCollection(IOrderService orderService, ILogService logService) : base(logService)
         {
             OrderService = orderService;
         }
@@ -23,14 +23,30 @@ namespace Inventory.Services
 
         public async Task LoadAsync(DataRequest<Order> dataRequest)
         {
-            _dataRequest = dataRequest;
-            Count = await OrderService.GetOrdersCountAsync(_dataRequest);
-            Ranges[0] = await FetchDataAsync(0, RangeSize);
+            try
+            {
+                _dataRequest = dataRequest;
+                Count = await OrderService.GetOrdersCountAsync(_dataRequest);
+                Ranges[0] = await OrderService.GetOrdersAsync(0, RangeSize, _dataRequest);
+            }
+            catch (Exception ex)
+            {
+                Count = 0;
+                throw ex;
+            }
         }
 
         protected override async Task<IList<OrderModel>> FetchDataAsync(int rangeIndex, int rangeSize)
         {
-            return await OrderService.GetOrdersAsync(rangeIndex * rangeSize, rangeSize, _dataRequest);
+            try
+            {
+                return await OrderService.GetOrdersAsync(rangeIndex * rangeSize, rangeSize, _dataRequest);
+            }
+            catch (Exception ex)
+            {
+                LogException("OrderCollection", "Fetch", ex);
+            }
+            return null;
         }
     }
 }

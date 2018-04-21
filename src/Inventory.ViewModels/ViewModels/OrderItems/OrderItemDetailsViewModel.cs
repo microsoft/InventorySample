@@ -60,8 +60,15 @@ namespace Inventory.ViewModels
             }
             else
             {
-                var item = await OrderItemService.GetOrderItemAsync(OrderID, ViewModelArgs.OrderLine);
-                Item = item ?? new OrderItemModel { OrderID = OrderID, OrderLine = ViewModelArgs.OrderLine, IsEmpty = true };
+                try
+                {
+                    var item = await OrderItemService.GetOrderItemAsync(OrderID, ViewModelArgs.OrderLine);
+                    Item = item ?? new OrderItemModel { OrderID = OrderID, OrderLine = ViewModelArgs.OrderLine, IsEmpty = true };
+                }
+                catch (Exception ex)
+                {
+                    LogException("OrderItem", "Load", ex);
+                }
             }
         }
         public void Unload()
@@ -88,20 +95,42 @@ namespace Inventory.ViewModels
             };
         }
 
-        protected override async Task SaveItemAsync(OrderItemModel model)
+        protected override async Task<bool> SaveItemAsync(OrderItemModel model)
         {
-            StartStatusMessage("Saving order item...");
-            await Task.Delay(100);
-            await OrderItemService.UpdateOrderItemAsync(model);
-            EndStatusMessage("Order item saved");
+            try
+            {
+                StartStatusMessage("Saving order item...");
+                await Task.Delay(100);
+                await OrderItemService.UpdateOrderItemAsync(model);
+                EndStatusMessage("Order item saved");
+                LogInformation("OrderItem", "Save", "Order item saved successfully", $"Order item #{model.OrderID}, {model.OrderLine} was saved successfully.");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                StatusError($"Error saving Order item: {ex.Message}");
+                LogException("OrderItem", "Save", ex);
+                return false;
+            }
         }
 
-        protected override async Task DeleteItemAsync(OrderItemModel model)
+        protected override async Task<bool> DeleteItemAsync(OrderItemModel model)
         {
-            StartStatusMessage("Deleting order item...");
-            await Task.Delay(100);
-            await OrderItemService.DeleteOrderItemAsync(model);
-            EndStatusMessage("Order item deleted");
+            try
+            {
+                StartStatusMessage("Deleting order item...");
+                await Task.Delay(100);
+                await OrderItemService.DeleteOrderItemAsync(model);
+                EndStatusMessage("Order item deleted");
+                LogWarning("OrderItem", "Delete", "Order item deleted", $"Order item #{model.OrderID}, {model.OrderLine} was deleted.");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                StatusError($"Error deleting Order item: {ex.Message}");
+                LogException("OrderItem", "Delete", ex);
+                return false;
+            }
         }
 
         protected override async Task<bool> ConfirmDeleteAsync()
@@ -134,14 +163,21 @@ namespace Inventory.ViewModels
                         case "ItemChanged":
                             await ContextService.RunAsync(async () =>
                             {
-                                var item = await OrderItemService.GetOrderItemAsync(current.OrderID, current.OrderLine);
-                                item = item ?? new OrderItemModel { OrderID = OrderID, OrderLine = ViewModelArgs.OrderLine, IsEmpty = true };
-                                current.Merge(item);
-                                current.NotifyChanges();
-                                NotifyPropertyChanged(nameof(Title));
-                                if (IsEditMode)
+                                try
                                 {
-                                    StatusMessage("WARNING: This orderItem has been modified externally");
+                                    var item = await OrderItemService.GetOrderItemAsync(current.OrderID, current.OrderLine);
+                                    item = item ?? new OrderItemModel { OrderID = OrderID, OrderLine = ViewModelArgs.OrderLine, IsEmpty = true };
+                                    current.Merge(item);
+                                    current.NotifyChanges();
+                                    NotifyPropertyChanged(nameof(Title));
+                                    if (IsEditMode)
+                                    {
+                                        StatusMessage("WARNING: This orderItem has been modified externally");
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    LogException("OrderItem", "Handle Changes", ex);
                                 }
                             });
                             break;
@@ -170,10 +206,17 @@ namespace Inventory.ViewModels
                         }
                         break;
                     case "ItemRangesDeleted":
-                        var model = await OrderItemService.GetOrderItemAsync(current.OrderID, current.OrderLine);
-                        if (model == null)
+                        try
                         {
-                            await OnItemDeletedExternally();
+                            var model = await OrderItemService.GetOrderItemAsync(current.OrderID, current.OrderLine);
+                            if (model == null)
+                            {
+                                await OnItemDeletedExternally();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            LogException("OrderItem", "Handle Ranges Deleted", ex);
                         }
                         break;
                 }

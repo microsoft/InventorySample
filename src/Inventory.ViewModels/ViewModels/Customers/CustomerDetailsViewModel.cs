@@ -44,8 +44,15 @@ namespace Inventory.ViewModels
             }
             else
             {
-                var item = await CustomerService.GetCustomerAsync(ViewModelArgs.CustomerID);
-                Item = item ?? new CustomerModel { CustomerID = ViewModelArgs.CustomerID, IsEmpty = true };
+                try
+                {
+                    var item = await CustomerService.GetCustomerAsync(ViewModelArgs.CustomerID);
+                    Item = item ?? new CustomerModel { CustomerID = ViewModelArgs.CustomerID, IsEmpty = true };
+                }
+                catch (Exception ex)
+                {
+                    LogException("Customer", "Load", ex);
+                }
             }
         }
         public void Unload()
@@ -71,20 +78,42 @@ namespace Inventory.ViewModels
             };
         }
 
-        protected override async Task SaveItemAsync(CustomerModel model)
+        protected override async Task<bool> SaveItemAsync(CustomerModel model)
         {
-            StartStatusMessage("Saving customer...");
-            await Task.Delay(100);
-            await CustomerService.UpdateCustomerAsync(model);
-            EndStatusMessage("Customer saved");
+            try
+            {
+                StartStatusMessage("Saving customer...");
+                await Task.Delay(100);
+                await CustomerService.UpdateCustomerAsync(model);
+                EndStatusMessage("Customer saved");
+                LogInformation("Customer", "Save", "Customer saved successfully", $"Customer {model.CustomerID} '{model.FullName}' was saved successfully.");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                StatusError($"Error saving Customer: {ex.Message}");
+                LogException("Customer", "Save", ex);
+                return false;
+            }
         }
 
-        protected override async Task DeleteItemAsync(CustomerModel model)
+        protected override async Task<bool> DeleteItemAsync(CustomerModel model)
         {
-            StartStatusMessage("Deleting customer...");
-            await Task.Delay(100);
-            await CustomerService.DeleteCustomerAsync(model);
-            EndStatusMessage("Customer deleted");
+            try
+            {
+                StartStatusMessage("Deleting customer...");
+                await Task.Delay(100);
+                await CustomerService.DeleteCustomerAsync(model);
+                EndStatusMessage("Customer deleted");
+                LogWarning("Customer", "Delete", "Customer deleted", $"Customer {model.CustomerID} '{model.FullName}' was deleted.");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                StatusError($"Error deleting Customer: {ex.Message}");
+                LogException("Customer", "Delete", ex);
+                return false;
+            }
         }
 
         protected override async Task<bool> ConfirmDeleteAsync()
@@ -119,14 +148,21 @@ namespace Inventory.ViewModels
                         case "ItemChanged":
                             await ContextService.RunAsync(async () =>
                             {
-                                var item = await CustomerService.GetCustomerAsync(current.CustomerID);
-                                item = item ?? new CustomerModel { CustomerID = current.CustomerID, IsEmpty = true };
-                                current.Merge(item);
-                                current.NotifyChanges();
-                                NotifyPropertyChanged(nameof(Title));
-                                if (IsEditMode)
+                                try
                                 {
-                                    StatusMessage("WARNING: This customer has been modified externally");
+                                    var item = await CustomerService.GetCustomerAsync(current.CustomerID);
+                                    item = item ?? new CustomerModel { CustomerID = current.CustomerID, IsEmpty = true };
+                                    current.Merge(item);
+                                    current.NotifyChanges();
+                                    NotifyPropertyChanged(nameof(Title));
+                                    if (IsEditMode)
+                                    {
+                                        StatusMessage("WARNING: This customer has been modified externally");
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    LogException("Customer", "Handle Changes", ex);
                                 }
                             });
                             break;
@@ -155,10 +191,17 @@ namespace Inventory.ViewModels
                         }
                         break;
                     case "ItemRangesDeleted":
-                        var model = await CustomerService.GetCustomerAsync(current.CustomerID);
-                        if (model == null)
+                        try
                         {
-                            await OnItemDeletedExternally();
+                            var model = await CustomerService.GetCustomerAsync(current.CustomerID);
+                            if (model == null)
+                            {
+                                await OnItemDeletedExternally();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            LogException("Customer", "Handle Ranges Deleted", ex);
                         }
                         break;
                 }

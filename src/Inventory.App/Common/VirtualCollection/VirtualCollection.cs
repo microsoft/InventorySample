@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 
+using Inventory.Data;
+
 namespace Inventory.Services
 {
     abstract public partial class VirtualCollection<T> : IItemsRangeInfo, INotifyCollectionChanged
@@ -17,8 +19,10 @@ namespace Inventory.Services
 
         private DispatcherTimer _timer = null;
 
-        public VirtualCollection(int rangeSize = 16)
+        public VirtualCollection(ILogService logService, int rangeSize = 16)
         {
+            LogService = logService;
+
             RangeSize = rangeSize;
             Ranges = new Dictionary<int, IList<T>>();
 
@@ -26,6 +30,8 @@ namespace Inventory.Services
             _timer.Interval = TimeSpan.FromMilliseconds(50);
             _timer.Tick += OnTimerTick;
         }
+
+        public ILogService LogService { get; }
 
         public Dictionary<int, IList<T>> Ranges { get; }
 
@@ -111,14 +117,22 @@ namespace Inventory.Services
                 if (!Ranges.ContainsKey(index))
                 {
                     var items = await FetchDataAsync(index, RangeSize);
-                    Ranges[index] = items;
-                    for (int n = 0; n < items.Count; n++)
+                    if (items != null)
                     {
-                        int replaceIndex = Math.Min(index * RangeSize + n, Count);
-                        CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, items[n], null, replaceIndex));
+                        Ranges[index] = items;
+                        for (int n = 0; n < items.Count; n++)
+                        {
+                            int replaceIndex = Math.Min(index * RangeSize + n, Count - 1);
+                            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, items[n], null, replaceIndex));
+                        }
                     }
                 }
             }
+        }
+
+        protected async void LogException(string source, string action, Exception exception)
+        {
+            await LogService.WriteAsync(LogType.Error, source, action, exception.Message, exception.ToString());
         }
 
         virtual public void Dispose() { }

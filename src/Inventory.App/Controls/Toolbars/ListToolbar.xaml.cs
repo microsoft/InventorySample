@@ -45,6 +45,23 @@ namespace Inventory.Controls
         public static readonly DependencyProperty ToolbarModeProperty = DependencyProperty.Register("ToolbarMode", typeof(ListToolbarMode), typeof(ListToolbar), new PropertyMetadata(ListToolbarMode.Default, ToolbarModeChanged));
         #endregion
 
+        #region DefaultCommands*
+        public string DefaultCommands
+        {
+            get { return (string)GetValue(DefaultCommandsProperty); }
+            set { SetValue(DefaultCommandsProperty, value); }
+        }
+
+        private static void DefaultCommandsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var control = d as ListToolbar;
+            control.UpdateControl();
+        }
+
+        public static readonly DependencyProperty DefaultCommandsProperty = DependencyProperty.Register(nameof(DefaultCommands), typeof(string), typeof(ListToolbar), new PropertyMetadata("new,select,refresh,search", DefaultCommandsChanged));
+        #endregion
+
+
         #region Query
         public string Query
         {
@@ -61,7 +78,7 @@ namespace Inventory.Controls
             {
                 default:
                 case ListToolbarMode.Default:
-                    ShowCategory("default");
+                    ShowCategory(DefaultCommands.Split(','));
                     break;
                 case ListToolbarMode.Cancel:
                     ShowCategory("cancel");

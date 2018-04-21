@@ -84,6 +84,16 @@ namespace Inventory.Controls
         public static readonly DependencyProperty DetailsTemplateProperty = DependencyProperty.Register(nameof(DetailsTemplate), typeof(DataTemplate), typeof(Details), new PropertyMetadata(null));
         #endregion
 
+        #region DefaultCommands
+        public string DefaultCommands
+        {
+            get { return (string)GetValue(DefaultCommandsProperty); }
+            set { SetValue(DefaultCommandsProperty, value); }
+        }
+
+        public static readonly DependencyProperty DefaultCommandsProperty = DependencyProperty.Register(nameof(DefaultCommands), typeof(string), typeof(Details), new PropertyMetadata("edit,delete"));
+        #endregion
+
 
         #region BackCommand
         public ICommand BackCommand

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Inventory.Data;
+using Inventory.Data.Services;
 using Inventory.Models;
 
 namespace Inventory.Services
@@ -21,13 +22,17 @@ namespace Inventory.Services
         {
             using (var dataService = DataServiceFactory.CreateDataService())
             {
-                var item = await dataService.GetOrderItemAsync(orderID, lineID);
-                if (item != null)
-                {
-                    return await CreateOrderItemModelAsync(item, includeAllFields: true);
-                }
-                return null;
+                return await GetOrderItemAsync(dataService, orderID, lineID);
             }
+        }
+        static private async Task<OrderItemModel> GetOrderItemAsync(IDataService dataService, long orderID, int lineID)
+        {
+            var item = await dataService.GetOrderItemAsync(orderID, lineID);
+            if (item != null)
+            {
+                return await CreateOrderItemModelAsync(item, includeAllFields: true);
+            }
+            return null;
         }
 
         public Task<IList<OrderItemModel>> GetOrderItemsAsync(DataRequest<OrderItem> request)
@@ -67,7 +72,7 @@ namespace Inventory.Services
                 {
                     UpdateOrderItemFromModel(orderItem, model);
                     await dataService.UpdateOrderItemAsync(orderItem);
-                    model.Merge(await GetOrderItemAsync(orderItem.OrderID, orderItem.OrderLine));
+                    model.Merge(await GetOrderItemAsync(dataService, orderItem.OrderID, orderItem.OrderLine));
                 }
                 return 0;
             }
@@ -91,7 +96,7 @@ namespace Inventory.Services
             }
         }
 
-        private async Task<OrderItemModel> CreateOrderItemModelAsync(OrderItem source, bool includeAllFields)
+        static public async Task<OrderItemModel> CreateOrderItemModelAsync(OrderItem source, bool includeAllFields)
         {
             var model = new OrderItemModel()
             {

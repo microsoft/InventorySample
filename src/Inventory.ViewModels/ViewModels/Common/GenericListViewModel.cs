@@ -109,7 +109,10 @@ namespace Inventory.ViewModels
         public ICommand DeselectItemsCommand => new RelayCommand<IList<object>>(OnDeselectItems);
         virtual protected void OnDeselectItems(IList<object> items)
         {
-            StatusReady();
+            if (items?.Count > 0)
+            {
+                StatusReady();
+            }
             if (IsMultipleSelection)
             {
                 foreach (TModel item in items)
@@ -122,7 +125,10 @@ namespace Inventory.ViewModels
         public ICommand SelectRangesCommand => new RelayCommand<IndexRange[]>(OnSelectRanges);
         virtual protected void OnSelectRanges(IndexRange[] indexRanges)
         {
-            StatusReady();
+            if (indexRanges?.Length > 0)
+            {
+                StatusReady();
+            }
             SelectedIndexRanges = indexRanges;
         }
 

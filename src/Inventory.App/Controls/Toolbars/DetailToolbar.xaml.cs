@@ -33,13 +33,29 @@ namespace Inventory.Controls
         public static readonly DependencyProperty ToolbarModeProperty = DependencyProperty.Register("ToolbarMode", typeof(DetailToolbarMode), typeof(DetailToolbar), new PropertyMetadata(DetailToolbarMode.Default, ToolbarModeChanged));
         #endregion
 
+        #region DefaultCommands*
+        public string DefaultCommands
+        {
+            get { return (string)GetValue(DefaultCommandsProperty); }
+            set { SetValue(DefaultCommandsProperty, value); }
+        }
+
+        private static void DefaultCommandsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var control = d as DetailToolbar;
+            control.UpdateControl();
+        }
+
+        public static readonly DependencyProperty DefaultCommandsProperty = DependencyProperty.Register(nameof(DefaultCommands), typeof(string), typeof(DetailToolbar), new PropertyMetadata("edit,delete", DefaultCommandsChanged));
+        #endregion
+
         private void UpdateControl()
         {
             switch (ToolbarMode)
             {
                 default:
                 case DetailToolbarMode.Default:
-                    ShowCategory("default");
+                    ShowCategory(DefaultCommands.Split(','));
                     break;
                 case DetailToolbarMode.BackEditdDelete:
                     ShowCategory("back", "edit", "delete");

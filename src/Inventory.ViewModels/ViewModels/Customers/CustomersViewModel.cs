@@ -81,15 +81,29 @@ namespace Inventory.ViewModels
 
         private async Task PopulateDetails(CustomerModel selected)
         {
-            var model = await CustomerService.GetCustomerAsync(selected.CustomerID);
-            selected.Merge(model);
+            try
+            {
+                var model = await CustomerService.GetCustomerAsync(selected.CustomerID);
+                selected.Merge(model);
+            }
+            catch (Exception ex)
+            {
+                LogException("Customers",  "Load Details", ex);
+            }
         }
 
         private async Task PopulateOrders(CustomerModel selectedItem)
         {
-            if (selectedItem != null)
+            try
             {
-                await CustomerOrders.LoadAsync(new OrderListArgs { CustomerID = selectedItem.CustomerID }, silent: true);
+                if (selectedItem != null)
+                {
+                    await CustomerOrders.LoadAsync(new OrderListArgs { CustomerID = selectedItem.CustomerID }, silent: true);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogException("Customers", "Load Orders", ex);
             }
         }
     }

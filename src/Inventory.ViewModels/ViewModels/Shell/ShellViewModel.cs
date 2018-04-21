@@ -50,29 +50,26 @@ namespace Inventory.ViewModels
         {
         }
 
-        public void Subscribe()
+        virtual public void Subscribe()
         {
             MessageService.Subscribe<ViewModelBase, String>(this, OnMessage);
         }
-        public void Unsubscribe()
+        virtual public void Unsubscribe()
         {
             MessageService.Unsubscribe(this);
         }
 
-        private async void OnMessage(ViewModelBase viewModel, string message, string status)
+        private void OnMessage(ViewModelBase viewModel, string message, string status)
         {
-            if (viewModel.ContextService.ViewID != ContextService.ViewID)
+            if (viewModel.ContextService.ContextID != ContextService.ContextID)
                 return;
 
             switch (message)
             {
                 case "StatusMessage":
                 case "StatusError":
-                    await ContextService.RunAsync(() =>
-                    {
-                        IsError = message == "StatusError";
-                        Message = status;
-                    });
+                    IsError = message == "StatusError";
+                    Message = status;
                     break;
             }
         }

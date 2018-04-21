@@ -4,35 +4,42 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Inventory.Data;
+using Inventory.Data.Services;
 using Inventory.Models;
 
 namespace Inventory.Services
 {
     public class ProductService : IProductService
     {
-        public ProductService(IDataServiceFactory dataServiceFactory)
+        public ProductService(IDataServiceFactory dataServiceFactory, ILogService logService)
         {
             DataServiceFactory = dataServiceFactory;
+            LogService = logService;
         }
 
         public IDataServiceFactory DataServiceFactory { get; }
+        public ILogService LogService { get; }
 
         public async Task<ProductModel> GetProductAsync(string id)
         {
             using (var dataService = DataServiceFactory.CreateDataService())
             {
-                var item = await dataService.GetProductAsync(id);
-                if (item != null)
-                {
-                    return await CreateProductModelAsync(item, includeAllFields: true);
-                }
-                return null;
+                return await GetProductAsync(dataService, id);
             }
+        }
+        static private async Task<ProductModel> GetProductAsync(IDataService dataService, string id)
+        {
+            var item = await dataService.GetProductAsync(id);
+            if (item != null)
+            {
+                return await CreateProductModelAsync(item, includeAllFields: true);
+            }
+            return null;
         }
 
         public async Task<IList<ProductModel>> GetProductsAsync(DataRequest<Product> request)
         {
-            var collection = new ProductCollection(this);
+            var collection = new ProductCollection(this, LogService);
             await collection.LoadAsync(request);
             return collection;
         }
@@ -69,7 +76,7 @@ namespace Inventory.Services
                 {
                     UpdateProductFromModel(product, model);
                     await dataService.UpdateProductAsync(product);
-                    model.Merge(await GetProductAsync(product.ProductID));
+                    model.Merge(await GetProductAsync(dataService, product.ProductID));
                 }
                 return 0;
             }

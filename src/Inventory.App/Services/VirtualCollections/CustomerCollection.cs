@@ -11,7 +11,7 @@ namespace Inventory.Services
     {
         private DataRequest<Customer> _dataRequest = null;
 
-        public CustomerCollection(ICustomerService customerService)
+        public CustomerCollection(ICustomerService customerService, ILogService logService) : base(logService)
         {
             CustomerService = customerService;
         }
@@ -23,14 +23,30 @@ namespace Inventory.Services
 
         public async Task LoadAsync(DataRequest<Customer> dataRequest)
         {
-            _dataRequest = dataRequest;
-            Count = await CustomerService.GetCustomersCountAsync(_dataRequest);
-            Ranges[0] = await FetchDataAsync(0, RangeSize);
+            try
+            {
+                _dataRequest = dataRequest;
+                Count = await CustomerService.GetCustomersCountAsync(_dataRequest);
+                Ranges[0] = await CustomerService.GetCustomersAsync(0, RangeSize, _dataRequest);
+            }
+            catch (Exception ex)
+            {
+                Count = 0;
+                throw ex;
+            }
         }
 
         protected override async Task<IList<CustomerModel>> FetchDataAsync(int rangeIndex, int rangeSize)
         {
-            return await CustomerService.GetCustomersAsync(rangeIndex * rangeSize, rangeSize, _dataRequest);
+            try
+            {
+                return await CustomerService.GetCustomersAsync(rangeIndex * rangeSize, rangeSize, _dataRequest);
+            }
+            catch (Exception ex)
+            {
+                LogException("CustomerCollection", "Fetch", ex);
+            }
+            return null;
         }
     }
 }

@@ -1,0 +1,53 @@
+﻿<Page
+    x:Class="Inventory.Views.AppLogsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Inventory.Controls"
+    xmlns:views="using:Inventory.Views"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="ListHeaderTemplate">
+            <StackPanel Margin="6,4,0,0" Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Text="Activity Log" FontSize="18" />
+                <Rectangle Margin="3,0 "/>
+                <TextBlock Text="{Binding}" FontSize="18" Foreground="Gray" />
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid Background="WhiteSmoke">
+        <controls:WindowTitle Prefix="Activity Logs" Title="{x:Bind ViewModel.AppLogList.Title, Mode=OneWay}" />
+        
+        <Grid Margin="6" RowSpacing="6">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--AppLogs-->
+            <Grid Grid.RowSpan="{x:Bind GetRowSpan(ViewModel.AppLogList.IsMultipleSelection), Mode=OneWay}">
+                <controls:Section Header="{x:Bind ViewModel.AppLogList.Title, Mode=OneWay}" HeaderTemplate="{StaticResource ListHeaderTemplate}" HeaderButtonGlyph="&#xE2B4;" HeaderButtonClick="OpenInNewView" IsButtonVisible="{x:Bind ViewModel.IsMainView}">
+                    <views:AppLogsList ViewModel="{x:Bind ViewModel.AppLogList}" />
+                </controls:Section>
+            </Grid>
+
+            <!--Details-->
+            <Grid Grid.Row="1" Visibility="{x:Bind ViewModel.AppLogList.IsMultipleSelection, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+                <controls:Section IsEnabled="{x:Bind ViewModel.AppLogDetails.IsEnabled, Mode=OneWay}" Visibility="{x:Bind ViewModel.AppLogDetails.IsDataAvailable, Mode=OneWay}">
+
+                    <Pivot x:Name="pivot">
+                        <PivotItem Header="Activity Log">
+                            <views:AppLogsDetails Grid.Row="1" ViewModel="{x:Bind ViewModel.AppLogDetails}" />
+                        </PivotItem>
+                    </Pivot>
+                </controls:Section>
+
+                <!--Empty Details-->
+                <controls:Section Header="No item selected" Visibility="{x:Bind ViewModel.AppLogDetails.IsDataUnavailable, Mode=OneWay}" />
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

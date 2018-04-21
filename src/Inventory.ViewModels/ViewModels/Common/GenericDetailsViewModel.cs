@@ -123,17 +123,18 @@ namespace Inventory.ViewModels
         virtual public async Task SaveAsync()
         {
             IsEnabled = false;
-            await SaveItemAsync(EditableItem);
+            if (await SaveItemAsync(EditableItem))
+            {
+                Item.Merge(EditableItem);
+                Item.NotifyChanges();
+                NotifyPropertyChanged(nameof(Title));
+                EditableItem = Item;
+
+                // TODO: Discrimine if New or Modified
+                MessageService.Send(this, "ItemChanged", Item);
+                IsEditMode = false;
+            }
             IsEnabled = true;
-
-            Item.Merge(EditableItem);
-            Item.NotifyChanges();
-            NotifyPropertyChanged(nameof(Title));
-            EditableItem = Item;
-
-            // TODO: Discrimine if New or Modified
-            MessageService.Send(this, "ItemChanged", Item);
-            IsEditMode = false;
         }
 
         public ICommand DeleteCommand => new RelayCommand(OnDelete);
@@ -151,9 +152,14 @@ namespace Inventory.ViewModels
             if (model != null)
             {
                 IsEnabled = false;
-                await DeleteItemAsync(model);
-
-                MessageService.Send(this, "ItemDeleted", model);
+                if (await DeleteItemAsync(model))
+                {
+                    MessageService.Send(this, "ItemDeleted", model);
+                }
+                else
+                {
+                    IsEnabled = true;
+                }
             }
         }
 
@@ -171,8 +177,8 @@ namespace Inventory.ViewModels
 
         virtual protected IEnumerable<IValidationConstraint<TModel>> GetValidationConstraints(TModel model) => Enumerable.Empty<IValidationConstraint<TModel>>();
 
-        abstract protected Task SaveItemAsync(TModel model);
-        abstract protected Task DeleteItemAsync(TModel model);
+        abstract protected Task<bool> SaveItemAsync(TModel model);
+        abstract protected Task<bool> DeleteItemAsync(TModel model);
         abstract protected Task<bool> ConfirmDeleteAsync();
     }
 }

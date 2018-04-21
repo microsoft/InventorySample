@@ -73,7 +73,7 @@ namespace Inventory.ViewModels
                 if (selected != null && !selected.IsEmpty)
                 {
                     await PopulateDetails(selected);
-                    await PopulateOrders(selected);
+                    await PopulateOrderItems(selected);
                 }
             }
             OrderDetails.Item = selected;
@@ -81,15 +81,29 @@ namespace Inventory.ViewModels
 
         private async Task PopulateDetails(OrderModel selected)
         {
-            var model = await OrderService.GetOrderAsync(selected.OrderID);
-            selected.Merge(model);
+            try
+            {
+                var model = await OrderService.GetOrderAsync(selected.OrderID);
+                selected.Merge(model);
+            }
+            catch (Exception ex)
+            {
+                LogException("Orders", "Load Details", ex);
+            }
         }
 
-        private async Task PopulateOrders(OrderModel selectedItem)
+        private async Task PopulateOrderItems(OrderModel selectedItem)
         {
-            if (selectedItem != null)
+            try
             {
-                await OrderItemList.LoadAsync(new OrderItemListArgs { OrderID = selectedItem.OrderID }, silent: true);
+                if (selectedItem != null)
+                {
+                    await OrderItemList.LoadAsync(new OrderItemListArgs { OrderID = selectedItem.OrderID }, silent: true);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogException("Orders", "Load OrderItems", ex);
             }
         }
     }

@@ -15,6 +15,8 @@ namespace Inventory.Services
 
         public string Version => AppSettings.Current.Version;
 
+        public int ContextID => ViewID;
+
         public void Initialize(object dispatcher, int viewID, bool isMainView)
         {
             _dispatcher = dispatcher as CoreDispatcher;

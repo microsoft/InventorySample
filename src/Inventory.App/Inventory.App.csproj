@@ -100,6 +100,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\GridLengths.cs" />
+    <Compile Include="Common\VirtualCollection\VirtualCollection.cs" />
+    <Compile Include="Common\VirtualCollection\VirtualCollection.IList.cs" />
+    <Compile Include="Common\VirtualCollection\VirtualCollection.Selection.cs" />
     <Compile Include="Configuration\AppSettings.cs" />
     <Compile Include="Configuration\ServiceLocator.cs" />
     <Compile Include="Configuration\Startup.cs" />
@@ -145,6 +148,8 @@
     <Compile Include="Converters\Int16Converter.cs" />
     <Compile Include="Converters\Int32Converter.cs" />
     <Compile Include="Converters\Int64Converter.cs" />
+    <Compile Include="Converters\LogTypeConverter.cs" />
+    <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Converters\ObjectToImageConverter.cs" />
     <Compile Include="Extensions\AnimationExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
@@ -152,21 +157,19 @@
     <Compile Include="Extensions\ItemIndexRangeExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CustomerService.cs" />
-    <Compile Include="Services\DataServiceFactory\DataServiceFactory.cs" />
-    <Compile Include="Services\DataServiceFactory\IDataServiceFactory.cs" />
     <Compile Include="Services\Infrastructure\CommonServices.cs" />
     <Compile Include="Services\Infrastructure\ContextService.cs" />
+    <Compile Include="Services\Infrastructure\DataServiceFactory\DataServiceFactory.cs" />
+    <Compile Include="Services\Infrastructure\DataServiceFactory\IDataServiceFactory.cs" />
     <Compile Include="Services\Infrastructure\DialogService.cs" />
-    <Compile Include="Services\Infrastructure\LogService.cs" />
+    <Compile Include="Services\Infrastructure\LogService\LogCollection.cs" />
+    <Compile Include="Services\Infrastructure\LogService\LogService.cs" />
     <Compile Include="Services\Infrastructure\MessageService.cs" />
     <Compile Include="Services\Infrastructure\NavigationService.cs" />
     <Compile Include="Services\LookupTables.cs" />
     <Compile Include="Services\OrderItemService.cs" />
     <Compile Include="Services\OrderService.cs" />
     <Compile Include="Services\ProductService.cs" />
-    <Compile Include="Services\VirtualCollections\Base\VirtualCollection.cs" />
-    <Compile Include="Services\VirtualCollections\Base\VirtualCollection.IList.cs" />
-    <Compile Include="Services\VirtualCollections\Base\VirtualCollection.Selection.cs" />
     <Compile Include="Services\VirtualCollections\CustomerCollection.cs" />
     <Compile Include="Services\VirtualCollections\OrderCollection.cs" />
     <Compile Include="Services\VirtualCollections\ProductCollection.cs" />
@@ -179,6 +182,15 @@
     <Compile Include="Tools\ElementSet\ElementSet.Events.cs" />
     <Compile Include="Tools\ElementSet\ElementSet.Methods.cs" />
     <Compile Include="Tools\ElementSet\ElementSet.Properties.cs" />
+    <Compile Include="Views\AppLogs\AppLogsView.xaml.cs">
+      <DependentUpon>AppLogsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AppLogs\Details\AppLogsDetails.xaml.cs">
+      <DependentUpon>AppLogsDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AppLogs\List\AppLogsList.xaml.cs">
+      <DependentUpon>AppLogsList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Controls\CustomerSuggestBox.xaml.cs">
       <DependentUpon>CustomerSuggestBox.xaml</DependentUpon>
     </Compile>
@@ -303,9 +315,9 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Html\ChartHtmlControl.html" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
-    <Content Include="html\ChartHtmlControl.html" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -352,7 +364,9 @@
       <Name>Inventory.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Assets\AppLog\AppLog.db" />
+  </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\DataGrid\DataGrid.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -411,6 +425,18 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\ThemeDictionaries.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AppLogs\AppLogsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AppLogs\Details\AppLogsDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AppLogs\List\AppLogsList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

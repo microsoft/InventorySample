@@ -4,35 +4,42 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Inventory.Data;
+using Inventory.Data.Services;
 using Inventory.Models;
 
 namespace Inventory.Services
 {
     public class CustomerService : ICustomerService
     {
-        public CustomerService(IDataServiceFactory dataServiceFactory)
+        public CustomerService(IDataServiceFactory dataServiceFactory, ILogService logService)
         {
             DataServiceFactory = dataServiceFactory;
+            LogService = logService;
         }
 
         public IDataServiceFactory DataServiceFactory { get; }
+        public ILogService LogService { get; }
 
         public async Task<CustomerModel> GetCustomerAsync(long id)
         {
             using (var dataService = DataServiceFactory.CreateDataService())
             {
-                var item = await dataService.GetCustomerAsync(id);
-                if (item != null)
-                {
-                    return await CreateCustomerModelAsync(item, includeAllFields: true);
-                }
-                return null;
+                return await GetCustomerAsync(dataService, id);
             }
+        }
+        static private async Task<CustomerModel> GetCustomerAsync(IDataService dataService, long id)
+        {
+            var item = await dataService.GetCustomerAsync(id);
+            if (item != null)
+            {
+                return await CreateCustomerModelAsync(item, includeAllFields: true);
+            }
+            return null;
         }
 
         public async Task<IList<CustomerModel>> GetCustomersAsync(DataRequest<Customer> request)
         {
-            var collection = new CustomerCollection(this);
+            var collection = new CustomerCollection(this, LogService);
             await collection.LoadAsync(request);
             return collection;
         }
@@ -69,7 +76,7 @@ namespace Inventory.Services
                 {
                     UpdateCustomerFromModel(customer, model);
                     await dataService.UpdateCustomerAsync(customer);
-                    model.Merge(await GetCustomerAsync(customer.CustomerID));
+                    model.Merge(await GetCustomerAsync(dataService, customer.CustomerID));
                 }
                 return 0;
             }

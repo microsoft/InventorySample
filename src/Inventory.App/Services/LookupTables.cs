@@ -3,17 +3,20 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+using Inventory.Data;
 using Inventory.Models;
 
 namespace Inventory.Services
 {
     public class LookupTables : ILookupTables
     {
-        public LookupTables(IDataServiceFactory dataServiceFactory)
+        public LookupTables(ILogService logService, IDataServiceFactory dataServiceFactory)
         {
+            LogService = logService;
             DataServiceFactory = dataServiceFactory;
         }
 
+        public ILogService LogService { get; }
         public IDataServiceFactory DataServiceFactory { get; }
 
         public IList<CategoryModel> Categories { get; private set; }
@@ -69,88 +72,141 @@ namespace Inventory.Services
 
         private async Task<IList<CategoryModel>> GetCategoriesAsync()
         {
-            using (var dataService = DataServiceFactory.CreateDataService())
+            try
             {
-                var items = await dataService.GetCategoriesAsync();
-                return items.Select(r => new CategoryModel
+                using (var dataService = DataServiceFactory.CreateDataService())
                 {
-                    CategoryID = r.CategoryID,
-                    Name = r.Name
-                })
-                .ToList();
+                    var items = await dataService.GetCategoriesAsync();
+                    return items.Select(r => new CategoryModel
+                    {
+                        CategoryID = r.CategoryID,
+                        Name = r.Name
+                    })
+                    .ToList();
+                }
             }
+            catch (Exception ex)
+            {
+                LogException("LookupTables", "Load Categories", ex);
+            }
+            return new List<CategoryModel>();
         }
 
         private async Task<IList<CountryCodeModel>> GetCountryCodesAsync()
         {
-            using (var dataService = DataServiceFactory.CreateDataService())
+            try
             {
-                var items = await dataService.GetCountryCodesAsync();
-                return items.OrderBy(r => r.Name).Select(r => new CountryCodeModel
+                using (var dataService = DataServiceFactory.CreateDataService())
                 {
-                    CountryCodeID = r.CountryCodeID,
-                    Name = r.Name
-                })
-                .ToList();
+                    var items = await dataService.GetCountryCodesAsync();
+                    return items.OrderBy(r => r.Name).Select(r => new CountryCodeModel
+                    {
+                        CountryCodeID = r.CountryCodeID,
+                        Name = r.Name
+                    })
+                    .ToList();
+                }
             }
+            catch (Exception ex)
+            {
+                LogException("LookupTables", "Load CountryCodes", ex);
+            }
+            return new List<CountryCodeModel>();
         }
 
         private async Task<IList<OrderStatusModel>> GetOrderStatusAsync()
         {
-            using (var dataService = DataServiceFactory.CreateDataService())
+            try
             {
-                var items = await dataService.GetOrderStatusAsync();
-                return items.Select(r => new OrderStatusModel
+                using (var dataService = DataServiceFactory.CreateDataService())
                 {
-                    Status = r.Status,
-                    Name = r.Name
-                })
-                .ToList();
+                    var items = await dataService.GetOrderStatusAsync();
+                    return items.Select(r => new OrderStatusModel
+                    {
+                        Status = r.Status,
+                        Name = r.Name
+                    })
+                    .ToList();
+                }
             }
+            catch (Exception ex)
+            {
+                LogException("LookupTables", "Load OrderStatus", ex);
+            }
+            return new List<OrderStatusModel>();
         }
 
         private async Task<IList<PaymentTypeModel>> GetPaymentTypesAsync()
         {
-            using (var dataService = DataServiceFactory.CreateDataService())
+            try
             {
-                var items = await dataService.GetPaymentTypesAsync();
-                return items.Select(r => new PaymentTypeModel
+                using (var dataService = DataServiceFactory.CreateDataService())
                 {
-                    PaymentTypeID = r.PaymentTypeID,
-                    Name = r.Name
-                })
-                .ToList();
+                    var items = await dataService.GetPaymentTypesAsync();
+                    return items.Select(r => new PaymentTypeModel
+                    {
+                        PaymentTypeID = r.PaymentTypeID,
+                        Name = r.Name
+                    })
+                    .ToList();
+                }
             }
+            catch (Exception ex)
+            {
+                LogException("LookupTables", "Load PaymentTypes", ex);
+            }
+            return new List<PaymentTypeModel>();
         }
 
         private async Task<IList<ShipperModel>> GetShippersAsync()
         {
-            using (var dataService = DataServiceFactory.CreateDataService())
+            try
             {
-                var items = await dataService.GetShippersAsync();
-                return items.Select(r => new ShipperModel
+                using (var dataService = DataServiceFactory.CreateDataService())
                 {
-                    ShipperID = r.ShipperID,
-                    Name = r.Name,
-                    Phone = r.Phone
-                })
-                .ToList();
+                    var items = await dataService.GetShippersAsync();
+                    return items.Select(r => new ShipperModel
+                    {
+                        ShipperID = r.ShipperID,
+                        Name = r.Name,
+                        Phone = r.Phone
+                    })
+                    .ToList();
+                }
             }
+            catch (Exception ex)
+            {
+                LogException("LookupTables", "Load Shippers", ex);
+            }
+            return new List<ShipperModel>();
         }
 
         private async Task<IList<TaxTypeModel>> GetTaxTypesAsync()
         {
-            using (var dataService = DataServiceFactory.CreateDataService())
+            try
             {
-                var items = await dataService.GetTaxTypesAsync();
-                return items.Select(r => new TaxTypeModel
+                using (var dataService = DataServiceFactory.CreateDataService())
                 {
-                    TaxTypeID = r.TaxTypeID,
-                    Name = r.Name,
-                    Rate = r.Rate
-                })
-                .ToList();
+                    var items = await dataService.GetTaxTypesAsync();
+                    return items.Select(r => new TaxTypeModel
+                    {
+                        TaxTypeID = r.TaxTypeID,
+                        Name = r.Name,
+                        Rate = r.Rate
+                    })
+                    .ToList();
+                }
             }
+            catch (Exception ex)
+            {
+                LogException("LookupTables", "Load TaxTypes", ex);
+            }
+            return new List<TaxTypeModel>();
+        }
+
+        private async void LogException(string source, string action, Exception exception)
+        {
+            await LogService.WriteAsync(LogType.Error, source, action, exception.Message, exception.ToString());
         }
     }
 }
