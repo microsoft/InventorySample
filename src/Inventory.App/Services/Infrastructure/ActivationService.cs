@@ -3,24 +3,27 @@
 using Windows.ApplicationModel.Activation;
 
 using Inventory.ViewModels;
-using Windows.Foundation;
 
 namespace Inventory.Services
 {
+    #region ActivationInfo
     public class ActivationInfo
     {
-        static public ActivationInfo CreateDefault()
+        static public ActivationInfo CreateDefault() => Create<DashboardViewModel>();
+
+        static public ActivationInfo Create<TViewModel>(object entryArgs = null) where TViewModel : ViewModelBase
         {
             return new ActivationInfo
             {
-                EntryViewModel = typeof(DashboardViewModel),
-                EntryArgs = null
+                EntryViewModel = typeof(TViewModel),
+                EntryArgs = entryArgs
             };
         }
 
         public Type EntryViewModel { get; set; }
         public object EntryArgs { get; set; }
     }
+    #endregion
 
     static public class ActivationService
     {
@@ -44,57 +47,32 @@ namespace Inventory.Services
                 switch (args.Uri.AbsolutePath.ToLowerInvariant())
                 {
                     case "customer":
-                        long customerID = GetParameterID(args.Uri);
+                    case "customers":
+                        long customerID = args.Uri.GetInt64Parameter("id");
                         if (customerID > 0)
                         {
-                            return new ActivationInfo
-                            {
-                                EntryViewModel = typeof(CustomerDetailsViewModel),
-                                EntryArgs = new CustomerDetailsArgs { CustomerID = customerID }
-                            };
+                            return ActivationInfo.Create<CustomerDetailsViewModel>(new CustomerDetailsArgs { CustomerID = customerID });
                         }
-                        break;
+                        return ActivationInfo.Create<CustomersViewModel>(new CustomerListArgs());
                     case "order":
-                        long orderID = GetParameterID(args.Uri);
+                    case "orders":
+                        long orderID = args.Uri.GetInt64Parameter("id");
                         if (orderID > 0)
                         {
-                            return new ActivationInfo
-                            {
-                                EntryViewModel = typeof(OrderDetailsViewModel),
-                                EntryArgs = new OrderDetailsArgs { OrderID = orderID }
-                            };
+                            return ActivationInfo.Create<OrderDetailsViewModel>(new OrderDetailsArgs { OrderID = orderID });
                         }
-                        break;
+                        return ActivationInfo.Create<OrdersViewModel>(new OrderListArgs());
                     case "product":
-                        var decoder = new WwwFormUrlDecoder(args.Uri.Query);
-                        string productID = decoder.GetFirstValueByName("id");
+                    case "products":
+                        string productID = args.Uri.GetParameter("id");
                         if (productID != null)
                         {
-                            return new ActivationInfo
-                            {
-                                EntryViewModel = typeof(ProductDetailsViewModel),
-                                EntryArgs = new ProductDetailsArgs { ProductID = productID }
-                            };
+                            return ActivationInfo.Create<ProductDetailsViewModel>(new ProductDetailsArgs { ProductID = productID });
                         }
-                        break;
+                        return ActivationInfo.Create<ProductsViewModel>(new ProductListArgs());
                 }
             }
             return ActivationInfo.CreateDefault();
-        }
-
-        private static long GetParameterID(Uri uri)
-        {
-            string query = uri.Query;
-            if (!String.IsNullOrEmpty(query))
-            {
-                var decoder = new WwwFormUrlDecoder(uri.Query);
-                string value = decoder.GetFirstValueByName("id");
-                if (Int64.TryParse(value, out Int64 id))
-                {
-                    return id;
-                }
-            }
-            return 0;
         }
     }
 }

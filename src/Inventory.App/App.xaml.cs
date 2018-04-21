@@ -43,11 +43,10 @@ namespace Inventory
             var frame = Window.Current.Content as Frame;
             if (frame == null)
             {
-                frame = new Frame();
-                Window.Current.Content = frame;
-
                 await Startup.ConfigureAsync();
 
+                frame = new Frame();
+                Window.Current.Content = frame;
                 var shellArgs = new ShellArgs
                 {
                     ViewModel = activationInfo.EntryViewModel,
