@@ -9,7 +9,23 @@
     <StackPanel Spacing="2">
         <StackPanel Margin="6,2">
             <Grid Margin="0,6" Height="180">
-                <Image Source="{x:Bind Item.ThumbnailSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <Grid Background="LightGray">
+                    <Viewbox Margin="24">
+                        <FontIcon Glyph="&#xE114;" Foreground="Gray" />
+                    </Viewbox>
+                    <Image Source="{x:Bind Item.ThumbnailSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Grid>
+                <Button Padding="0" BorderThickness="1" BorderBrush="White" Background="Transparent" Command="{x:Bind ViewModel.EditPictureCommand}"
+                        HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        Visibility="{x:Bind ViewModel.IsEditMode, Mode=OneWay}">
+                    <Grid>
+                        <Rectangle Fill="White" Opacity="0.75" />
+                        <TextBlock Text="Edit Photo" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{x:Bind ViewModel.IsEnabled, Mode=OneWay}" />
+                        <Image Source="{x:Bind ViewModel.NewPictureSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Visibility="{x:Bind ViewModel.NewPictureSource, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}}" />
+                    </Grid>
+                </Button>
             </Grid>
             <TextBlock Text="{x:Bind Item.Name, Mode=OneWay}" TextAlignment="Center" TextWrapping="WrapWholeWords" IsTextSelectionEnabled="True" FontSize="14" />
         </StackPanel>

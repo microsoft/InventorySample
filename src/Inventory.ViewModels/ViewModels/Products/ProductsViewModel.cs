@@ -8,12 +8,12 @@ namespace Inventory.ViewModels
 {
     public class ProductsViewModel : ViewModelBase
     {
-        public ProductsViewModel(IProductService productService, IOrderService orderService, ICommonServices commonServices) : base(commonServices)
+        public ProductsViewModel(IProductService productService, IOrderService orderService, IFilePickerService filePickerService, ICommonServices commonServices) : base(commonServices)
         {
             ProductService = productService;
 
             ProductList = new ProductListViewModel(ProductService, commonServices);
-            ProductDetails = new ProductDetailsViewModel(ProductService, commonServices);
+            ProductDetails = new ProductDetailsViewModel(ProductService, filePickerService, commonServices);
         }
 
         public IProductService ProductService { get; }
