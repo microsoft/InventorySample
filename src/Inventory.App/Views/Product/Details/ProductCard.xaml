@@ -10,7 +10,7 @@
         <StackPanel Margin="6,2">
             <Grid Margin="0,6" Height="180">
                 <Grid Background="LightGray">
-                    <Viewbox Margin="24">
+                    <Viewbox Margin="24" Visibility="{x:Bind ViewModel.IsEnabled, Mode=OneWay}">
                         <FontIcon Glyph="&#xE114;" Foreground="Gray" />
                     </Viewbox>
                     <Image Source="{x:Bind Item.ThumbnailSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
