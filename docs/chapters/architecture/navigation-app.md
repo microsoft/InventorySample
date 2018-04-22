@@ -99,7 +99,7 @@ Once the Navigation Service is initialized from the Shell views. We are ready to
 
 As you may know, in UWP apps the pages are recreated everytime we navigate to them, unless we want to preserve them in memory setting the property `NavigationCacheMode` to `Required` or `Enabled`.
 
-With the purpose of having the best performance we can, we have decided not to *cache* the pages and save the state of them in the Navigation process. This page state will be passed as an argument when we navigate to another page, and retreived when we navigate back to the original page.
+With the purpose of having the best performance we can, we have decided not to *cache* the pages and save the state of them in the Navigation process. This page state will be passed as an argument when we navigate to a page, and retreived when we navigate back.
 
 So, the first thing to do is defined an argument per ViewModel. Let's take for example the `CustomerListViewModel`. We will have a class defined for the arguments of this `CustomerListArgs`:
 

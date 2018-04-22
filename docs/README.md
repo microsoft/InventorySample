@@ -45,6 +45,9 @@
     - [Data Access](chapters/architecture/dataaccess.md#data-access)
         - [Inventory.Data project](chapters/architecture/dataaccess.md#inventory.data-project)
         - [Accessing the data from the app](chapters/architecture/dataaccess.md#accessing-the-data-from-the-app)
+    - [Message Service](chapters/architecture/message-service.md#message-service)
+        - [How to use it](chapters/architecture/message-service.md#How-to-use-it)
+        - [Message Service Implementation](chapters/architecture/message-service.md#Message-Service-Implementation)
     - Localization
     - ...
 - [Data Access](chapters/dataaccess.md)
