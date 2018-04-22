@@ -126,7 +126,7 @@ As we can see, we are saving the possible values of the actions that the user ca
 
 #### Passing the state as an argument in the navigation
 
-
+If we have a look at the `Navigate` method implemented of the *Navigation Service*, we have a nullable `parameter` in addition of the type of the ViewModel we want to navigate to. 
 ```csharp
 public bool Navigate(Type viewModelType, object parameter = null)
 {
@@ -138,7 +138,12 @@ public bool Navigate(Type viewModelType, object parameter = null)
 }
 ```
 
+We will pass the in this `parameter` the `CustomerListArgs` previously defined: 
+```csharp
+NavigationService.Navigate(viewModel, new CustomerListArgs());
+```
 
+Now we need to reflect the passed state in the navigation into the View. To accomplish that, we need to overrride the View method `OnNavigatedTo` and get the state in the `Parameter` property of the `NavigationEventArgs` received:
 ```csharp
 protected override async void OnNavigatedTo(NavigationEventArgs e)
 {
@@ -147,6 +152,7 @@ protected override async void OnNavigatedTo(NavigationEventArgs e)
 }
 ```
 
+For those ViewModels we want to save the state, we are creating a public method in them to be called from our Views, the `LoadAsync` method. This method, just simple receive the status saved in the `CustomerListArgs` object, and load it in the ViewModel:
 ```csharp
 public async Task LoadAsync(CustomerListArgs args)
 {
@@ -158,6 +164,4 @@ public async Task LoadAsync(CustomerListArgs args)
     EndStatusMessage("Customers loaded");
 }
 ```
-
-
 
