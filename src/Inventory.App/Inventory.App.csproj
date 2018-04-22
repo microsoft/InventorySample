@@ -112,6 +112,7 @@
     <Compile Include="Controls\Buttons\IconButton.cs" />
     <Compile Include="Controls\Buttons\IconLabel.cs" />
     <Compile Include="Controls\Buttons\IconLabelButton.cs" />
+    <Compile Include="Controls\Buttons\RoundButton.cs" />
     <Compile Include="Controls\DataGrid\DataGrid.xaml.cs">
       <DependentUpon>DataGrid.xaml</DependentUpon>
     </Compile>
@@ -164,6 +165,7 @@
     <Compile Include="Services\Infrastructure\CommonServices.cs" />
     <Compile Include="Services\Infrastructure\ContextService.cs" />
     <Compile Include="Services\Infrastructure\DialogService.cs" />
+    <Compile Include="Services\Infrastructure\FilePickerService.cs" />
     <Compile Include="Services\Infrastructure\LogService\LogCollection.cs" />
     <Compile Include="Services\Infrastructure\LogService\LogService.cs" />
     <Compile Include="Services\Infrastructure\MessageService.cs" />

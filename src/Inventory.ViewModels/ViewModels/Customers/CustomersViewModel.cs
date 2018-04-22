@@ -8,12 +8,12 @@ namespace Inventory.ViewModels
 {
     public class CustomersViewModel : ViewModelBase
     {
-        public CustomersViewModel(ICustomerService customerService, IOrderService orderService, ICommonServices commonServices) : base(commonServices)
+        public CustomersViewModel(ICustomerService customerService, IOrderService orderService, IFilePickerService filePickerService, ICommonServices commonServices) : base(commonServices)
         {
             CustomerService = customerService;
 
             CustomerList = new CustomerListViewModel(CustomerService, commonServices);
-            CustomerDetails = new CustomerDetailsViewModel(CustomerService, commonServices);
+            CustomerDetails = new CustomerDetailsViewModel(CustomerService, filePickerService, commonServices);
             CustomerOrders = new OrderListViewModel(orderService, commonServices);
         }
 
@@ -88,7 +88,7 @@ namespace Inventory.ViewModels
             }
             catch (Exception ex)
             {
-                LogException("Customers",  "Load Details", ex);
+                LogException("Customers", "Load Details", ex);
             }
         }
 

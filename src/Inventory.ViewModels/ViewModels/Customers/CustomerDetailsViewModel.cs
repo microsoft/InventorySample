@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 using Inventory.Models;
 using Inventory.Services;
@@ -21,12 +22,14 @@ namespace Inventory.ViewModels
 
     public class CustomerDetailsViewModel : GenericDetailsViewModel<CustomerModel>
     {
-        public CustomerDetailsViewModel(ICustomerService customerService, ICommonServices commonServices) : base(commonServices)
+        public CustomerDetailsViewModel(ICustomerService customerService, IFilePickerService filePickerService, ICommonServices commonServices) : base(commonServices)
         {
             CustomerService = customerService;
+            FilePickerService = filePickerService;
         }
 
         public ICustomerService CustomerService { get; }
+        public IFilePickerService FilePickerService { get; }
 
         override public string Title => (Item?.IsNew ?? true) ? "New Customer" : TitleEdit;
         public string TitleEdit => Item == null ? "Customer" : $"{Item.FullName}";
@@ -76,6 +79,38 @@ namespace Inventory.ViewModels
             {
                 CustomerID = Item?.CustomerID ?? 0
             };
+        }
+
+        private object _newPictureSource = null;
+        public object NewPictureSource
+        {
+            get => _newPictureSource;
+            set => Set(ref _newPictureSource, value);
+        }
+
+        public override void BeginEdit()
+        {
+            NewPictureSource = null;
+            base.BeginEdit();
+        }
+
+        public ICommand EditPictureCommand => new RelayCommand(OnEditPicture);
+        private async void OnEditPicture()
+        {
+            NewPictureSource = null;
+            var result = await FilePickerService.OpenImagePickerAsync();
+            if (result != null)
+            {
+                EditableItem.Picture = result.ImageBytes;
+                EditableItem.PictureSource = result.ImageSource;
+                EditableItem.Thumbnail = result.ImageBytes;
+                EditableItem.ThumbnailSource = result.ImageSource;
+                NewPictureSource = result.ImageSource;
+            }
+            else
+            {
+                NewPictureSource = null;
+            }
         }
 
         protected override async Task<bool> SaveItemAsync(CustomerModel model)

@@ -28,10 +28,11 @@ namespace Inventory
 
             serviceCollection.AddSingleton<IMessageService, MessageService>();
             serviceCollection.AddSingleton<ILogService, LogService>();
+            serviceCollection.AddSingleton<IDialogService, DialogService>();
+            serviceCollection.AddSingleton<IFilePickerService, FilePickerService>();
 
             serviceCollection.AddScoped<IContextService, ContextService>();
             serviceCollection.AddScoped<INavigationService, NavigationService>();
-            serviceCollection.AddScoped<IDialogService, DialogService>();
             serviceCollection.AddScoped<ICommonServices, CommonServices>();
 
             serviceCollection.AddTransient<ShellViewModel>();

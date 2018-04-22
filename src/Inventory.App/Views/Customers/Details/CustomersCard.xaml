@@ -4,12 +4,25 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Inventory.Controls"
     mc:Ignorable="d" d:DesignWidth="260" d:DesignHeight="400">
 
     <StackPanel Spacing="2">
-        <PersonPicture Margin="12" ProfilePicture="{x:Bind Item.PictureSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" Initials="{x:Bind Item.Initials, Mode=OneWay}" Width="96" Height="96" />
+        <Grid>
+            <PersonPicture Margin="12" ProfilePicture="{x:Bind Item.PictureSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" Initials="{x:Bind Item.Initials, Mode=OneWay}" Width="96" Height="96" />
+            <controls:RoundButton CornerRadius="48" BorderThickness="1" BorderBrush="White" Background="Transparent" Command="{x:Bind ViewModel.EditPictureCommand}"
+                                  HorizontalAlignment="Center" Visibility="{x:Bind ViewModel.IsEditMode, Mode=OneWay}">
+                <Grid Width="96" Height="96">
+                    <Rectangle Fill="White" Opacity="0.75" />
+                    <TextBlock Text="Edit Photo" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{x:Bind ViewModel.IsEnabled, Mode=OneWay}" />
+                    <Image Source="{x:Bind ViewModel.NewPictureSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"
+                           Visibility="{x:Bind ViewModel.NewPictureSource, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}}" />
+                </Grid>
+            </controls:RoundButton>
+        </Grid>
         <TextBlock Margin="0" Text="{x:Bind Item.FullName, Mode=OneWay}" TextAlignment="Center" TextWrapping="WrapWholeWords" HorizontalAlignment="Stretch" FontSize="18" FontWeight="SemiBold" IsTextSelectionEnabled="True" />
         <TextBlock Margin="0" Text="{x:Bind Item.EmailAddress, Mode=OneWay}" TextAlignment="Center" TextWrapping="WrapWholeWords" HorizontalAlignment="Stretch" FontSize="14" IsTextSelectionEnabled="True" />
+        
         <Rectangle Margin="6" />
         <Grid Margin="6,0">
             <Grid.ColumnDefinitions>
