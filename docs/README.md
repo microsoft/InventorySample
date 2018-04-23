@@ -32,6 +32,9 @@
     - Description 
     - Solution Structure
     - Authentication and Authorization
+    - [Bootstraping](chapters/architecture/bootstrapping.md#bootstrapping)
+        - [The Startup class](chapters/architecture/bootstrapping.md#the-startup-class)
+        - [Dependency Injection and ServiceLocator](chapters/architecture/bootstrapping.md#Dependency-Injection-and-ServiceLocator)
     - [Navigation](chapters/architecture/navigation.md)
         - [Navigation Service](chapters/architecture/navigation-service.md)
             - [INavigationService](chapters/architecture/navigation-service.md#inavigationservice)
