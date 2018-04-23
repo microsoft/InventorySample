@@ -94,7 +94,7 @@ static public void Register<TViewModel, TView>() where TView : Page
 
 It just adds the type of the ViewModel and the type of the View in a common dictionary.
 
-The registration is usually done at the beginning of the execution, so all entries are available as soon as possible. In our application, you can locate the registration in the `Setup` class, inside the `ConfigureNavigation` method.
+The registration is usually done at the beginning of the execution, so all entries are available as soon as possible. In our application, you can locate the registration in the `Startup` class, inside the `ConfigureNavigation` method.
 
 ```csharp
 private static void ConfigureNavigation()

@@ -221,7 +221,7 @@ class Subscriber
 
 #### IMessageService implementation
 
-Once we understand how the internal classes `Subscriptions` and `Subscriber` work, the implementation of the `IMessageService` becomes much simplier. These are the main three methods of `IMessageService`:
+Once we understand how the internal classes `Subscriptions` and `Subscriber` work, the implementation of the `IMessageService` becomes much simplier. These are the implementation of main three methods of `IMessageService`:
 
 - **Subscribe**: We are just simply creating a new `Subscriber` in case it wasn't already defined, and associate an `Action` to be executed.
 ```csharp
@@ -263,7 +263,7 @@ public void Unsubscribe(object target)
 }
 ```
 
-- **Send**: Execute the actions associated to Subscribers when a specific event occurs:
+- **Send**: Execute the actions associated to Subscribers when a specific event occurs.
 
 ```csharp
 public void Send<TSender, TArgs>(TSender sender, string message, TArgs args) where TSender : class
