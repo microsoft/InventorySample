@@ -41,9 +41,13 @@
             - [MainShellView](chapters/architecture/navigation-app.md#mainshellview)
             - [ShellView](chapters/architecture/navigation-app.md#shellview)
             - [Frame Navigation](chapters/architecture/navigation-app.md#frame-navigation)
+            - [Saving the state of the view when Navigate](chapters/architecture/navigation-app.md#Saving-the-state-of-the-view-when-Navigate)
     - [Data Access](chapters/architecture/dataaccess.md#data-access)
         - [Inventory.Data project](chapters/architecture/dataaccess.md#inventory.data-project)
         - [Accessing the data from the app](chapters/architecture/dataaccess.md#accessing-the-data-from-the-app)
+    - [Message Service](chapters/architecture/message-service.md#message-service)
+        - [How to use it](chapters/architecture/message-service.md#How-to-use-it)
+        - [Message Service Implementation](chapters/architecture/message-service.md#Message-Service-Implementation)
     - Localization
     - ...
 - [Data Access](chapters/dataaccess.md)
