@@ -217,5 +217,3 @@ private void Edit()
             SaveCommand="{x:Bind ViewModel.SaveCommand}"
             CancelCommand="{x:Bind ViewModel.CancelCommand}" />
 ```
-
-## Event Pattern Agreggator - PENDING
