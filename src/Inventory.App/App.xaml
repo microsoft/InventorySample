@@ -12,7 +12,15 @@
                 <ResourceDictionary Source="/Styles/CalendarPicker.xaml" />
                 <ResourceDictionary Source="/Styles/DataGrid.xaml" />
                 <ResourceDictionary Source="/Styles/ToolBar.xaml" />
+                <ResourceDictionary Source="/Styles/PivotHeaderItem.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <SolidColorBrush x:Key="NavigationViewDefaultPaneBackground" Color="#EBEBEB"/>
+            <SolidColorBrush x:Key="NavigationViewExpandedPaneBackground" Color="#EBEBEB"/>
+            <SolidColorBrush x:Key="DetailsViewBackgroundColor" Color="#F5F5F5" />
+
+            <!--<AcrylicBrush x:Key="NavigationViewDefaultPaneBackground" BackgroundSource="Backdrop" TintColor="Yellow" TintOpacity=".6"/>
+            <AcrylicBrush x:Key="NavigationViewExpandedPaneBackground" BackgroundSource="HostBackdrop" TintColor="Orange" TintOpacity=".8"/>-->
 
             <!--  Colors  -->
             <SolidColorBrush x:Key="Information" Color="RoyalBlue" />

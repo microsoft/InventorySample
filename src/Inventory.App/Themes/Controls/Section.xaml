@@ -5,9 +5,7 @@
 
     <Style TargetType="controls:Section">
         <Setter Property="Padding" Value="6" />
-        <Setter Property="BorderBrush" Value="LightGray" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Background" Value="White" />
+        <Setter Property="Background" Value="#FFFFFF" />
         <Setter Property="HeaderTemplate">
             <Setter.Value>
                 <DataTemplate>
@@ -18,7 +16,11 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:Section">
-                    <Border x:Name="container" Padding="{TemplateBinding Padding}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
+                    <Border x:Name="container" 
+                            Padding="{TemplateBinding Padding}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            Background="{TemplateBinding Background}">
                         <Grid x:Name="content">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>

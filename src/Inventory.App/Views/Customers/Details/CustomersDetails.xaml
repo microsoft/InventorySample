@@ -46,8 +46,13 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Background="WhiteSmoke">
-            <views:CustomersCard Margin="6,12" ViewModel="{x:Bind ViewModel}" Item="{x:Bind ViewModel.Item, Mode=OneWay}" />
+        <Grid Background="WhiteSmoke" 
+              BorderBrush="LightGray"
+              BorderThickness="0,0,1,0">
+            <views:CustomersCard 
+                Margin="6,12" 
+                ViewModel="{x:Bind ViewModel}" 
+                Item="{x:Bind ViewModel.Item, Mode=OneWay}" />
         </Grid>
 
         <controls:Details x:Name="details" Grid.Column="1" Margin="6,0,0,0"

@@ -6,8 +6,6 @@
         <Setter Property="Padding" Value="6" />
         <Setter Property="Foreground" Value="{ThemeResource TextBoxDisabledForegroundThemeBrush}" />
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
-        <Setter Property="Typography.Capitals" Value="SmallCaps" />
-        <Setter Property="FontSize" Value="14" />
     </Style>
 
     <Style x:Key="ColumnHeaderRightStyle" TargetType="TextBlock" BasedOn="{StaticResource ColumnHeaderStyle}">

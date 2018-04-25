@@ -8,6 +8,7 @@
     mc:Ignorable="d">
 
     <Page.Resources>
+
         <DataTemplate x:Name="NavigationViewItem" x:DataType="viewmodels:NavigationItem">
             <Grid Height="40">
                 <Grid.ColumnDefinitions>
@@ -30,9 +31,14 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <NavigationView x:Name="navigationView" MenuItemsSource="{x:Bind ViewModel.Items}" MenuItemTemplate="{StaticResource NavigationViewItem}"
-                        SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay}" SelectionChanged="OnSelectionChanged"
-                        IsPaneOpen="{x:Bind ViewModel.IsPaneOpen, Mode=TwoWay}" AlwaysShowHeader="False">
+        <NavigationView x:Name="navigationView" 
+                        Background="#EBEBEB"
+                        MenuItemsSource="{x:Bind ViewModel.Items}" 
+                        MenuItemTemplate="{StaticResource NavigationViewItem}"
+                        SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay}" 
+                        SelectionChanged="OnSelectionChanged"
+                        IsPaneOpen="{x:Bind ViewModel.IsPaneOpen, Mode=TwoWay}"
+                        AlwaysShowHeader="False">
 
             <Grid>
                 <ProgressRing IsActive="{x:Bind ViewModel.IsBusy}" />
