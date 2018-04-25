@@ -16,9 +16,6 @@
     - [What is .Net Standard](chapters/netstandard.md#what-is-.net-standard)
     - [Why .Net Standard?](chapters/netstandard.md#why-.net-standard)
         - [Comparation with PCLs](chapters/netstandard.md#comparation-with-pcls)
-- What's the Universal Windows Platform? *Pending*
-    - Device Families
-    - Enterprise app ditribution: https://docs.microsoft.com/en-us/windows/uwp/publish/distribute-lob-apps-to-enterprises
 - [Windows 10 Binding](chapters/windows-10-binding.md)
     - [Binding Elements](chapters/windows-10-binding.md#binding-elements)
     - [Dependecy property](chapters/windows-10-binding.md#dependency-property)
@@ -26,12 +23,10 @@
     - [Binding markup extension](chapters/windows-10-binding.md#Binding-markup-extension)
     - [x:Bind markup extension](chapters/windows-10-binding.md#x:bind-markup-extension)
     - [Value Converters](chapters/windows-10-binding.md#value-converters)
-- Windows 10 Accessibility
-    - Access Keys 
-- [Van Arsdel Inventory Architecture](chapters/architecture/architecture.md)
-    - Description 
-    - Solution Structure
-    - Authentication and Authorization
+- [Inventory App Architecture](chapters/architecture/architecture.md)
+    - [Bootstraping](chapters/architecture/bootstrapping.md#bootstrapping)
+        - [The Startup class](chapters/architecture/bootstrapping.md#the-startup-class)
+        - [Dependency Injection and ServiceLocator](chapters/architecture/bootstrapping.md#Dependency-Injection-and-ServiceLocator)
     - [Navigation](chapters/architecture/navigation.md)
         - [Navigation Service](chapters/architecture/navigation-service.md)
             - [INavigationService](chapters/architecture/navigation-service.md#inavigationservice)
@@ -48,8 +43,6 @@
     - [Message Service](chapters/architecture/message-service.md#message-service)
         - [How to use it](chapters/architecture/message-service.md#How-to-use-it)
         - [Message Service Implementation](chapters/architecture/message-service.md#Message-Service-Implementation)
-    - Localization
-    - ...
 - [Data Access](chapters/dataaccess.md)
     - [Entity Framework Core](chapters/dataaccess.md#entity-framework-core)
     - [Models definitions](chapters/dataaccess.md#models-definitions)
@@ -66,13 +59,6 @@
     - [Multiple Windows](chapters/fluent-design/multiple-windows.md)
     - [Responsive Design (Adaptive Layout)](chapters/fluent-design/responsive.md)
     - [Visual Layer (AKA Composition API)](chapters/fluent-design/visual-layer.md)
-- Windows 10 Universal Controls 
-  - NavigationView
-  - AutoSuggestBox
-  - SplitView
-  - PersonPicture
-  - CalendarDatePicker
-  - ParallaxView
 - [Windows Hello](chapters/windows-hello.md)
   - [What is Windows Hello?](chapters/windows-hello.md#what-is-windows-hello)
 	- [Authenticating with Hello](chapters/windows-hello.md#authenticating-with-hello)
@@ -88,5 +74,3 @@
 	- [Authentication at the backend side](chapters/windows-hello.md#authentication-at-the-backend-side)
 	- [Enrolling multiple devices](chapters/windows-hello.md#enrolling-multiple-devices)
 	- [Using multiple accounts](chapters/windows-hello.md#using-multiple-accounts)
-- UWP Community Toolkit
-    - *Pending for approval*
