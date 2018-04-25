@@ -28,6 +28,13 @@ namespace Inventory.ViewModels
             OrderService = orderService;
         }
 
+        //public ICommand CancelCommand => new RelayCommand(OnCancel, () => { return Item.CustomerID <= 0 ? false : true; });
+        public ICommand CancelCommand => new RelayCommand(OnCancel, OnCanExecuteCancel);
+        private bool OnCanExecuteCancel()
+        {
+            return Item.CustomerID <= 0 ? false : true;
+        }
+
         public IOrderService OrderService { get; }
 
         override public string Title => (Item?.IsNew ?? true) ? TitleNew : TitleEdit;

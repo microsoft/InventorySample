@@ -6,7 +6,7 @@ namespace Inventory.Controls
 {
     public interface IInputControl
     {
-        event RoutedEventHandler EnterFocus;
+        event RoutedEventHandler GotFocus;
 
         TextEditMode Mode { get; set; }
 

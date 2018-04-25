@@ -89,7 +89,7 @@ namespace Inventory.ViewModels
             }
         }
 
-        public ICommand CancelCommand => new RelayCommand(OnCancel);
+        public ICommand CancelCommand => new RelayCommand(OnCancel);        
         virtual protected void OnCancel()
         {
             StatusReady();

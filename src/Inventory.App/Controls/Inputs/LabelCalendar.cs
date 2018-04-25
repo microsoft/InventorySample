@@ -4,13 +4,11 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Controls;
 
-using Inventory.Animations;
-
 namespace Inventory.Controls
 {
     public class LabelCalendar : Control, IInputControl
     {
-        public event RoutedEventHandler EnterFocus;
+        public event RoutedEventHandler GotFocus;
 
         private Grid _container = null;
         private CalendarDatePicker _calendar = null;
@@ -59,7 +57,7 @@ namespace Inventory.Controls
         {
             if (_calendar != null)
             {
-                _calendar.MinDate = MinDate ?? DateTimeOffset.MinValue;
+                _calendar.MinDate = MinDate ?? DateTimeOffset.Now.AddYears(-150);
             }
         }
 
@@ -106,6 +104,7 @@ namespace Inventory.Controls
             _border = base.GetTemplateChild("border") as Border;
 
             _container.PointerEntered += OnPointerEntered;
+            _container.PointerEntered += OnPointerEntered;
             _container.PointerExited += OnPointerExited;
 
             _calendar.GotFocus += OnGotFocus;
@@ -116,11 +115,22 @@ namespace Inventory.Controls
             SetMinDate();
         }
 
+        private void OnPointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+
+            if (Mode == TextEditMode.Auto)
+            {
+                UpdateVisualState(_visualState.Edit);
+                _calendar.Focus(FocusState.Programmatic);
+            }
+
+        }
+
         private void OnPointerEntered(object sender, PointerRoutedEventArgs e)
         {
             if (Mode == TextEditMode.Auto)
             {
-                _border.Fade(500, 0.0, 1.0);
+                _border.Visibility = Visibility.Visible;
             }
         }
 
@@ -128,50 +138,56 @@ namespace Inventory.Controls
         {
             if (Mode == TextEditMode.Auto)
             {
-                _border.Fade(500, 1.0, 0.0);
+                _border.Visibility = Visibility.Collapsed;
             }
         }
 
         private void OnGotFocus(object sender, RoutedEventArgs e)
         {
-            _border.Opacity = 1.0;
-            EnterFocus?.Invoke(this, e);
+            GotFocus?.Invoke(this, e);
         }
 
         private void OnLostFocus(object sender, RoutedEventArgs e)
         {
             if (Mode == TextEditMode.Auto)
             {
-                _border.Opacity = 0.0;
+                UpdateVisualState(_visualState.ReadOnly);
             }
         }
 
         private void OnOpened(object sender, object e)
         {
-            _border.Opacity = 1.0;
-            EnterFocus?.Invoke(this, new RoutedEventArgs());
+            GotFocus?.Invoke(this, new RoutedEventArgs());
         }
 
         private void UpdateMode()
         {
-            if (_calendar != null)
+            switch (Mode)
             {
-                switch (Mode)
+                case TextEditMode.Auto:
+                case TextEditMode.ReadOnly:
+                    UpdateVisualState(_visualState.ReadOnly);
+                    break;
+                case TextEditMode.ReadWrite:
+                    UpdateVisualState(_visualState.Edit);
+                    break;
+            }
+        }
+
+        private enum _visualState { ReadOnly, Edit }
+        private void UpdateVisualState(_visualState mode)
+        {
+            if (_border != null)
+            {
+                switch (mode)
                 {
-                    case TextEditMode.ReadOnly:
-                        _calendar.IsTabStop = false;
-                        _border.IsHitTestVisible = true;
-                        _border.Opacity = 0.0;
+                    case _visualState.ReadOnly:
+                        _border.Visibility = Visibility.Collapsed;
+                        _calendar.BorderThickness = new Thickness(0);
                         break;
-                    case TextEditMode.Auto:
-                        _calendar.IsTabStop = true;
-                        _border.IsHitTestVisible = false;
-                        _border.Opacity = 0.0;
-                        break;
-                    case TextEditMode.ReadWrite:
-                        _calendar.IsTabStop = true;
-                        _border.IsHitTestVisible = false;
-                        _border.Opacity = 1.0;
+                    case _visualState.Edit:
+                        _border.Visibility = Visibility.Collapsed;
+                        _calendar.BorderThickness = new Thickness(1);
                         break;
                 }
             }

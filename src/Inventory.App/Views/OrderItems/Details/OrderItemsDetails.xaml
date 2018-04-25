@@ -11,28 +11,30 @@
 
     <UserControl.Resources>
         <DataTemplate x:Key="DetailsTemplate" x:DataType="viewmodels:OrderItemDetailsViewModel">
-            <StackPanel Spacing="6" Margin="0,6">
-                <Grid ColumnSpacing="6">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" MaxWidth="400" />
-                        <ColumnDefinition Width="*" MaxWidth="400" />
-                    </Grid.ColumnDefinitions>
+            <ScrollViewer>
+                <StackPanel Spacing="6" Margin="0,6">
+                    <Grid ColumnSpacing="6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" MaxWidth="400" />
+                            <ColumnDefinition Width="*" MaxWidth="400" />
+                        </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Column="0" Spacing="6">
-                        <controls:LabelTextBox Label="Quantity" Text="{x:Bind EditableItem.Quantity, Mode=TwoWay, Converter={StaticResource Int32Converter}}" ValueType="Int32" />
-                        <controls:LabelTextBox Label="Discount" Text="{x:Bind EditableItem.Discount, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" ValueType="Decimal" />
-                        <controls:LabelComboBox Label="Tax Type" ItemsSource="{x:Bind LookupTables.TaxTypes}"
+                        <StackPanel Grid.Column="0" Spacing="6">
+                            <controls:LabelTextBox Label="Quantity" Text="{x:Bind EditableItem.Quantity, Mode=TwoWay, Converter={StaticResource Int32Converter}}" ValueType="Int32" />
+                            <controls:LabelTextBox Label="Discount" Text="{x:Bind EditableItem.Discount, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" ValueType="Decimal" />
+                            <controls:LabelComboBox Label="Tax Type" ItemsSource="{x:Bind LookupTables.TaxTypes}"
                                                 SelectedValue="{x:Bind EditableItem.TaxType, Mode=TwoWay, Converter={StaticResource Int32Converter}}"
                                                 SelectedValuePath="TaxTypeID" DisplayMemberPath="Name" />
-                    </StackPanel>
+                        </StackPanel>
 
-                    <StackPanel Grid.Column="1" Spacing="6">
-                        <controls:LabelTextBlock Label="Unit Price" Text="{x:Bind EditableItem.UnitPrice, Mode=OneWay, Converter={StaticResource DecimalConverter}}" />
-                        <controls:LabelTextBlock Label="Subtotal" Text="{x:Bind EditableItem.Subtotal, Mode=OneWay, Converter={StaticResource DecimalConverter}}" />
-                        <controls:LabelTextBlock Label="Total" Text="{x:Bind EditableItem.Total, Mode=OneWay, Converter={StaticResource DecimalConverter}}" />
-                    </StackPanel>
-                </Grid>
-            </StackPanel>
+                        <StackPanel Grid.Column="1" Spacing="6">
+                            <controls:LabelTextBlock Label="Unit Price" Text="{x:Bind EditableItem.UnitPrice, Mode=OneWay, Converter={StaticResource DecimalConverter}}" />
+                            <controls:LabelTextBlock Label="Subtotal" Text="{x:Bind EditableItem.Subtotal, Mode=OneWay, Converter={StaticResource DecimalConverter}}" />
+                            <controls:LabelTextBlock Label="Total" Text="{x:Bind EditableItem.Total, Mode=OneWay, Converter={StaticResource DecimalConverter}}" />
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
         </DataTemplate>
     </UserControl.Resources>
 

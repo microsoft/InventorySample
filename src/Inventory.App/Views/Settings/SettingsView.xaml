@@ -19,6 +19,12 @@
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Enable random error generation for testing purposes." />
             <ToggleSwitch IsOn="{x:Bind ViewModel.IsRandomErrorsEnabled, Mode=TwoWay}" />
+            <Button Content="Modo Auto" Click="ModoAutoClick" />
+            <Button Content="Modo ReadOnly" Click="ModoReadOnly" />
+            <Button Content="Modo Write" Click="ModeWrite" />
+
+            <controls:LabelSuggestBox x:Name="labelTB01" Mode="Auto" Text="Test" Label="LabelTextBox Sample" />
+            <controls:LabelSuggestBox x:Name="labelTB02" Mode="Auto" Text="Test" Label="LabelTextBox Sample" />
         </StackPanel>
     </Grid>
 </Page>

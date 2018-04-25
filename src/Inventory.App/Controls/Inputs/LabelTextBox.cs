@@ -4,13 +4,11 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Controls;
 
-using Inventory.Animations;
-
 namespace Inventory.Controls
 {
     public sealed class LabelTextBox : Control, IInputControl
     {
-        public event RoutedEventHandler EnterFocus;
+        public event RoutedEventHandler GotFocus;
 
         private Grid _container = null;
         private TextBox _inputText = null;
@@ -68,7 +66,7 @@ namespace Inventory.Controls
         public static readonly DependencyProperty ValueTypeProperty = DependencyProperty.Register("ValueType", typeof(TextValueType), typeof(LabelTextBox), new PropertyMetadata(TextValueType.String));
         #endregion
 
-        #region Mode*
+        #region Mode
         public TextEditMode Mode
         {
             get { return (TextEditMode)GetValue(ModeProperty); }
@@ -110,6 +108,7 @@ namespace Inventory.Controls
 
             _container.PointerEntered += OnPointerEntered;
             _container.PointerExited += OnPointerExited;
+            _container.PointerPressed += OnPointerPressed;
 
             _inputText.BeforeTextChanging += OnBeforeTextChanging;
             _inputText.GotFocus += OnGotFocus;
@@ -118,46 +117,46 @@ namespace Inventory.Controls
             UpdateMode();
         }
 
+        private void OnPointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            if (_inputText.Visibility != Visibility.Visible)
+            {
+                if (Mode == TextEditMode.Auto)
+                {
+                    UpdateVisualState(_visualState.Edit);
+                    _inputText.Focus(FocusState.Programmatic);
+                }
+            }
+        }
+
         private void OnPointerEntered(object sender, PointerRoutedEventArgs e)
         {
-            if (Mode == TextEditMode.Auto)
+            if (_inputText.Visibility != Visibility.Visible)
             {
-                if (_inputText.Opacity == 0.0)
-                {
-                    _border.Fade(500, 0.0, 1.0);
-                }
+                _border.Visibility = Visibility.Visible;
             }
         }
 
         private void OnPointerExited(object sender, PointerRoutedEventArgs e)
         {
-            if (Mode == TextEditMode.Auto)
+            if (_inputText.Visibility != Visibility.Visible)
             {
-                if (_inputText.Opacity == 0.0)
-                {
-                    _border.Fade(500, 1.0, 0.0);
-                }
+                _border.Visibility = Visibility.Collapsed;
             }
         }
 
         private void OnGotFocus(object sender, RoutedEventArgs e)
         {
             _inputText.SelectionStart = _inputText.Text.Length;
-            _inputText.Opacity = 1.0;
-            _border.Opacity = 1.0;
-            _displayText.Visibility = Visibility.Collapsed;
-            EnterFocus?.Invoke(this, e);
+            GotFocus?.Invoke(this, e);
         }
 
         private void OnLostFocus(object sender, RoutedEventArgs e)
         {
             if (Mode == TextEditMode.Auto)
             {
-                _border.Opacity = 0.0;
+                UpdateVisualState(_visualState.ReadOnly);
             }
-            _displayText.Visibility = Visibility.Visible;
-            _inputText.Opacity = 0.0;
-            UpdateText();
         }
 
         private void OnBeforeTextChanging(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
@@ -198,25 +197,34 @@ namespace Inventory.Controls
 
         private void UpdateMode()
         {
-            if (_inputText != null)
+            switch (Mode)
             {
-                switch (Mode)
+                case TextEditMode.Auto:
+                case TextEditMode.ReadOnly:
+                    UpdateVisualState(_visualState.ReadOnly);
+                    break;
+                case TextEditMode.ReadWrite:
+                    UpdateVisualState(_visualState.Edit);
+                    break;
+            }
+        }
+
+        private enum _visualState { ReadOnly, Edit }
+        private void UpdateVisualState(_visualState mode)
+        {
+            if (_inputText != null && _displayText != null && _border != null)
+            {
+                switch (mode)
                 {
-                    case TextEditMode.ReadOnly:
+                    case _visualState.ReadOnly:
                         _inputText.Visibility = Visibility.Collapsed;
                         _border.Visibility = Visibility.Collapsed;
+                        _displayText.Visibility = Visibility.Visible;
                         break;
-                    case TextEditMode.Auto:
+                    case _visualState.Edit:
+                        _displayText.Visibility = Visibility.Collapsed;
                         _inputText.Visibility = Visibility.Visible;
-                        _border.Opacity = 0.0;
-                        _border.IsHitTestVisible = false;
-                        _border.Visibility = Visibility.Visible;
-                        break;
-                    case TextEditMode.ReadWrite:
-                        _inputText.Visibility = Visibility.Visible;
-                        _border.Opacity = 1.0;
-                        _border.IsHitTestVisible = false;
-                        _border.Visibility = Visibility.Visible;
+                        _border.Visibility = Visibility.Collapsed;
                         break;
                 }
             }

@@ -26,7 +26,7 @@ namespace Inventory.Controls
         {
             foreach (var input in GetEditableControls())
             {
-                input.EnterFocus += OnInputGotFocus;
+                input.GotFocus += OnInputGotFocus;
             }
             UpdateEditMode();
         }
