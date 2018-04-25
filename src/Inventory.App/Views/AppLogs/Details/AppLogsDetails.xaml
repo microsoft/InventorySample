@@ -10,12 +10,10 @@
 
     <UserControl.Resources>
         <DataTemplate x:Key="DetailsTemplate" x:DataType="viewmodels:AppLogDetailsViewModel">
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <StackPanel Spacing="6" Margin="0,6">
-                    <controls:LabelTextBlock Label="Message" Text="{x:Bind Item.Message, Mode=TwoWay}" />
-                    <controls:LabelTextBlock Label="Description" Text="{x:Bind Item.Description, Mode=TwoWay}" />
-                </StackPanel>
-            </ScrollViewer>
+            <StackPanel Margin="0,12" Spacing="6" >
+                <controls:LabelTextBlock Label="Message" Text="{x:Bind Item.Message, Mode=TwoWay}" />
+                <controls:LabelTextBlock Label="Description" Text="{x:Bind Item.Description, Mode=TwoWay}" />
+            </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
 
