@@ -35,7 +35,7 @@ namespace Inventory.Controls
             set { SetValue(MinColumnWidthProperty, value); }
         }
 
-        public static readonly DependencyProperty MinColumnWidthProperty = DependencyProperty.Register(nameof(MinColumnWidth), typeof(double), typeof(FluidGrid), new PropertyMetadata(160.0));
+        public static readonly DependencyProperty MinColumnWidthProperty = DependencyProperty.Register(nameof(MinColumnWidth), typeof(double), typeof(FluidGrid), new PropertyMetadata(180.0));
         #endregion
 
         #region MaxColumnWidth
@@ -111,7 +111,7 @@ namespace Inventory.Controls
             }
 
             double height = 0;
-            for (int n = 0; n <= y; n++)
+            for (int n = 0; n < rowHeights.Length; n++)
             {
                 height += rowHeights[n];
             }
@@ -197,7 +197,7 @@ namespace Inventory.Controls
 
             if (MinColumnWidth >= availableWidth)
             {
-                return Tuple.Create(1, MinColumnWidth);
+                return Tuple.Create(1, availableWidth);
             }
 
             double width = MinColumnWidth + ColumnSpacing;
