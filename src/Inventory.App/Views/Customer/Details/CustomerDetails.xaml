@@ -11,7 +11,6 @@
 
     <UserControl.Resources>
         <DataTemplate x:Key="DetailsTemplate" x:DataType="viewmodels:CustomerDetailsViewModel">
-
             <controls:FluidGrid Margin="0,6" Columns="2" ColumnSpacing="12" RowSpacing="12">
                 <TextBlock controls:FluidGrid.ColumnSpan="2" Text="Personal Information" FontSize="16" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
                 <controls:LabelTextBox Label="First Name" Text="{x:Bind EditableItem.FirstName, Mode=TwoWay}" />
