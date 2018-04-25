@@ -118,9 +118,6 @@ public class ModelBase : INotifyPropertyChanged
 
 We can differentiate 3 types of bindings:
 
-![data biding](img/data-binding.png)
-<p style="text-align: center;"><b>Figure 1-2</b>: Types of Bindings</p>
-
 #### One-Time Binding:
 The value of the View Model property will be informed to the View just one time, normally when the View is being loaded. There are two ways to implement this time of binding:
 

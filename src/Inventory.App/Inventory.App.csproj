@@ -122,6 +122,7 @@
     <Compile Include="Controls\Details\Details.xaml.cs">
       <DependentUpon>Details.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FluidGrid\FluidGrid.cs" />
     <Compile Include="Controls\Inputs\InputCommon.cs" />
     <Compile Include="Controls\Inputs\LabelCalendar.cs" />
     <Compile Include="Controls\Inputs\LabelComboBox.cs" />

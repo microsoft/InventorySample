@@ -5,6 +5,7 @@ using System.Windows.Input;
 
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.ApplicationModel;
 
 using Inventory.Data;
 using Inventory.Models;
@@ -16,7 +17,10 @@ namespace Inventory.Controls
     {
         public ProductSuggestBox()
         {
-            ProductService = ServiceLocator.Current.GetService<IProductService>();
+            if (!DesignMode.DesignModeEnabled)
+            {
+                ProductService = ServiceLocator.Current.GetService<IProductService>();
+            }
             InitializeComponent();
         }
 
