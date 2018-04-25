@@ -14,12 +14,10 @@
             <controls:FluidGrid Margin="0,12,0,0" Columns="2" ColumnSpacing="12" RowSpacing="12">
                 <controls:LabelTextBox Label="First Name" Text="{x:Bind EditableItem.FirstName, Mode=TwoWay}" />
                 <controls:LabelTextBox Label="Last Name" Text="{x:Bind EditableItem.LastName, Mode=TwoWay}" />
-
-                <controls:FluidGrid Columns="2" ColumnSpacing="6" MinColumnWidth="60">
+                <controls:FluidGrid Columns="2" ColumnSpacing="6" RowSpacing="12" MinColumnWidth="60">
                     <controls:LabelTextBox Label="Middle Name" Text="{x:Bind EditableItem.MiddleName, Mode=TwoWay}" />
                     <controls:LabelTextBox Label="Sufix" Text="{x:Bind EditableItem.Suffix, Mode=TwoWay}" />
                 </controls:FluidGrid>
-
                 <controls:LabelTextBox Label="EMail Address" Text="{x:Bind EditableItem.EmailAddress, Mode=TwoWay}" />
                 <controls:LabelTextBox Label="Phone" Text="{x:Bind EditableItem.Phone, Mode=TwoWay}" />
                 <controls:LabelTextBox Label="Address" Text="{x:Bind EditableItem.AddressLine1, Mode=TwoWay}" />
