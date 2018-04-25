@@ -1,4 +1,4 @@
-## Data Access
+## Inventory App Data Access
 
 One of the most important parts of the *Inventory Sample app* is how we access to the different Data Sources and how this logic is decoupled from the rest of the app.
 
