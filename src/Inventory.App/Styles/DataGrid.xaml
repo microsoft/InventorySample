@@ -3,8 +3,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style x:Key="ColumnHeaderStyle" TargetType="TextBlock">
-        <Setter Property="Padding" Value="6" />
-        <Setter Property="Foreground" Value="{ThemeResource TextBoxDisabledForegroundThemeBrush}" />
+        <Setter Property="Padding" Value="9" />
+        <Setter Property="Margin" Value="0,6,0,6" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="Opacity" Value="0.9" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="Black" />
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
     </Style>
 

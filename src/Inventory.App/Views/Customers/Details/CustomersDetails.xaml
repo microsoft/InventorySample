@@ -37,7 +37,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Background="WhiteSmoke">
+        <Grid Background="WhiteSmoke" BorderThickness="0,0,1,0" BorderBrush="LightGray">
             <views:CustomersCard Margin="6,12" ViewModel="{x:Bind ViewModel}" Item="{x:Bind ViewModel.Item, Mode=OneWay}" />
         </Grid>
 

@@ -12,7 +12,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="28"/>
+            <!--<RowDefinition Height="28"/>-->
         </Grid.RowDefinitions>
 
         <!--Toolbar-->
@@ -25,7 +25,9 @@
             ButtonClick="OnToolbarClick" />
 
         <!--Header-->
-        <ContentControl Grid.Row="1" ContentTemplate="{x:Bind HeaderTemplate}" HorizontalContentAlignment="Stretch" />
+        <ContentControl Grid.Row="1" 
+                        ContentTemplate="{x:Bind HeaderTemplate}" 
+                        HorizontalContentAlignment="Stretch" />
 
         <!--List Content-->
         <Grid Grid.Row="2">
@@ -41,7 +43,7 @@
         </Grid>
 
         <!--Footer-->
-        <Grid Grid.Row="3" Margin="2" Visibility="{x:Bind IsDataAvailable, Mode=OneWay}">
+        <!--<Grid Grid.Row="3" Margin="2" Visibility="{x:Bind IsDataAvailable, Mode=OneWay}">
             <TextBlock FontSize="14" VerticalAlignment="Bottom" Opacity="0.75" Visibility="{x:Bind IsMultipleSelection, Mode=OneWay}">
                 <Run Text="{x:Bind SelectedItemsCount, Mode=OneWay}" />
                 <Run Text="items selected." />
@@ -51,6 +53,6 @@
                 <Run Text="{x:Bind ItemsCount, Mode=OneWay}" />
                 <Run Text="items." />
             </TextBlock>
-        </Grid>
+        </Grid>-->
     </Grid>
 </UserControl>
