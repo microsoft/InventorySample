@@ -1,4 +1,4 @@
-## Bootstraping
+## Inventory App initial setup
 
 Every app or web, with complex patterns involved, normally requires an initial setup to put evething in motion. In this section we will review the initial app setup required to make it works.
 
@@ -57,6 +57,53 @@ We can distinguish the following setups:
 - `EnsureDatabaseAsync`: This method makes sure that the database exists or created if there`s no one.
 - `ConfigureDataHelper`: Once the database is created, we are caching the setup tables values in a `ILookupTables` service to avoid continuous access to the database. If you want to know more about the Data Services, please check [this section](dataaccess.md#Accessing-the-data-from-the-app).
 
+
+## Dependency Injection
+
+### What is Dependency Injection
+
+Dependency Injection (DI) is a design pattern to create loosely coupled classes. It's also the fifth statement of the *SOLID* principles:
+
+> One should "depend upon abstractions, [not] concretions
+
+The best way to understand it is by a simple example of how to use it. The following code uses DI to implement loose coupling:
+
+```c#
+public interface IClass2 
+{
+}
+
+public class Class2 : IClass2
+{
+}
+
+public class Class1
+{
+    public readonly IClass2 _class2;
+ 
+    public Class1():this(DependencyFactory.Resolve<IClass2>())
+    {
+    }
+ 
+    public Class1(IClass2 class2)
+    {
+        _class2 = class2;
+    }
+} 
+```
+
+This is what we know when we have a look a little closer to this class:
+
+- `Class1` needs an *interface* `IClass2` to work.
+- `Class1` doesn't know which class is implementing the *interface* `IClass2` and how it was initialized.
+- If we would want to test `Class1`, we don't need the Class2 that implements the interface `IClass2`, we just need a *mock* of this interface.
+
+### Advantages of using DI
+
+There are 2 important reasons to use *DI*:
+
+- **Unit Testing**: DI enables you to replace complex dependencies, such as databases, with mocked implementations of those dependencies. This allows you to completely isolate the code that is being testing.
+- **Validation/Exception Management**: DI allows you to inject additional code between the dependencies. For example, it is possible to inject exception management logic or validation logic, which means that the developer no longer needs to write this logic for every class.
 
 ### Dependency Injection and ServiceLocator
 
