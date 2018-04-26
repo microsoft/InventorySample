@@ -7,6 +7,7 @@ using Windows.UI.ViewManagement;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
+using Windows.UI.Core;
 
 using Inventory.Views;
 using Inventory.ViewModels;
@@ -22,6 +23,7 @@ namespace Inventory
 
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
             ApplicationView.PreferredLaunchViewSize = new Size(1280, 840);
+
             this.Suspending += OnSuspending;
             this.UnhandledException += OnUnhandledException;
         }

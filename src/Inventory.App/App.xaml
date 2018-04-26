@@ -13,6 +13,8 @@
                 <ResourceDictionary Source="/Styles/DataGrid.xaml" />
                 <ResourceDictionary Source="/Styles/ToolBar.xaml" />
                 <ResourceDictionary Source="/Styles/PivotHeaderItem.xaml" />
+                <ResourceDictionary Source="/Styles/NavigationView.xaml" />
+
             </ResourceDictionary.MergedDictionaries>
 
             <SolidColorBrush x:Key="NavigationViewDefaultPaneBackground" Color="#EBEBEB"/>

@@ -23,6 +23,108 @@
                 </Border>
             </Grid>
         </DataTemplate>
+        <StaticResource x:Key="NavigationViewDefaultPaneBackground" ResourceKey="SystemControlChromeMediumLowAcrylicElementMediumBrush"/>
+        <StaticResource x:Key="NavigationViewExpandedPaneBackground" ResourceKey="SystemControlChromeMediumLowAcrylicWindowMediumBrush"/>
+        <Style x:Key="BaseTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="XamlAutoFontFamily"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="TextTrimming" Value="None"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="LineStackingStrategy" Value="MaxHeight"/>
+            <Setter Property="TextLineBounds" Value="Full"/>
+        </Style>
+        <Style x:Key="TitleTextBlockStyle" BasedOn="{StaticResource BaseTextBlockStyle}" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="SemiLight"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="OpticalMarginAlignment" Value="TrimSideBearings"/>
+        </Style>
+        <Style x:Key="PaneToggleButtonStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontFamily" Value="{StaticResource SymbolThemeFontFamily}"/>
+            <Setter Property="MinHeight" Value="{StaticResource PaneToggleButtonSize}"/>
+            <Setter Property="MinWidth" Value="{StaticResource PaneToggleButtonSize}"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="{ThemeResource NavigationViewItemBackground}"/>
+            <Setter Property="Foreground" Value="{ThemeResource NavigationViewItemForeground}"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource NavigationViewItemBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="{ThemeResource NavigationViewToggleBorderThickness}"/>
+            <Setter Property="Content" Value="&#xE700;"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="LayoutRoot" Background="{TemplateBinding Background}" Height="{TemplateBinding MinHeight}" Margin="{TemplateBinding Padding}" Width="{TemplateBinding MinWidth}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="PointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Target="LayoutRoot.(RevealBrush.State)" Value="PointerOver"/>
+                                            <Setter Target="LayoutRoot.Background" Value="{ThemeResource NavigationViewItemBackgroundPointerOver}"/>
+                                            <Setter Target="RevealBorder.BorderBrush" Value="{ThemeResource NavigationViewItemBorderBrushPointerOver}"/>
+                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundPointerOver}"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Target="LayoutRoot.(RevealBrush.State)" Value="Pressed"/>
+                                            <Setter Target="LayoutRoot.Background" Value="{ThemeResource NavigationViewItemBackgroundPressed}"/>
+                                            <Setter Target="RevealBorder.BorderBrush" Value="{ThemeResource NavigationViewItemBorderBrushPressed}"/>
+                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundPressed}"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <VisualState.Setters>
+                                            <Setter Target="LayoutRoot.Background" Value="{ThemeResource NavigationViewItemBackgroundDisabled}"/>
+                                            <Setter Target="RevealBorder.BorderBrush" Value="{ThemeResource NavigationViewItemBorderBrushDisabled}"/>
+                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundDisabled}"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Checked">
+                                        <VisualState.Setters>
+                                            <Setter Target="LayoutRoot.Background" Value="{ThemeResource NavigationViewItemBackgroundChecked}"/>
+                                            <Setter Target="RevealBorder.BorderBrush" Value="{ThemeResource NavigationViewItemBorderBrushChecked}"/>
+                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundChecked}"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="CheckedPointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Target="LayoutRoot.(RevealBrush.State)" Value="PointerOver"/>
+                                            <Setter Target="LayoutRoot.Background" Value="{ThemeResource NavigationViewItemBackgroundCheckedPointerOver}"/>
+                                            <Setter Target="RevealBorder.BorderBrush" Value="{ThemeResource NavigationViewItemBorderBrushCheckedPointerOver}"/>
+                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundCheckedPointerOver}"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="CheckedPressed">
+                                        <VisualState.Setters>
+                                            <Setter Target="LayoutRoot.(RevealBrush.State)" Value="Pressed"/>
+                                            <Setter Target="LayoutRoot.Background" Value="{ThemeResource NavigationViewItemBackgroundCheckedPressed}"/>
+                                            <Setter Target="RevealBorder.BorderBrush" Value="{ThemeResource NavigationViewItemBorderBrushCheckedPressed}"/>
+                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundCheckedPressed}"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="CheckedDisabled">
+                                        <VisualState.Setters>
+                                            <Setter Target="LayoutRoot.Background" Value="{ThemeResource NavigationViewItemBackgroundCheckedDisabled}"/>
+                                            <Setter Target="RevealBorder.BorderBrush" Value="{ThemeResource NavigationViewItemBorderBrushCheckedDisabled}"/>
+                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource NavigationViewItemForegroundCheckedDisabled}"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Viewbox x:Name="IconHost" AutomationProperties.AccessibilityView="Raw" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Height="16" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Width="16">
+                                <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" Content="{TemplateBinding Content}" FontSize="{TemplateBinding FontSize}"/>
+                            </Viewbox>
+                            <Border x:Name="RevealBorder" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -31,7 +133,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <NavigationView x:Name="navigationView" 
+        <NavigationView Style="{StaticResource BackButtonNavigationViewStyle}" x:Name="navigationView" 
                         Background="#EBEBEB"
                         MenuItemsSource="{x:Bind ViewModel.Items}" 
                         MenuItemTemplate="{StaticResource NavigationViewItem}"
@@ -51,7 +153,11 @@
                 </Frame>
             </Grid>
         </NavigationView>
-
+        <Button x:Name="NavigationViewBackButton"
+                IsEnabled="False"
+                Click="OnNavigationViewBackButton"
+                Content="&#xE72B;"
+                Style="{StaticResource PaneToggleButtonStyle}"/>
         <Grid Grid.Row="1" Background="{ThemeResource SystemControlAccentAcrylicElementAccentMediumHighBrush}">
             <Rectangle Fill="{StaticResource Error}" Visibility="{x:Bind ViewModel.IsError, Mode=OneWay}" />
             <TextBlock Margin="6,4" Text="{x:Bind ViewModel.Message, Mode=OneWay}" Foreground="White" FontSize="12" />
