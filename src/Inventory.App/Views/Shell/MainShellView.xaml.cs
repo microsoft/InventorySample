@@ -39,7 +39,6 @@ namespace Inventory.Views
             _navigationService = ServiceLocator.Current.GetService<INavigationService>();
             _navigationService.Initialize(frame);
             frame.Navigated += OnFrameNavigated;
-            //CurrentView.BackRequested += OnBackRequested;
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
@@ -67,16 +66,7 @@ namespace Inventory.Views
             }
             UpdateBackButton();
         }
-
-        //private void OnBackRequested(object sender, BackRequestedEventArgs e)
-        //{
-        //    if (_navigationService.CanGoBack)
-        //    {
-        //        _navigationService.GoBack();
-        //        e.Handled = true;
-        //    }
-        //}
-
+        
         private void UpdateBackButton()
         {
             if (_navigationService.CanGoBack)
@@ -91,8 +81,7 @@ namespace Inventory.Views
                 _navigationService.GoBack();
             }
         }
-
-
+        
         private void OnFrameNavigated(object sender, NavigationEventArgs e)
         {
             var targetType = NavigationService.GetViewModel(e.SourcePageType);

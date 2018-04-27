@@ -7,7 +7,6 @@ using Windows.UI.ViewManagement;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
-using Windows.UI.Core;
 
 using Inventory.Views;
 using Inventory.ViewModels;

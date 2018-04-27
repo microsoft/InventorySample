@@ -12,16 +12,17 @@
         <DataTemplate x:Key="ListHeaderTemplate">
             <StackPanel Margin="6,4,0,0" Orientation="Horizontal" VerticalAlignment="Center">
                 <TextBlock Text="Activity Log" FontSize="18" />
-                <Rectangle Margin="3,0 "/>
                 <TextBlock Text="{Binding}" FontSize="18" Foreground="Gray" />
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
 
-    <Grid Background="WhiteSmoke">
+    <Grid Background="WhiteSmoke"
+          BorderBrush="LightGray"
+          BorderThickness="1,0,0,0">
         <controls:WindowTitle Prefix="Activity Logs" Title="{x:Bind ViewModel.AppLogList.Title, Mode=OneWay}" />
-        
-        <Grid Margin="6" RowSpacing="6">
+
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -35,8 +36,13 @@
             </Grid>
 
             <!--Details-->
-            <Grid Grid.Row="1" Visibility="{x:Bind ViewModel.AppLogList.IsMultipleSelection, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}">
-                <controls:Section IsEnabled="{x:Bind ViewModel.AppLogDetails.IsEnabled, Mode=OneWay}" Visibility="{x:Bind ViewModel.AppLogDetails.IsDataAvailable, Mode=OneWay}">
+            <Grid Grid.Row="1" 
+                  BorderBrush="LightGray"
+                  BorderThickness="0,1,0,0" 
+                  Visibility="{x:Bind ViewModel.AppLogList.IsMultipleSelection, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+                <controls:Section IsEnabled="{x:Bind ViewModel.AppLogDetails.IsEnabled, Mode=OneWay}" 
+                                  Background="{StaticResource DetailsViewBackgroundColor}"
+                                  Visibility="{x:Bind ViewModel.AppLogDetails.IsDataAvailable, Mode=OneWay}">
 
                     <Pivot x:Name="pivot">
                         <PivotItem Header="Activity Log">

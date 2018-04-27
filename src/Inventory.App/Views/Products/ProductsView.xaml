@@ -12,17 +12,22 @@
         <DataTemplate x:Key="ListHeaderTemplate">
             <StackPanel Margin="6,4,0,0" Orientation="Horizontal" VerticalAlignment="Center">
                 <TextBlock Text="Products" FontSize="18" />
-                <Rectangle Margin="3,0 "/>
                 <TextBlock Text="{Binding}" FontSize="18" Foreground="Gray" />
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
 
-    <Grid Background="WhiteSmoke">
+    <Grid Background="WhiteSmoke"
+          BorderBrush="LightGray"
+          BorderThickness="1,0,0,0">
         <controls:WindowTitle Prefix="Products" Title="{x:Bind ViewModel.ProductList.Title, Mode=OneWay}" />
 
-        <Grid Margin="6" Grid.RowSpan="{x:Bind GetRowSpan(ViewModel.ProductList.IsMultipleSelection), Mode=OneWay}">
-            <controls:Section Header="{x:Bind ViewModel.ProductList.Title, Mode=OneWay}" HeaderTemplate="{StaticResource ListHeaderTemplate}" HeaderButtonGlyph="&#xE2B4;" HeaderButtonClick="OpenInNewView" IsButtonVisible="{x:Bind ViewModel.IsMainView}">
+        <Grid 
+              Grid.RowSpan="{x:Bind GetRowSpan(ViewModel.ProductList.IsMultipleSelection), Mode=OneWay}">
+            <controls:Section Header="{x:Bind ViewModel.ProductList.Title, Mode=OneWay}" 
+                              HeaderTemplate="{StaticResource ListHeaderTemplate}" 
+                              HeaderButtonGlyph="&#xE2B4;" HeaderButtonClick="OpenInNewView" 
+                              IsButtonVisible="{x:Bind ViewModel.IsMainView}">
                 <views:ProductsList ViewModel="{x:Bind ViewModel.ProductList}" />
             </controls:Section>
         </Grid>

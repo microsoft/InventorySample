@@ -31,13 +31,14 @@
         </DataTemplate>
     </UserControl.Resources>
 
-    <Grid ColumnSpacing="6" Visibility="{x:Bind ViewModel.Item.IsEmpty, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+    <Grid ColumnSpacing="6" 
+          Visibility="{x:Bind ViewModel.Item.IsEmpty, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="260"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Background="WhiteSmoke" BorderThickness="0,0,1,0" BorderBrush="LightGray">
+        <Grid BorderThickness="0,0,1,0" BorderBrush="LightGray">
             <views:CustomersCard Margin="6,12" ViewModel="{x:Bind ViewModel}" Item="{x:Bind ViewModel.Item, Mode=OneWay}" />
         </Grid>
 

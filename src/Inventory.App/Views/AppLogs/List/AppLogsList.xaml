@@ -10,7 +10,7 @@
 
     <UserControl.Resources>
         <DataTemplate x:Key="HeaderTemplate">
-            <Grid>
+            <Grid BorderBrush="LightGray" BorderThickness="0,0,0,1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="32"/>
                     <ColumnDefinition Width="100"/>
@@ -22,7 +22,7 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="Log Type" Style="{StaticResource ColumnHeaderStyle}" />
+                <TextBlock Grid.Column="1" Text="Log Type" Style="{StaticResource ColumnHeaderStyle}" />
                 <TextBlock Grid.Column="2" Text="Log ID" Style="{StaticResource ColumnHeaderStyle}" />
                 <TextBlock Grid.Column="3" Text="Date" Style="{StaticResource ColumnHeaderStyle}" />
                 <TextBlock Grid.Column="4" Text="Time" Style="{StaticResource ColumnHeaderStyle}" />
@@ -34,7 +34,7 @@
         </DataTemplate>
 
         <DataTemplate x:Key="ItemTemplate" x:DataType="models:AppLogModel">
-            <Grid BorderThickness="0,0,0,1" BorderBrush="LightGray" Height="32">
+            <Grid BorderThickness="0,0,0,0" BorderBrush="LightGray" Height="32">
                 <Grid Visibility="{x:Bind IsEmpty, Converter={StaticResource InverseBoolToVisibilityConverter}}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="32"/>

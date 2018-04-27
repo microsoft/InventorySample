@@ -11,17 +11,18 @@
     <UserControl.Resources>
         <DataTemplate x:Key="ListHeaderTemplate">
             <StackPanel Margin="6,4,0,0" Orientation="Horizontal" VerticalAlignment="Center">
-                <TextBlock Text="Order Items" FontSize="18" />
-                <Rectangle Margin="3,0 "/>
+                <TextBlock Text="Orders" FontSize="18" />
                 <TextBlock Text="{Binding}" FontSize="18" Foreground="Gray" />
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
 
-    <Grid Background="WhiteSmoke">
+    <Grid Background="WhiteSmoke"
+          BorderBrush="LightGray"
+          BorderThickness="1,0,0,0">
         <controls:WindowTitle Prefix="Order Items" Title="{x:Bind ViewModel.OrderItemList.Title, Mode=OneWay}" />
 
-        <Grid Margin="6" RowSpacing="6">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -35,18 +36,27 @@
             </Grid>
 
             <!--Details-->
-            <Grid Grid.Row="1" Visibility="{x:Bind ViewModel.OrderItemList.IsMultipleSelection, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}">
-                <controls:Section IsEnabled="{x:Bind ViewModel.OrderItemDetails.IsEnabled, Mode=OneWay}" HeaderButtonGlyph="&#xE2B4;" HeaderButtonClick="OpenDetailsInNewView" Visibility="{x:Bind ViewModel.OrderItemDetails.IsDataAvailable, Mode=OneWay}">
+            <Grid Grid.Row="1" 
+                  BorderBrush="LightGray"
+                  BorderThickness="0,1,0,0"
+                  Visibility="{x:Bind ViewModel.OrderItemList.IsMultipleSelection, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+                <controls:Section IsEnabled="{x:Bind ViewModel.OrderItemDetails.IsEnabled, Mode=OneWay}" 
+                                  Background="{StaticResource DetailsViewBackgroundColor}"
+                                  HeaderButtonGlyph="&#xE2B4;" 
+                                  HeaderButtonClick="OpenDetailsInNewView" 
+                                  Visibility="{x:Bind ViewModel.OrderItemDetails.IsDataAvailable, Mode=OneWay}">
 
                     <Pivot x:Name="pivot">
                         <PivotItem Header="Order Item">
-                            <views:OrderItemsDetails Grid.Row="1" ViewModel="{x:Bind ViewModel.OrderItemDetails}" />
+                            <views:OrderItemsDetails Grid.Row="1" 
+                                                     ViewModel="{x:Bind ViewModel.OrderItemDetails}" />
                         </PivotItem>
                     </Pivot>
                 </controls:Section>
 
                 <!--Empty Details-->
-                <controls:Section Header="No item selected" Visibility="{x:Bind ViewModel.OrderItemDetails.IsDataUnavailable, Mode=OneWay}" />
+                <controls:Section Header="No item selected" 
+                                  Visibility="{x:Bind ViewModel.OrderItemDetails.IsDataUnavailable, Mode=OneWay}" />
             </Grid>
         </Grid>
     </Grid>
