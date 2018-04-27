@@ -1,5 +1,8 @@
 # Index
 
+- [Introduction](chapters/introduction.md)
+    - [The Inventory Sample app](chapters/introduction.md#The-Inventory-Sample-app)
+
 - [MVVM](chapters/mvvm.md#mvvm)
     - [The MVVM pattern](chapters/mvvm.md#the-mvvm-pattern)
         - [Model](chapters/mvvm.md#model)
