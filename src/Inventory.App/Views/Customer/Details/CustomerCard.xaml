@@ -23,92 +23,94 @@
         <TextBlock Text="{x:Bind Item.FullName, Mode=OneWay}" TextAlignment="Center" TextWrapping="WrapWholeWords" HorizontalAlignment="Stretch" FontSize="18" FontWeight="SemiBold" IsTextSelectionEnabled="True" Foreground="Black" />
         <TextBlock Text="{x:Bind Item.EmailAddress, Mode=OneWay}" TextAlignment="Center" TextWrapping="WrapWholeWords" HorizontalAlignment="Stretch" FontSize="14" IsTextSelectionEnabled="True" />
 
-        <TextBlock Margin="6,0" Text="General" />
+        <Rectangle Margin="12" />
         <Rectangle Margin="6,2" Fill="LightGray" Height="1" />
-        <Grid Margin="6,2">
+        <TextBlock Margin="6,12" Text="General" FontWeight="SemiBold" />
+  
+        <Grid Margin="6,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Customer ID:" FontSize="14" FontWeight="SemiBold" />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.CustomerID, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" />
+            <TextBlock Grid.Column="0" Text="Customer ID:" FontSize="14"  />
+            <TextBlock Grid.Column="1" Text="{x:Bind Item.CustomerID, Mode=OneWay}" FontWeight="SemiBold" IsTextSelectionEnabled="True" FontSize="14" />
         </Grid>
         <Grid Margin="6,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Phone:" FontSize="14" FontWeight="SemiBold" />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.Phone, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" />
+            <TextBlock Grid.Column="0" Text="Phone:" FontSize="14"  />
+            <TextBlock Grid.Column="1" Text="{x:Bind Item.Phone, Mode=OneWay}" FontWeight="SemiBold" IsTextSelectionEnabled="True" FontSize="14" />
         </Grid>
         <Grid Margin="6,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Created On:" FontSize="14" FontWeight="SemiBold" />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.CreatedOn, Mode=OneWay, Converter={StaticResource DateTimeFormatConverter}}" IsTextSelectionEnabled="True" FontSize="14" />
+            <TextBlock Grid.Column="0" Text="Created On:" FontSize="14" />
+            <TextBlock Grid.Column="1" Text="{x:Bind Item.CreatedOn, Mode=OneWay, Converter={StaticResource DateTimeFormatConverter}}" FontWeight="SemiBold"  IsTextSelectionEnabled="True" FontSize="14" />
         </Grid>
         <Grid Margin="6,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Last Update:" FontSize="14" FontWeight="SemiBold" />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.LastModifiedOn, Mode=OneWay, Converter={StaticResource DateTimeFormatConverter}}" IsTextSelectionEnabled="True" FontSize="14" />
+            <TextBlock Grid.Column="0" Text="Last Update:" FontSize="14"  />
+            <TextBlock Grid.Column="1" Text="{x:Bind Item.LastModifiedOn, Mode=OneWay, Converter={StaticResource DateTimeFormatConverter}}" FontWeight="SemiBold" IsTextSelectionEnabled="True" FontSize="14" />
         </Grid>
 
         <Rectangle Margin="12" />
-
-        <TextBlock Margin="6,0" Text="Address" />
         <Rectangle Margin="6,2" Fill="LightGray" Height="1" />
-        <Grid Margin="6,2">
+        <TextBlock Margin="6,12" Text="Address" FontWeight="SemiBold" />
+
+        <Grid Margin="6,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Address Line 1:" FontSize="14" FontWeight="SemiBold" />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.AddressLine1, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" TextWrapping="WrapWholeWords" />
+            <TextBlock Grid.Column="0" Text="Address Line 1:" FontSize="14" />
+            <TextBlock Grid.Column="1" Text="{x:Bind Item.AddressLine1, Mode=OneWay}" FontWeight="SemiBold"  IsTextSelectionEnabled="True" FontSize="14" TextWrapping="WrapWholeWords" />
         </Grid>
         <Grid Margin="6,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Address Line 2:" FontSize="14" FontWeight="SemiBold" />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.AddressLine2, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" TextWrapping="WrapWholeWords" />
+            <TextBlock Grid.Column="0" Text="Address Line 2:" FontSize="14"  />
+            <TextBlock Grid.Column="1" Text="{x:Bind Item.AddressLine2, Mode=OneWay}" FontWeight="SemiBold" IsTextSelectionEnabled="True" FontSize="14" TextWrapping="WrapWholeWords" />
         </Grid>
         <Grid Margin="6,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="City:" FontSize="14" FontWeight="SemiBold" />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.City, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" />
+            <TextBlock Grid.Column="0" Text="City:" FontSize="14"  />
+            <TextBlock Grid.Column="1" Text="{x:Bind Item.City, Mode=OneWay}" FontWeight="SemiBold" IsTextSelectionEnabled="True" FontSize="14" />
         </Grid>
         <Grid Margin="6,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Postal Code:" FontSize="14" FontWeight="SemiBold" />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.PostalCode, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" />
+            <TextBlock Grid.Column="0" Text="Postal Code:" FontSize="14"  />
+            <TextBlock Grid.Column="1" Text="{x:Bind Item.PostalCode, Mode=OneWay}" FontWeight="SemiBold" IsTextSelectionEnabled="True" FontSize="14" />
         </Grid>
         <Grid Margin="6,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Region:" FontSize="14" FontWeight="SemiBold" />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.Region, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" />
+            <TextBlock Grid.Column="0" Text="Region:" FontSize="14"  />
+            <TextBlock Grid.Column="1" Text="{x:Bind Item.Region, Mode=OneWay}" FontWeight="SemiBold" IsTextSelectionEnabled="True" FontSize="14" />
         </Grid>
         <Grid Margin="6,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Country:" FontSize="14" FontWeight="SemiBold" />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.CountryName, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" />
+            <TextBlock Grid.Column="0" Text="Country:" FontSize="14"  />
+            <TextBlock Grid.Column="1" Text="{x:Bind Item.CountryName, Mode=OneWay}" FontWeight="SemiBold" IsTextSelectionEnabled="True" FontSize="14" />
         </Grid>
     </StackPanel>
 </UserControl>

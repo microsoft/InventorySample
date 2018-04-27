@@ -8,12 +8,15 @@
 
     <StackPanel Spacing="2">
         <StackPanel Margin="6,2">
-            <Grid Margin="0,6" Height="180">
+            <Grid  Margin="6,24,6,0" Height="180">
                 <Grid Background="LightGray">
                     <Viewbox Margin="24" Visibility="{x:Bind ViewModel.IsEnabled, Mode=OneWay}">
                         <FontIcon Glyph="&#xE114;" Foreground="Gray" />
                     </Viewbox>
-                    <Image Source="{x:Bind Item.ThumbnailSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Image Source="{x:Bind Item.ThumbnailSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" 
+                           Stretch="UniformToFill" 
+                           HorizontalAlignment="Center" 
+                           VerticalAlignment="Center" />
                 </Grid>
                 <Button Padding="0" BorderThickness="1" BorderBrush="White" Background="Transparent" Command="{x:Bind ViewModel.EditPictureCommand}"
                         HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
@@ -29,92 +32,93 @@
             </Grid>
             <TextBlock Text="{x:Bind Item.Name, Mode=OneWay}" TextAlignment="Center" TextWrapping="WrapWholeWords" IsTextSelectionEnabled="True" FontSize="14" />
         </StackPanel>
-
-        <Rectangle Margin="6" />
-
-        <TextBlock Margin="6,0" Text="General" />
+       
+        <Rectangle Margin="12" />
         <Rectangle Margin="6,2" Fill="LightGray" Height="1" />
+        <TextBlock Margin="6,12" Text="General" FontWeight="SemiBold" />
+
+
         <Grid Margin="6,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Product ID:" FontSize="14" FontWeight="SemiBold" />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.ProductID, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" />
+            <TextBlock Grid.Column="0" Text="Product ID:" FontSize="14"  />
+            <TextBlock Grid.Column="1" Text="{x:Bind Item.ProductID, Mode=OneWay}" FontWeight="SemiBold" IsTextSelectionEnabled="True" FontSize="14" />
         </Grid>
         <Grid Margin="6,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Category:" FontSize="14" FontWeight="SemiBold" />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.CategoryName, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" />
+            <TextBlock Grid.Column="0" Text="Category:" FontSize="14"  />
+            <TextBlock Grid.Column="1" Text="{x:Bind Item.CategoryName, Mode=OneWay}" FontWeight="SemiBold" IsTextSelectionEnabled="True" FontSize="14" />
         </Grid>
         <Grid Margin="6,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Created On:" FontSize="14" FontWeight="SemiBold" />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.CreatedOn, Mode=OneWay, Converter={StaticResource DateTimeFormatConverter}}" IsTextSelectionEnabled="True" FontSize="14" />
+            <TextBlock Grid.Column="0" Text="Created On:" FontSize="14"  />
+            <TextBlock Grid.Column="1" Text="{x:Bind Item.CreatedOn, Mode=OneWay, Converter={StaticResource DateTimeFormatConverter}}" FontWeight="SemiBold" IsTextSelectionEnabled="True" FontSize="14" />
         </Grid>
         <Grid Margin="6,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Last Update:" FontSize="14" FontWeight="SemiBold" />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.LastModifiedOn, Mode=OneWay, Converter={StaticResource DateTimeFormatConverter}}" IsTextSelectionEnabled="True" FontSize="14" />
+            <TextBlock Grid.Column="0" Text="Last Update:" FontSize="14"  />
+            <TextBlock Grid.Column="1" Text="{x:Bind Item.LastModifiedOn, Mode=OneWay, Converter={StaticResource DateTimeFormatConverter}}" FontWeight="SemiBold" IsTextSelectionEnabled="True" FontSize="14" />
         </Grid>
 
-        <Rectangle Margin="6" />
-
-        <TextBlock Margin="6,0" Text="Price" />
+        <Rectangle Margin="12" />
         <Rectangle Margin="6,2" Fill="LightGray" Height="1" />
+        <TextBlock Margin="6,12" Text="Price" FontWeight="SemiBold" />
+
         <Grid Margin="6,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="List Price:" FontSize="14" FontWeight="SemiBold" />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.ListPrice, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" />
+            <TextBlock Grid.Column="0" Text="List Price:" FontSize="14" />
+            <TextBlock Grid.Column="1" Text="{x:Bind Item.ListPrice, Mode=OneWay}" FontWeight="SemiBold" IsTextSelectionEnabled="True" FontSize="14" />
         </Grid>
         <Grid Margin="6,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Dealer Price:" FontSize="14" FontWeight="SemiBold" />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.DealerPrice, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" />
+            <TextBlock Grid.Column="0" Text="Dealer Price:" FontSize="14"  />
+            <TextBlock Grid.Column="1" Text="{x:Bind Item.DealerPrice, Mode=OneWay}" FontWeight="SemiBold" IsTextSelectionEnabled="True" FontSize="14" />
         </Grid>
         <Grid Margin="6,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Discount:" FontSize="14" FontWeight="SemiBold" />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.Discount, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" />
+            <TextBlock Grid.Column="0" Text="Discount:" FontSize="14"  />
+            <TextBlock Grid.Column="1" Text="{x:Bind Item.Discount, Mode=OneWay}" FontWeight="SemiBold" IsTextSelectionEnabled="True" FontSize="14" />
         </Grid>
 
-        <Rectangle Margin="6" />
-
-        <TextBlock Margin="6,0" Text="Stock" />
+        <Rectangle Margin="12" />
         <Rectangle Margin="6,2" Fill="LightGray" Height="1" />
+        <TextBlock Margin="6,12" Text="Stock" FontWeight="SemiBold" />
+
         <Grid Margin="6,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Stock Units:" FontSize="14" FontWeight="SemiBold" />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.StockUnits, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" />
+            <TextBlock Grid.Column="0" Text="Stock Units:" FontSize="14"  />
+            <TextBlock Grid.Column="1" Text="{x:Bind Item.StockUnits, Mode=OneWay}" FontWeight="SemiBold" IsTextSelectionEnabled="True" FontSize="14" />
         </Grid>
         <Grid Margin="6,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Safety Stock:" FontSize="14" FontWeight="SemiBold" />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.SafetyStockLevel, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" />
+            <TextBlock Grid.Column="0" Text="Safety Stock:" FontSize="14"  />
+            <TextBlock Grid.Column="1" Text="{x:Bind Item.SafetyStockLevel, Mode=OneWay}" FontWeight="SemiBold" IsTextSelectionEnabled="True" FontSize="14" />
         </Grid>
     </StackPanel>
 </UserControl>

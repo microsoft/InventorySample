@@ -120,7 +120,10 @@ namespace Inventory.Controls
             {
                 _content.RowDefinitions[0].Height = Header == null ? GridLengths.Zero : GridLengths.Auto;
                 _content.RowDefinitions[2].Height = Footer == null ? GridLengths.Zero : GridLengths.Auto;
-                _button.Visibility = IsButtonVisible && !String.IsNullOrEmpty($"{HeaderButtonGlyph}{HeaderButtonLabel}") ? Visibility.Visible : Visibility.Collapsed;
+                if (_button != null)
+                {
+                    _button.Visibility = IsButtonVisible && !String.IsNullOrEmpty($"{HeaderButtonGlyph}{HeaderButtonLabel}") ? Visibility.Visible : Visibility.Collapsed;
+                }
                 UpdateContainer();
             }
         }
@@ -147,8 +150,10 @@ namespace Inventory.Controls
             _content = base.GetTemplateChild("content") as Grid;
 
             _button = base.GetTemplateChild("button") as IconLabelButton;
-            _button.Click += OnClick;
-
+            if (_button != null)
+            {
+                _button.Click += OnClick;
+            }
             IsEnabledChanged += OnIsEnabledChanged;
 
             UpdateControl();

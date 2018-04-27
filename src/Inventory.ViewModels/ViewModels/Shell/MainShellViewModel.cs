@@ -16,7 +16,6 @@ namespace Inventory.ViewModels
         private readonly NavigationItem ProductsItem = new NavigationItem(0xE781, "Products", typeof(ProductsViewModel));
         private readonly NavigationItem AppLogsItem = new NavigationItem(0xE7BA, "Activity Log", typeof(AppLogsViewModel));
         private readonly NavigationItem SettingsItem = new NavigationItem(0x0000, "Settings", typeof(SettingsViewModel));
-
         public MainShellViewModel(ICommonServices commonServices) : base(commonServices)
         {
         }

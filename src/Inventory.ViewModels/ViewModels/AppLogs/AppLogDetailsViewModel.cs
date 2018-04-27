@@ -23,7 +23,7 @@ namespace Inventory.ViewModels
         {
         }
 
-        override public string Title => "Activity Log";
+        override public string Title => "Activity Logs";
 
         public AppLogDetailsArgs ViewModelArgs { get; private set; }
 

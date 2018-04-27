@@ -11,7 +11,7 @@
     <UserControl.Resources>
         <DataTemplate x:Key="ListHeaderTemplate">
             <StackPanel Margin="6,4,0,0" Orientation="Horizontal" VerticalAlignment="Center">
-                <TextBlock Text="Activity Log" FontSize="18" />
+                <TextBlock Text="Activity Logs" FontSize="18" />
                 <TextBlock Text="{Binding}" FontSize="18" Foreground="Gray" />
             </StackPanel>
         </DataTemplate>
@@ -43,12 +43,7 @@
                 <controls:Section IsEnabled="{x:Bind ViewModel.AppLogDetails.IsEnabled, Mode=OneWay}" 
                                   Background="{StaticResource DetailsViewBackgroundColor}"
                                   Visibility="{x:Bind ViewModel.AppLogDetails.IsDataAvailable, Mode=OneWay}">
-
-                    <Pivot x:Name="pivot">
-                        <PivotItem Header="Activity Log">
-                            <views:AppLogsDetails Grid.Row="1" ViewModel="{x:Bind ViewModel.AppLogDetails}" />
-                        </PivotItem>
-                    </Pivot>
+                    <views:AppLogsDetails Grid.Row="1" ViewModel="{x:Bind ViewModel.AppLogDetails}" />
                 </controls:Section>
 
                 <!--Empty Details-->

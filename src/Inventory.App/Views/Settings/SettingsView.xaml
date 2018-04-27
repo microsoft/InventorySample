@@ -5,10 +5,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Inventory.Controls"
+    xmlns:inventory="using:Inventory.Views"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <controls:WindowTitle Title="Settings" />
+        <!--<controls:WindowTitle Title="Settings" />
 
         <Image Source="ms-appx:///Assets/AppLogo.png" HorizontalAlignment="Center" VerticalAlignment="Top" Stretch="None" />
         <StackPanel Margin="24,220" VerticalAlignment="Top">
@@ -19,6 +20,7 @@
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Enable random error generation for testing purposes." />
             <ToggleSwitch IsOn="{x:Bind ViewModel.IsRandomErrorsEnabled, Mode=TwoWay}" />
-            </StackPanel>
+            </StackPanel>-->
+        <inventory:CustomerView />
     </Grid>
 </Page>
