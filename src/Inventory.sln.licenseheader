@@ -1,8 +1,9 @@
-ï»¿#region copyright
+extensions: .cs 
+#region copyright
 // ******************************************************************
 // Copyright (c) Microsoft. All rights reserved.
 // This code is licensed under the MIT License (MIT).
-// THE CODE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// THE CODE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
 // INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 // IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
@@ -11,20 +12,3 @@
 // THE CODE OR THE USE OR OTHER DEALINGS IN THE CODE.
 // ******************************************************************
 #endregion
-
-using System;
-
-namespace Inventory.Models
-{
-    public class CategoryModel : ModelBase
-    {
-        public int CategoryID { get; set; }
-
-        public string Name { get; set; }
-        public string Description { get; set; }
-
-        public byte[] Picture { get; set; }
-
-        public byte[] Thumbnail { get; set; }
-    }
-}
