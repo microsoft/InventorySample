@@ -82,6 +82,16 @@ namespace Inventory.Controls
         public static readonly DependencyProperty ItemTemplateProperty = DependencyProperty.Register(nameof(ItemTemplate), typeof(DataTemplate), typeof(DataList), new PropertyMetadata(null));
         #endregion
 
+        #region ItemSecondaryActionInvokedCommand
+        public ICommand ItemSecondaryActionInvokedCommand
+        {
+            get { return (ICommand)GetValue(ItemSecondaryActionInvokedCommandProperty); }
+            set { SetValue(ItemSecondaryActionInvokedCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty ItemSecondaryActionInvokedCommandProperty = DependencyProperty.Register(nameof(ItemSecondaryActionInvokedCommand), typeof(ICommand), typeof(DataGrid), new PropertyMetadata(null));
+        #endregion
+
         #region DefaultCommands
         public string DefaultCommands
         {
@@ -284,6 +294,14 @@ namespace Inventory.Controls
                         }
                     }
                 }
+            }
+        }
+
+        private void OnDoubleTapped(object sender, Windows.UI.Xaml.Input.DoubleTappedRoutedEventArgs e)
+        {
+            if (!IsMultipleSelection)
+            {
+                ItemSecondaryActionInvokedCommand?.TryExecute(listview.SelectedItem);
             }
         }
 

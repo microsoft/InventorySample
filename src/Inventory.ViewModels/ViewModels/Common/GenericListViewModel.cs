@@ -137,5 +137,6 @@ namespace Inventory.ViewModels
         abstract protected void OnNew();
         abstract protected void OnRefresh();
         abstract protected void OnDeleteSelection();
+       
     }
 }

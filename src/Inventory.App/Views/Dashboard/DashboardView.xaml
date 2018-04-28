@@ -35,24 +35,35 @@
 
             <TextBlock Grid.Row="1" Margin="12,0" Text="Dashboard" FontSize="22" Foreground="Gray" />
 
-            <controls:AdaptiveGridView Grid.Row="2" Margin="6" ItemContainerStyle="{StaticResource GridItemStyle}"
-                                       DesiredWidth="440"
-                                       ItemHeight="260"
-                                       StretchContentForSingleRow="False"
-                                       SelectionMode="None" IsItemClickEnabled="True" ItemClick="OnItemClick">
-                <GridViewItem>
-                    <views:CustomersPane Margin="12" ItemsSource="{x:Bind ViewModel.Customers, Mode=OneWay}" Tag="Customers" />
-                </GridViewItem>
-                <GridViewItem>
-                    <views:ProductsPane Margin="12" ItemsSource="{x:Bind ViewModel.Products, Mode=OneWay}" Tag="Products" />
-                </GridViewItem>
-                <GridViewItem>
-                    <views:OrdersPane Margin="12" ItemsSource="{x:Bind ViewModel.Orders, Mode=OneWay}" Tag="Orders" />
-                </GridViewItem>
-                <GridViewItem IsHitTestVisible="False">
-                    <views:ChartPane Margin="12,12,12,0" Tag="Charts" />
-                </GridViewItem>
-            </controls:AdaptiveGridView>
+
+            <GridView Grid.Row="2" 
+                      Margin="6" 
+                      ItemContainerStyle="{StaticResource GridItemStyle}"
+                      SelectionMode="None" 
+                      IsItemClickEnabled="True" ItemClick="OnItemClick">
+                <GridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <controls:WrapPanel />
+                    </ItemsPanelTemplate>
+                </GridView.ItemsPanel>
+                <views:CustomersPane Margin="12" 
+                                         Width="600"
+                                         Height="250"
+                                         ItemsSource="{x:Bind ViewModel.Customers, Mode=OneWay}" 
+                                         Tag="Customers" />
+
+                <views:ProductsPane Margin="12" 
+                                        Width="400"
+                                        Height="250"
+                                        ItemsSource="{x:Bind ViewModel.Products, Mode=OneWay}" 
+                                        Tag="Products" />
+
+                <views:OrdersPane Margin="12" 
+                                      Width="400"
+                                      Height="250"
+                                      ItemsSource="{x:Bind ViewModel.Orders, Mode=OneWay}" 
+                                      Tag="Orders" />
+            </GridView>
         </Grid>
     </Grid>
 </Page>

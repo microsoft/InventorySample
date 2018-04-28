@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Inventory.Data;
 using Inventory.Models;
 using Inventory.Services;
+using System.Windows.Input;
 
 namespace Inventory.ViewModels
 {
@@ -230,6 +231,12 @@ namespace Inventory.ViewModels
                     });
                     break;
             }
+        }
+
+        public ICommand OpenInNewViewCommand => new RelayCommand(OnOpenInNewView);
+        private async void OnOpenInNewView()
+        {
+            await NavigationService.CreateNewViewAsync<OrderDetailsViewModel>(new OrderDetailsArgs { OrderID = SelectedItem?.OrderID ?? 0 });
         }
     }
 }

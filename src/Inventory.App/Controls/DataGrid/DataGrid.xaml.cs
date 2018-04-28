@@ -248,6 +248,16 @@ namespace Inventory.Controls
         public static readonly DependencyProperty ItemInvokedCommandProperty = DependencyProperty.Register(nameof(ItemInvokedCommand), typeof(ICommand), typeof(DataGrid), new PropertyMetadata(null));
         #endregion
 
+        #region ItemSecondaryActionInvokedCommand
+        public ICommand ItemSecondaryActionInvokedCommand
+        {
+            get { return (ICommand)GetValue(ItemSecondaryActionInvokedCommandProperty); }
+            set { SetValue(ItemSecondaryActionInvokedCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty ItemSecondaryActionInvokedCommandProperty = DependencyProperty.Register(nameof(ItemSecondaryActionInvokedCommand), typeof(ICommand), typeof(DataGrid), new PropertyMetadata(null));
+        #endregion
+
 
         public ListToolbarMode ToolbarMode => IsMultipleSelection ? (SelectedItemsCount > 0 ? ListToolbarMode.CancelDelete : ListToolbarMode.Cancel) : ListToolbarMode.Default;
         static DependencyExpression ToolbarModeExpression = DependencyExpressions.Register(nameof(ToolbarMode), nameof(IsMultipleSelection), nameof(SelectedItemsCount));
@@ -321,6 +331,13 @@ namespace Inventory.Controls
                 ItemInvokedCommand?.TryExecute(e.ClickedItem);
             }
         }
+        private void OnDoubleTapped(object sender, Windows.UI.Xaml.Input.DoubleTappedRoutedEventArgs e)
+        {
+            if (!IsMultipleSelection)
+            {
+                ItemSecondaryActionInvokedCommand?.TryExecute(gridview.SelectedItem);
+            }
+        }
 
         private void OnQuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
@@ -355,5 +372,7 @@ namespace Inventory.Controls
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
+
+        
     }
 }

@@ -36,6 +36,7 @@
                                        SelectionMode="{x:Bind SelectionMode, Mode=OneWay}"
                                        SelectionChanged="OnSelectionChanged"
                                        IsItemClickEnabled="True"
+                                       DoubleTapped="OnDoubleTapped"
                                        ItemClick="OnItemClick"
                                        Visibility="{x:Bind IsDataAvailable, Mode=OneWay}" />
 

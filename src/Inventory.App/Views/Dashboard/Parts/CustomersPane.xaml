@@ -9,29 +9,30 @@
 
     <UserControl.Resources>
         <DataTemplate x:Key="HeaderTemplate" x:DataType="models:CustomerModel">
-            <Grid>
+             <Grid BorderBrush="LightGray" BorderThickness="0,0,0,1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="8*"/>
-                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="6*"/>
                     <ColumnDefinition Width="10*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="Customer ID" Style="{StaticResource ColumnHeaderStyle}" />
+                <TextBlock Grid.Column="1" Text="Customer ID" Style="{StaticResource ColumnHeaderStyle}" />
                 <TextBlock Grid.Column="2" Text="Name" Style="{StaticResource ColumnHeaderStyle}" />
                 <TextBlock Grid.Column="3" Text="eMail" Style="{StaticResource ColumnHeaderStyle}" />
             </Grid>
         </DataTemplate>
 
         <DataTemplate x:Key="ItemTemplate" x:DataType="models:CustomerModel">
-            <Grid BorderThickness="0,0,0,1" BorderBrush="LightGray">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="8*"/>
-                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="6*"/>
                     <ColumnDefinition Width="10*"/>
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0" Margin="1" Padding="1">
-                    <PersonPicture ProfilePicture="{x:Bind ThumbnailSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" Width="28" Height="28" />
+                    <PersonPicture ProfilePicture="{x:Bind ThumbnailSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" 
+                                   Width="28" Height="28" />
                 </Border>
                 <TextBlock Grid.Column="1" Text="{x:Bind CustomerID}" Style="{StaticResource ColumnValueStyle}" />
                 <TextBlock Grid.Column="2" Text="{x:Bind FullName}" Style="{StaticResource ColumnValueStyle}" />
@@ -48,8 +49,13 @@
         </Grid.RowDefinitions>
 
         <TextBlock Margin="6,0" Text="Latest Customers" FontSize="18" />
-        <ContentControl Grid.Row="1" ContentTemplate="{StaticResource HeaderTemplate}" HorizontalContentAlignment="Stretch" />
-        <ListView Grid.Row="2" ItemsSource="{x:Bind ItemsSource, Mode=OneWay}" ItemTemplate="{StaticResource ItemTemplate}"
-                  ItemContainerStyle="{StaticResource RowItemStyle}" IsHitTestVisible="False" />
+        <ContentControl Grid.Row="1" 
+                        ContentTemplate="{StaticResource HeaderTemplate}" 
+                        HorizontalContentAlignment="Stretch" />
+        <ListView Grid.Row="2" 
+                  ItemsSource="{x:Bind ItemsSource, Mode=OneWay}" 
+                  ItemTemplate="{StaticResource ItemTemplate}"
+                  ItemContainerStyle="{StaticResource RowItemStyle}"
+                  IsHitTestVisible="False" />
     </Grid>
 </UserControl>

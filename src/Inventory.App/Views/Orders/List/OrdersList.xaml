@@ -59,6 +59,7 @@
     </UserControl.Resources>
 
     <controls:DataList ItemsSource="{x:Bind ViewModel.Items, Mode=OneWay}"
+                       ItemSecondaryActionInvokedCommand="{x:Bind ViewModel.OpenInNewViewCommand}"
                        NewLabel="New Order"
                        SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay}"
                        HeaderTemplate="{StaticResource HeaderTemplate}"
