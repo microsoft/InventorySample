@@ -10,7 +10,7 @@
 
     <UserControl.Resources>
         <DataTemplate x:Key="HeaderTemplate">
-            <Grid>
+            <Grid BorderBrush="LightGray" BorderThickness="0,0,0,1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="40"/>
                     <ColumnDefinition Width="8*"/>
@@ -20,7 +20,7 @@
                     <ColumnDefinition Width="10*"/>
                     <ColumnDefinition Width="8*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="Customer ID" Style="{StaticResource ColumnHeaderStyle}" />
+                <TextBlock Grid.Column="1" Text="Customer ID" Style="{StaticResource ColumnHeaderStyle}" />
                 <TextBlock Grid.Column="2" Text="Name" Style="{StaticResource ColumnHeaderStyle}" />
                 <TextBlock Grid.Column="3" Text="eMail" Style="{StaticResource ColumnHeaderStyle}" />
                 <TextBlock Grid.Column="4" Text="Phone" Style="{StaticResource ColumnHeaderStyle}" />
@@ -30,7 +30,7 @@
         </DataTemplate>
 
         <DataTemplate x:Key="ItemTemplate" x:DataType="models:CustomerModel">
-            <Grid BorderThickness="0,0,0,1" BorderBrush="LightGray" Height="32">
+            <Grid BorderThickness="0,0,0,0" BorderBrush="LightGray" Height="32">
                 <Grid Visibility="{x:Bind IsEmpty, Converter={StaticResource InverseBoolToVisibilityConverter}}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="40"/>
@@ -56,6 +56,7 @@
     </UserControl.Resources>
 
     <controls:DataList ItemsSource="{x:Bind ViewModel.Items, Mode=OneWay}"
+                       ItemSecondaryActionInvokedCommand="{x:Bind ViewModel.OpenInNewViewCommand}"
                        NewLabel="New Customer"
                        SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay}"
                        HeaderTemplate="{StaticResource HeaderTemplate}"

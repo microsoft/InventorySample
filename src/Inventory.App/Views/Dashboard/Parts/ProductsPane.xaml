@@ -9,24 +9,24 @@
 
     <UserControl.Resources>
         <DataTemplate x:Key="HeaderTemplate" x:DataType="models:ProductModel">
-            <Grid>
+            <Grid BorderThickness="0,0,0,1" BorderBrush="LightGray">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="48"/>
-                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="10*"/>
                     <ColumnDefinition Width="15*"/>
                     <ColumnDefinition Width="6*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="Product ID" Style="{StaticResource ColumnHeaderStyle}" />
+                <TextBlock Grid.Column="1" Text="Product ID" Style="{StaticResource ColumnHeaderStyle}" />
                 <TextBlock Grid.Column="2" Text="Name" Style="{StaticResource ColumnHeaderStyle}" />
                 <TextBlock Grid.Column="3" Text="Price" Style="{StaticResource ColumnHeaderStyle}" />
             </Grid>
         </DataTemplate>
 
         <DataTemplate x:Key="ItemTemplate" x:DataType="models:ProductModel">
-            <Grid BorderThickness="0,0,0,1" BorderBrush="LightGray">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="48"/>
-                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="10*"/>
                     <ColumnDefinition Width="15*"/>
                     <ColumnDefinition Width="6*"/>
                 </Grid.ColumnDefinitions>

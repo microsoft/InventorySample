@@ -11,47 +11,28 @@
 
     <UserControl.Resources>
         <DataTemplate x:Key="DetailsTemplate" x:DataType="viewmodels:ProductDetailsViewModel">
-            <StackPanel Spacing="6" Margin="0,6">
-                <TextBlock Text="General" FontSize="16" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
-                <Grid ColumnSpacing="6">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" MaxWidth="400" />
-                        <ColumnDefinition Width="*" MaxWidth="400" />
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0" Spacing="6">
-                        <controls:LabelTextBox Label="Name" Text="{x:Bind EditableItem.Name, Mode=TwoWay}" />
-                        <controls:LabelComboBox Label="Category" ItemsSource="{x:Bind LookupTables.Categories}"
-                                                SelectedValue="{x:Bind EditableItem.CategoryID, Mode=TwoWay}" SelectedValuePath="CategoryID" DisplayMemberPath="Name" />
-                    </StackPanel>
-                    <StackPanel Grid.Column="1" Spacing="6">
-                    </StackPanel>
-                </Grid>
+            <controls:FluidGrid Margin="12,18,6,6" Columns="2" ColumnSpacing="12" RowSpacing="12">
+                <TextBlock controls:FluidGrid.ColumnSpan="2" Text="General" FontSize="16" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
+                <controls:LabelTextBox Label="Name" Text="{x:Bind EditableItem.Name, Mode=TwoWay}" />
+                <controls:LabelComboBox Label="Category" ItemsSource="{x:Bind LookupTables.Categories}" SelectedValue="{x:Bind EditableItem.CategoryID, Mode=TwoWay}" SelectedValuePath="CategoryID" DisplayMemberPath="Name" />
 
-                <TextBlock Text="Price" FontSize="16" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
-                <Grid ColumnSpacing="6">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" MaxWidth="400" />
-                        <ColumnDefinition Width="*" MaxWidth="400" />
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0" Spacing="6">
-                        <controls:LabelTextBox Label="ListPrice" Text="{x:Bind EditableItem.ListPrice, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" ValueType="Decimal" />
-                        <controls:LabelTextBox Label="DealerPrice" Text="{x:Bind EditableItem.DealerPrice, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" ValueType="Decimal" />
-                        <controls:LabelTextBox Label="Discount" Text="{x:Bind EditableItem.Discount, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" ValueType="Decimal" />
-                    </StackPanel>
-                    <StackPanel Grid.Column="1" Spacing="6">
-                    </StackPanel>
-                </Grid>
-            </StackPanel>
+                <TextBlock controls:FluidGrid.ColumnSpan="2" Text="Price" FontSize="16" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
+                <controls:LabelTextBox Label="List Price" Text="{x:Bind EditableItem.ListPrice, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" ValueType="Decimal" />
+                <controls:LabelTextBox Label="Dealer Price" Text="{x:Bind EditableItem.DealerPrice, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" ValueType="Decimal" />
+                <controls:LabelTextBox Label="Discount" Text="{x:Bind EditableItem.Discount, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" ValueType="Decimal" />
+            </controls:FluidGrid>
         </DataTemplate>
     </UserControl.Resources>
 
-    <Grid ColumnSpacing="6">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="320"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Margin="6" Background="WhiteSmoke">
+        <Grid BorderBrush="LightGray" 
+              BorderThickness="0,1,1,0"                                   
+              Background="{StaticResource DetailsViewBackgroundColor}">
             <views:ProductCard Margin="6" ViewModel="{x:Bind ViewModel}" Item="{x:Bind ViewModel.Item, Mode=OneWay}" />
         </Grid>
 

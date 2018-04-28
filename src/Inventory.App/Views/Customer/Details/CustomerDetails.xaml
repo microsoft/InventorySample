@@ -11,76 +11,50 @@
 
     <UserControl.Resources>
         <DataTemplate x:Key="DetailsTemplate" x:DataType="viewmodels:CustomerDetailsViewModel">
-            <StackPanel Spacing="6" Margin="0,6">
-                <TextBlock Text="Personal Information" FontSize="16" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
-                <Grid ColumnSpacing="6">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" MaxWidth="400" />
-                        <ColumnDefinition Width="*" MaxWidth="400" />
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0" Spacing="6">
-                        <controls:LabelTextBox Label="First Name" Text="{x:Bind EditableItem.FirstName, Mode=TwoWay}" />
-                        <controls:LabelTextBox Label="Middle Name" Text="{x:Bind EditableItem.MiddleName, Mode=TwoWay}" />
-                        <controls:LabelTextBox Label="Last Name" Text="{x:Bind EditableItem.LastName, Mode=TwoWay}" />
-                    </StackPanel>
-                    <StackPanel Grid.Column="1" Spacing="6">
-                        <controls:LabelTextBox Label="Title" Text="{x:Bind EditableItem.Title, Mode=TwoWay}" />
-                        <controls:LabelTextBox Label="Email Address" Text="{x:Bind EditableItem.EmailAddress, Mode=TwoWay}" />
-                        <controls:LabelTextBox Label="Phone" Text="{x:Bind EditableItem.Phone, Mode=TwoWay}" />
-                    </StackPanel>
-                </Grid>
+            <controls:FluidGrid Columns="2" ColumnSpacing="12" Margin="12,18,6,6" RowSpacing="12">
+                <TextBlock controls:FluidGrid.ColumnSpan="2" Text="Personal Information" FontSize="16" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
+                <controls:LabelTextBox Label="First Name" Text="{x:Bind EditableItem.FirstName, Mode=TwoWay}" />
+                <controls:LabelTextBox Label="Last Name" Text="{x:Bind EditableItem.LastName, Mode=TwoWay}" />
+                <controls:FluidGrid Columns="2" ColumnSpacing="6" RowSpacing="12" MinColumnWidth="60">
+                    <controls:LabelTextBox Label="Middle Name" Text="{x:Bind EditableItem.MiddleName, Mode=TwoWay}" />
+                    <controls:LabelTextBox Label="Sufix" Text="{x:Bind EditableItem.Suffix, Mode=TwoWay}" />
+                </controls:FluidGrid>
+                <controls:LabelTextBox Label="Title" Text="{x:Bind EditableItem.Title, Mode=TwoWay}" />
+                <controls:LabelTextBox Label="Email Address" Text="{x:Bind EditableItem.EmailAddress, Mode=TwoWay}" />
+                <controls:LabelTextBox Label="Phone" Text="{x:Bind EditableItem.Phone, Mode=TwoWay}" />
 
-                <Rectangle Margin="6" />
-                <TextBlock Text="Customer Address" FontSize="16" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
-                <Grid ColumnSpacing="6">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" MaxWidth="400" />
-                        <ColumnDefinition Width="*" MaxWidth="400" />
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0" Spacing="6">
-                        <controls:LabelTextBox Label="Address Line 1" Text="{x:Bind EditableItem.AddressLine1, Mode=TwoWay}" />
-                        <controls:LabelTextBox Label="Address Line 2" Text="{x:Bind EditableItem.AddressLine2, Mode=TwoWay}" />
-                        <controls:LabelTextBox Label="City" Text="{x:Bind EditableItem.City, Mode=TwoWay}" />
-                    </StackPanel>
-                    <StackPanel Grid.Column="1" Spacing="6">
-                        <controls:LabelTextBox Label="Region" Text="{x:Bind EditableItem.Region, Mode=TwoWay}" />
-                        <controls:LabelTextBox Label="Postal Code" Text="{x:Bind EditableItem.PostalCode, Mode=TwoWay}" />
-                        <controls:LabelComboBox Label="Country" ItemsSource="{x:Bind LookupTables.CountryCodes}"
-                                                    SelectedValue="{x:Bind EditableItem.CountryCode, Mode=TwoWay}" SelectedValuePath="CountryCodeID" DisplayMemberPath="Name" />
-                    </StackPanel>
-                </Grid>
+                <TextBlock controls:FluidGrid.ColumnSpan="2" Text="Customer Address" FontSize="16" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
+                <controls:LabelTextBox Label="Address Line 1" Text="{x:Bind EditableItem.AddressLine1, Mode=TwoWay}" />
+                <controls:LabelTextBox Label="Address Line 2" Text="{x:Bind EditableItem.AddressLine2, Mode=TwoWay}" />
+                <controls:LabelTextBox Label="City" Text="{x:Bind EditableItem.City, Mode=TwoWay}" />
+                <controls:LabelTextBox Label="Region" Text="{x:Bind EditableItem.Region, Mode=TwoWay}" />
+                <controls:LabelTextBox Label="Postal Code" Text="{x:Bind EditableItem.PostalCode, Mode=TwoWay}" />
+                <controls:LabelComboBox Label="Country" ItemsSource="{x:Bind LookupTables.CountryCodes}" SelectedValue="{x:Bind EditableItem.CountryCode, Mode=TwoWay}" SelectedValuePath="CountryCodeID" DisplayMemberPath="Name" />
 
-                <Rectangle Margin="6" />
-                <TextBlock Text="Customer Demographic" FontSize="16" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
-                <Grid ColumnSpacing="6">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" MaxWidth="400" />
-                        <ColumnDefinition Width="*" MaxWidth="400" />
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0" Spacing="6">
-                        <controls:LabelCalendar Label="BirthDate" Date="{x:Bind EditableItem.BirthDate, Mode=TwoWay}" />
-                        <controls:LabelTextBox Label="Occupation" Text="{x:Bind EditableItem.Occupation, Mode=TwoWay}" />
-                        <controls:LabelTextBox Label="Education" Text="{x:Bind EditableItem.Education, Mode=TwoWay}" />
-                        <controls:LabelTextBox Label="YearlyIncome" Text="{x:Bind EditableItem.YearlyIncome, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" ValueType="Decimal" />
-                    </StackPanel>
-                    <StackPanel Grid.Column="1" Spacing="6">
-                        <controls:LabelTextBox Label="NumberCarsOwned" Text="{x:Bind EditableItem.NumberCarsOwned, Mode=TwoWay, Converter={StaticResource Int32Converter}}" ValueType="Int32" />
-                        <controls:LabelTextBox Label="MaritalStatus" Text="{x:Bind EditableItem.MaritalStatus, Mode=TwoWay}" />
-                        <controls:LabelTextBox Label="TotalChildren" Text="{x:Bind EditableItem.TotalChildren, Mode=TwoWay, Converter={StaticResource Int32Converter}}" ValueType="Int32" />
-                        <controls:LabelTextBox Label="ChildrenAtHome" Text="{x:Bind EditableItem.ChildrenAtHome, Mode=TwoWay, Converter={StaticResource Int32Converter}}" ValueType="Int32" />
-                    </StackPanel>
-                </Grid>
-            </StackPanel>
+                <TextBlock controls:FluidGrid.ColumnSpan="2" Text="Customer Demographic" FontSize="16" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
+                <controls:LabelCalendar Label="Birth Date" Date="{x:Bind EditableItem.BirthDate, Mode=TwoWay}" />
+                <controls:LabelTextBox Label="Education" Text="{x:Bind EditableItem.Education, Mode=TwoWay}" />
+                <controls:FluidGrid Columns="2" ColumnSpacing="6" RowSpacing="12" MinColumnWidth="80">
+                    <controls:LabelTextBox Label="Occupation" Text="{x:Bind EditableItem.Occupation, Mode=TwoWay}" />
+                    <controls:LabelTextBox Label="Yearly Income" Text="{x:Bind EditableItem.YearlyIncome, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" ValueType="Decimal" />
+                </controls:FluidGrid>
+                <controls:FluidGrid Columns="2" ColumnSpacing="6" RowSpacing="12" MinColumnWidth="80">
+                    <controls:LabelTextBox Label="Marital Status" Text="{x:Bind EditableItem.MaritalStatus, Mode=TwoWay}" />
+                    <controls:LabelTextBox Label="Total Children" Text="{x:Bind EditableItem.TotalChildren, Mode=TwoWay, Converter={StaticResource Int32Converter}}" ValueType="Int32" />
+                </controls:FluidGrid>
+            </controls:FluidGrid>
         </DataTemplate>
     </UserControl.Resources>
 
-    <Grid ColumnSpacing="6">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="320"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Margin="6" Background="WhiteSmoke">
+        <Grid BorderBrush="LightGray" 
+              BorderThickness="0,1,1,0"                                   
+              Background="{StaticResource DetailsViewBackgroundColor}">
             <views:CustomerCard Margin="6" ViewModel="{x:Bind ViewModel}" Item="{x:Bind ViewModel.Item, Mode=OneWay}" />
         </Grid>
 

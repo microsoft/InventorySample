@@ -1,16 +1,29 @@
-﻿using System;
+﻿#region copyright
+// ******************************************************************
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THE CODE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
+// THE CODE OR THE USE OR OTHER DEALINGS IN THE CODE.
+// ******************************************************************
+#endregion
+
+using System;
 
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Controls;
 
-using Inventory.Animations;
 
 namespace Inventory.Controls
 {
     public sealed class LabelComboBox : Control, IInputControl
     {
-        public event RoutedEventHandler EnterFocus;
+        public event RoutedEventHandler GotFocus;
 
         private Grid _container = null;
         private ComboBox _combo = null;
@@ -19,7 +32,6 @@ namespace Inventory.Controls
         public LabelComboBox()
         {
             DefaultStyleKey = typeof(LabelComboBox);
-            IsTabStop = false;
         }
 
         #region ItemsSource
@@ -103,16 +115,28 @@ namespace Inventory.Controls
 
             _container.PointerEntered += OnPointerEntered;
             _container.PointerExited += OnPointerExited;
+            _container.PointerPressed += OnPointerPressed;
 
             _combo.GotFocus += OnGotFocus;
             _combo.LostFocus += OnLostFocus;
+
+            UpdateMode();
+        }
+
+        private void OnPointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            if (Mode == TextEditMode.Auto)
+            {
+                UpdateVisualState(_visualState.Edit);
+                _combo.Focus(FocusState.Programmatic);
+            }
         }
 
         private void OnPointerEntered(object sender, PointerRoutedEventArgs e)
         {
             if (Mode == TextEditMode.Auto)
             {
-                _border.Fade(500, 0.0, 1.0);
+                _border.Visibility = Visibility.Visible;
             }
         }
 
@@ -120,44 +144,51 @@ namespace Inventory.Controls
         {
             if (Mode == TextEditMode.Auto)
             {
-                _border.Fade(500, 1.0, 0.0);
+                _border.Visibility = Visibility.Collapsed;
             }
         }
 
         private void OnGotFocus(object sender, RoutedEventArgs e)
         {
-            _border.Opacity = 1.0;
-            EnterFocus?.Invoke(this, e);
+            GotFocus?.Invoke(this, e);
         }
 
         private void OnLostFocus(object sender, RoutedEventArgs e)
         {
             if (Mode == TextEditMode.Auto)
             {
-                _border.Opacity = 0.0;
+                UpdateVisualState(_visualState.ReadOnly);
             }
         }
 
         private void UpdateMode()
         {
-            if (_combo != null)
+            switch (Mode)
             {
-                switch (Mode)
+                case TextEditMode.Auto:
+                case TextEditMode.ReadOnly:
+                    UpdateVisualState(_visualState.ReadOnly);
+                    break;
+                case TextEditMode.ReadWrite:
+                    UpdateVisualState(_visualState.Edit);
+                    break;
+            }
+        }
+
+        private enum _visualState { ReadOnly, Edit }
+        private void UpdateVisualState(_visualState mode)
+        {
+            if (_border != null)
+            {
+                switch (mode)
                 {
-                    case TextEditMode.ReadOnly:
-                        _combo.IsTabStop = false;
-                        _border.IsHitTestVisible = true;
-                        _border.Opacity = 0.0;
+                    case _visualState.ReadOnly:
+                        _border.Visibility = Visibility.Collapsed;
+                        _combo.BorderThickness = new Thickness(0);
                         break;
-                    case TextEditMode.Auto:
-                        _combo.IsTabStop = true;
-                        _border.IsHitTestVisible = false;
-                        _border.Opacity = 0.0;
-                        break;
-                    case TextEditMode.ReadWrite:
-                        _combo.IsTabStop = true;
-                        _border.IsHitTestVisible = false;
-                        _border.Opacity = 1.0;
+                    case _visualState.Edit:
+                        _border.Visibility = Visibility.Collapsed;
+                        _combo.BorderThickness = new Thickness(1);
                         break;
                 }
             }

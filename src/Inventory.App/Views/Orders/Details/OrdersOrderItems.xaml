@@ -13,19 +13,19 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="48"/>
-                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="10*"/>
                     <ColumnDefinition Width="12*"/>
                     <ColumnDefinition Width="6*"/>
-                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="6*"/>
                     <ColumnDefinition Width="8*"/>
                     <ColumnDefinition Width="8*"/>
                     <ColumnDefinition Width="8*"/>
                     <ColumnDefinition Width="8*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="Product ID" Style="{StaticResource ColumnHeaderStyle}" />
-                <TextBlock Grid.Column="2" Text="Product Name" Style="{StaticResource ColumnHeaderStyle}" />
-                <TextBlock Grid.Column="3" Text="Order Line" Style="{StaticResource ColumnHeaderRightStyle}" />
-                <TextBlock Grid.Column="4" Text="Unit Price" Style="{StaticResource ColumnHeaderRightStyle}" />
+                <TextBlock Grid.Column="1" Text="ID" Style="{StaticResource ColumnHeaderStyle}" />
+                <TextBlock Grid.Column="2" Text="Name" Style="{StaticResource ColumnHeaderStyle}" />
+                <TextBlock Grid.Column="3" Text="Line" Style="{StaticResource ColumnHeaderRightStyle}" />
+                <TextBlock Grid.Column="4" Text="Price" Style="{StaticResource ColumnHeaderRightStyle}" />
                 <TextBlock Grid.Column="5" Text="Quantity" Style="{StaticResource ColumnHeaderRightStyle}" />
                 <TextBlock Grid.Column="6" Text="Discount" Style="{StaticResource ColumnHeaderRightStyle}" />
                 <TextBlock Grid.Column="7" Text="Subtotal" Style="{StaticResource ColumnHeaderRightStyle}" />
@@ -37,10 +37,10 @@
             <Grid BorderThickness="0,0,0,1" BorderBrush="LightGray">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="48"/>
-                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="10*"/>
                     <ColumnDefinition Width="12*"/>
                     <ColumnDefinition Width="6*"/>
-                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="6*"/>
                     <ColumnDefinition Width="8*"/>
                     <ColumnDefinition Width="8*"/>
                     <ColumnDefinition Width="8*"/>

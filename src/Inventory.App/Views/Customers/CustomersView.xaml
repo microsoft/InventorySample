@@ -12,16 +12,17 @@
         <DataTemplate x:Key="ListHeaderTemplate">
             <StackPanel Margin="6,4,0,0" Orientation="Horizontal" VerticalAlignment="Center">
                 <TextBlock Text="Customers" FontSize="18" />
-                <Rectangle Margin="3,0 "/>
                 <TextBlock Text="{Binding}" FontSize="18" Foreground="Gray" />
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
 
-    <Grid Background="WhiteSmoke">
+    <Grid Background="WhiteSmoke"
+          BorderBrush="LightGray"
+          BorderThickness="1,0,0,0">
         <controls:WindowTitle Prefix="Customers" Title="{x:Bind ViewModel.CustomerList.Title, Mode=OneWay}" />
-        
-        <Grid Margin="6" RowSpacing="6">
+
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -29,27 +30,39 @@
 
             <!--Customers-->
             <Grid Grid.RowSpan="{x:Bind GetRowSpan(ViewModel.CustomerList.IsMultipleSelection), Mode=OneWay}">
-                <controls:Section Header="{x:Bind ViewModel.CustomerList.Title, Mode=OneWay}" HeaderTemplate="{StaticResource ListHeaderTemplate}" HeaderButtonGlyph="&#xE2B4;" HeaderButtonClick="OpenInNewView" IsButtonVisible="{x:Bind ViewModel.IsMainView}">
+                <controls:Section Header="{x:Bind ViewModel.CustomerList.Title, Mode=OneWay}" 
+                                  HeaderTemplate="{StaticResource ListHeaderTemplate}"
+                                  HeaderButtonGlyph="&#xE2B4;" 
+                                  HeaderButtonClick="OpenInNewView"
+                                  IsButtonVisible="{x:Bind ViewModel.IsMainView}">
                     <views:CustomersList ViewModel="{x:Bind ViewModel.CustomerList}" />
                 </controls:Section>
             </Grid>
 
             <!--Details-->
-            <Grid Grid.Row="1" Visibility="{x:Bind ViewModel.CustomerList.IsMultipleSelection, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}">
-                <controls:Section IsEnabled="{x:Bind ViewModel.CustomerDetails.IsEnabled, Mode=OneWay}" HeaderButtonGlyph="&#xE2B4;" HeaderButtonClick="OpenDetailsInNewView" Visibility="{x:Bind ViewModel.CustomerDetails.IsDataAvailable, Mode=OneWay}">
+            <Grid Grid.Row="1" 
+                  BorderBrush="LightGray"
+                  BorderThickness="0,1,0,0"
+                  Visibility="{x:Bind ViewModel.CustomerList.IsMultipleSelection, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+                <controls:Section IsEnabled="{x:Bind ViewModel.CustomerDetails.IsEnabled, Mode=OneWay}" 
+                                  HeaderButtonGlyph="&#xE2B4;" 
+                                  HeaderButtonClick="OpenDetailsInNewView" 
+                                  Background="{StaticResource DetailsViewBackgroundColor}"
+                                  Visibility="{x:Bind ViewModel.CustomerDetails.IsDataAvailable, Mode=OneWay}">
 
                     <Pivot x:Name="pivot">
                         <PivotItem Header="Customer">
-                            <views:CustomersDetails Grid.Row="1" ViewModel="{x:Bind ViewModel.CustomerDetails}" />
+                            <views:CustomersDetails ViewModel="{x:Bind ViewModel.CustomerDetails}" />
                         </PivotItem>
                         <PivotItem Header="Orders">
-                            <views:CustomersOrders Grid.Row="1" ViewModel="{x:Bind ViewModel.CustomerOrders}" />
+                            <views:CustomersOrders ViewModel="{x:Bind ViewModel.CustomerOrders}" />
                         </PivotItem>
                     </Pivot>
                 </controls:Section>
 
                 <!--Empty Details-->
-                <controls:Section Header="No item selected" Visibility="{x:Bind ViewModel.CustomerDetails.IsDataUnavailable, Mode=OneWay}" />
+                <controls:Section Header="No item selected" 
+                                  Visibility="{x:Bind ViewModel.CustomerDetails.IsDataUnavailable, Mode=OneWay}" />
             </Grid>
         </Grid>
     </Grid>

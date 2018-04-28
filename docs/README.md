@@ -2,36 +2,30 @@
 
 - [MVVM](chapters/mvvm.md#mvvm)
     - [The MVVM pattern](chapters/mvvm.md#the-mvvm-pattern)
-    - [Model](chapters/mvvm.md#model)
-    - [View](chapters/mvvm.md#view)
-    - [View Model](chapters/mvvm.md#view-model)
-    - [Data Binding](chapters/mvvm.md#data-binding)
-    - [Commands](chapters/mvvm.md#commands)
-- [Dependency Injection](chapters/dependency-injection.md)
-    - [What is Dependency Injection](chapters/dependency-injection.md#what-is-dependency-injection)
-    - [Advantages of using DI](chapters/dependency-injection.md#advantages-of-using-di)
-    - [Microsoft.Extensions.DependencyInjection](chapters/dependency-injection.md#microsoft.extensions.dependencyInjection)
-        - [How to use it](chapters/dependency-injection.md#how-to-use-it)
-- [.Net Standard](chapters/netstandard.md)
-    - [What is .Net Standard](chapters/netstandard.md#what-is-.net-standard)
-    - [Why .Net Standard?](chapters/netstandard.md#why-.net-standard)
-        - [Comparation with PCLs](chapters/netstandard.md#comparation-with-pcls)
-- What's the Universal Windows Platform? *Pending*
-    - Device Families
-    - Enterprise app ditribution: https://docs.microsoft.com/en-us/windows/uwp/publish/distribute-lob-apps-to-enterprises
-- [Windows 10 Binding](chapters/windows-10-binding.md)
-    - [Binding Elements](chapters/windows-10-binding.md#binding-elements)
-    - [Dependecy property](chapters/windows-10-binding.md#dependency-property)
-    - [Difference between x:Bind and Binding](chapters/windows-10-binding.md#Difference-between-x:Bind-and-Binding)
-    - [Binding markup extension](chapters/windows-10-binding.md#Binding-markup-extension)
-    - [x:Bind markup extension](chapters/windows-10-binding.md#x:bind-markup-extension)
-    - [Value Converters](chapters/windows-10-binding.md#value-converters)
-- Windows 10 Accessibility
-    - Access Keys 
-- [Van Arsdel Inventory Architecture](chapters/architecture/architecture.md)
-    - Description 
-    - Solution Structure
-    - Authentication and Authorization
+        - [Model](chapters/mvvm.md#model)
+        - [View](chapters/mvvm.md#view)
+        - [View Model](chapters/mvvm.md#view-model)
+        - [Data Binding](chapters/mvvm.md#data-binding)
+        - [Commands](chapters/mvvm.md#commands)
+    - [Windows 10 Binding](chapters/windows-10-binding.md)
+        - [Binding Elements](chapters/windows-10-binding.md#binding-elements)
+        - [Dependecy property](chapters/windows-10-binding.md#dependency-property)
+        - [Difference between x:Bind and Binding](chapters/windows-10-binding.md#Difference-between-x:Bind-and-Binding)
+        - [Binding markup extension](chapters/windows-10-binding.md#Binding-markup-extension)
+        - [x:Bind markup extension](chapters/windows-10-binding.md#x:bind-markup-extension)
+        - [Value Converters](chapters/windows-10-binding.md#value-converters)
+
+- [Inventory App Initial Setup](chapters/architecture/app-initial-setup.md)
+    - [The Startup class](chapters/architecture/app-initial-setup.md#the-startup-class)
+    - [Dependency Injection](chapters/architecture/app-initial-setup.md#dependency-injection)
+        - [What is Dependency Injection](chapters/architecture/app-initial-setup.md#what-is-dependency-injection)
+        - [Advantages of using DI](chapters/architecture/app-initial-setup.md#advantages-of-using-di)
+        - [Dependency Injection and ServiceLocator](chapters/architecture/app-initial-setup.md#Dependency-Injection-and-ServiceLocator)
+
+- [Infrastructure Services](chapters/architecture/infrastructure-services.md)
+    - [Message Service](chapters/architecture/message-service.md#message-service)
+        - [How to use it](chapters/architecture/message-service.md#How-to-use-it)
+        - [Message Service Implementation](chapters/architecture/message-service.md#Message-Service-Implementation)
     - [Navigation](chapters/architecture/navigation.md)
         - [Navigation Service](chapters/architecture/navigation-service.md)
             - [INavigationService](chapters/architecture/navigation-service.md#inavigationservice)
@@ -42,14 +36,7 @@
             - [ShellView](chapters/architecture/navigation-app.md#shellview)
             - [Frame Navigation](chapters/architecture/navigation-app.md#frame-navigation)
             - [Saving the state of the view when Navigate](chapters/architecture/navigation-app.md#Saving-the-state-of-the-view-when-Navigate)
-    - [Data Access](chapters/architecture/dataaccess.md#data-access)
-        - [Inventory.Data project](chapters/architecture/dataaccess.md#inventory.data-project)
-        - [Accessing the data from the app](chapters/architecture/dataaccess.md#accessing-the-data-from-the-app)
-    - [Message Service](chapters/architecture/message-service.md#message-service)
-        - [How to use it](chapters/architecture/message-service.md#How-to-use-it)
-        - [Message Service Implementation](chapters/architecture/message-service.md#Message-Service-Implementation)
-    - Localization
-    - ...
+
 - [Data Access](chapters/dataaccess.md)
     - [Entity Framework Core](chapters/dataaccess.md#entity-framework-core)
     - [Models definitions](chapters/dataaccess.md#models-definitions)
@@ -59,6 +46,32 @@
         - [DbSet](chapters/dataaccess.md#dbset)
         - [Commit changes to database](chapters/dataaccess.md#commit-changes-to-database)
         - [Other considerations](chapters/dataaccess.md#other-considerations)
+    - [Inventory App Data Access](chapters/architecture/dataaccess.md#data-access)
+        - [Inventory.Data project](chapters/architecture/dataaccess.md#inventory.data-project)
+        - [Accessing the data from the app](chapters/architecture/dataaccess.md#accessing-the-data-from-the-app)
+
+
+- [Globalization and Localization](chapters/Localization.md#Globalization-and-Localization)
+    - [Overview of the Globalization APIs](chapters/Localization.md#Overview-of-the-Globalization-APIs)
+    - [The User-Profile, App-Manifest and Runtime Language Lists](chapters/Localization.md#The-User-Profile,-App-Manifest-and-Runtime-Language-Lists)
+    - [Using string Resources](chapters/Localization.md#Using-string-Resources)
+    - [The user´s Geographic Region and Cultural Preferences](chapters/Localization.md#The-user´s-Geographic-Region-and-Cultural-Preferences)
+    - [Date and Time Globalization](chapters/Localization.md#Date-and-Time-Globalization)
+    - [Format numbers and currencies appropriately](chapters/Localization.md#Format-numbers-and-currencies-appropriately)
+    - [Format-phone-numbers-appropriately](chapters/Localization.md#Format-phone-numbers-appropriately)
+    - [The User Interface (UI) Globalization](chapters/Localization.md#The-User-Interface-(UI)-Globalization)
+    - [Fonts](chapters/Localization.md#Fonts)
+    - [Multilingual App Toolkit 4.0.](chapters/Localization.md#Multilingual-App-Toolkit-4.0.)
+
+- [Accessibility](chapters/Accessibility.md#Accessibility)
+    - [Access Keys](chapters/Accessibility.md#Access-Keys)
+    - [Keyboard Accelerators](chapters/Accessibility.md#Keyboard-Accelerators)
+
+- [.Net Standard](chapters/netstandard.md)
+    - [What is .Net Standard](chapters/netstandard.md#what-is-.net-standard)
+    - [Why .Net Standard?](chapters/netstandard.md#why-.net-standard)
+        - [Comparation with PCLs](chapters/netstandard.md#comparation-with-pcls)
+    
 - [Fluent Design](chapters/fluent-design/overview.md)
     - [Brushes](chapters/fluent-design/brushes.md)
     - [Animations](chapters/fluent-design/animations.md)
@@ -66,13 +79,6 @@
     - [Multiple Windows](chapters/fluent-design/multiple-windows.md)
     - [Responsive Design (Adaptive Layout)](chapters/fluent-design/responsive.md)
     - [Visual Layer (AKA Composition API)](chapters/fluent-design/visual-layer.md)
-- Windows 10 Universal Controls 
-  - NavigationView
-  - AutoSuggestBox
-  - SplitView
-  - PersonPicture
-  - CalendarDatePicker
-  - ParallaxView
 - [Windows Hello](chapters/windows-hello.md)
   - [What is Windows Hello?](chapters/windows-hello.md#what-is-windows-hello)
 	- [Authenticating with Hello](chapters/windows-hello.md#authenticating-with-hello)
@@ -88,5 +94,3 @@
 	- [Authentication at the backend side](chapters/windows-hello.md#authentication-at-the-backend-side)
 	- [Enrolling multiple devices](chapters/windows-hello.md#enrolling-multiple-devices)
 	- [Using multiple accounts](chapters/windows-hello.md#using-multiple-accounts)
-- UWP Community Toolkit
-    - *Pending for approval*

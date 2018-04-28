@@ -1,4 +1,18 @@
-﻿using System;
+﻿#region copyright
+// ******************************************************************
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THE CODE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
+// THE CODE OR THE USE OR OTHER DEALINGS IN THE CODE.
+// ******************************************************************
+#endregion
+
+using System;
 
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
@@ -6,13 +20,11 @@ using Windows.UI.Xaml.Controls;
 
 using Windows.Foundation;
 
-using Inventory.Animations;
-
 namespace Inventory.Controls
 {
     public class LabelSuggestBox : Control, IInputControl
     {
-        public event RoutedEventHandler EnterFocus;
+        public event RoutedEventHandler GotFocus;
 
         public event TypedEventHandler<AutoSuggestBox, AutoSuggestBoxTextChangedEventArgs> TextChanged;
         public event TypedEventHandler<AutoSuggestBox, AutoSuggestBoxSuggestionChosenEventArgs> SuggestionChosen;
@@ -46,16 +58,6 @@ namespace Inventory.Controls
         }
 
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register(nameof(Text), typeof(string), typeof(LabelSuggestBox), new PropertyMetadata(null));
-        #endregion
-
-        #region DisplayText
-        public string DisplayText
-        {
-            get { return (string)GetValue(DisplayTextProperty); }
-            set { SetValue(DisplayTextProperty, value); }
-        }
-
-        public static readonly DependencyProperty DisplayTextProperty = DependencyProperty.Register(nameof(DisplayText), typeof(string), typeof(LabelSuggestBox), new PropertyMetadata(null));
         #endregion
 
         #region Mode*
@@ -150,82 +152,98 @@ namespace Inventory.Controls
 
             _container.PointerEntered += OnPointerEntered;
             _container.PointerExited += OnPointerExited;
+            _container.PointerPressed += OnPointerPressed;
 
-            _autoSuggestBox.GotFocus += OnGotFocus;
-            _autoSuggestBox.LostFocus += OnLostFocus;
+            _container.GotFocus += OnGotFocus;
+            _container.LostFocus += OnLostFocus;
 
             _autoSuggestBox.TextChanged += (s, a) => TextChanged?.Invoke(s, a);
             _autoSuggestBox.SuggestionChosen += (s, a) => SuggestionChosen?.Invoke(s, a);
             _autoSuggestBox.QuerySubmitted += (s, a) => QuerySubmitted?.Invoke(s, a);
 
-            UpdateMode();
+            UpdateMode();            
+        }
+
+        private void OnPointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            if (_autoSuggestBox.Visibility != Visibility.Visible)
+            {
+                if (Mode == TextEditMode.Auto)
+                {
+                    UpdateVisualState(_visualState.Edit);
+                    //Forzing an upddate of the layout to realise the TextBox's AutoSuggestBox
+                    _autoSuggestBox.UpdateLayout();
+                    _autoSuggestBox.Focus(FocusState.Programmatic);
+                }
+            }
         }
 
         private void OnPointerEntered(object sender, PointerRoutedEventArgs e)
         {
-            if (Mode == TextEditMode.Auto)
+            if (_autoSuggestBox.Visibility != Visibility.Visible)
             {
-                if (_autoSuggestBox.Opacity == 0.0)
-                {
-                    _border.Fade(500, 0.0, 1.0);
-                }
+                _border.Visibility = Visibility.Visible;
             }
         }
 
         private void OnPointerExited(object sender, PointerRoutedEventArgs e)
         {
-            if (Mode == TextEditMode.Auto)
+            if (_autoSuggestBox.Visibility != Visibility.Visible)
             {
-                if (_autoSuggestBox.Opacity == 0.0)
-                {
-                    _border.Fade(500, 1.0, 0.0);
-                }
+                _border.Visibility = Visibility.Collapsed;
             }
+
         }
 
         private void OnGotFocus(object sender, RoutedEventArgs e)
         {
-            _autoSuggestBox.Text = DisplayText;
-            _autoSuggestBox.Opacity = 1.0;
-            _border.Opacity = 1.0;
-            _displayText.Visibility = Visibility.Collapsed;
-            EnterFocus?.Invoke(this, e);
+            GotFocus?.Invoke(this, e);
         }
 
         private void OnLostFocus(object sender, RoutedEventArgs e)
         {
             if (Mode == TextEditMode.Auto)
             {
-                _border.Opacity = 0.0;
+                UpdateVisualState(_visualState.ReadOnly);
             }
-            _displayText.Visibility = Visibility.Visible;
-            _autoSuggestBox.Opacity = 0.0;
         }
 
         private void UpdateMode()
         {
-            if (_autoSuggestBox != null)
+            switch (Mode)
             {
-                switch (Mode)
+                case TextEditMode.Auto:
+                    UpdateVisualState(_visualState.ReadOnly);
+                    System.Diagnostics.Debug.WriteLine("Mode.Auto");
+                    break;
+                case TextEditMode.ReadOnly:
+                    System.Diagnostics.Debug.WriteLine("Mode.ReadOnly");
+                    UpdateVisualState(_visualState.ReadOnly);
+                    break;
+                case TextEditMode.ReadWrite:
+                    System.Diagnostics.Debug.WriteLine("Mode.Write");
+                    UpdateVisualState(_visualState.Edit);
+                    break;
+            }
+        }
+
+        private enum _visualState { ReadOnly, Edit }
+        private void UpdateVisualState(_visualState mode)
+        {
+            if (_autoSuggestBox != null && _displayText != null && _border != null)
+            {
+                switch (mode)
                 {
-                    case TextEditMode.ReadOnly:
-                        _displayText.Opacity = 0.5;
+                    case _visualState.ReadOnly:
+                        _displayText.Text = _autoSuggestBox.Text;
                         _autoSuggestBox.Visibility = Visibility.Collapsed;
                         _border.Visibility = Visibility.Collapsed;
+                        _displayText.Visibility = Visibility.Visible;
                         break;
-                    case TextEditMode.Auto:
-                        _displayText.Opacity = 1.0;
+                    case _visualState.Edit:
                         _autoSuggestBox.Visibility = Visibility.Visible;
-                        _border.Opacity = 0.0;
-                        _border.IsHitTestVisible = false;
-                        _border.Visibility = Visibility.Visible;
-                        break;
-                    case TextEditMode.ReadWrite:
-                        _displayText.Opacity = 1.0;
-                        _autoSuggestBox.Visibility = Visibility.Visible;
-                        _border.Opacity = 1.0;
-                        _border.IsHitTestVisible = false;
-                        _border.Visibility = Visibility.Visible;
+                        _border.Visibility = Visibility.Collapsed;
+                        _displayText.Visibility = Visibility.Collapsed;
                         break;
                 }
             }

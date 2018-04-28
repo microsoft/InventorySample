@@ -10,7 +10,7 @@ Animations have never been easier. You can add them declaratively in XAML. This 
 Depending on which control we are using, animations can be used almost with no effort because they already ready to be used. We will detail some of the most important.
 
 #### Frame
-`Frame` is a handy control to handle navigation between different contents. In  the improve the experience, we can make it use animations that will be applied to the content being navigated. To do it, just specify a transition animation in its `ContentTransitions`:
+`Frame` is a handy control to handle navigation between different contents. In the improve the experience, we can make it use animations that will be applied to the content being navigated. To do it, just specify a transition animation in its `ContentTransitions`:
 
 ```xml
 <Frame x:Name="frame">

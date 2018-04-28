@@ -1,4 +1,18 @@
-﻿using System;
+﻿#region copyright
+// ******************************************************************
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THE CODE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
+// THE CODE OR THE USE OR OTHER DEALINGS IN THE CODE.
+// ******************************************************************
+#endregion
+
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,11 +26,10 @@ namespace Inventory.ViewModels
     {
         private readonly NavigationItem DashboardItem = new NavigationItem(0xE80F, "Dashboard", typeof(DashboardViewModel));
         private readonly NavigationItem CustomersItem = new NavigationItem(0xE716, "Customers", typeof(CustomersViewModel));
-        private readonly NavigationItem OrdersItem = new NavigationItem(0xE14C, "Orders", typeof(OrdersViewModel));
-        private readonly NavigationItem ProductsItem = new NavigationItem(0xECAA, "Products", typeof(ProductsViewModel));
+        private readonly NavigationItem OrdersItem = new NavigationItem(0xE8A1, "Orders", typeof(OrdersViewModel));
+        private readonly NavigationItem ProductsItem = new NavigationItem(0xE781, "Products", typeof(ProductsViewModel));
         private readonly NavigationItem AppLogsItem = new NavigationItem(0xE7BA, "Activity Log", typeof(AppLogsViewModel));
         private readonly NavigationItem SettingsItem = new NavigationItem(0x0000, "Settings", typeof(SettingsViewModel));
-
         public MainShellViewModel(ICommonServices commonServices) : base(commonServices)
         {
         }

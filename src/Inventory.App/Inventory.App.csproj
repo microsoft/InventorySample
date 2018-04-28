@@ -122,6 +122,7 @@
     <Compile Include="Controls\Details\Details.xaml.cs">
       <DependentUpon>Details.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FluidGrid\FluidGrid.cs" />
     <Compile Include="Controls\Inputs\InputCommon.cs" />
     <Compile Include="Controls\Inputs\LabelCalendar.cs" />
     <Compile Include="Controls\Inputs\LabelComboBox.cs" />
@@ -140,6 +141,7 @@
     </Compile>
     <Compile Include="Controls\Toolbars\ToolbarCommon.cs" />
     <Compile Include="Controls\WindowTitle\WindowTitle.cs" />
+    <Compile Include="Controls\WrapPanel\WrapPanel.cs" />
     <Compile Include="Converters\BoolNegationConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\DateTimeFormatConverter.cs" />
@@ -409,6 +411,14 @@
     <Page Include="Styles\DataGrid.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\NavigationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\PivotHeaderItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\ToolBar.xaml">
       <Generator>MSBuild:Compile</Generator>

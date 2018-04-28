@@ -1,4 +1,18 @@
-﻿using System;
+﻿#region copyright
+// ******************************************************************
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THE CODE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
+// THE CODE OR THE USE OR OTHER DEALINGS IN THE CODE.
+// ******************************************************************
+#endregion
+
+using System;
 
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -120,7 +134,10 @@ namespace Inventory.Controls
             {
                 _content.RowDefinitions[0].Height = Header == null ? GridLengths.Zero : GridLengths.Auto;
                 _content.RowDefinitions[2].Height = Footer == null ? GridLengths.Zero : GridLengths.Auto;
-                _button.Visibility = IsButtonVisible && !String.IsNullOrEmpty($"{HeaderButtonGlyph}{HeaderButtonLabel}") ? Visibility.Visible : Visibility.Collapsed;
+                if (_button != null)
+                {
+                    _button.Visibility = IsButtonVisible && !String.IsNullOrEmpty($"{HeaderButtonGlyph}{HeaderButtonLabel}") ? Visibility.Visible : Visibility.Collapsed;
+                }
                 UpdateContainer();
             }
         }
@@ -147,8 +164,10 @@ namespace Inventory.Controls
             _content = base.GetTemplateChild("content") as Grid;
 
             _button = base.GetTemplateChild("button") as IconLabelButton;
-            _button.Click += OnClick;
-
+            if (_button != null)
+            {
+                _button.Click += OnClick;
+            }
             IsEnabledChanged += OnIsEnabledChanged;
 
             UpdateControl();

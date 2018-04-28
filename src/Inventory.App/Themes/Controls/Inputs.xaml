@@ -9,9 +9,21 @@
             <Setter.Value>
                 <ControlTemplate TargetType="controls:LabelTextBlock">
                     <Grid>
-                        <TextBlock Padding="6,16,6,4" FontSize="{TemplateBinding FontSize}" Text="{TemplateBinding DisplayText}" TextWrapping="{TemplateBinding TextWrapping}"
-                                   TextAlignment="{TemplateBinding TextAlignment}" TextTrimming="WordEllipsis" IsTextSelectionEnabled="True" />
-                        <TextBlock Margin="6,2" Text="{TemplateBinding Label}" FontSize="12" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" IsHitTestVisible="False" TextAlignment="{TemplateBinding TextAlignment}" />
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition MinHeight="34" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{TemplateBinding Label}" 
+                                   Foreground="{ThemeResource SystemControlForegroundAccentBrush}" 
+                                   TextAlignment="{TemplateBinding TextAlignment}" />
+
+                        <TextBlock Grid.Row="1" 
+                                   FontSize="{TemplateBinding FontSize}" 
+                                   Text="{TemplateBinding DisplayText}" 
+                                   TextWrapping="{TemplateBinding TextWrapping}"
+                                   TextAlignment="{TemplateBinding TextAlignment}" 
+                                   TextTrimming="WordEllipsis" 
+                                   IsTextSelectionEnabled="True" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -25,13 +37,32 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:LabelTextBox">
-                    <Grid x:Name="container" Background="Transparent">
-                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" IsHitTestVisible="False" Opacity="0.0" />
-                        <TextBox x:Name="inputText" Padding="6,16,6,2" MaxLength="{TemplateBinding MaxLength}" FontSize="14" BorderThickness="1" Opacity="0.0"
-                                 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                        <TextBlock x:Name="displayText" Padding="7,17,6,2" Text="{TemplateBinding FormattedText}" FontSize="14" IsHitTestVisible="False" />
-                        <TextBlock Margin="6,2" Text="{TemplateBinding Label}" FontSize="12" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" IsHitTestVisible="False" />
-                    </Grid>
+                    <Grid x:Name="container"  Background="Transparent">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition MinHeight="34" />
+                        </Grid.RowDefinitions>
+                        
+                        <TextBlock x:Name="label"
+                                   Text="{TemplateBinding Label}"
+                                   Margin="10,0"
+                                   Foreground="{ThemeResource SystemControlForegroundAccentBrush}"/>
+                        <TextBlock x:Name="displayText" 
+                                   Grid.Row="1"
+                                   Text="{TemplateBinding FormattedText}"
+                                   Margin="12,5"/>
+                        <TextBox x:Name="inputText" 
+                                 Grid.Row="1"
+                                 Visibility="Collapsed"
+                                 MaxLength="{TemplateBinding MaxLength}"                    
+                                 BorderThickness="1" 
+                                 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Border x:Name="border" 
+                                Grid.RowSpan="2"
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                Visibility="Collapsed"/>
+                   </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -45,20 +76,32 @@
             <Setter.Value>
                 <ControlTemplate TargetType="controls:LabelSuggestBox">
                     <Grid x:Name="container" Background="Transparent">
-                        <AutoSuggestBox x:Name="autoSuggestBox" Padding="6,16,6,4" FontSize="14" BorderThickness="0" Opacity="0.0"
-                                        ItemsSource="{TemplateBinding ItemsSource}" ItemTemplate="{TemplateBinding ItemTemplate}" ItemContainerStyle="{TemplateBinding ItemContainerStyle}"
-                                        PlaceholderText="{TemplateBinding PlaceholderText}" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text}">
-                            <AutoSuggestBox.TextBoxStyle>
-                                <Style TargetType="TextBox" BasedOn="{StaticResource AutoSuggestBoxTextBoxStyle}">
-                                    <Setter Property="Padding" Value="6,16,6,4" />
-                                    <Setter Property="BorderThickness" Value="0" />
-                                    <Setter Property="FontSize" Value="14" />
-                                </Style>
-                            </AutoSuggestBox.TextBoxStyle>
-                        </AutoSuggestBox>
-                        <TextBlock x:Name="displayText" Padding="6,16,6,4" Text="{TemplateBinding DisplayText}" FontSize="14" IsHitTestVisible="False" />
-                        <TextBlock Margin="6,2" Text="{TemplateBinding Label}" FontSize="12" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" IsHitTestVisible="False" />
-                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" IsHitTestVisible="False" Opacity="0.0" />
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition MinHeight="34" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock x:Name="label"
+                                   Margin="6,2" 
+                                   Text="{TemplateBinding Label}"
+                                   Foreground="{ThemeResource SystemControlForegroundAccentBrush}"/>
+                        <TextBlock x:Name="displayText" 
+                                   Grid.Row="1"
+                                   Padding="12,5" 
+                                   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text}"/>
+                        <Border x:Name="border" 
+                                Grid.RowSpan="2"
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Visibility="Collapsed"/>
+                        <AutoSuggestBox x:Name="autoSuggestBox" 
+                                        Grid.Row="1"
+                                        BorderThickness="1"
+                                        ItemsSource="{TemplateBinding ItemsSource}" 
+                                        ItemTemplate="{TemplateBinding ItemTemplate}" 
+                                        ItemContainerStyle="{TemplateBinding ItemContainerStyle}"
+                                        PlaceholderText="{TemplateBinding PlaceholderText}" 
+                                        Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text}"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -72,10 +115,24 @@
             <Setter.Value>
                 <ControlTemplate TargetType="controls:LabelCalendar">
                     <Grid x:Name="container" Background="Transparent">
-                        <CalendarDatePicker x:Name="calendar" Date="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Date, Mode=TwoWay}"
-                                            Style="{StaticResource CalendarPickerStyle}" BorderThickness="0" HorizontalAlignment="Stretch" />
-                        <TextBlock Margin="6,2" Text="{TemplateBinding Label}" FontSize="12" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" IsHitTestVisible="False" />
-                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" IsHitTestVisible="False" Opacity="0.0" />
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition MinHeight="34" />
+                        </Grid.RowDefinitions>
+                        <TextBlock x:Name="label"
+                                   Margin="10,0"                            
+                                   Text="{TemplateBinding Label}" 
+                                   Foreground="{ThemeResource SystemControlForegroundAccentBrush}"/>
+                        <CalendarDatePicker x:Name="calendar" 
+                                            Grid.Row="1"
+                                            Date="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Date, Mode=TwoWay}"
+                                            BorderThickness="1" 
+                                            HorizontalAlignment="Stretch" />
+                        <Border x:Name="border" 
+                                Grid.RowSpan="2"
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Visibility="Collapsed"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -90,11 +147,28 @@
             <Setter.Value>
                 <ControlTemplate TargetType="controls:LabelComboBox">
                     <Grid x:Name="container" Background="Transparent">
-                        <ComboBox x:Name="combo" Padding="6,16,6,4" ItemsSource="{TemplateBinding ItemsSource}" FontSize="14" BorderThickness="0" HorizontalAlignment="Stretch"
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition MinHeight="34" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock x:Name="label"
+                                   Text="{TemplateBinding Label}" 
+                                   Margin="10,0"
+                                   Foreground="{ThemeResource SystemControlForegroundAccentBrush}"/>
+                        <ComboBox x:Name="combo" 
+                                  Grid.Row="1"
+                                  ItemsSource="{TemplateBinding ItemsSource}" 
+                                  BorderThickness="1"
+                                  HorizontalAlignment="Stretch"
                                   SelectedValue="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectedValue, Mode=TwoWay}"
-                                  SelectedValuePath="{TemplateBinding SelectedValuePath}" DisplayMemberPath="{TemplateBinding DisplayMemberPath}" />
-                        <TextBlock Margin="6,2" Text="{TemplateBinding Label}" FontSize="12" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" IsHitTestVisible="False" />
-                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" IsHitTestVisible="False" Opacity="0.0" />
+                                  SelectedValuePath="{TemplateBinding SelectedValuePath}" 
+                                  DisplayMemberPath="{TemplateBinding DisplayMemberPath}" />
+                        <Border x:Name="border" 
+                                Grid.RowSpan="2"
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                Visibility="Collapsed" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

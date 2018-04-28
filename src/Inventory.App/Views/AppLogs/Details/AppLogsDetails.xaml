@@ -10,12 +10,10 @@
 
     <UserControl.Resources>
         <DataTemplate x:Key="DetailsTemplate" x:DataType="viewmodels:AppLogDetailsViewModel">
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <StackPanel Spacing="6" Margin="0,6">
-                    <controls:LabelTextBlock Label="Message" Text="{x:Bind Item.Message, Mode=TwoWay}" />
-                    <controls:LabelTextBlock Label="Description" Text="{x:Bind Item.Description, Mode=TwoWay}" />
-                </StackPanel>
-            </ScrollViewer>
+            <StackPanel Margin="0,12" Spacing="6" >
+                <controls:LabelTextBlock Label="Message" Text="{x:Bind Item.Message, Mode=TwoWay}" />
+                <controls:LabelTextBlock Label="Description" Text="{x:Bind Item.Description, Mode=TwoWay}" />
+            </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
 
@@ -25,7 +23,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Background="WhiteSmoke">
+        <Grid Background="WhiteSmoke" BorderThickness="0,0,1,0" BorderBrush="LightGray">
             <StackPanel Spacing="2">
                 <Rectangle Margin="6" />
 
@@ -38,15 +36,13 @@
 
                 <Rectangle Margin="6" />
 
-                <StackPanel Margin="6,2">
-                    <TextBlock Margin="6,0" Text="General" />
-                    <Rectangle Margin="6,2" Fill="LightGray" Height="1" />
+                <StackPanel Margin="6,6">
                     <Grid Margin="6,2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*"/>
                             <ColumnDefinition Width="3*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Log ID:" FontSize="14" FontWeight="SemiBold" />
+                        <TextBlock Grid.Column="0" Text="Log ID:" FontSize="14"  />
                         <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.Item.Id, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" />
                     </Grid>
 
@@ -55,7 +51,7 @@
                             <ColumnDefinition Width="2*"/>
                             <ColumnDefinition Width="3*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Date:" FontSize="14" FontWeight="SemiBold" />
+                        <TextBlock Grid.Column="0" Text="Date:" FontSize="14" />
                         <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.Item.DateTime, Mode=OneWay, Converter={StaticResource DateTimeFormatConverter}}" IsTextSelectionEnabled="True" FontSize="14" />
                     </Grid>
 
@@ -64,7 +60,7 @@
                             <ColumnDefinition Width="2*"/>
                             <ColumnDefinition Width="3*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Time:" FontSize="14" FontWeight="SemiBold" />
+                        <TextBlock Grid.Column="0" Text="Time:" FontSize="14" />
                         <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.Item.DateTime, Mode=OneWay, ConverterParameter=longtime, Converter={StaticResource DateTimeFormatConverter}}" IsTextSelectionEnabled="True" FontSize="14" />
                     </Grid>
 
@@ -73,7 +69,7 @@
                             <ColumnDefinition Width="2*"/>
                             <ColumnDefinition Width="3*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="User:" FontSize="14" FontWeight="SemiBold" />
+                        <TextBlock Grid.Column="0" Text="User:" FontSize="14"  />
                         <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.Item.User, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" />
                     </Grid>
 
@@ -82,7 +78,7 @@
                             <ColumnDefinition Width="2*"/>
                             <ColumnDefinition Width="3*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Source:" FontSize="14" FontWeight="SemiBold" />
+                        <TextBlock Grid.Column="0" Text="Source:" FontSize="14"  />
                         <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.Item.Source, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" />
                     </Grid>
 
@@ -91,7 +87,7 @@
                             <ColumnDefinition Width="2*"/>
                             <ColumnDefinition Width="3*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Action:" FontSize="14" FontWeight="SemiBold" />
+                        <TextBlock Grid.Column="0" Text="Action:" FontSize="14"  />
                         <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.Item.Action, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" />
                     </Grid>
                 </StackPanel>

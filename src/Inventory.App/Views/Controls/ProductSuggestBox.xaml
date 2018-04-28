@@ -35,7 +35,7 @@
                               ItemTemplate="{StaticResource ItemTemplate}"
                               ItemContainerStyle="{StaticResource RowItemStyle}"
                               Label="Product"
-                              DisplayText="{x:Bind DisplayText, Mode=OneWay}"
+                              Text="{x:Bind DisplayText, Mode=OneWay}"
                               PlaceholderText="Search Product"
                               TextMemberPath="Name"
                               AutoMaximizeSuggestionArea="False"
