@@ -15,6 +15,7 @@
 using System;
 using System.Threading.Tasks;
 
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.ViewManagement;
@@ -65,9 +66,10 @@ namespace Inventory
                 var shellArgs = new ShellArgs
                 {
                     ViewModel = activationInfo.EntryViewModel,
-                    Parameter = activationInfo.EntryArgs
+                    Parameter = activationInfo.EntryArgs,
+                    UserInfo = await TryGetUserInfoAsync(e as IActivatedEventArgsWithUser)
                 };
-                frame.Navigate(typeof(MainShellView), shellArgs);
+                frame.Navigate(typeof(LoginView), shellArgs);
 
                 Window.Current.Activate();
             }
@@ -76,6 +78,26 @@ namespace Inventory
                 var navigationService = ServiceLocator.Current.GetService<INavigationService>();
                 await navigationService.CreateNewViewAsync(activationInfo.EntryViewModel, activationInfo.EntryArgs);
             }
+        }
+
+        private async Task<UserInfo> TryGetUserInfoAsync(IActivatedEventArgsWithUser argsWithUser)
+        {
+            if (argsWithUser != null)
+            {
+                var user = argsWithUser.User;
+                var userInfo = new UserInfo
+                {
+                    AccountName = await user.GetPropertyAsync(KnownUserProperties.AccountName) as String,
+                    FirstName = await user.GetPropertyAsync(KnownUserProperties.FirstName) as String,
+                    LastName = await user.GetPropertyAsync(KnownUserProperties.LastName) as String
+                };
+                if (String.IsNullOrEmpty(userInfo.AccountName))
+                {
+                    userInfo.AccountName = $"{userInfo.FirstName} {userInfo.LastName}";
+                }
+                return userInfo;
+            }
+            return UserInfo.Default;
         }
 
         private async void OnSuspending(object sender, SuspendingEventArgs e)

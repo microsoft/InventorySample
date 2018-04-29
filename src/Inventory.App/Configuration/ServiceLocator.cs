@@ -44,10 +44,13 @@ namespace Inventory
             serviceCollection.AddSingleton<ILogService, LogService>();
             serviceCollection.AddSingleton<IDialogService, DialogService>();
             serviceCollection.AddSingleton<IFilePickerService, FilePickerService>();
+            serviceCollection.AddSingleton<ILoginService, LoginService>();
 
             serviceCollection.AddScoped<IContextService, ContextService>();
             serviceCollection.AddScoped<INavigationService, NavigationService>();
             serviceCollection.AddScoped<ICommonServices, CommonServices>();
+
+            serviceCollection.AddTransient<LoginViewModel>();
 
             serviceCollection.AddTransient<ShellViewModel>();
             serviceCollection.AddTransient<MainShellViewModel>();
@@ -67,7 +70,6 @@ namespace Inventory
             serviceCollection.AddTransient<ProductDetailsViewModel>();
 
             serviceCollection.AddTransient<AppLogsViewModel>();
-            //serviceCollection.AddTransient<AppLogDetailsViewModel>();
 
             serviceCollection.AddTransient<SettingsViewModel>();
 

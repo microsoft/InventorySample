@@ -168,6 +168,7 @@
     <Compile Include="Services\Infrastructure\ContextService.cs" />
     <Compile Include="Services\Infrastructure\DialogService.cs" />
     <Compile Include="Services\Infrastructure\FilePickerService.cs" />
+    <Compile Include="Services\Infrastructure\LoginService.cs" />
     <Compile Include="Services\Infrastructure\LogService\LogCollection.cs" />
     <Compile Include="Services\Infrastructure\LogService\LogService.cs" />
     <Compile Include="Services\Infrastructure\MessageService.cs" />
@@ -245,6 +246,12 @@
     </Compile>
     <Compile Include="Views\Login\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Login\WindowsHelloControl.xaml.cs">
+      <DependentUpon>WindowsHelloControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Login\NamePasswordControl.xaml.cs">
+      <DependentUpon>NamePasswordControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\OrderItems\Details\OrderItemsCard.xaml.cs">
       <DependentUpon>OrderItemsCard.xaml</DependentUpon>
@@ -324,6 +331,7 @@
   <ItemGroup>
     <Content Include="Assets\AppLogo.png" />
     <Content Include="Assets\Html\ChartHtmlControl.html" />
+    <Content Include="Assets\Images\LoginBackground.jpg" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Properties\Default.rd.xml" />
@@ -517,6 +525,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Login\LoginView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Login\WindowsHelloControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Login\NamePasswordControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -60,6 +60,18 @@ namespace Inventory
             }
         }
 
+        public string UserName
+        {
+            get => GetSettingsValue("UserName", default(String));
+            set => LocalSettings.Values["UserName"] = value;
+        }
+
+        public string WindowsHelloPublicKeyHint
+        {
+            get => GetSettingsValue("WindowsHelloPublicKeyHint", default(String));
+            set => LocalSettings.Values["WindowsHelloPublicKeyHint"] = value;
+        }
+
         public DataProviderType DataProvider
         {
             get => (DataProviderType)GetSettingsValue("DataProvider", (int)DataProviderType.SQLite);

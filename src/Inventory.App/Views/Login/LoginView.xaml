@@ -4,9 +4,61 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="using:Inventory.Views"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
 
+            <Grid>
+                <Border x:Name="background">
+                    <Image Source="ms-appx:///Assets/Images/LoginBackground.jpg" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.9" />
+                </Border>
+            </Grid>
+
+            <TextBox Grid.RowSpan="2" GotFocus="OnBackgroundFocus" Opacity="0" />
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <StackPanel x:Name="foreground" Grid.Row="1" VerticalAlignment="Center">
+                    <Grid GotFocus="OnForegroundFocus">
+                        <views:NamePasswordControl x:Name="passwordView" HorizontalAlignment="Center"
+                                                   UserName="{x:Bind ViewModel.UserName, Mode=TwoWay}" Password="{x:Bind ViewModel.Password}"
+                                                   LoginWithPasswordCommand="{x:Bind ViewModel.LoginWithPasswordCommand}"
+                                                   Visibility="{x:Bind ViewModel.IsLoginWithPassword, Mode=OneWay}"
+                                                   IsEnabled="{x:Bind ViewModel.IsBusy, Converter={StaticResource BoolNegationConverter}}" />
+
+                        <views:WindowsHelloControl x:Name="helloView" HorizontalAlignment="Center"
+                                                   UserName="{x:Bind ViewModel.UserName, Mode=OneWay}"
+                                                   LoginWithWindowHelloCommand="{x:Bind ViewModel.LoginWithWindowHelloCommand}"
+                                                   Visibility="{x:Bind ViewModel.IsLoginWithWindowsHello, Mode=OneWay}"
+                                                   IsEnabled="{x:Bind ViewModel.IsBusy, Converter={StaticResource BoolNegationConverter}}" />
+                    </Grid>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" IsHitTestVisible="False" />
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+
+                <HyperlinkButton Content="Sign in with another user" Foreground="#222" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                 Visibility="{x:Bind ViewModel.IsLoginWithWindowsHello, Mode=OneWay}"
+                                 Click="OnShowLoginWithPassword" Command="{x:Bind ViewModel.ShowLoginWithPasswordCommand}" />
+                <Border Grid.Row="1">
+                    <Image Margin="24" Source="ms-appx:///Assets/AppLogo.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" />
+                </Border>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

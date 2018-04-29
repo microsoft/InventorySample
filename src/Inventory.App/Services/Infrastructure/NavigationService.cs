@@ -80,10 +80,6 @@ namespace Inventory.Services
 
         public void Initialize(object frame)
         {
-            if (Frame != null)
-            {
-                throw new InvalidOperationException("Navigation frame already initialized.");
-            }
             Frame = frame as Frame;
         }
 

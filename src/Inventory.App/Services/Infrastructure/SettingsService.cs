@@ -20,6 +20,12 @@ namespace Inventory.Services
     {
         public string Version => AppSettings.Current.Version;
 
+        public string UserName
+        {
+            get => AppSettings.Current.UserName;
+            set => AppSettings.Current.UserName = value;
+        }
+
         public DataProviderType DataProvider
         {
             get => AppSettings.Current.DataProvider;

@@ -23,6 +23,7 @@ namespace Inventory.ViewModels
     {
         public Type ViewModel { get; set; }
         public object Parameter { get; set; }
+        public UserInfo UserInfo { get; set; }
     }
 
     public class ShellViewModel : ViewModelBase

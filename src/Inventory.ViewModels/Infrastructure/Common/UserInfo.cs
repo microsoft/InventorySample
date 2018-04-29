@@ -14,23 +14,21 @@
 
 using System;
 
-namespace Inventory.Services
+namespace Inventory
 {
-    public enum DataProviderType
+    public class UserInfo
     {
-        SQLite,
-        SQLServer,
-        WebAPI
-    }
+        static readonly public UserInfo Default = new UserInfo
+        {
+            AccountName = "Lacey Heath",
+            FirstName = "Lacey",
+            LastName = "Heath"
+        };
 
-    public interface ISettingsService
-    {
-        string Version { get; }
+        public string AccountName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
-        string UserName { get; set; }
-
-        DataProviderType DataProvider { get; set; }
-        string SQLServerConnectionString { get; set; }
-        bool IsRandomErrorsEnabled { get; set; }
+        public string DisplayName => $"{FirstName} {LastName}";
     }
 }

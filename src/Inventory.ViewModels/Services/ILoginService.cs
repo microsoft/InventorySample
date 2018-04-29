@@ -13,24 +13,16 @@
 #endregion
 
 using System;
+using System.Threading.Tasks;
 
 namespace Inventory.Services
 {
-    public enum DataProviderType
+    public interface ILoginService
     {
-        SQLite,
-        SQLServer,
-        WebAPI
-    }
+        Task<bool> SignInWithPasswordAsync(string userName, string password);
 
-    public interface ISettingsService
-    {
-        string Version { get; }
-
-        string UserName { get; set; }
-
-        DataProviderType DataProvider { get; set; }
-        string SQLServerConnectionString { get; set; }
-        bool IsRandomErrorsEnabled { get; set; }
+        bool IsWindowsHelloEnabled(string userName);
+        Task TrySetupWindowsHelloAsync(string userName);
+        Task<Result> SignInWithWindowsHelloAsync();
     }
 }
