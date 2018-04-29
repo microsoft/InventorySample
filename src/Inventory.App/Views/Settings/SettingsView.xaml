@@ -8,19 +8,23 @@
     xmlns:inventory="using:Inventory.Views"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <!--<controls:WindowTitle Title="Settings" />
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="24">
+        <controls:WindowTitle Title="Settings" />
 
-        <Image Source="ms-appx:///Assets/AppLogo.png" HorizontalAlignment="Center" VerticalAlignment="Top" Stretch="None" />
-        <StackPanel Margin="24,220" VerticalAlignment="Top">
-            <TextBlock Text="VanArsdel Inventory" FontSize="18" HorizontalAlignment="Center" />
-            <TextBlock Text="{x:Bind ViewModel.Version}" FontSize="15" HorizontalAlignment="Center" />
+        <Image Source="ms-appx:///Assets/AppLogo.png" Margin="-50,0" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="None" />
+        <StackPanel Margin="0,220" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <TextBlock Text="VanArsdel Inventory Sample"/>
+            <TextBlock Text="{x:Bind ViewModel.Version}" />
+            <TextBlock><Hyperlink NavigateUri="https://github.com/Microsoft/InventorySample">https://github.com/Microsoft/InventorySample</Hyperlink></TextBlock>
+
         </StackPanel>
 
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="Enable random error generation for testing purposes." />
-            <ToggleSwitch IsOn="{x:Bind ViewModel.IsRandomErrorsEnabled, Mode=TwoWay}" />
-            </StackPanel>-->
-        <inventory:CustomerView />
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+
+            <TextBlock Margin="0,12" Text="Testing" Style="{StaticResource TitleTextBlockStyle}"  />
+
+            <ToggleSwitch Header="Enable random error generation for testing the Activity Log" 
+                          IsOn="{x:Bind ViewModel.IsRandomErrorsEnabled, Mode=TwoWay}" />
+        </StackPanel>
     </Grid>
 </Page>

@@ -46,8 +46,8 @@
                   Visibility="{x:Bind ViewModel.CustomerList.IsMultipleSelection, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}">
                 <controls:Section IsEnabled="{x:Bind ViewModel.CustomerDetails.IsEnabled, Mode=OneWay}" 
                                   HeaderButtonGlyph="&#xE2B4;" 
-                                  Background="{StaticResource DetailsViewBackgroundColor}"
                                   HeaderButtonClick="OpenDetailsInNewView" 
+                                  Background="{StaticResource DetailsViewBackgroundColor}"
                                   Visibility="{x:Bind ViewModel.CustomerDetails.IsDataAvailable, Mode=OneWay}">
 
                     <Pivot x:Name="pivot">

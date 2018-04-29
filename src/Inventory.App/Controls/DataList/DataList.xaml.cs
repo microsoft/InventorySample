@@ -1,4 +1,18 @@
-﻿using System;
+﻿#region copyright
+// ******************************************************************
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THE CODE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
+// THE CODE OR THE USE OR OTHER DEALINGS IN THE CODE.
+// ******************************************************************
+#endregion
+
+using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Specialized;
@@ -80,6 +94,16 @@ namespace Inventory.Controls
         }
 
         public static readonly DependencyProperty ItemTemplateProperty = DependencyProperty.Register(nameof(ItemTemplate), typeof(DataTemplate), typeof(DataList), new PropertyMetadata(null));
+        #endregion
+
+        #region ItemSecondaryActionInvokedCommand
+        public ICommand ItemSecondaryActionInvokedCommand
+        {
+            get { return (ICommand)GetValue(ItemSecondaryActionInvokedCommandProperty); }
+            set { SetValue(ItemSecondaryActionInvokedCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty ItemSecondaryActionInvokedCommandProperty = DependencyProperty.Register(nameof(ItemSecondaryActionInvokedCommand), typeof(ICommand), typeof(DataGrid), new PropertyMetadata(null));
         #endregion
 
         #region DefaultCommands
@@ -284,6 +308,14 @@ namespace Inventory.Controls
                         }
                     }
                 }
+            }
+        }
+
+        private void OnDoubleTapped(object sender, Windows.UI.Xaml.Input.DoubleTappedRoutedEventArgs e)
+        {
+            if (!IsMultipleSelection)
+            {
+                ItemSecondaryActionInvokedCommand?.TryExecute(listview.SelectedItem);
             }
         }
 

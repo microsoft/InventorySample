@@ -32,6 +32,7 @@
         <!--List Content-->
         <Grid Grid.Row="2">
             <ListView x:Name="listview"
+                  DoubleTapped="OnDoubleTapped"
                   ItemsSource="{x:Bind ItemsSource, Mode=OneWay}"
                   ItemTemplate="{x:Bind ItemTemplate}"
                   ItemContainerStyle="{StaticResource RowItemStyle}"
