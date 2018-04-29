@@ -45,6 +45,12 @@
             - [Frame Navigation](chapters/architecture/navigation-app.md#frame-navigation)
             - [Saving the state of the view when Navigate](chapters/architecture/navigation-app.md#Saving-the-state-of-the-view-when-Navigate)
 
+- [Views](chapters/architecture/views.md)
+    - [Lists](chapters/architecture/views.md#lists)
+        - [DataList control](chapters/architecture/views.md#datalist-control)
+    - [Detail](chapters/architecture/views.md#detail)
+        - [Details control](chapters/architecture/views.md#Details-control)
+
 - [Data Access](chapters/dataaccess.md)
     - [Entity Framework Core](chapters/dataaccess.md#entity-framework-core)
     - [Models definitions](chapters/dataaccess.md#models-definitions)
