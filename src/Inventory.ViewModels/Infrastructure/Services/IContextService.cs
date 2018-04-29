@@ -19,6 +19,8 @@ namespace Inventory.Services
 {
     public interface IContextService
     {
+        int MainViewID { get; }
+
         int ContextID { get; }
 
         bool IsMainView { get; }

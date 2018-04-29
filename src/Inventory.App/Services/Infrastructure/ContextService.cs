@@ -21,7 +21,11 @@ namespace Inventory.Services
 {
     public class ContextService : IContextService
     {
+        static private int _mainViewID = -1;
+
         private CoreDispatcher _dispatcher = null;
+
+        public int MainViewID => _mainViewID;
 
         public int ContextID { get; private set; }
 
@@ -32,6 +36,10 @@ namespace Inventory.Services
             _dispatcher = dispatcher as CoreDispatcher;
             ContextID = contextID;
             IsMainView = isMainView;
+            if (IsMainView)
+            {
+                _mainViewID = ContextID;
+            }
         }
 
         public async Task RunAsync(Action action)

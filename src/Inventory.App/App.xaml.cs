@@ -95,6 +95,11 @@ namespace Inventory
                 {
                     userInfo.AccountName = $"{userInfo.FirstName} {userInfo.LastName}";
                 }
+                var pictureStream = await user.GetPictureAsync(UserPictureSize.Size64x64);
+                if (pictureStream != null)
+                {
+                    userInfo.PictureSource = await BitmapTools.LoadBitmapAsync(pictureStream);
+                }
                 return userInfo;
             }
             return UserInfo.Default;

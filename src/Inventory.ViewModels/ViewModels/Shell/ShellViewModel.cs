@@ -28,8 +28,16 @@ namespace Inventory.ViewModels
 
     public class ShellViewModel : ViewModelBase
     {
-        public ShellViewModel(ICommonServices commonServices) : base(commonServices)
+        public ShellViewModel(ILoginService loginService, ICommonServices commonServices) : base(commonServices)
         {
+            IsLocked = !loginService.IsAuthenticated;
+        }
+
+        private bool _isLocked = false;
+        public bool IsLocked
+        {
+            get => _isLocked;
+            set => Set(ref _isLocked, value);
         }
 
         private bool _isBusy = false;
@@ -53,6 +61,8 @@ namespace Inventory.ViewModels
             set => Set(ref _isError, value);
         }
 
+        public UserInfo UserInfo { get; protected set; }
+
         public ShellArgs ViewModelArgs { get; protected set; }
 
         virtual public Task LoadAsync(ShellArgs args)
@@ -60,6 +70,7 @@ namespace Inventory.ViewModels
             ViewModelArgs = args;
             if (ViewModelArgs != null)
             {
+                UserInfo = ViewModelArgs.UserInfo;
                 NavigationService.Navigate(ViewModelArgs.ViewModel, ViewModelArgs.Parameter);
             }
             return Task.CompletedTask;
@@ -71,7 +82,9 @@ namespace Inventory.ViewModels
         virtual public void Subscribe()
         {
             MessageService.Subscribe<ViewModelBase, String>(this, OnMessage);
+            MessageService.Subscribe<ILoginService, bool>(this, OnLoginMessage);
         }
+
         virtual public void Unsubscribe()
         {
             MessageService.Unsubscribe(this);
@@ -89,6 +102,17 @@ namespace Inventory.ViewModels
                     IsError = message == "StatusError";
                     Message = status;
                     break;
+            }
+        }
+
+        private async void OnLoginMessage(ILoginService loginService, string message, bool isAuthenticated)
+        {
+            if (message == "AuthenticationChanged")
+            {
+                await ContextService.RunAsync(() =>
+                {
+                    IsLocked = !isAuthenticated;
+                });
             }
         }
     }

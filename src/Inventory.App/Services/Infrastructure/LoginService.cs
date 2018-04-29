@@ -24,12 +24,17 @@ namespace Inventory.Services
 {
     public class LoginService : ILoginService
     {
-        public LoginService(IDialogService dialogService)
+        public LoginService(IMessageService messageService, IDialogService dialogService)
         {
+            IsAuthenticated = false;
+            MessageService = messageService;
             DialogService = dialogService;
         }
 
+        public IMessageService MessageService { get; }
         public IDialogService DialogService { get; }
+
+        public bool IsAuthenticated { get; private set; }
 
         public bool IsWindowsHelloEnabled(string userName)
         {
@@ -47,6 +52,7 @@ namespace Inventory.Services
         {
             // Perform authentication here.
             // This sample accepts any user name and password.
+            UpdateAuthenticationStatus(true);
             return Task.FromResult(true);
         }
 
@@ -63,6 +69,7 @@ namespace Inventory.Services
                     var result = await credential.RequestSignAsync(challengeBuffer);
                     if (result.Status == KeyCredentialStatus.Success)
                     {
+                        UpdateAuthenticationStatus(true);
                         return Result.Ok();
                     }
                     return Result.Error("Windows Hello", $"Cannot sign in with Windows Hello: {result.Status}");
@@ -70,6 +77,17 @@ namespace Inventory.Services
                 return Result.Error("Windows Hello", $"Cannot sign in with Windows Hello: {retrieveResult.Status}");
             }
             return Result.Error("Windows Hello", "Windows Hello is not enabled for current user.");
+        }
+
+        public void Logoff()
+        {
+            UpdateAuthenticationStatus(false);
+        }
+
+        private void UpdateAuthenticationStatus(bool isAuthenticated)
+        {
+            IsAuthenticated = isAuthenticated;
+            MessageService.Send(this, "AuthenticationChanged", IsAuthenticated);
         }
 
         public async Task TrySetupWindowsHelloAsync(string userName)

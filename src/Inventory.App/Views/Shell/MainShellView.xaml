@@ -4,11 +4,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:Inventory"
     xmlns:viewmodels="using:Inventory.ViewModels"
     mc:Ignorable="d">
 
     <Page.Resources>
-
         <DataTemplate x:Name="NavigationViewItem" x:DataType="viewmodels:NavigationItem">
             <Grid Height="40">
                 <Grid.ColumnDefinitions>
@@ -29,6 +29,26 @@
                            Foreground="{StaticResource Error}" />
             </Grid>
         </DataTemplate>
+
+        <DataTemplate x:Name="NavigationViewItemProfile" x:DataType="local:UserInfo">
+            <Grid Width="300" Height="40">
+                <Grid IsTapEnabled="False">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="32" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="28" />
+                        <ColumnDefinition Width="4" />
+                    </Grid.ColumnDefinitions>
+                    <Viewbox Margin="-4,6,0,6" HorizontalAlignment="Left">
+                        <PersonPicture ProfilePicture="{x:Bind PictureSource, Converter={StaticResource ObjectToImageConverter}}" DisplayName="{x:Bind DisplayName}" />
+                    </Viewbox>
+                    <TextBlock Grid.Column="1" Text="{x:Bind DisplayName}" VerticalAlignment="Center" />
+                    <FontIcon Grid.Column="2" Glyph="&#xE7E8;" VerticalAlignment="Center" />
+                </Grid>
+                <Button Margin="-4,0,0,0" BorderThickness="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Opacity="0" Click="OnLogoff" />
+            </Grid>
+        </DataTemplate>
+
         <Style x:Key="BaseTextBlockStyle" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="XamlAutoFontFamily"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
@@ -38,11 +58,13 @@
             <Setter Property="LineStackingStrategy" Value="MaxHeight"/>
             <Setter Property="TextLineBounds" Value="Full"/>
         </Style>
+        
         <Style x:Key="TitleTextBlockStyle" BasedOn="{StaticResource BaseTextBlockStyle}" TargetType="TextBlock">
             <Setter Property="FontWeight" Value="SemiLight"/>
             <Setter Property="FontSize" Value="24"/>
             <Setter Property="OpticalMarginAlignment" Value="TrimSideBearings"/>
         </Style>
+        
         <Style x:Key="PaneToggleButtonStyle" TargetType="Button">
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontFamily" Value="{StaticResource SymbolThemeFontFamily}"/>
@@ -156,12 +178,18 @@
                     </Frame.ContentTransitions>
                 </Frame>
             </Grid>
+
+            <NavigationView.PaneFooter>
+                <NavigationViewItem ContentTemplate="{StaticResource NavigationViewItemProfile}" Content="{x:Bind ViewModel.UserInfo}" />
+            </NavigationView.PaneFooter>
         </NavigationView>
+        
         <Button x:Name="NavigationViewBackButton"
                 IsEnabled="False"
                 Click="OnNavigationViewBackButton"
                 Content="&#xE72B;"
                 Style="{StaticResource PaneToggleButtonStyle}"/>
+        
         <Grid Grid.Row="1" Background="{ThemeResource SystemControlAccentAcrylicElementAccentMediumHighBrush}">
             <Rectangle Fill="{StaticResource Error}" Visibility="{x:Bind ViewModel.IsError, Mode=OneWay}" />
             <TextBlock Margin="6,4" Text="{x:Bind ViewModel.Message, Mode=OneWay}" Foreground="White" FontSize="12" />

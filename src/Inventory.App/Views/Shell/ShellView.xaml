@@ -7,25 +7,39 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
-            <ProgressRing IsActive="{x:Bind ViewModel.IsBusy}" />
-            <Frame x:Name="frame">
-                <Frame.ContentTransitions>
-                    <TransitionCollection>
-                        <NavigationThemeTransition/>
-                    </TransitionCollection>
-                </Frame.ContentTransitions>
-            </Frame>
+            <Grid Grid.Row="0">
+                <ProgressRing IsActive="{x:Bind ViewModel.IsBusy}" />
+                <Frame x:Name="frame">
+                    <Frame.ContentTransitions>
+                        <TransitionCollection>
+                            <NavigationThemeTransition/>
+                        </TransitionCollection>
+                    </Frame.ContentTransitions>
+                </Frame>
+            </Grid>
+
+            <Grid Grid.Row="1" Background="{ThemeResource SystemControlAccentAcrylicElementAccentMediumHighBrush}">
+                <Rectangle Fill="{StaticResource Error}" Visibility="{x:Bind ViewModel.IsError, Mode=OneWay}" />
+                <TextBlock Margin="6,4" Text="{x:Bind ViewModel.Message, Mode=OneWay}" Foreground="White" FontSize="12" />
+            </Grid>
         </Grid>
 
-        <Grid Grid.Row="1" Background="{ThemeResource SystemControlAccentAcrylicElementAccentMediumHighBrush}">
-            <Rectangle Fill="{StaticResource Error}" Visibility="{x:Bind ViewModel.IsError, Mode=OneWay}" />
-            <TextBlock Margin="6,4" Text="{x:Bind ViewModel.Message, Mode=OneWay}" Foreground="White" FontSize="12" />
+        <Grid RequestedTheme="Dark" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Visibility="{x:Bind ViewModel.IsLocked, Mode=OneWay}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <StackPanel VerticalAlignment="Center">
+                <Image Source="ms-appx:///Assets/SplashScreen.scale-200.png" Width="640" />
+                <TextBlock Text="Application is locked" HorizontalAlignment="Center" FontSize="18" />
+                <HyperlinkButton Content="Switch to main view to unlock" Foreground="White" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Click="OnUnlockClick" />
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>

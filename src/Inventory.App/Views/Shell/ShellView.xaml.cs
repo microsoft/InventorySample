@@ -66,5 +66,11 @@ namespace Inventory.Views
             appView.Consolidated -= OnViewConsolidated;
             ServiceLocator.DisposeCurrent();
         }
+
+        private async void OnUnlockClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            var context = ServiceLocator.Current.GetService<IContextService>();
+            await ApplicationViewSwitcher.SwitchAsync(context.MainViewID);
+        }
     }
 }

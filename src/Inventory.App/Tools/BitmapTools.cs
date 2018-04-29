@@ -38,5 +38,19 @@ namespace Inventory
             }
             return null;
         }
+
+        static public async Task<BitmapImage> LoadBitmapAsync(IRandomAccessStreamReference randomStreamReference)
+        {
+            var bitmap = new BitmapImage();
+            try
+            {
+                using (var stream = await randomStreamReference.OpenReadAsync())
+                {
+                    await bitmap.SetSourceAsync(stream);
+                }
+            }
+            catch { }
+            return bitmap;
+        }
     }
 }
