@@ -18,6 +18,11 @@
         - [x:Bind markup extension](chapters/windows-10-binding.md#x:bind-markup-extension)
         - [Value Converters](chapters/windows-10-binding.md#value-converters)
 
+- [ViewModels](chapters/architecture/view-models.md#View-Models)
+    - [The Base ViewModels](chapters/architecture/view-models.md#The-Base-ViewModels)
+        - [Infrastructure base ViewModels](chapters/architecture/view-models.md#Infrastructure-base-ViewModels)
+        - [Domain Base ViewModels](chapters/architecture/view-models.md#Domain-Base-ViewModels)
+
 - [Inventory App Initial Setup](chapters/architecture/app-initial-setup.md)
     - [The Startup class](chapters/architecture/app-initial-setup.md#the-startup-class)
     - [Dependency Injection](chapters/architecture/app-initial-setup.md#dependency-injection)
