@@ -34,7 +34,7 @@ namespace Inventory.Services
         public IMessageService MessageService { get; }
         public IDialogService DialogService { get; }
 
-        public bool IsAuthenticated { get; private set; }
+        public bool IsAuthenticated { get; set; }
 
         public bool IsWindowsHelloEnabled(string userName)
         {

@@ -34,7 +34,7 @@
         </DataTemplate>
 
         <DataTemplate x:Key="ItemTemplate" x:DataType="models:OrderItemModel">
-            <Grid BorderThickness="0,0,0,1" BorderBrush="LightGray">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="48"/>
                     <ColumnDefinition Width="6*"/>
@@ -62,6 +62,7 @@
     </UserControl.Resources>
 
     <controls:DataList ItemsSource="{x:Bind ViewModel.Items, Mode=OneWay}"
+                       ItemSecondaryActionInvokedCommand="{x:Bind ViewModel.OpenInNewViewCommand}"
                        NewLabel="New Order Item"
                        SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay}"
                        HeaderTemplate="{StaticResource HeaderTemplate}"

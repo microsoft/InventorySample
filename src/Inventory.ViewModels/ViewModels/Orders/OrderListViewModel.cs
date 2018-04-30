@@ -17,11 +17,11 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 using Inventory.Data;
 using Inventory.Models;
 using Inventory.Services;
-using System.Windows.Input;
 
 namespace Inventory.ViewModels
 {
@@ -141,6 +141,15 @@ namespace Inventory.ViewModels
             return new List<OrderModel>();
         }
 
+        public ICommand OpenInNewViewCommand => new RelayCommand(OnOpenInNewView);
+        private async void OnOpenInNewView()
+        {
+            if (SelectedItem != null)
+            {
+                await NavigationService.CreateNewViewAsync<OrderDetailsViewModel>(new OrderDetailsArgs { OrderID = SelectedItem.OrderID });
+            }
+        }
+
         protected override async void OnNew()
         {
             if (IsMainView)
@@ -245,12 +254,6 @@ namespace Inventory.ViewModels
                     });
                     break;
             }
-        }
-
-        public ICommand OpenInNewViewCommand => new RelayCommand(OnOpenInNewView);
-        private async void OnOpenInNewView()
-        {
-            await NavigationService.CreateNewViewAsync<OrderDetailsViewModel>(new OrderDetailsArgs { OrderID = SelectedItem?.OrderID ?? 0 });
         }
     }
 }

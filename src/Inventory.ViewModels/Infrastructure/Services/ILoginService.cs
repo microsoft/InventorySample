@@ -19,7 +19,7 @@ namespace Inventory.Services
 {
     public interface ILoginService
     {
-        bool IsAuthenticated { get; }
+        bool IsAuthenticated { get; set; }
 
         Task<bool> SignInWithPasswordAsync(string userName, string password);
 

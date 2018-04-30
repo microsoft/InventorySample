@@ -34,7 +34,7 @@
         </DataTemplate>
 
         <DataTemplate x:Key="ItemTemplate" x:DataType="models:AppLogModel">
-            <Grid BorderThickness="0,0,0,0" BorderBrush="LightGray" Height="32">
+            <Grid Height="32">
                 <Grid Visibility="{x:Bind IsEmpty, Converter={StaticResource InverseBoolToVisibilityConverter}}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="32"/>

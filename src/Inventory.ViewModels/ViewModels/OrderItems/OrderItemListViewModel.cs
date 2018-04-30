@@ -17,6 +17,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 using Inventory.Data;
 using Inventory.Models;
@@ -138,6 +139,15 @@ namespace Inventory.ViewModels
                 return await OrderItemService.GetOrderItemsAsync(request);
             }
             return new List<OrderItemModel>();
+        }
+
+        public ICommand OpenInNewViewCommand => new RelayCommand(OnOpenInNewView);
+        private async void OnOpenInNewView()
+        {
+            if (SelectedItem != null)
+            {
+                await NavigationService.CreateNewViewAsync<OrderItemDetailsViewModel>(new OrderItemDetailsArgs { OrderID = SelectedItem.OrderID, OrderLine = SelectedItem.OrderLine });
+            }
         }
 
         protected override async void OnNew()

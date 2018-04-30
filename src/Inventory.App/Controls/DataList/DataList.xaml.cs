@@ -103,7 +103,7 @@ namespace Inventory.Controls
             set { SetValue(ItemSecondaryActionInvokedCommandProperty, value); }
         }
 
-        public static readonly DependencyProperty ItemSecondaryActionInvokedCommandProperty = DependencyProperty.Register(nameof(ItemSecondaryActionInvokedCommand), typeof(ICommand), typeof(DataGrid), new PropertyMetadata(null));
+        public static readonly DependencyProperty ItemSecondaryActionInvokedCommandProperty = DependencyProperty.Register(nameof(ItemSecondaryActionInvokedCommand), typeof(ICommand), typeof(DataList), new PropertyMetadata(null));
         #endregion
 
         #region DefaultCommands
