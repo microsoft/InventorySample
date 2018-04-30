@@ -19,6 +19,8 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.ViewManagement;
+using Windows.ApplicationModel.Core;
 
 using Inventory.Animations;
 using Inventory.ViewModels;
@@ -31,10 +33,17 @@ namespace Inventory.Views
         public LoginView()
         {
             ViewModel = ServiceLocator.Current.GetService<LoginViewModel>();
+            InitializeContext();
             InitializeComponent();
         }
 
         public LoginViewModel ViewModel { get; }
+
+        private void InitializeContext()
+        {
+            var context = ServiceLocator.Current.GetService<IContextService>();
+            context.Initialize(Dispatcher, ApplicationView.GetForCurrentView().Id, CoreApplication.GetCurrentView().IsMain);
+        }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
