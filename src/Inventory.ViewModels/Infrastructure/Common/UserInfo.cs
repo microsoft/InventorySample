@@ -31,5 +31,7 @@ namespace Inventory
         public object PictureSource { get; set; }
 
         public string DisplayName => $"{FirstName} {LastName}";
+
+        public bool IsEmpty => String.IsNullOrEmpty(DisplayName.Trim());
     }
 }

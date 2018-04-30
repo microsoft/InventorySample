@@ -69,8 +69,13 @@ namespace Inventory
                     Parameter = activationInfo.EntryArgs,
                     UserInfo = await TryGetUserInfoAsync(e as IActivatedEventArgsWithUser)
                 };
+#if SKIP_LOGIN || true
+                frame.Navigate(typeof(MainShellView), shellArgs);
+                var loginService = ServiceLocator.Current.GetService<ILoginService>();
+                loginService.IsAuthenticated = true;
+#else
                 frame.Navigate(typeof(LoginView), shellArgs);
-
+#endif
                 Window.Current.Activate();
             }
             else
@@ -91,16 +96,19 @@ namespace Inventory
                     FirstName = await user.GetPropertyAsync(KnownUserProperties.FirstName) as String,
                     LastName = await user.GetPropertyAsync(KnownUserProperties.LastName) as String
                 };
-                if (String.IsNullOrEmpty(userInfo.AccountName))
+                if (!userInfo.IsEmpty)
                 {
-                    userInfo.AccountName = $"{userInfo.FirstName} {userInfo.LastName}";
+                    if (String.IsNullOrEmpty(userInfo.AccountName))
+                    {
+                        userInfo.AccountName = $"{userInfo.FirstName} {userInfo.LastName}";
+                    }
+                    var pictureStream = await user.GetPictureAsync(UserPictureSize.Size64x64);
+                    if (pictureStream != null)
+                    {
+                        userInfo.PictureSource = await BitmapTools.LoadBitmapAsync(pictureStream);
+                    }
+                    return userInfo;
                 }
-                var pictureStream = await user.GetPictureAsync(UserPictureSize.Size64x64);
-                if (pictureStream != null)
-                {
-                    userInfo.PictureSource = await BitmapTools.LoadBitmapAsync(pictureStream);
-                }
-                return userInfo;
             }
             return UserInfo.Default;
         }

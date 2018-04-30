@@ -113,7 +113,10 @@ namespace Inventory.Views
         {
             var loginService = ServiceLocator.Current.GetService<ILoginService>();
             loginService.Logoff();
-            Frame.GoBack();
+            if (Frame.CanGoBack)
+            {
+                Frame.GoBack();
+            }
         }
     }
 }

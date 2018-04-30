@@ -138,6 +138,15 @@ namespace Inventory.ViewModels
 
         private void EnterApplication()
         {
+            if (ViewModelArgs.UserInfo.AccountName != UserName)
+            {
+                ViewModelArgs.UserInfo = new UserInfo
+                {
+                    AccountName = UserName,
+                    FirstName = UserName,
+                    PictureSource = null
+                };
+            }
             NavigationService.Navigate<MainShellViewModel>(ViewModelArgs);
         }
 
