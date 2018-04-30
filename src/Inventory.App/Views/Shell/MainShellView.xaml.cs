@@ -73,7 +73,6 @@ namespace Inventory.Views
             if (args.SelectedItem is NavigationItem item)
             {
                 ViewModel.NavigateTo(item.ViewModel);
-        
             }
             else if (args.IsSettingsSelected)
             {
@@ -81,14 +80,7 @@ namespace Inventory.Views
             }
             UpdateBackButton();
         }
-        
-        private void UpdateBackButton()
-        {
-            if (_navigationService.CanGoBack)
-            {
-                NavigationViewBackButton.IsEnabled = _navigationService.CanGoBack;
-            }
-        }
+
         private void OnNavigationViewBackButton(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             if (_navigationService.CanGoBack)
@@ -96,7 +88,7 @@ namespace Inventory.Views
                 _navigationService.GoBack();
             }
         }
-        
+
         private void OnFrameNavigated(object sender, NavigationEventArgs e)
         {
             var targetType = NavigationService.GetViewModel(e.SourcePageType);
@@ -109,7 +101,12 @@ namespace Inventory.Views
                     ViewModel.SelectedItem = ViewModel.Items.Where(r => r.ViewModel == targetType).FirstOrDefault();
                     break;
             }
-            //CurrentView.AppViewBackButtonVisibility = _navigationService.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+            UpdateBackButton();
+        }
+
+        private void UpdateBackButton()
+        {
+            NavigationViewBackButton.IsEnabled = _navigationService.CanGoBack;
         }
 
         private void OnLogoff(object sender, RoutedEventArgs e)
