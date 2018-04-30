@@ -42,18 +42,13 @@ namespace Inventory.ViewModels
             OrderService = orderService;
         }
 
-        //public ICommand CancelCommand => new RelayCommand(OnCancel, () => { return Item.CustomerID <= 0 ? false : true; });
-        public ICommand CancelCommand => new RelayCommand(OnCancel, OnCanExecuteCancel);
-        private bool OnCanExecuteCancel()
-        {
-            return Item.CustomerID <= 0 ? false : true;
-        }
-
         public IOrderService OrderService { get; }
 
         override public string Title => (Item?.IsNew ?? true) ? TitleNew : TitleEdit;
         public string TitleNew => Item?.Customer == null ? "New Order" : $"New Order, {Item?.Customer?.FullName}";
         public string TitleEdit => Item == null ? "Order" : $"Order #{Item?.OrderID}";
+
+        protected override bool ItemIsNew => Item?.IsNew ?? true;
 
         public ICommand CustomerSelectedCommand => new RelayCommand<CustomerModel>(CustomerSelected);
         private void CustomerSelected(CustomerModel customer)

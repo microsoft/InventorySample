@@ -103,7 +103,7 @@ namespace Inventory.ViewModels
             }
         }
 
-        public ICommand CancelCommand => new RelayCommand(OnCancel);        
+        public ICommand CancelCommand => new RelayCommand(OnCancel);
         virtual protected void OnCancel()
         {
             StatusReady();
@@ -112,6 +112,21 @@ namespace Inventory.ViewModels
         }
         virtual public void CancelEdit()
         {
+            if (ItemIsNew)
+            {
+                // We were creating a new item: cancel means exit
+                if (NavigationService.CanGoBack)
+                {
+                    NavigationService.GoBack();
+                }
+                else
+                {
+                    NavigationService.CloseViewAsync();
+                }
+                return;
+            }
+
+            // We were editing an existing item: just cancel edition
             if (IsEditMode)
             {
                 EditableItem = Item;
@@ -190,6 +205,8 @@ namespace Inventory.ViewModels
         }
 
         virtual protected IEnumerable<IValidationConstraint<TModel>> GetValidationConstraints(TModel model) => Enumerable.Empty<IValidationConstraint<TModel>>();
+
+        abstract protected bool ItemIsNew { get; }
 
         abstract protected Task<bool> SaveItemAsync(TModel model);
         abstract protected Task<bool> DeleteItemAsync(TModel model);

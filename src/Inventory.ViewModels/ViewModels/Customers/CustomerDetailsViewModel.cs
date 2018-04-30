@@ -48,6 +48,8 @@ namespace Inventory.ViewModels
         override public string Title => (Item?.IsNew ?? true) ? "New Customer" : TitleEdit;
         public string TitleEdit => Item == null ? "Customer" : $"{Item.FullName}";
 
+        protected override bool ItemIsNew => Item?.IsNew ?? true;
+
         public CustomerDetailsArgs ViewModelArgs { get; private set; }
 
         public async Task LoadAsync(CustomerDetailsArgs args)

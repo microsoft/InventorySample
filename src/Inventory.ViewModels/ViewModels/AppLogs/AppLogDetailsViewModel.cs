@@ -39,6 +39,8 @@ namespace Inventory.ViewModels
 
         override public string Title => "Activity Logs";
 
+        protected override bool ItemIsNew => false;
+
         public AppLogDetailsArgs ViewModelArgs { get; private set; }
 
         public async Task LoadAsync(AppLogDetailsArgs args)

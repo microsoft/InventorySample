@@ -48,6 +48,8 @@ namespace Inventory.ViewModels
         public string TitleNew => $"New Order Item, Order #{OrderID}";
         public string TitleEdit => $"Order Line {Item?.OrderLine}, #{Item?.OrderID}" ?? String.Empty;
 
+        protected override bool ItemIsNew => Item?.IsNew ?? true;
+
         public OrderItemDetailsArgs ViewModelArgs { get; private set; }
 
         public long OrderID { get; set; }
