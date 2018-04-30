@@ -1,5 +1,8 @@
 # Index
 
+- [Introduction](chapters/introduction.md)
+    - [The Inventory Sample app](chapters/introduction.md#The-Inventory-Sample-app)
+
 - [MVVM](chapters/mvvm.md#mvvm)
     - [The MVVM pattern](chapters/mvvm.md#the-mvvm-pattern)
         - [Model](chapters/mvvm.md#model)
@@ -14,6 +17,11 @@
         - [Binding markup extension](chapters/windows-10-binding.md#Binding-markup-extension)
         - [x:Bind markup extension](chapters/windows-10-binding.md#x:bind-markup-extension)
         - [Value Converters](chapters/windows-10-binding.md#value-converters)
+
+- [ViewModels](chapters/architecture/view-models.md#View-Models)
+    - [The Base ViewModels](chapters/architecture/view-models.md#The-Base-ViewModels)
+        - [Infrastructure base ViewModels](chapters/architecture/view-models.md#Infrastructure-base-ViewModels)
+        - [Domain Base ViewModels](chapters/architecture/view-models.md#Domain-Base-ViewModels)
 
 - [Inventory App Initial Setup](chapters/architecture/app-initial-setup.md)
     - [The Startup class](chapters/architecture/app-initial-setup.md#the-startup-class)
@@ -36,6 +44,12 @@
             - [ShellView](chapters/architecture/navigation-app.md#shellview)
             - [Frame Navigation](chapters/architecture/navigation-app.md#frame-navigation)
             - [Saving the state of the view when Navigate](chapters/architecture/navigation-app.md#Saving-the-state-of-the-view-when-Navigate)
+
+- [Views](chapters/architecture/views.md)
+    - [Lists](chapters/architecture/views.md#lists)
+        - [DataList control](chapters/architecture/views.md#datalist-control)
+    - [Detail](chapters/architecture/views.md#detail)
+        - [Details control](chapters/architecture/views.md#Details-control)
 
 - [Data Access](chapters/dataaccess.md)
     - [Entity Framework Core](chapters/dataaccess.md#entity-framework-core)

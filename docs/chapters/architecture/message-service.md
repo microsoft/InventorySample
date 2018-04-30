@@ -1,6 +1,6 @@
 ## Message Service
 
-Another service that it's important to know is the one represented by the interface `IMessageService`. The mission of this service is to send messages between ViewModels or Views, and once the subscriber receive the message, react to it executing some action. This pattern is known as the **Event Aggregator Pattern**:
+Another service that it's important to know is the one represented by the interface `IMessageService`. The mission of this service is to send messages between decoupled components (Views, ViewModels, etc), and once the subscriber receive the message, react to it executing some action. This pattern is known as the **Event Aggregator Pattern**:
 
 ![event aggregator](../img/eventaggregator.png)
 
