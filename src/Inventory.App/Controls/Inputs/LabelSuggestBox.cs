@@ -24,7 +24,7 @@ namespace Inventory.Controls
 {
     public class LabelSuggestBox : Control, IInputControl
     {
-        public event RoutedEventHandler GotFocus;
+        public event RoutedEventHandler EnterFocus;
 
         public event TypedEventHandler<AutoSuggestBox, AutoSuggestBoxTextChangedEventArgs> TextChanged;
         public event TypedEventHandler<AutoSuggestBox, AutoSuggestBoxSuggestionChosenEventArgs> SuggestionChosen;
@@ -197,7 +197,7 @@ namespace Inventory.Controls
 
         private void OnGotFocus(object sender, RoutedEventArgs e)
         {
-            GotFocus?.Invoke(this, e);
+            EnterFocus?.Invoke(this, e);
         }
 
         private void OnLostFocus(object sender, RoutedEventArgs e)

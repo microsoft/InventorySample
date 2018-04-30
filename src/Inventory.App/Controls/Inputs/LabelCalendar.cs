@@ -22,7 +22,7 @@ namespace Inventory.Controls
 {
     public class LabelCalendar : Control, IInputControl
     {
-        public event RoutedEventHandler GotFocus;
+        public event RoutedEventHandler EnterFocus;
 
         private Grid _container = null;
         private CalendarDatePicker _calendar = null;
@@ -158,7 +158,7 @@ namespace Inventory.Controls
 
         private void OnGotFocus(object sender, RoutedEventArgs e)
         {
-            GotFocus?.Invoke(this, e);
+            EnterFocus?.Invoke(this, e);
         }
 
         private void OnLostFocus(object sender, RoutedEventArgs e)
@@ -171,7 +171,7 @@ namespace Inventory.Controls
 
         private void OnOpened(object sender, object e)
         {
-            GotFocus?.Invoke(this, new RoutedEventArgs());
+            EnterFocus?.Invoke(this, new RoutedEventArgs());
         }
 
         private void UpdateMode()

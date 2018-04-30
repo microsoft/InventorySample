@@ -40,7 +40,7 @@ namespace Inventory.Controls
         {
             foreach (var input in GetEditableControls())
             {
-                input.GotFocus += OnInputGotFocus;
+                input.EnterFocus += OnInputGotFocus;
             }
             UpdateEditMode();
         }

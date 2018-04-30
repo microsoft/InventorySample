@@ -23,7 +23,7 @@ namespace Inventory.Controls
 {
     public sealed class LabelComboBox : Control, IInputControl
     {
-        public event RoutedEventHandler GotFocus;
+        public event RoutedEventHandler EnterFocus;
 
         private Grid _container = null;
         private ComboBox _combo = null;
@@ -150,7 +150,7 @@ namespace Inventory.Controls
 
         private void OnGotFocus(object sender, RoutedEventArgs e)
         {
-            GotFocus?.Invoke(this, e);
+            EnterFocus?.Invoke(this, e);
         }
 
         private void OnLostFocus(object sender, RoutedEventArgs e)

@@ -22,7 +22,7 @@ namespace Inventory.Controls
 {
     public sealed class LabelTextBox : Control, IInputControl
     {
-        public event RoutedEventHandler GotFocus;
+        public event RoutedEventHandler EnterFocus;
 
         private Grid _container = null;
         private TextBox _inputText = null;
@@ -162,7 +162,7 @@ namespace Inventory.Controls
         private void OnGotFocus(object sender, RoutedEventArgs e)
         {
             _inputText.SelectionStart = _inputText.Text.Length;
-            GotFocus?.Invoke(this, e);
+            EnterFocus?.Invoke(this, e);
         }
 
         private void OnLostFocus(object sender, RoutedEventArgs e)
