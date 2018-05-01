@@ -35,7 +35,7 @@ namespace Inventory.Services
         {
             var appLog = new AppLog()
             {
-                User = "[User]",
+                User = AppSettings.Current.UserName ?? "App",
                 Type = type,
                 Source = source,
                 Action = action,

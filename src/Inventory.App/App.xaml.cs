@@ -116,7 +116,7 @@ namespace Inventory
         private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var logService = ServiceLocator.Current.GetService<ILogService>();
-            await logService.WriteAsync(Data.LogType.Information, "App", "Suspending", "Application End", $"Application ended by [User].");
+            await logService.WriteAsync(Data.LogType.Information, "App", "Suspending", "Application End", $"Application ended by '{AppSettings.Current.UserName}'.");
         }
 
         private void OnUnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)

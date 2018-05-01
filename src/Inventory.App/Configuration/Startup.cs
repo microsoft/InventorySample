@@ -44,7 +44,7 @@ namespace Inventory
             await ConfigureLookupTables();
 
             var logService = ServiceLocator.Current.GetService<ILogService>();
-            await logService.WriteAsync(Data.LogType.Information, "Startup", "Configuration", "Application Start", $"Application started by [User].");
+            await logService.WriteAsync(Data.LogType.Information, "Startup", "Configuration", "Application Start", $"Application started.");
 
             ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(500, 500));
         }
