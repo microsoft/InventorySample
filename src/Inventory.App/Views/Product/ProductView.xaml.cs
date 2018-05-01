@@ -53,12 +53,5 @@ namespace Inventory.Views
             ViewModel.Unload();
             ViewModel.Unsubscribe();
         }
-
-        private async void OpenInNewView(object sender, RoutedEventArgs e)
-        {
-            ViewModel.IsEditMode = false;
-            await NavigationService.CreateNewViewAsync<ProductView>(ViewModel.CreateArgs());
-            NavigationService.GoBack();
-        }
     }
 }

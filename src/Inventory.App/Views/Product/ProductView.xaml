@@ -12,8 +12,7 @@
         <controls:WindowTitle Title="{x:Bind ViewModel.Title, Mode=OneWay}" />
 
         <controls:Section IsEnabled="{x:Bind ViewModel.IsEnabled, Mode=OneWay}"
-                          Style="{StaticResource DetailsViewSection}"
-                          IsButtonVisible="{x:Bind ViewModel.IsMainView}">
+                          Style="{StaticResource DetailsViewSection}">
             <views:ProductDetails x:Name="details" ViewModel="{x:Bind ViewModel, Mode=OneWay}" />
         </controls:Section>
     </Grid>
