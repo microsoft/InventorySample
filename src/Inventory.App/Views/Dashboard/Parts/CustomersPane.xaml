@@ -9,7 +9,7 @@
 
     <UserControl.Resources>
         <DataTemplate x:Key="HeaderTemplate" x:DataType="models:CustomerModel">
-             <Grid BorderBrush="LightGray" BorderThickness="0,0,0,1">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="40"/>
                     <ColumnDefinition Width="6*"/>
@@ -49,9 +49,10 @@
         </Grid.RowDefinitions>
 
         <TextBlock Margin="6,0" Text="Latest Customers" FontSize="18" />
-        <ContentControl Grid.Row="1" 
-                        ContentTemplate="{StaticResource HeaderTemplate}" 
-                        HorizontalContentAlignment="Stretch" />
+        <Grid Grid.Row="1">
+            <ContentControl ContentTemplate="{StaticResource HeaderTemplate}" HorizontalContentAlignment="Stretch" />
+            <Border Margin="4" BorderBrush="LightGray" BorderThickness="0,0,0,1" />
+        </Grid>
         <ListView Grid.Row="2" 
                   ItemsSource="{x:Bind ItemsSource, Mode=OneWay}" 
                   ItemTemplate="{StaticResource ItemTemplate}"

@@ -2,9 +2,7 @@
     x:Class="Inventory.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    
     xmlns:converters="using:Inventory.Converters"
-    xmlns:controls="using:Inventory.Controls"
     RequestedTheme="Light">
 
     <Application.Resources>
@@ -13,17 +11,13 @@
                 <ResourceDictionary Source="/Styles/Buttons.xaml" />
                 <ResourceDictionary Source="/Styles/CalendarPicker.xaml" />
                 <ResourceDictionary Source="/Styles/DataGrid.xaml" />
-                <ResourceDictionary Source="/Styles/ToolBar.xaml" />
                 <ResourceDictionary Source="/Styles/PivotHeaderItem.xaml" />
                 <ResourceDictionary Source="/Styles/NavigationView.xaml" />
-
+                <ResourceDictionary Source="/Styles/Sections.xaml" />
+                <ResourceDictionary Source="/Styles/ToolBar.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
             
             <SolidColorBrush x:Key="DetailsViewBackgroundColor" Color="#F5F5F5" />
-
-            <!--<AcrylicBrush x:Key="NavigationViewDefaultPaneBackground" BackgroundSource="Backdrop" TintColor="Yellow" TintOpacity=".6"/>
-            <AcrylicBrush x:Key="NavigationViewExpandedPaneBackground" BackgroundSource="HostBackdrop" TintColor="Orange" TintOpacity=".8"/>-->
 
             <!--  Colors  -->
             <SolidColorBrush x:Key="Information" Color="RoyalBlue" />
@@ -44,34 +38,7 @@
             <converters:LogTypeConverter x:Key="LogTypeConverter" />
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
             <converters:ObjectToImageConverter x:Key="ObjectToImageConverter" />
-
-
-            <Style TargetType="controls:Section" x:Key="DetailsViewSection">
-                <Setter Property="Padding" Value="0" />
-                <Setter Property="Background" Value="#FFFFFF" />
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="controls:Section">
-                            <Border x:Name="container" BorderThickness="0">
-                                <Grid x:Name="content">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-
-                                    <ContentPresenter Grid.Row="1" />
-                                    <ContentControl Grid.Row="2" 
-                                            Margin="0,0,0,0" 
-                                            Content="{TemplateBinding Footer}" 
-                                            ContentTemplate="{TemplateBinding FooterTemplate}" HorizontalContentAlignment="Stretch" />
-                                </Grid>
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
+            
         </ResourceDictionary>
     </Application.Resources>
 

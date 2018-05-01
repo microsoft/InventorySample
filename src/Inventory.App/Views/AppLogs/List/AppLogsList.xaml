@@ -10,7 +10,7 @@
 
     <UserControl.Resources>
         <DataTemplate x:Key="HeaderTemplate">
-            <Grid BorderBrush="LightGray" BorderThickness="0,0,0,1">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="32"/>
                     <ColumnDefinition Width="100"/>

@@ -12,7 +12,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <!--<RowDefinition Height="28"/>-->
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!--Toolbar-->
@@ -25,13 +25,14 @@
             ButtonClick="OnToolbarClick" />
 
         <!--Header-->
-        <ContentControl Grid.Row="1" 
-                        ContentTemplate="{x:Bind HeaderTemplate}" 
-                        HorizontalContentAlignment="Stretch" />
+        <Grid Grid.Row="1">
+            <ContentControl ContentTemplate="{x:Bind HeaderTemplate}" HorizontalContentAlignment="Stretch" />
+            <Border Margin="2,6,2,0" BorderBrush="LightGray" BorderThickness="0,0,0,1" />
+        </Grid>
 
         <!--List Content-->
         <Grid Grid.Row="2">
-            <ListView x:Name="listview"
+            <ListView x:Name="listview" Padding="0,6,0,0"
                   DoubleTapped="OnDoubleTapped"
                   ItemsSource="{x:Bind ItemsSource, Mode=OneWay}"
                   ItemTemplate="{x:Bind ItemTemplate}"
@@ -44,16 +45,11 @@
         </Grid>
 
         <!--Footer-->
-        <!--<Grid Grid.Row="3" Margin="2" Visibility="{x:Bind IsDataAvailable, Mode=OneWay}">
-            <TextBlock FontSize="14" VerticalAlignment="Bottom" Opacity="0.75" Visibility="{x:Bind IsMultipleSelection, Mode=OneWay}">
+        <Grid Grid.Row="3" Visibility="{x:Bind IsDataAvailable, Mode=OneWay}">
+            <TextBlock Margin="4" FontSize="14" VerticalAlignment="Bottom" Opacity="0.75" Visibility="{x:Bind IsMultipleSelection, Mode=OneWay}">
                 <Run Text="{x:Bind SelectedItemsCount, Mode=OneWay}" />
                 <Run Text="items selected." />
             </TextBlock>
-            <TextBlock FontSize="14" VerticalAlignment="Bottom" Opacity="0.75" Visibility="{x:Bind IsSingleSelection, Mode=OneWay}">
-                <Run Text="Total" />
-                <Run Text="{x:Bind ItemsCount, Mode=OneWay}" />
-                <Run Text="items." />
-            </TextBlock>
-        </Grid>-->
+        </Grid>
     </Grid>
 </UserControl>

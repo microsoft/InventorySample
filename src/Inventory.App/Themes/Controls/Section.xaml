@@ -4,7 +4,7 @@
     xmlns:controls="using:Inventory.Controls">
 
     <Style TargetType="controls:Section">
-        <Setter Property="Padding" Value="6" />
+        <Setter Property="Padding" Value="6,2" />
         <Setter Property="Background" Value="#FFFFFF" />
         <Setter Property="HeaderTemplate">
             <Setter.Value>
@@ -37,5 +37,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 </ResourceDictionary>
