@@ -48,7 +48,7 @@ namespace Inventory.ViewModels
         public string TitleNew => Item?.Customer == null ? "New Order" : $"New Order, {Item?.Customer?.FullName}";
         public string TitleEdit => Item == null ? "Order" : $"Order #{Item?.OrderID}";
 
-        protected override bool ItemIsNew => Item?.IsNew ?? true;
+        public override bool ItemIsNew => Item?.IsNew ?? true;
 
         public ICommand CustomerSelectedCommand => new RelayCommand<CustomerModel>(CustomerSelected);
         private void CustomerSelected(CustomerModel customer)
@@ -91,6 +91,7 @@ namespace Inventory.ViewModels
             {
                 Item.CanEditCustomer = args.CustomerID <= 0;
             }
+            NotifyPropertyChanged(nameof(ItemIsNew));
         }
         public void Unload()
         {

@@ -161,6 +161,8 @@ namespace Inventory.ViewModels
                 // TODO: Discrimine if New or Modified
                 MessageService.Send(this, "ItemChanged", Item);
                 IsEditMode = false;
+
+                NotifyPropertyChanged(nameof(ItemIsNew));
             }
             IsEnabled = true;
         }
@@ -205,7 +207,7 @@ namespace Inventory.ViewModels
 
         virtual protected IEnumerable<IValidationConstraint<TModel>> GetValidationConstraints(TModel model) => Enumerable.Empty<IValidationConstraint<TModel>>();
 
-        abstract protected bool ItemIsNew { get; }
+        abstract public bool ItemIsNew { get; }
 
         abstract protected Task<bool> SaveItemAsync(TModel model);
         abstract protected Task<bool> DeleteItemAsync(TModel model);

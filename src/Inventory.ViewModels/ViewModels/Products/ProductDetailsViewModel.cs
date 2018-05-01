@@ -48,7 +48,7 @@ namespace Inventory.ViewModels
         override public string Title => (Item?.IsNew ?? true) ? "New Product" : TitleEdit;
         public string TitleEdit => Item == null ? "Product" : $"{Item.Name}";
 
-        protected override bool ItemIsNew => Item?.IsNew ?? true;
+        public override bool ItemIsNew => Item?.IsNew ?? true;
 
         public ProductDetailsArgs ViewModelArgs { get; private set; }
 
