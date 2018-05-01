@@ -43,7 +43,6 @@
                         <PersonPicture ProfilePicture="{x:Bind PictureSource, Converter={StaticResource ObjectToImageConverter}}" DisplayName="{x:Bind DisplayName}" />
                     </Viewbox>
                     <TextBlock Grid.Column="1" Text="{x:Bind DisplayName}" VerticalAlignment="Center" />
-                    <FontIcon Grid.Column="2" Glyph="&#xE7E8;" VerticalAlignment="Center" />
                 </Grid>
                 <Button Margin="-4,0,0,0" BorderThickness="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Opacity="0" Click="OnLogoff" />
             </Grid>

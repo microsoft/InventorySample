@@ -10,15 +10,19 @@
         <x:String x:Key="WindowsHelloIcon">M306.755,374.439c48.801,0,88.362,39.561,88.362,88.362s-39.562,88.362-88.362,88.362s-88.361-39.562-88.361-88.362S257.954,374.439,306.755,374.439z M486.176,384.763c-42.816-99.015-157.794-144.572-256.809-101.754c-45.632,19.732-82.021,56.123-101.754,101.754c-5.499,11.606-0.548,25.471,11.058,30.97c11.605,5.498,25.472,0.548,30.97-11.059c0.204-0.43,0.395-0.867,0.572-1.31c32.571-75.461,120.149-110.23,195.611-77.659c34.841,15.038,62.621,42.818,77.659,77.659c4.775,11.922,18.311,17.715,30.232,12.939c11.921-4.775,17.714-18.311,12.938-30.232c-0.177-0.442-0.367-0.879-0.571-1.309H486.176z</x:String>
     </UserControl.Resources>
 
-    <StackPanel>
-        <Grid HorizontalAlignment="Center">
-            <TextBlock Text="{x:Bind UserName}" HorizontalAlignment="Center" FontSize="22" />
-        </Grid>
-        <Button BorderThickness="0" Background="Transparent" Command="{x:Bind LoginWithWindowHelloCommand}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+        <TextBlock Text="{x:Bind UserName}" HorizontalAlignment="Center" FontSize="22" />
+
+        <Button HorizontalAlignment="Center" Grid.Row="1" BorderThickness="0" Background="Transparent" Command="{x:Bind LoginWithWindowHelloCommand}">
             <StackPanel>
                 <Path Margin="16" Height="32" HorizontalAlignment="Center" Data="{StaticResource WindowsHelloIcon}" Fill="Black" Stretch="Uniform" />
                 <TextBlock Text="Windows Hello" FontSize="19" FontWeight="Normal" HorizontalAlignment="Center" />
             </StackPanel>
         </Button>
-    </StackPanel>
+    </Grid>
 </UserControl>

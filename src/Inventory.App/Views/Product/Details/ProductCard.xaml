@@ -13,8 +13,8 @@
                     <Viewbox Margin="24" Visibility="{x:Bind ViewModel.IsEnabled, Mode=OneWay}">
                         <FontIcon Glyph="&#xE114;" Foreground="Gray" />
                     </Viewbox>
-                    <Image Source="{x:Bind Item.ThumbnailSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" 
-                           Stretch="UniformToFill" 
+                    <Image Source="{x:Bind Item.PictureSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" 
+                           Stretch="Uniform" 
                            HorizontalAlignment="Center" 
                            VerticalAlignment="Center" />
                 </Grid>
@@ -25,7 +25,10 @@
                     <Grid>
                         <Rectangle Fill="White" Opacity="0.75" />
                         <TextBlock Text="Edit Photo" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{x:Bind ViewModel.IsEnabled, Mode=OneWay}" />
-                        <Image Source="{x:Bind ViewModel.NewPictureSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"
+                        <Image Source="{x:Bind ViewModel.NewPictureSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" 
+                               Stretch="Uniform" 
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"
                                Visibility="{x:Bind ViewModel.NewPictureSource, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}}" />
                     </Grid>
                 </Button>

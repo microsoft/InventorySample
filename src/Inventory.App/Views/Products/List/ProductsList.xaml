@@ -16,7 +16,8 @@
                     <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
                 <Grid>
-                    <Image Source="{x:Bind ThumbnailSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Image Source="{x:Bind ThumbnailSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" 
+                           Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Grid>
                 <Grid Grid.Row="1" Background="WhiteSmoke">
                     <StackPanel Margin="6" VerticalAlignment="Center">
