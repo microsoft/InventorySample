@@ -29,18 +29,23 @@ namespace Inventory.Views
         }
 
         #region ViewModel
-        public OrderDetailsViewModel ViewModel
+        public OrderDetailsWithItemsViewModel ViewModel
         {
-            get { return (OrderDetailsViewModel)GetValue(ViewModelProperty); }
+            get { return (OrderDetailsWithItemsViewModel)GetValue(ViewModelProperty); }
             set { SetValue(ViewModelProperty, value); }
         }
 
-        public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register("ViewModel", typeof(OrderDetailsViewModel), typeof(OrderDetails), new PropertyMetadata(null));
+        public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(nameof(ViewModel), typeof(OrderDetailsWithItemsViewModel), typeof(OrderDetails), new PropertyMetadata(null));
         #endregion
 
         public void SetFocus()
         {
             details.SetFocus();
+        }
+
+        public int GetRowSpan(bool isItemNew)
+        {
+            return isItemNew ? 2 : 1;
         }
     }
 }

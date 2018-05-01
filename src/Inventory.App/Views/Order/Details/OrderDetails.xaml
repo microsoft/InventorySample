@@ -53,18 +53,31 @@
         <Grid BorderBrush="LightGray" 
               BorderThickness="0,1,1,0"                                   
               Background="{StaticResource DetailsViewBackgroundColor}">
-            <views:OrderCard Margin="6" Item="{x:Bind ViewModel.Item, Mode=OneWay}" />
+            <views:OrderCard Margin="6" Item="{x:Bind ViewModel.OrderDetails.Item, Mode=OneWay}" />
         </Grid>
 
-        <controls:Details x:Name="details" Grid.Column="1" Margin="6"
-                          DetailsContent="{x:Bind ViewModel}"
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <controls:Details x:Name="details" Margin="6" Grid.RowSpan="{x:Bind GetRowSpan(ViewModel.OrderDetails.ItemIsNew), Mode=OneWay}"
+                          DetailsContent="{x:Bind ViewModel.OrderDetails}"
                           DetailsTemplate="{StaticResource DetailsTemplate}"
-                          CanGoBack="{x:Bind ViewModel.CanGoBack}"
-                          IsEditMode="{x:Bind ViewModel.IsEditMode, Mode=OneWay}"
-                          BackCommand="{x:Bind ViewModel.BackCommand}"
-                          EditCommand="{x:Bind ViewModel.EditCommand}"
-                          DeleteCommand="{x:Bind ViewModel.DeleteCommand}"
-                          SaveCommand="{x:Bind ViewModel.SaveCommand}"
-                          CancelCommand="{x:Bind ViewModel.CancelCommand}" />
+                          CanGoBack="{x:Bind ViewModel.OrderDetails.CanGoBack}"
+                          IsEditMode="{x:Bind ViewModel.OrderDetails.IsEditMode, Mode=OneWay}"
+                          BackCommand="{x:Bind ViewModel.OrderDetails.BackCommand}"
+                          EditCommand="{x:Bind ViewModel.OrderDetails.EditCommand}"
+                          DeleteCommand="{x:Bind ViewModel.OrderDetails.DeleteCommand}"
+                          SaveCommand="{x:Bind ViewModel.OrderDetails.SaveCommand}"
+                          CancelCommand="{x:Bind ViewModel.OrderDetails.CancelCommand}" />
+
+            <Border Grid.Row="1" BorderBrush="LightGray" BorderThickness="0,1,0,0" Visibility="{x:Bind ViewModel.OrderDetails.ItemIsNew, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+                <controls:Section Header="Order Items" Background="{StaticResource DetailsViewBackgroundColor}">
+                    <views:OrdersOrderItems ViewModel="{x:Bind ViewModel.OrderItemList}" />
+                </controls:Section>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

@@ -28,12 +28,12 @@ namespace Inventory.Views
     {
         public OrderView()
         {
-            ViewModel = ServiceLocator.Current.GetService<OrderDetailsViewModel>();
+            ViewModel = ServiceLocator.Current.GetService<OrderDetailsWithItemsViewModel>();
             NavigationService = ServiceLocator.Current.GetService<INavigationService>();
             InitializeComponent();
         }
 
-        public OrderDetailsViewModel ViewModel { get; }
+        public OrderDetailsWithItemsViewModel ViewModel { get; }
         public INavigationService NavigationService { get; }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
@@ -41,7 +41,7 @@ namespace Inventory.Views
             ViewModel.Subscribe();
             await ViewModel.LoadAsync(e.Parameter as OrderDetailsArgs);
 
-            if (ViewModel.IsEditMode)
+            if (ViewModel.OrderDetails.IsEditMode)
             {
                 await Task.Delay(100);
                 details.SetFocus();
@@ -52,13 +52,6 @@ namespace Inventory.Views
         {
             ViewModel.Unload();
             ViewModel.Unsubscribe();
-        }
-
-        private async void OpenInNewView(object sender, RoutedEventArgs e)
-        {
-            ViewModel.IsEditMode = false;
-            await NavigationService.CreateNewViewAsync<OrderView>(ViewModel.CreateArgs());
-            NavigationService.GoBack();
         }
     }
 }

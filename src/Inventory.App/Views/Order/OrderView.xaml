@@ -9,9 +9,9 @@
     mc:Ignorable="d">
 
     <Grid>
-        <controls:WindowTitle Title="{x:Bind ViewModel.Title, Mode=OneWay}" />
+        <controls:WindowTitle Title="{x:Bind ViewModel.OrderDetails.Title, Mode=OneWay}" />
 
-        <controls:Section IsEnabled="{x:Bind ViewModel.IsEnabled, Mode=OneWay}"
+        <controls:Section IsEnabled="{x:Bind ViewModel.OrderDetails.IsEnabled, Mode=OneWay}"
                           Style="{StaticResource DetailsViewSection}"
                           IsButtonVisible="{x:Bind ViewModel.IsMainView}">
             <views:OrderDetails x:Name="details" ViewModel="{x:Bind ViewModel, Mode=OneWay}" />

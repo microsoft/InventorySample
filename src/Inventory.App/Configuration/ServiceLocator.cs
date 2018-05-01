@@ -62,6 +62,7 @@ namespace Inventory
 
             serviceCollection.AddTransient<OrdersViewModel>();
             serviceCollection.AddTransient<OrderDetailsViewModel>();
+            serviceCollection.AddTransient<OrderDetailsWithItemsViewModel>();
 
             serviceCollection.AddTransient<OrderItemsViewModel>();
             serviceCollection.AddTransient<OrderItemDetailsViewModel>();
