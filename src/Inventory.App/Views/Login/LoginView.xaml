@@ -56,7 +56,11 @@
                                  Visibility="{x:Bind ViewModel.IsLoginWithWindowsHello, Mode=OneWay}"
                                  Click="OnShowLoginWithPassword" Command="{x:Bind ViewModel.ShowLoginWithPasswordCommand}" />
                 <Border Grid.Row="1">
-                    <Image Margin="24" Source="ms-appx:///Assets/AppLogo.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" />
+                    <Image Margin="24" 
+                           Source="ms-appx:///Assets/AppLogo.png" 
+                           Width="320" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center" 
+                           Stretch="Uniform" />
                 </Border>
             </Grid>
         </Grid>

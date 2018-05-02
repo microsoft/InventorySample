@@ -16,7 +16,6 @@
                         <TextBlock Text="{TemplateBinding Label}" 
                                    Foreground="{ThemeResource SystemControlForegroundAccentBrush}" 
                                    TextAlignment="{TemplateBinding TextAlignment}" />
-
                         <TextBlock Grid.Row="1" 
                                    FontSize="{TemplateBinding FontSize}" 
                                    Text="{TemplateBinding DisplayText}" 
@@ -45,7 +44,6 @@
                         
                         <TextBlock x:Name="label"
                                    Text="{TemplateBinding Label}"
-                                   Margin="10,0"
                                    Foreground="{ThemeResource SystemControlForegroundAccentBrush}"/>
                         <TextBlock x:Name="displayText" 
                                    Grid.Row="1"
@@ -82,7 +80,6 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock x:Name="label"
-                                   Margin="6,2" 
                                    Text="{TemplateBinding Label}"
                                    Foreground="{ThemeResource SystemControlForegroundAccentBrush}"/>
                         <TextBlock x:Name="displayText" 
@@ -120,7 +117,6 @@
                             <RowDefinition MinHeight="34" />
                         </Grid.RowDefinitions>
                         <TextBlock x:Name="label"
-                                   Margin="10,0"                            
                                    Text="{TemplateBinding Label}" 
                                    Foreground="{ThemeResource SystemControlForegroundAccentBrush}"/>
                         <CalendarDatePicker x:Name="calendar" 
@@ -154,7 +150,6 @@
 
                         <TextBlock x:Name="label"
                                    Text="{TemplateBinding Label}" 
-                                   Margin="10,0"
                                    Foreground="{ThemeResource SystemControlForegroundAccentBrush}"/>
                         <ComboBox x:Name="combo" 
                                   Grid.Row="1"

@@ -18,7 +18,7 @@
     </Style>
 
     <Style x:Key="ColumnValueStyle" TargetType="TextBlock">
-        <Setter Property="Padding" Value="6" />
+        <Setter Property="Padding" Value="9" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
     </Style>

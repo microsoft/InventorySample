@@ -28,7 +28,7 @@
 
     <Grid ColumnSpacing="6">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="260"/>
+            <ColumnDefinition Width="360"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
@@ -36,7 +36,7 @@
             <views:OrderItemsCard Margin="6,12" Item="{x:Bind ViewModel.Item, Mode=OneWay}" />
         </Grid>
 
-        <controls:Details x:Name="details" Grid.Column="1" Margin="6,0,0,0"
+        <controls:Details x:Name="details" Grid.Column="1" Margin="6,24,0,0"
                           DetailsContent="{x:Bind ViewModel}"
                           DetailsTemplate="{StaticResource DetailsTemplate}"
                           IsEditMode="{x:Bind ViewModel.IsEditMode, Mode=OneWay}"

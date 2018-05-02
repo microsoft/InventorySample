@@ -12,7 +12,7 @@
     <UserControl.Resources>
         <DataTemplate x:Key="DetailsTemplate" x:DataType="viewmodels:OrderDetailsViewModel">
             <controls:FluidGrid Margin="12,18,6,6" Columns="2" ColumnSpacing="12" RowSpacing="12">
-                <TextBlock controls:FluidGrid.ColumnSpan="2" Text="Customer Information" FontSize="16" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
+                <TextBlock Style="{StaticResource FormsSection}" controls:FluidGrid.ColumnSpan="2" Text="Customer Information" />
                 <controls:CustomerSuggestBox DisplayText="{x:Bind EditableItem.Customer.FullName, Mode=OneWay}"
                                              CustomerSelectedCommand="{x:Bind CustomerSelectedCommand}"
                                              IsReadOnly="{x:Bind EditableItem.CanEditCustomer, Mode=OneWay, Converter={StaticResource BoolNegationConverter}}" />
@@ -23,7 +23,7 @@
                 <controls:LabelComboBox Label="Ship Country" ItemsSource="{x:Bind LookupTables.CountryCodes}"
                                         SelectedValue="{x:Bind EditableItem.ShipCountryCode, Mode=TwoWay}" SelectedValuePath="CountryCodeID" DisplayMemberPath="Name" />
 
-                <TextBlock controls:FluidGrid.ColumnSpan="2" Text="Order Status" FontSize="16" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
+                <TextBlock Style="{StaticResource FormsSection}" controls:FluidGrid.ColumnSpan="2" Text="Order Status" />
                 <controls:LabelComboBox Label="Status" ItemsSource="{x:Bind LookupTables.OrderStatus}"
                                             SelectedValue="{x:Bind EditableItem.Status, Mode=TwoWay, Converter={StaticResource Int32Converter}}"
                                             SelectedValuePath="Status" DisplayMemberPath="Name" />

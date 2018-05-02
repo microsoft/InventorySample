@@ -41,18 +41,19 @@
         </DataTemplate>
     </UserControl.Resources>
 
-    <Grid ColumnSpacing="6" 
-          Visibility="{x:Bind ViewModel.Item.IsEmpty, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+    <Grid Visibility="{x:Bind ViewModel.Item.IsEmpty, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="260"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid BorderThickness="0,0,1,0" BorderBrush="LightGray">
+        <Grid BorderBrush="LightGray" 
+              BorderThickness="0,0,1,0"                                   
+              Background="{StaticResource DetailsViewBackgroundColor}">
             <views:OrdersCard Margin="6,12" Item="{x:Bind ViewModel.Item, Mode=OneWay}" />
         </Grid>
 
-        <controls:Details x:Name="details" Grid.Column="1" Margin="6,0,0,0"
+        <controls:Details x:Name="details" Grid.Column="1" Margin="6"
                           DetailsContent="{x:Bind ViewModel}"
                           DetailsTemplate="{StaticResource DetailsTemplate}"
                           IsEditMode="{x:Bind ViewModel.IsEditMode, Mode=OneWay}"

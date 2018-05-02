@@ -26,6 +26,20 @@ namespace Inventory.Controls
             DefaultStyleKey = typeof(RoundButton);
         }
 
+        public double Radius
+        {
+            get { return (double)GetValue(RadiusProperty); }
+            set
+            {
+                SetValue(CornerRadiusProperty, new CornerRadius(value));
+                SetValue(RadiusProperty, value);
+
+            }
+        }
+        public static readonly DependencyProperty RadiusProperty = DependencyProperty.Register(nameof(Radius), typeof(double), typeof(RoundButton), new PropertyMetadata(0));
+
+
+
         #region CornerRadius
         public CornerRadius CornerRadius
         {

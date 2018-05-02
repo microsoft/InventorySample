@@ -8,23 +8,23 @@
     xmlns:inventory="using:Inventory.Views"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="24">
+    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="24">
         <controls:WindowTitle Title="Settings" />
+        <Image Width="320" 
+               HorizontalAlignment="Left"
+               Source="ms-appx:///Assets/AppLogo.png" 
+               Stretch="UniformToFill" />
 
-        <Image Source="ms-appx:///Assets/AppLogo.png" Margin="-50,0" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="None" />
-        <StackPanel Margin="0,220" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <StackPanel Padding="0,12">
             <TextBlock Text="VanArsdel Inventory Sample"/>
             <TextBlock Text="{x:Bind ViewModel.Version}" />
             <TextBlock><Hyperlink NavigateUri="https://github.com/Microsoft/InventorySample">https://github.com/Microsoft/InventorySample</Hyperlink></TextBlock>
-
         </StackPanel>
 
-        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
-
+        <StackPanel Padding="0,64">
             <TextBlock Margin="0,12" Text="Testing" Style="{StaticResource TitleTextBlockStyle}"  />
-
             <ToggleSwitch Header="Enable random error generation for testing the Activity Log" 
                           IsOn="{x:Bind ViewModel.IsRandomErrorsEnabled, Mode=TwoWay}" />
         </StackPanel>
-    </Grid>
+    </StackPanel>
 </Page>

@@ -45,13 +45,7 @@
                                   HeaderButtonGlyph="&#xE2B4;" 
                                   HeaderButtonClick="OpenDetailsInNewView" 
                                   Visibility="{x:Bind ViewModel.OrderItemDetails.IsDataAvailable, Mode=OneWay}">
-
-                    <Pivot x:Name="pivot">
-                        <PivotItem Header="Order Item">
-                            <views:OrderItemsDetails Grid.Row="1" 
-                                                     ViewModel="{x:Bind ViewModel.OrderItemDetails}" />
-                        </PivotItem>
-                    </Pivot>
+                            <views:OrderItemsDetails Grid.Row="1" ViewModel="{x:Bind ViewModel.OrderItemDetails}" />
                 </controls:Section>
 
                 <!--Empty Details-->

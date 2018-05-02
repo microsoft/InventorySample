@@ -15,6 +15,7 @@
                 <ResourceDictionary Source="/Styles/NavigationView.xaml" />
                 <ResourceDictionary Source="/Styles/Sections.xaml" />
                 <ResourceDictionary Source="/Styles/ToolBar.xaml" />
+                <ResourceDictionary Source="/Styles/Cards.xaml" />
             </ResourceDictionary.MergedDictionaries>
             
             <SolidColorBrush x:Key="DetailsViewBackgroundColor" Color="#F5F5F5" />

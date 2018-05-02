@@ -30,7 +30,7 @@ namespace Inventory.ViewModels
 
         public ILookupTables LookupTables => LookupTablesProxy.Instance;
 
-        public override string Title => String.IsNullOrEmpty(Query) ? $" ({ItemsCount} results)" : $" ({ItemsCount} results for \"{Query}\")";
+        public override string Title => String.IsNullOrEmpty(Query) ? $" ({ItemsCount})" : $" ({ItemsCount} for \"{Query}\")";
 
         private IList<TModel> _items = null;
         public IList<TModel> Items

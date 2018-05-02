@@ -6,129 +6,55 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" d:DesignWidth="320" d:DesignHeight="600">
 
-    <StackPanel Spacing="2">
-        <!--<TextBlock Margin="6,0" Text="Order" />
-        <Rectangle Margin="6,2" Fill="LightGray" Height="1" />-->
-        <Grid Margin="6,24,6,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Order ID:" FontSize="14"  />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.OrderID, Mode=OneWay}" FontWeight="SemiBold" IsTextSelectionEnabled="True" FontSize="14" />
-        </Grid>
+    
 
-        <Grid Margin="6,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Status:" FontSize="14" />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.StatusDesc, Mode=OneWay}" FontWeight="SemiBold"  IsTextSelectionEnabled="True" FontSize="14" />
-        </Grid>
-        <Grid Margin="6,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Order Date:" FontSize="14"  />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.OrderDate, Mode=OneWay, Converter={StaticResource DateTimeFormatConverter}}" FontWeight="SemiBold" IsTextSelectionEnabled="True" FontSize="14" />
-        </Grid>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="12">
 
-        <Rectangle Margin="12" />
-        <Rectangle Margin="6,2" Fill="LightGray" Height="1" />
-        <TextBlock Margin="6,12" Text="Customer" FontWeight="SemiBold" />
-     
-        <Grid Margin="6,2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
+            <TextBlock Style="{StaticResource CardHeader}" Text="Order ID" />
+            <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.OrderID, Mode=OneWay}" />
 
-            <PersonPicture ProfilePicture="{x:Bind Item.Customer.PictureSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" 
+            <TextBlock Style="{StaticResource CardHeader}" Text="Status" />
+            <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.StatusDesc, Mode=OneWay}" />
+            
+            <TextBlock Style="{StaticResource CardHeader}" Text="Order Date" />
+            <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.OrderDate, Mode=OneWay, Converter={StaticResource DateTimeFormatConverter}}" />
+
+            <Rectangle Style="{StaticResource CardSeparator}"/>
+            <TextBlock Style="{StaticResource CardSection}" Margin="0,12" Text="Customer"  />
+
+            <StackPanel Orientation="Horizontal" Margin="0,6,0,9">
+                <PersonPicture ProfilePicture="{x:Bind Item.Customer.PictureSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" 
                            Initials="{x:Bind Item.Customer.Initials, Mode=OneWay}" 
-                           Width="48" 
-                           Height="48" />
-            <StackPanel Grid.Column="1" Margin="6,0">
-                <TextBlock Text="{x:Bind Item.Customer.FullName, Mode=OneWay}" 
-                           TextWrapping="WrapWholeWords" 
-                           FontSize="14" 
-                           IsTextSelectionEnabled="True" />
-                <TextBlock Text="{x:Bind Item.Customer.EmailAddress, Mode=OneWay}" 
-                           TextWrapping="WrapWholeWords" 
-                           FontSize="13" 
-                           IsTextSelectionEnabled="True" />
+                           Width="{StaticResource CardPictureRadius}" 
+                           Height="{StaticResource CardPictureRadius}" />
+                <TextBlock Style="{StaticResource CardText}" VerticalAlignment="Center" Margin="9,0" Text="{x:Bind Item.Customer.FullName, Mode=OneWay}" />
             </StackPanel>
-        </Grid>
-        
-        <Grid Margin="6,12,6,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" 
-                       Text="Customer ID:" 
-                       FontSize="14" />
-            <TextBlock Grid.Column="1" 
-                       Text="{x:Bind Item.CustomerID, Mode=OneWay}" 
-                       IsTextSelectionEnabled="True" 
-                       FontSize="14" />
-        </Grid>
 
-        <Grid Margin="6,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" 
-                       Text="Phone:" 
-                       FontSize="14" />
-            <TextBlock Grid.Column="1" 
-                       Text="{x:Bind Item.Customer.Phone, Mode=OneWay}" 
-                       IsTextSelectionEnabled="True" 
-                       FontSize="14" />
-        </Grid>
+            <TextBlock Style="{StaticResource CardHeader}" Text="Customer ID" />
+            <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.CustomerID, Mode=OneWay}" />
 
-        <Rectangle Margin="12" />
-        <Rectangle Margin="6,2" Fill="LightGray" Height="1" />
-        <TextBlock Margin="6,12" Text="Shipment" FontWeight="SemiBold" />
-        
-               
-        <Grid Margin="6,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Payment Type:" FontSize="14"  />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.PaymentTypeDesc, Mode=OneWay}" FontWeight="SemiBold" IsTextSelectionEnabled="True" FontSize="14" />
-        </Grid>
+            <TextBlock Style="{StaticResource CardHeader}" Text="Email" />
+            <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.Customer.EmailAddress, Mode=OneWay }" />
 
-        <Grid Margin="6,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Shipper:" FontSize="14"  />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.ShipViaDesc, Mode=OneWay}" FontWeight="SemiBold" IsTextSelectionEnabled="True" FontSize="14" />
-        </Grid>
+            <TextBlock Style="{StaticResource CardHeader}" Text="Phone" />
+            <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.Customer.Phone, Mode=OneWay}" />
 
-        <Grid Margin="6,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Shipped Date:" FontSize="14"  />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.ShippedDate, Mode=OneWay, Converter={StaticResource DateTimeFormatConverter}}" FontWeight="SemiBold" IsTextSelectionEnabled="True" FontSize="14" />
-        </Grid>
+            <Rectangle Style="{StaticResource CardSeparator}"/>
+            <TextBlock Style="{StaticResource CardSection}" Margin="0,12" Text="Shipment"  />
 
-        <Grid Margin="6,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Delivered Date:" FontSize="14"  />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.DeliveredDate, Mode=OneWay, Converter={StaticResource DateTimeFormatConverter}}" FontWeight="SemiBold" IsTextSelectionEnabled="True" FontSize="14" />
-        </Grid>
+            <TextBlock Style="{StaticResource CardHeader}" Text="Payment Type" />
+            <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.PaymentTypeDesc, Mode=OneWay}" />
 
-    </StackPanel>
+            <TextBlock Style="{StaticResource CardHeader}" Text="Shipper" />
+            <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.ShipViaDesc, Mode=OneWay}" />
+
+            <TextBlock Style="{StaticResource CardHeader}" Text="Shipped Date" />
+            <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.ShippedDate, Mode=OneWay, Converter={StaticResource DateTimeFormatConverter}}" />
+
+            <TextBlock Style="{StaticResource CardHeader}" Text="Delivered Date" />
+            <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.DeliveredDate, Mode=OneWay, Converter={StaticResource DateTimeFormatConverter}}" />
+
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

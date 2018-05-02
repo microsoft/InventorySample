@@ -6,91 +6,36 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" d:DesignWidth="260" d:DesignHeight="400">
 
-    <StackPanel Spacing="2">
-        <TextBlock Margin="6,6" Text="Order" FontWeight="SemiBold" />
-        <!--<Rectangle Margin="6,2" Fill="LightGray" Height="1" />-->
-        <Grid Margin="6,2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Order ID:" FontSize="14" />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.OrderID, Mode=OneWay}" 
-                       IsTextSelectionEnabled="True" FontSize="14" />
-        </Grid>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Style="{StaticResource CardHeader}" Text="Order ID" />
+            <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.OrderID, Mode=OneWay}" />
 
-        <Grid Margin="6,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Status:" FontSize="14"  />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.StatusDesc, Mode=OneWay}" 
-                       IsTextSelectionEnabled="True" FontSize="14" />
-        </Grid>
-        <Grid Margin="6,0,6,6">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Order Date:" FontSize="14"/>
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.OrderDate, Mode=OneWay, Converter={StaticResource DateTimeFormatConverter}}" 
-                       IsTextSelectionEnabled="True" FontSize="14" />
-        </Grid>
+            <TextBlock Style="{StaticResource CardHeader}" Text="Status" />
+            <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.StatusDesc, Mode=OneWay}" />
 
-   
-    
-        <Rectangle Margin="6,2,6,6" Fill="LightGray" Height="1" />
-        <TextBlock Margin="6,6" Text="Customer" FontWeight="SemiBold" />
-        <Rectangle Margin="6" />
-        <Grid Margin="6,2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
+            <TextBlock Style="{StaticResource CardHeader}" Text="Order Date" />
+            <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.OrderDate, Mode=OneWay, Converter={StaticResource DateTimeFormatConverter}}" />
 
-            <PersonPicture ProfilePicture="{x:Bind Item.Customer.PictureSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" 
+            <Rectangle Style="{StaticResource CardSeparator}"/>
+            <TextBlock Style="{StaticResource CardSection}" Margin="0,12" Text="Customer"  />
+
+            <StackPanel Orientation="Horizontal" Margin="0,3,0,9">
+                <PersonPicture ProfilePicture="{x:Bind Item.Customer.PictureSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" 
                            Initials="{x:Bind Item.Customer.Initials, Mode=OneWay}" 
-                           Width="48" 
-                           Height="48" />
-            <StackPanel Grid.Column="1" Margin="6,0">
-                <TextBlock Text="{x:Bind Item.Customer.FullName, Mode=OneWay}" 
-                           TextWrapping="WrapWholeWords" 
-                           FontSize="14" 
-                           IsTextSelectionEnabled="True" />
-                <TextBlock Text="{x:Bind Item.Customer.EmailAddress, Mode=OneWay}" 
-                           TextWrapping="WrapWholeWords" 
-                           FontSize="13" 
-                           IsTextSelectionEnabled="True" />
+                           Width="{StaticResource CardPictureRadius}"
+                           Height="{StaticResource CardPictureRadius}" />
+                <TextBlock Style="{StaticResource CardText}" VerticalAlignment="Center" Margin="9,0" Text="{x:Bind Item.Customer.FullName, Mode=OneWay}" />
             </StackPanel>
-        </Grid>
 
-        <Grid Margin="6,12,6,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" 
-                       Text="Customer ID:" 
-                       FontSize="14" />
-            <TextBlock Grid.Column="1" 
-                       Text="{x:Bind Item.CustomerID, Mode=OneWay}" 
-                       IsTextSelectionEnabled="True" 
-                       FontSize="14" />
-        </Grid>
+            <TextBlock Style="{StaticResource CardHeader}" Text="Customer ID" />
+            <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.CustomerID, Mode=OneWay}" />
 
-        <Grid Margin="6,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" 
-                       Text="Phone:" 
-                       FontSize="14" />
-            <TextBlock Grid.Column="1" 
-                       Text="{x:Bind Item.Customer.Phone, Mode=OneWay}" 
-                       IsTextSelectionEnabled="True" 
-                       FontSize="14" />
-        </Grid>
-    </StackPanel>
+            <TextBlock Style="{StaticResource CardHeader}" Text="Email" />
+            <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.Customer.EmailAddress, Mode=OneWay}" />
+
+            <TextBlock Style="{StaticResource CardHeader}" Text="Phone" />
+            <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.Customer.Phone, Mode=OneWay}" />
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

@@ -6,61 +6,39 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" d:DesignWidth="260" d:DesignHeight="400">
 
-    <StackPanel Spacing="2">
-        <TextBlock Margin="6,0" Text="Order Item" />
-        <Rectangle Margin="6,2" Fill="LightGray" Height="1" />
-        <Grid Margin="6,2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Order ID:" FontSize="14" FontWeight="SemiBold" />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.OrderID, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" />
-        </Grid>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" BorderThickness="0,0,1,0" BorderBrush="LightGray">
+        <StackPanel>
 
-        <Grid Margin="6,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Order Line:" FontSize="14" FontWeight="SemiBold" />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.OrderLine, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" />
-        </Grid>
+            <TextBlock Style="{StaticResource CardSection}" Margin="0,12" Text="Order"  />
+            <TextBlock Style="{StaticResource CardHeader}" Text="Order ID" />
+            <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.OrderID, Mode=OneWay}" />
+            
+            <TextBlock Style="{StaticResource CardHeader}" Text="Order Line" />
+            <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.OrderLine, Mode=OneWay}" />
 
-        <Rectangle Margin="6" />
+            <Rectangle Style="{StaticResource CardSeparator}"/>
+            <TextBlock Style="{StaticResource CardSection}" Margin="0,12" Text="Product"  />
 
-        <TextBlock Margin="6,0" Text="Product" />
-        <Rectangle Margin="6,2" Fill="LightGray" Height="1" />
-        <Grid Margin="6,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Product ID:" FontSize="14" FontWeight="SemiBold" />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.ProductID, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" />
-        </Grid>
+            <StackPanel Orientation="Horizontal" Margin="0,0">
+                <Image Source="{x:Bind Item.Product.ThumbnailSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" 
+                           Margin="0,3,9,12" Height="56"
+                           Stretch="Uniform" HorizontalAlignment="Center" 
+                           VerticalAlignment="Center" />
+                <TextBlock Text="{x:Bind Item.Product.Name, Mode=OneWay}" 
+                           VerticalAlignment="Center"
+                           Style="{StaticResource CardSuperHeader}"
+                           TextAlignment="Center" />
+            </StackPanel>
 
-        <Grid Margin="6,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Price:" FontSize="14" FontWeight="SemiBold" />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.Product.ListPrice, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" />
-        </Grid>
+            <TextBlock Style="{StaticResource CardHeader}" Text="Product ID" />
+            <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.ProductID, Mode=OneWay}" />
 
-        <Grid Margin="6,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Total:" FontSize="14" FontWeight="SemiBold" />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.Total, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" />
-        </Grid>
+            <TextBlock Style="{StaticResource CardHeader}" Text="Price" />
+            <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.Product.ListPrice, Mode=OneWay}" />
 
-        <StackPanel Margin="6,2">
-            <Image Margin="0,6" Source="{x:Bind Item.Product.PictureSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" Width="180" />
-            <TextBlock Grid.Column="1" Text="{x:Bind Item.Product.Name, Mode=OneWay}" TextAlignment="Center" TextWrapping="WrapWholeWords" IsTextSelectionEnabled="True" FontSize="14" />
+            <TextBlock Style="{StaticResource CardHeader}" Text="Total" />
+            <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.Total, Mode=OneWay}" />
+          
         </StackPanel>
-    </StackPanel>
+    </ScrollViewer>
 </UserControl>

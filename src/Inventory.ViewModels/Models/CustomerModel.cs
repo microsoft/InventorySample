@@ -64,6 +64,15 @@ namespace Inventory.Models
         public string Initials => String.Format("{0}{1}", $"{FirstName} "[0], $"{LastName} "[0]).Trim().ToUpper();
         public string CountryName => LookupTablesProxy.Instance.GetCountry(CountryCode);
 
+        public string FullAddress
+        {
+            get
+            {
+                return $"{AddressLine1} {AddressLine2}\n{City}, {Region} {PostalCode}\n{CountryName}";
+          
+            }
+        }
+
         public override void Merge(ModelBase source)
         {
             if (source is CustomerModel model)

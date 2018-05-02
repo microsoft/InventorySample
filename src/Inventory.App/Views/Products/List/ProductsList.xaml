@@ -44,6 +44,6 @@
                        SelectItemsCommand="{x:Bind ViewModel.SelectItemsCommand}"
                        DeselectItemsCommand="{x:Bind ViewModel.DeselectItemsCommand}"
                        SelectRangesCommand="{x:Bind ViewModel.SelectRangesCommand}"
-                       ItemSecondaryActionInvokedCommand="{x:Bind ViewModel.ItemInvokedCommand}"
+                       ItemInvokedCommand="{x:Bind ViewModel.ItemInvokedCommand}"
                        DeleteCommand="{x:Bind ViewModel.DeleteSelectionCommand}" />
 </UserControl>
