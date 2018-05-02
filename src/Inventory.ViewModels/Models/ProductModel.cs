@@ -25,14 +25,12 @@ namespace Inventory.Models
         public string ProductID { get; set; }
 
         public int CategoryID { get; set; }
-        public int SubCategoryID { get; set; }
 
         public string Name { get; set; }
         public string Description { get; set; }
 
         public string Size { get; set; }
         public string Color { get; set; }
-        public string Gender { get; set; }
 
         public decimal ListPrice { get; set; }
         public decimal DealerPrice { get; set; }
@@ -44,8 +42,6 @@ namespace Inventory.Models
         public int StockUnits { get; set; }
         public int SafetyStockLevel { get; set; }
 
-        public DateTimeOffset? StartDate { get; set; }
-        public DateTimeOffset? EndDate { get; set; }
         public DateTimeOffset CreatedOn { get; set; }
         public DateTimeOffset LastModifiedOn { get; set; }
 
@@ -72,12 +68,10 @@ namespace Inventory.Models
             {
                 ProductID = source.ProductID;
                 CategoryID = source.CategoryID;
-                SubCategoryID = source.SubCategoryID;
                 Name = source.Name;
                 Description = source.Description;
                 Size = source.Size;
                 Color = source.Color;
-                Gender = source.Gender;
                 ListPrice = source.ListPrice;
                 DealerPrice = source.DealerPrice;
                 TaxType = source.TaxType;
@@ -86,8 +80,6 @@ namespace Inventory.Models
                 DiscountEndDate = source.DiscountEndDate;
                 StockUnits = source.StockUnits;
                 SafetyStockLevel = source.SafetyStockLevel;
-                StartDate = source.StartDate;
-                EndDate = source.EndDate;
                 CreatedOn = source.CreatedOn;
                 LastModifiedOn = source.LastModifiedOn;
                 Picture = source.Picture;

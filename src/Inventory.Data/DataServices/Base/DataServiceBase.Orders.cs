@@ -118,8 +118,7 @@ namespace Inventory.Data.Services
                 order.OrderDate = DateTime.UtcNow;
                 _dataSource.Entry(order).State = EntityState.Added;
             }
-            // TODO: 
-            //order.LastModifiedOn = DateTime.UtcNow;
+            order.LastModifiedOn = DateTime.UtcNow;
             order.SearchTerms = order.BuildSearchTerms();
             return await _dataSource.SaveChangesAsync();
         }

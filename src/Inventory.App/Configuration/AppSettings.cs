@@ -25,7 +25,7 @@ namespace Inventory
     public class AppSettings
     {
         const string DB_NAME = "VanArsdel";
-        const string DB_VERSION = "0.20";
+        const string DB_VERSION = "1.00";
         const string DB_BASEURL = "https://vanarsdelinventory.blob.core.windows.net/database";
 
         static AppSettings()
