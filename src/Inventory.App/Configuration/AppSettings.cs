@@ -45,6 +45,7 @@ namespace Inventory
         static public readonly string DatabaseName = $"{DB_NAME}.{DB_VERSION}.db";
         static public readonly string DatabasePattern = $"{DB_NAME}.{DB_VERSION}.pattern.db";
         static public readonly string DatabaseFileName = Path.Combine(DatabasePath, DatabaseName);
+        static public readonly string DatabasePatternFileName = Path.Combine(DatabasePath, DatabasePattern);
         static public readonly string DatabaseUrl = $"{DB_BASEURL}/{DatabaseName}";
 
         public readonly string SQLiteConnectionString = $"Data Source={DatabaseFileName}";
@@ -80,7 +81,7 @@ namespace Inventory
 
         public string SQLServerConnectionString
         {
-            get => GetSettingsValue("SQLServerConnectionString", @"Data Source=.\SQLExpress;Initial Catalog=VanArsdelDb2;Integrated Security=SSPI");
+            get => GetSettingsValue("SQLServerConnectionString", @"Data Source=.\SQLExpress;Initial Catalog=VanArsdelDb;Integrated Security=SSPI");
             set => SetSettingsValue("SQLServerConnectionString", value);
         }
 
