@@ -190,6 +190,7 @@
     <Compile Include="Tools\ElementSet\ElementSet.Events.cs" />
     <Compile Include="Tools\ElementSet\ElementSet.Methods.cs" />
     <Compile Include="Tools\ElementSet\ElementSet.Properties.cs" />
+    <Compile Include="Tools\SQLServerDbTools.cs" />
     <Compile Include="Views\AppLogs\AppLogsView.xaml.cs">
       <DependentUpon>AppLogsView.xaml</DependentUpon>
     </Compile>

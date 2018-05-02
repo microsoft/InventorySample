@@ -185,16 +185,20 @@ namespace Inventory.ViewModels
                         await DeleteItemsAsync(SelectedItems);
                         MessageService.Send(this, "ItemsDeleted", SelectedItems);
                     }
-                    EndStatusMessage($"{count} customers deleted");
                 }
                 catch (Exception ex)
                 {
                     StatusError($"Error deleting {count} Customers: {ex.Message}");
                     LogException("Customers", "Delete", ex);
+                    count = 0;
                 }
                 await RefreshAsync();
                 SelectedIndexRanges = null;
                 SelectedItems = null;
+                if (count > 0)
+                {
+                    EndStatusMessage($"{count} customers deleted");
+                }
             }
         }
 

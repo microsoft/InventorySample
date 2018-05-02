@@ -89,6 +89,15 @@ namespace Inventory
 
         static private async Task EnsureDatabaseAsync()
         {
+            await EnsureSQLiteDatabaseAsync();
+            if (AppSettings.Current.DataProvider == DataProviderType.SQLServer)
+            {
+                await SQLServerDbTools.EnsureDatabaseAsync();
+            }
+        }
+
+        private static async Task EnsureSQLiteDatabaseAsync()
+        {
             var localFolder = ApplicationData.Current.LocalFolder;
             var databaseFolder = await localFolder.CreateFolderAsync(AppSettings.DatabasePath, CreationCollisionOption.OpenIfExists);
 

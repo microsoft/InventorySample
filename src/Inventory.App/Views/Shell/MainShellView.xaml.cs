@@ -109,13 +109,17 @@ namespace Inventory.Views
             NavigationViewBackButton.IsEnabled = _navigationService.CanGoBack;
         }
 
-        private void OnLogoff(object sender, RoutedEventArgs e)
+        private async void OnLogoff(object sender, RoutedEventArgs e)
         {
-            var loginService = ServiceLocator.Current.GetService<ILoginService>();
-            loginService.Logoff();
-            if (Frame.CanGoBack)
+            var dialogService = ServiceLocator.Current.GetService<IDialogService>();
+            if (await dialogService.ShowAsync("Confirm logoff", "Are you sure you want to logoff?", "Ok", "Cancel"))
             {
-                Frame.GoBack();
+                var loginService = ServiceLocator.Current.GetService<ILoginService>();
+                loginService.Logoff();
+                if (Frame.CanGoBack)
+                {
+                    Frame.GoBack();
+                }
             }
         }
     }

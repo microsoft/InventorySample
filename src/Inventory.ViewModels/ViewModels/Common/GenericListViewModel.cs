@@ -117,6 +117,7 @@ namespace Inventory.ViewModels
             if (IsMultipleSelection)
             {
                 SelectedItems.AddRange(items.Cast<TModel>());
+                StatusMessage($"{SelectedItems.Count} items selected");
             }
         }
 
@@ -133,17 +134,16 @@ namespace Inventory.ViewModels
                 {
                     SelectedItems.Remove(item);
                 }
+                StatusMessage($"{SelectedItems.Count} items selected");
             }
         }
 
         public ICommand SelectRangesCommand => new RelayCommand<IndexRange[]>(OnSelectRanges);
         virtual protected void OnSelectRanges(IndexRange[] indexRanges)
         {
-            if (indexRanges?.Length > 0)
-            {
-                StatusReady();
-            }
             SelectedIndexRanges = indexRanges;
+            int count = SelectedIndexRanges?.Sum(r => r.Length) ?? 0;
+            StatusMessage($"{count} items selected");
         }
 
         public ICommand DeleteSelectionCommand => new RelayCommand(OnDeleteSelection);
@@ -151,6 +151,6 @@ namespace Inventory.ViewModels
         abstract protected void OnNew();
         abstract protected void OnRefresh();
         abstract protected void OnDeleteSelection();
-       
+
     }
 }

@@ -38,7 +38,7 @@ namespace Inventory.Services
                     return new SQLiteDataService(AppSettings.Current.SQLiteConnectionString);
 
                 case DataProviderType.SQLServer:
-                    return new SQLiteDataService(AppSettings.Current.SQLServerConnectionString);
+                    return new SQLServerDataService(AppSettings.Current.SQLServerConnectionString);
 
                 default:
                     throw new NotImplementedException();

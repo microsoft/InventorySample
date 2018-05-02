@@ -144,8 +144,8 @@
                                                         Grid.Row="3" 
                                                         SelectionMode="Single" 
                                                         SelectedItem="{TemplateBinding SelectedItem}"/>
-                                    <Border x:Name="FooterContentBorder" Child="{TemplateBinding PaneFooter}" Grid.Row="5"/>
-                                    <NavigationViewItem x:Name="SettingsNavPaneItem" Grid.Row="4">
+                                    <Border x:Name="FooterContentBorder" Child="{TemplateBinding PaneFooter}" Grid.Row="4"/>
+                                    <NavigationViewItem x:Name="SettingsNavPaneItem" Grid.Row="5">
                                         <NavigationViewItem.Icon>
                                             <SymbolIcon Symbol="Setting"/>
                                         </NavigationViewItem.Icon>
