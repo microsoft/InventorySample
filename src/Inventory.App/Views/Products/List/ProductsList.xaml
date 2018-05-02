@@ -29,6 +29,7 @@
     </UserControl.Resources>
 
     <controls:DataGrid ItemsSource="{x:Bind ViewModel.Items, Mode=OneWay}"
+                       ItemInvokedCommand="{x:Bind ViewModel.ItemInvokedCommand}"
                        NewLabel="New Product"
                        SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay}"
                        ItemTemplate="{StaticResource ItemTemplate}"
@@ -43,6 +44,5 @@
                        SelectItemsCommand="{x:Bind ViewModel.SelectItemsCommand}"
                        DeselectItemsCommand="{x:Bind ViewModel.DeselectItemsCommand}"
                        SelectRangesCommand="{x:Bind ViewModel.SelectRangesCommand}"
-                       ItemSecondaryActionInvokedCommand="{x:Bind ViewModel.ItemInvokedCommand}"
                        DeleteCommand="{x:Bind ViewModel.DeleteSelectionCommand}" />
 </UserControl>
