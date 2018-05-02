@@ -38,7 +38,7 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="4" />
                     </Grid.ColumnDefinitions>
-                    <Viewbox Margin="-4,6,0,6" HorizontalAlignment="Left">
+                    <Viewbox Margin="-2,9,0,9" HorizontalAlignment="Left">
                         <PersonPicture ProfilePicture="{x:Bind PictureSource, Converter={StaticResource ObjectToImageConverter}}" DisplayName="{x:Bind DisplayName}" />
                     </Viewbox>
                     <TextBlock Grid.Column="1" Text="{x:Bind DisplayName}" VerticalAlignment="Center" />
