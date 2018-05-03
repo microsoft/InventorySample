@@ -13,6 +13,7 @@
         - [View Model](chapters/mvvm.md#view-model)
         - [Data Binding](chapters/mvvm.md#data-binding)
         - [Commands](chapters/mvvm.md#commands)
+        - [Summary](chapters/mvvm.md#summary)
     - [Windows 10 Binding](chapters/windows-10-binding.md)
         - [Binding Elements](chapters/windows-10-binding.md#binding-elements)
         - [Dependecy property](chapters/windows-10-binding.md#dependency-property)
