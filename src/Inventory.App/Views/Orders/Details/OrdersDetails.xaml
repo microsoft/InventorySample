@@ -53,7 +53,7 @@
             <views:OrdersCard Margin="6,12" Item="{x:Bind ViewModel.Item, Mode=OneWay}" />
         </Grid>
 
-        <controls:Details x:Name="details" Grid.Column="1" Margin="6"
+        <controls:Details x:Name="details" Grid.Column="1" Margin="12,6,6,6"
                           DetailsContent="{x:Bind ViewModel}"
                           DetailsTemplate="{StaticResource DetailsTemplate}"
                           IsEditMode="{x:Bind ViewModel.IsEditMode, Mode=OneWay}"

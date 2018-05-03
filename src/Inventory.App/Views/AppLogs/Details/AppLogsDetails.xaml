@@ -23,76 +23,39 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Background="WhiteSmoke" BorderThickness="0,0,1,0" BorderBrush="LightGray">
-            <StackPanel Spacing="2">
-                <Rectangle Margin="6" />
+            <StackPanel Margin="12" 
+                        BorderThickness="0,0,1,0" 
+                        BorderBrush="LightGray">
 
-                <StackPanel Margin="6,2">
-                    <Viewbox Margin="6" Width="60">
-                        <FontIcon Glyph="{x:Bind ViewModel.Item.Type, Mode=OneWay, Converter={StaticResource LogTypeConverter}}" Foreground="{x:Bind ViewModel.Item.Type, Mode=OneWay, Converter={StaticResource LogTypeConverter}}" />
-                    </Viewbox>
-                    <TextBlock Text="{x:Bind ViewModel.Item.Type, Mode=OneWay}" TextAlignment="Center" IsTextSelectionEnabled="True" FontSize="16" />
+                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Margin="0,12,6,12">
+                    <FontIcon Margin="6"
+                              FontSize="32"
+                              Glyph="{x:Bind ViewModel.Item.Type, Mode=OneWay, Converter={StaticResource LogTypeConverter}}"
+                              Foreground="{x:Bind ViewModel.Item.Type, Mode=OneWay, Converter={StaticResource LogTypeConverter}}" />
+                    
+                    <TextBlock Style="{StaticResource CardSuperHeader}" 
+                               Text="{x:Bind ViewModel.Item.Type, Mode=OneWay}" 
+                               VerticalAlignment="Center" />
                 </StackPanel>
 
-                <Rectangle Margin="6" />
+                <TextBlock Style="{StaticResource CardHeader}" Text="Log ID" />
+                <TextBlock Style="{StaticResource CardText}" Text="{x:Bind ViewModel.Item.Id, Mode=OneWay}" />
 
-                <StackPanel Margin="6,6">
-                    <Grid Margin="6,2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="3*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Log ID:" FontSize="14"  />
-                        <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.Item.Id, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" />
-                    </Grid>
+                <TextBlock Style="{StaticResource CardHeader}" Text="Date" />
+                <TextBlock Style="{StaticResource CardText}" Text="{x:Bind ViewModel.Item.DateTime, Mode=OneWay, Converter={StaticResource DateTimeFormatConverter}}" />
 
-                    <Grid Margin="6,2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="3*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Date:" FontSize="14" />
-                        <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.Item.DateTime, Mode=OneWay, Converter={StaticResource DateTimeFormatConverter}}" IsTextSelectionEnabled="True" FontSize="14" />
-                    </Grid>
+                <TextBlock Style="{StaticResource CardHeader}" Text="Time" />
+                <TextBlock Style="{StaticResource CardText}" Text="{x:Bind ViewModel.Item.DateTime, Mode=OneWay, ConverterParameter=longtime, Converter={StaticResource DateTimeFormatConverter}}" />
 
-                    <Grid Margin="6,2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="3*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Time:" FontSize="14" />
-                        <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.Item.DateTime, Mode=OneWay, ConverterParameter=longtime, Converter={StaticResource DateTimeFormatConverter}}" IsTextSelectionEnabled="True" FontSize="14" />
-                    </Grid>
+                <TextBlock Style="{StaticResource CardHeader}" Text="User" />
+                <TextBlock Style="{StaticResource CardText}" Text="{x:Bind ViewModel.Item.User, Mode=OneWay}" />
 
-                    <Grid Margin="6,2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="3*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="User:" FontSize="14"  />
-                        <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.Item.User, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" />
-                    </Grid>
+                <TextBlock Style="{StaticResource CardHeader}" Text="Source" />
+                <TextBlock Style="{StaticResource CardText}" Text="{x:Bind ViewModel.Item.Source, Mode=OneWay}" />
 
-                    <Grid Margin="6,2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="3*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Source:" FontSize="14"  />
-                        <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.Item.Source, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" />
-                    </Grid>
-
-                    <Grid Margin="6,2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="3*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Action:" FontSize="14"  />
-                        <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.Item.Action, Mode=OneWay}" IsTextSelectionEnabled="True" FontSize="14" />
-                    </Grid>
-                </StackPanel>
+                <TextBlock Style="{StaticResource CardHeader}" Text="Action" />
+                <TextBlock Style="{StaticResource CardText}" Text="{x:Bind ViewModel.Item.Action, Mode=OneWay}" />
             </StackPanel>
-        </Grid>
 
         <controls:Details x:Name="details" Grid.Column="1" Margin="6"
                           DefaultCommands="delete"
