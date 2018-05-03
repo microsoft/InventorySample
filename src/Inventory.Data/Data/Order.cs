@@ -30,9 +30,9 @@ namespace Inventory.Data
         public long CustomerID { get; set; }
 
         [Required]
-        public DateTime OrderDate { get; set; }
-        public DateTime? ShippedDate { get; set; }
-        public DateTime? DeliveredDate { get; set; }
+        public DateTimeOffset OrderDate { get; set; }
+        public DateTimeOffset? ShippedDate { get; set; }
+        public DateTimeOffset? DeliveredDate { get; set; }
 
         [Required]
         public int Status { get; set; }
@@ -56,6 +56,8 @@ namespace Inventory.Data
         [MaxLength(20)]
         public string ShipPhone { get; set; }
 
+        [Required]
+        public DateTimeOffset LastModifiedOn { get; set; }
         public string SearchTerms { get; set; }
 
         public virtual Customer Customer { get; set; }

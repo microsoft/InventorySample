@@ -133,14 +133,14 @@ namespace Inventory.Services
                 CountryCode = source.CountryCode,
                 PostalCode = source.PostalCode,
                 Phone = source.Phone,
-                CreatedOn = source.CreatedOn.AsDateTimeOffset(),
-                LastModifiedOn = source.LastModifiedOn.AsNullableDateTimeOffset(),
+                CreatedOn = source.CreatedOn,
+                LastModifiedOn = source.LastModifiedOn,
                 Thumbnail = source.Thumbnail,
                 ThumbnailSource = await BitmapTools.LoadBitmapAsync(source.Thumbnail)
             };
             if (includeAllFields)
             {
-                model.BirthDate = source.BirthDate.AsNullableDateTimeOffset();
+                model.BirthDate = source.BirthDate;
                 model.Education = source.Education;
                 model.Occupation = source.Occupation;
                 model.YearlyIncome = source.YearlyIncome;
@@ -171,7 +171,7 @@ namespace Inventory.Services
             target.CountryCode = source.CountryCode;
             target.PostalCode = source.PostalCode;
             target.Phone = source.Phone;
-            target.BirthDate = source.BirthDate.AsNullableDateTime();
+            target.BirthDate = source.BirthDate;
             target.Education = source.Education;
             target.Occupation = source.Occupation;
             target.YearlyIncome = source.YearlyIncome;
@@ -180,8 +180,8 @@ namespace Inventory.Services
             target.ChildrenAtHome = source.ChildrenAtHome;
             target.IsHouseOwner = source.IsHouseOwner;
             target.NumberCarsOwned = source.NumberCarsOwned;
-            target.CreatedOn = source.CreatedOn.AsDateTime();
-            target.LastModifiedOn = source.LastModifiedOn.AsNullableDateTime();
+            target.CreatedOn = source.CreatedOn;
+            target.LastModifiedOn = source.LastModifiedOn;
             target.Picture = source.Picture;
             target.Thumbnail = source.Thumbnail;
         }
