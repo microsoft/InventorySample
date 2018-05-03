@@ -12,7 +12,7 @@
                 <Grid  Margin="6,24,6,0" Height="180">
                     <Grid Background="LightGray">
                         <Image Source="{x:Bind Item.PictureSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" 
-                           Stretch="Uniform" 
+                           Stretch="UniformToFill" 
                            HorizontalAlignment="Center" 
                            VerticalAlignment="Center" />
                     </Grid>
@@ -24,7 +24,7 @@
                             <Rectangle Fill="White" Opacity="0.75" />
                             <TextBlock Text="Edit Photo" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{x:Bind ViewModel.IsEnabled, Mode=OneWay}" />
                             <Image Source="{x:Bind ViewModel.NewPictureSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" 
-                               Stretch="Uniform" 
+                               Stretch="UniformToFill" 
                                HorizontalAlignment="Center" 
                                VerticalAlignment="Center"
                                Visibility="{x:Bind ViewModel.NewPictureSource, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}}" />
