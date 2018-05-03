@@ -28,6 +28,7 @@
     - [The Base ViewModels](chapters/architecture/view-models.md#the-base-viewmodels)
         - [Infrastructure base ViewModels](chapters/architecture/view-models.md#infrastructure-base-viewmodels)
         - [Domain Base ViewModels](chapters/architecture/view-models.md#domain-base-viewmodels)
+    - [Summary](chapters/architecture/view-models.md#summary)
 
 - [Inventory App Initial Setup](chapters/architecture/app-initial-setup.md)
     - [The Startup class](chapters/architecture/app-initial-setup.md#the-startup-class)
