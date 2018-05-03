@@ -214,3 +214,7 @@ private void Edit()
             SaveCommand="{x:Bind ViewModel.SaveCommand}"
             CancelCommand="{x:Bind ViewModel.CancelCommand}" />
 ```
+
+## Summary
+
+MVVM arquitecture is the most extended practice developing Windows 10 enterprise apps. It helps to cleanly separate the business and presentation logic of an application from its user interface (UI). Maintaining a clean separation between application logic and the UI helps to address numerous development issues and can make an application easier to test, maintain, and evolve. It can also greatly improve code re-use opportunities and allows developers and UI designers to more easily collaborate when developing their respective parts of an app.
