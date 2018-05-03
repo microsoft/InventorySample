@@ -24,12 +24,12 @@ namespace Inventory.ViewModels
 {
     public class MainShellViewModel : ShellViewModel
     {
-        private readonly NavigationItem DashboardItem = new NavigationItem(0xE80F, "Dashboard", typeof(DashboardViewModel));
-        private readonly NavigationItem CustomersItem = new NavigationItem(0xE716, "Customers", typeof(CustomersViewModel));
-        private readonly NavigationItem OrdersItem = new NavigationItem(0xE8A1, "Orders", typeof(OrdersViewModel));
-        private readonly NavigationItem ProductsItem = new NavigationItem(0xE781, "Products", typeof(ProductsViewModel));
-        private readonly NavigationItem AppLogsItem = new NavigationItem(0xE7BA, "Activity Log", typeof(AppLogsViewModel));
-        private readonly NavigationItem SettingsItem = new NavigationItem(0x0000, "Settings", typeof(SettingsViewModel));
+        private readonly NavigationItem DashboardItem = new NavigationItem(0xE80F, "Dashboard", typeof(DashboardViewModel), "D");
+        private readonly NavigationItem CustomersItem = new NavigationItem(0xE716, "Customers", typeof(CustomersViewModel), "C");
+        private readonly NavigationItem OrdersItem = new NavigationItem(0xE8A1, "Orders", typeof(OrdersViewModel), "O");
+        private readonly NavigationItem ProductsItem = new NavigationItem(0xE781, "Products", typeof(ProductsViewModel), "P");
+        private readonly NavigationItem AppLogsItem = new NavigationItem(0xE7BA, "Activity Log", typeof(AppLogsViewModel), "L");
+        private readonly NavigationItem SettingsItem = new NavigationItem(0x0000, "Settings", typeof(SettingsViewModel), "S");
         public MainShellViewModel(ILoginService loginService, ICommonServices commonServices) : base(loginService, commonServices)
         {
         }
@@ -57,7 +57,7 @@ namespace Inventory.ViewModels
 
         public override async Task LoadAsync(ShellArgs args)
         {
-            Items = GetItems().ToArray();
+            Items =  GetItems().ToArray();
             await UpdateAppLogBadge();
             await base.LoadAsync(args);
         }

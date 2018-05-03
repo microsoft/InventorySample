@@ -5,7 +5,8 @@
 
     <SolidColorBrush x:Key="NavigationViewDefaultPaneBackground" Color="#EBEBEB"/>
     <SolidColorBrush x:Key="NavigationViewExpandedPaneBackground" Color="#EBEBEB"/>
-    
+
+        
     <Style x:Key="BackButtonNavigationViewStyle" TargetType="NavigationView">
         <Setter Property="PaneToggleButtonStyle" Value="{StaticResource PaneToggleButtonStyle}"/>
         <Setter Property="IsTabStop" Value="False"/>

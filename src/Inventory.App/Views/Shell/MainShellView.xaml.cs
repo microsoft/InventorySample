@@ -122,5 +122,10 @@ namespace Inventory.Views
                 }
             }
         }
+
+        private void OnAccessKeyInvoked(UIElement sender, Windows.UI.Xaml.Input.AccessKeyInvokedEventArgs args)
+        {
+            
+        }
     }
 }

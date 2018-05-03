@@ -29,10 +29,17 @@ namespace Inventory.ViewModels
             Label = label;
             Glyph = Char.ConvertFromUtf32(glyph).ToString();
         }
+        public NavigationItem(int glyph, string label, Type viewModel, string accessKey) : this(viewModel)
+        {
+            Label = label;
+            Glyph = Char.ConvertFromUtf32(glyph).ToString();
+            AccessKey = accessKey;
+        }
 
         public readonly string Glyph;
         public readonly string Label;
         public readonly Type ViewModel;
+        public readonly string AccessKey;
 
         private string _badge = null;
         public string Badge
