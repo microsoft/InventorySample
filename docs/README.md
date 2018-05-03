@@ -21,6 +21,8 @@
         - [Binding markup extension](chapters/windows-10-binding.md#Binding-markup-extension)
         - [x:Bind markup extension](chapters/windows-10-binding.md#x:bind-markup-extension)
         - [Value Converters](chapters/windows-10-binding.md#value-converters)
+        - [Summary](chapters/windows-10-binding.md#summary)
+        
 
 - [ViewModels](chapters/architecture/view-models.md)
     - [The Base ViewModels](chapters/architecture/view-models.md#the-base-viewmodels)
