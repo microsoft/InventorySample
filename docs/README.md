@@ -51,6 +51,10 @@
     - [Detail](chapters/architecture/views.md#detail)
         - [Details control](chapters/architecture/views.md#Details-control)
 
+- [Validation](chapters/architecture/validation.md#Validation)
+    - [IValidationConstraint](chapters/architecture/validation.md#IValidationConstraint)
+    - [Detail ViewModel validation](chapters/architecture/validation.md#Detail-ViewModel-validation)
+
 - [Data Access](chapters/dataaccess.md)
     - [Entity Framework Core](chapters/dataaccess.md#entity-framework-core)
     - [Models definitions](chapters/dataaccess.md#models-definitions)
