@@ -64,7 +64,7 @@ namespace Inventory.Data
         [MaxLength(20)]
         public string Phone { get; set; }
 
-        public DateTime? BirthDate { get; set; }
+        public DateTimeOffset? BirthDate { get; set; }
         [MaxLength(40)]
         public string Education { get; set; }
         [MaxLength(100)]
@@ -78,9 +78,9 @@ namespace Inventory.Data
         public int? NumberCarsOwned { get; set; }
 
         [Required]
-        public DateTime CreatedOn { get; set; }
+        public DateTimeOffset CreatedOn { get; set; }
         [Required]
-        public DateTime? LastModifiedOn { get; set; }
+        public DateTimeOffset? LastModifiedOn { get; set; }
         public string SearchTerms { get; set; }
 
         public byte[] Picture { get; set; }

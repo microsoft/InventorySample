@@ -148,9 +148,9 @@ namespace Inventory.Services
             {
                 OrderID = source.OrderID,
                 CustomerID = source.CustomerID,
-                OrderDate = source.OrderDate.AsDateTimeOffset(),
-                ShippedDate = source.ShippedDate.AsNullableDateTimeOffset(),
-                DeliveredDate = source.DeliveredDate.AsNullableDateTimeOffset(),
+                OrderDate = source.OrderDate,
+                ShippedDate = source.ShippedDate,
+                DeliveredDate = source.DeliveredDate,
                 Status = source.Status,
                 PaymentType = source.PaymentType,
                 TrackingNumber = source.TrackingNumber,
@@ -172,9 +172,9 @@ namespace Inventory.Services
         private void UpdateOrderFromModel(Order target, OrderModel source)
         {
             target.CustomerID = source.CustomerID;
-            target.OrderDate = source.OrderDate.AsDateTime();
-            target.ShippedDate = source.ShippedDate.AsNullableDateTime();
-            target.DeliveredDate = source.DeliveredDate.AsNullableDateTime();
+            target.OrderDate = source.OrderDate;
+            target.ShippedDate = source.ShippedDate;
+            target.DeliveredDate = source.DeliveredDate;
             target.Status = source.Status;
             target.PaymentType = source.PaymentType;
             target.TrackingNumber = source.TrackingNumber;

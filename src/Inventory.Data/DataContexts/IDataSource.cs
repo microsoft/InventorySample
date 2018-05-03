@@ -23,6 +23,8 @@ namespace Inventory.Data.Services
 {
     public interface IDataSource : IDisposable
     {
+        DbSet<DbVersion> DbVersion { get; }
+
         DbSet<Category> Categories { get; }
         DbSet<CountryCode> CountryCodes { get; }
         DbSet<OrderStatus> OrderStatus { get; }
@@ -37,6 +39,7 @@ namespace Inventory.Data.Services
 
         EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
 
+        int SaveChanges();
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken));
     }
 }

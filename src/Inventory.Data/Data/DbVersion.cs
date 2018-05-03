@@ -13,16 +13,15 @@
 #endregion
 
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Inventory.Models
+namespace Inventory.Data
 {
-    public class SubCategoryModel : ModelBase
+    [Table("DbVersion")]
+    public class DbVersion
     {
-        public int CategoryID { get; set; }
-
-        public int SubCategoryID { get; set; }
-
-        public string Name { get; set; }
-        public string Description { get; set; }
+        [Key]
+        public string Version { get; set; }
     }
 }

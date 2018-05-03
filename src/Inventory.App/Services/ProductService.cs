@@ -120,24 +120,20 @@ namespace Inventory.Services
             {
                 ProductID = source.ProductID,
                 CategoryID = source.CategoryID,
-                SubCategoryID = source.SubCategoryID,
                 Name = source.Name,
                 Description = source.Description,
                 Size = source.Size,
                 Color = source.Color,
-                Gender = source.Gender,
                 ListPrice = source.ListPrice,
                 DealerPrice = source.DealerPrice,
                 TaxType = source.TaxType,
                 Discount = source.Discount,
-                DiscountStartDate = source.DiscountStartDate.AsNullableDateTimeOffset(),
-                DiscountEndDate = source.DiscountEndDate.AsNullableDateTimeOffset(),
+                DiscountStartDate = source.DiscountStartDate,
+                DiscountEndDate = source.DiscountEndDate,
                 StockUnits = source.StockUnits,
                 SafetyStockLevel = source.SafetyStockLevel,
-                StartDate = source.StartDate.AsNullableDateTimeOffset(),
-                EndDate = source.EndDate.AsNullableDateTimeOffset(),
-                CreatedOn = source.CreatedOn.AsDateTimeOffset(),
-                LastModifiedOn = source.LastModifiedOn.AsDateTimeOffset(),
+                CreatedOn = source.CreatedOn,
+                LastModifiedOn = source.LastModifiedOn,
                 Thumbnail = source.Thumbnail,
                 ThumbnailSource = await BitmapTools.LoadBitmapAsync(source.Thumbnail)
             };
@@ -153,24 +149,20 @@ namespace Inventory.Services
         private void UpdateProductFromModel(Product target, ProductModel source)
         {
             target.CategoryID = source.CategoryID;
-            target.SubCategoryID = source.SubCategoryID;
             target.Name = source.Name;
             target.Description = source.Description;
             target.Size = source.Size;
             target.Color = source.Color;
-            target.Gender = source.Gender;
             target.ListPrice = source.ListPrice;
             target.DealerPrice = source.DealerPrice;
             target.TaxType = source.TaxType;
             target.Discount = source.Discount;
-            target.DiscountStartDate = source.DiscountStartDate.AsNullableDateTime();
-            target.DiscountEndDate = source.DiscountEndDate.AsNullableDateTime();
+            target.DiscountStartDate = source.DiscountStartDate;
+            target.DiscountEndDate = source.DiscountEndDate;
             target.StockUnits = source.StockUnits;
             target.SafetyStockLevel = source.SafetyStockLevel;
-            target.StartDate = source.StartDate.AsNullableDateTime();
-            target.EndDate = source.EndDate.AsNullableDateTime();
-            target.CreatedOn = source.CreatedOn.AsDateTime();
-            target.LastModifiedOn = source.LastModifiedOn.AsDateTime();
+            target.CreatedOn = source.CreatedOn;
+            target.LastModifiedOn = source.LastModifiedOn;
             target.Picture = source.Picture;
             target.Thumbnail = source.Thumbnail;
         }

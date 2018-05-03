@@ -155,7 +155,6 @@
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Converters\ObjectToImageConverter.cs" />
     <Compile Include="Extensions\AnimationExtensions.cs" />
-    <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\ICommandExtensions.cs" />
     <Compile Include="Extensions\ItemIndexRangeExtensions.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />

@@ -34,9 +34,10 @@ namespace Inventory.Data.Services
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<SubCategory>().HasKey(e => new { e.CategoryID, e.SubCategoryID });
             modelBuilder.Entity<OrderItem>().HasKey(e => new { e.OrderID, e.OrderLine });
         }
+
+        public DbSet<DbVersion> DbVersion { get; set; }
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Product> Products { get; set; }
@@ -44,7 +45,6 @@ namespace Inventory.Data.Services
         public DbSet<OrderItem> OrderItems { get; set; }
 
         public DbSet<Category> Categories { get; set; }
-        public DbSet<SubCategory> SubCategories { get; set; }
 
         public DbSet<CountryCode> CountryCodes { get; set; }
         public DbSet<PaymentType> PaymentTypes { get; set; }
