@@ -1,4 +1,4 @@
- Contributing to the Sample
+ ## Contributing to the Sample
 
  - [Questions](#question)
  - [Issues or Bugs](#issue)
@@ -21,7 +21,7 @@ If you find a bug, you can help us by
 ## <a name="pr"></a> Submitting a pull request
 For every contribution, you must:
 
-* test your code with the [supported SDKs](readme.md#supported)
+* test your code with the [supported SDKs](README.md#supported)
 * follow the [quality guidance](#xaml), [general rules](#rules) and [naming convention](#naming)
 * target master branch (or an appropriate release branch if appropriate for a bug fix)
 
