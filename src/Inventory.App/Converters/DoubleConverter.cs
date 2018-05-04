@@ -24,7 +24,7 @@ namespace Inventory.Converters
         {
             if (value is double d)
             {
-                return d == 0.0 ? "" : d.ToString("0.00");
+                return d == 0 ? "" : d.ToString();
             }
             return "";
         }
