@@ -199,9 +199,9 @@ namespace Inventory.Controls
             GetFormControls().FirstOrDefault()?.Focus(FocusState.Programmatic);
         }
 
-        private void OnVisualStateChanged(object sender, TextVisualState e)
+        private void OnVisualStateChanged(object sender, FormVisualState e)
         {
-            if (e == TextVisualState.Focused)
+            if (e == FormVisualState.Focused)
             {
                 if (!IsEditMode)
                 {
@@ -214,9 +214,9 @@ namespace Inventory.Controls
         {
             if (IsEditMode)
             {
-                foreach (var ctrl in GetFormControls().Where(r => r.VisualState != TextVisualState.Focused))
+                foreach (var ctrl in GetFormControls().Where(r => r.VisualState != FormVisualState.Focused))
                 {
-                    ctrl.SetVisualState(TextVisualState.Ready);
+                    ctrl.SetVisualState(FormVisualState.Ready);
                 }
             }
             else
@@ -224,7 +224,7 @@ namespace Inventory.Controls
                 Focus(FocusState.Programmatic);
                 foreach (var ctrl in GetFormControls())
                 {
-                    ctrl.SetVisualState(TextVisualState.Idle);
+                    ctrl.SetVisualState(FormVisualState.Idle);
                 }
             }
         }

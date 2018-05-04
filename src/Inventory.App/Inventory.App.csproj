@@ -123,6 +123,7 @@
       <DependentUpon>Details.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\FluidGrid\FluidGrid.cs" />
+    <Compile Include="Controls\Forms\FormCommon.cs" />
     <Compile Include="Controls\Forms\FormTextBox.cs" />
     <Compile Include="Controls\Inputs\InputCommon.cs" />
     <Compile Include="Controls\Inputs\LabelCalendar.cs" />
@@ -445,7 +446,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\Controls\FormText.xaml">
+    <Page Include="Themes\Controls\FormTextBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

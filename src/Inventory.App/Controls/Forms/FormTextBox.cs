@@ -1,50 +1,27 @@
-﻿using System;
+﻿#region copyright
+// ******************************************************************
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THE CODE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
+// THE CODE OR THE USE OR OTHER DEALINGS IN THE CODE.
+// ******************************************************************
+#endregion
 
-using Windows.UI;
+using System;
+
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
 
 namespace Inventory.Controls
 {
-    public interface IFormControl
-    {
-        event EventHandler<TextVisualState> VisualStateChanged;
-
-        TextEditMode2 Mode { get; }
-        TextVisualState VisualState { get; }
-
-        bool IsEnabled { get; }
-
-        bool Focus(FocusState value);
-
-        void SetVisualState(TextVisualState visualState);
-    }
-
-    public enum TextDataType
-    {
-        String,
-        Integer,
-        Decimal,
-        Double
-    }
-
-    public enum TextEditMode2
-    {
-        Auto,
-        ReadWrite
-    }
-
-    public enum TextVisualState
-    {
-        Idle,
-        Ready,
-        Focused
-    }
-
     public class FormTextBox : TextBox, IFormControl
     {
-        public event EventHandler<TextVisualState> VisualStateChanged;
+        public event EventHandler<FormVisualState> VisualStateChanged;
 
         private Border _borderElement = null;
         private Control _contentElement = null;
@@ -59,7 +36,7 @@ namespace Inventory.Controls
             BeforeTextChanging += OnBeforeTextChanging;
         }
 
-        public TextVisualState VisualState { get; private set; }
+        public FormVisualState VisualState { get; private set; }
 
         #region DataType
         public TextDataType DataType
@@ -92,9 +69,9 @@ namespace Inventory.Controls
         #endregion
 
         #region Mode*
-        public TextEditMode2 Mode
+        public FormEditMode Mode
         {
-            get { return (TextEditMode2)GetValue(ModeProperty); }
+            get { return (FormEditMode)GetValue(ModeProperty); }
             set { SetValue(ModeProperty, value); }
         }
 
@@ -105,7 +82,7 @@ namespace Inventory.Controls
             control.UpdateVisualState();
         }
 
-        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(TextEditMode2), typeof(FormTextBox), new PropertyMetadata(TextEditMode2.Auto, ModeChanged));
+        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(FormEditMode), typeof(FormTextBox), new PropertyMetadata(FormEditMode.Auto, ModeChanged));
         #endregion
 
         protected override void OnApplyTemplate()
@@ -177,9 +154,9 @@ namespace Inventory.Controls
                     break;
             }
 
-            if (Mode == TextEditMode2.Auto)
+            if (Mode == FormEditMode.Auto)
             {
-                SetVisualState(TextVisualState.Focused);
+                SetVisualState(FormVisualState.Focused);
             }
 
             base.OnGotFocus(e);
@@ -187,9 +164,9 @@ namespace Inventory.Controls
 
         protected override void OnLostFocus(RoutedEventArgs e)
         {
-            if (VisualState == TextVisualState.Focused)
+            if (VisualState == FormVisualState.Focused)
             {
-                SetVisualState(TextVisualState.Ready);
+                SetVisualState(FormVisualState.Ready);
             }
 
             switch (DataType)
@@ -246,16 +223,16 @@ namespace Inventory.Controls
         {
             switch (Mode)
             {
-                case TextEditMode2.Auto:
-                    VisualState = TextVisualState.Idle;
+                case FormEditMode.Auto:
+                    VisualState = FormVisualState.Idle;
                     break;
-                case TextEditMode2.ReadWrite:
-                    VisualState = TextVisualState.Ready;
+                case FormEditMode.ReadWrite:
+                    VisualState = FormVisualState.Ready;
                     break;
             }
         }
 
-        public void SetVisualState(TextVisualState visualState)
+        public void SetVisualState(FormVisualState visualState)
         {
             if (visualState != VisualState)
             {
@@ -271,19 +248,19 @@ namespace Inventory.Controls
             {
                 switch (VisualState)
                 {
-                    case TextVisualState.Idle:
+                    case FormVisualState.Idle:
                         _borderElement.Opacity = 0.5;
                         _contentElement.Visibility = Visibility.Collapsed;
-                        _displayContent.Background = TransparentBrush;
+                        _displayContent.Background = FormBrushes.TransparentBrush;
                         _displayContent.Visibility = Visibility.Visible;
                         break;
-                    case TextVisualState.Ready:
+                    case FormVisualState.Ready:
                         _borderElement.Opacity = 1.0;
                         _contentElement.Visibility = Visibility.Collapsed;
-                        _displayContent.Background = OpaqueBrush;
+                        _displayContent.Background = FormBrushes.OpaqueBrush;
                         _displayContent.Visibility = Visibility.Visible;
                         break;
-                    case TextVisualState.Focused:
+                    case FormVisualState.Focused:
                         _borderElement.Opacity = 1.0;
                         _contentElement.Visibility = Visibility.Visible;
                         _displayContent.Visibility = Visibility.Collapsed;
@@ -291,8 +268,5 @@ namespace Inventory.Controls
                 }
             }
         }
-
-        readonly Brush TransparentBrush = new SolidColorBrush(Colors.Transparent);
-        readonly Brush OpaqueBrush = new SolidColorBrush(Colors.White);
     }
 }
