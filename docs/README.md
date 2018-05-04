@@ -93,9 +93,9 @@
     - [Access Keys](chapters/Accessibility.md#access-keys)
     - [Keyboard Accelerators](chapters/Accessibility.md#keyboard-accelerators)
 
-- [.Net Standard](chapters/netstandard.md)
-    - [What is .Net Standard](chapters/netstandard.md#what-is-.net-standard)
-    - [Why .Net Standard?](chapters/netstandard.md#why-.net-standard)
+- [.NET Standard](chapters/netstandard.md)
+    - [What is .NET Standard](chapters/netstandard.md#what-is-.net-standard)
+    - [Why .NET Standard?](chapters/netstandard.md#why-.net-standard)
         - [Comparation with PCLs](chapters/netstandard.md#comparation-with-pcls)
     
 - [Fluent Design](chapters/fluent-design/overview.md)
