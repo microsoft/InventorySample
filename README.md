@@ -22,7 +22,7 @@ As the code, the documentation is in development as well. You can find the lates
 Please use GitHub issues for bug reports and feature requests. For feature requests, use the enhancement label. For bugs, use the bug label.
 
 ## Contributing
-Do you want to contribute? We would love to have you help out. Here are our [contribution guidelines](CONTRIBUTING.md).
+Do you want to contribute? We would love to have you help out. Here are our [contribution guidelines](Contributing.md).
 
 ## License
 This code is distributed under the terms and conditions of the MIT license.
