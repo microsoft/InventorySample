@@ -69,7 +69,7 @@ namespace Inventory
                     Parameter = activationInfo.EntryArgs,
                     UserInfo = await TryGetUserInfoAsync(e as IActivatedEventArgsWithUser)
                 };
-#if SKIP_LOGIN
+#if true
                 frame.Navigate(typeof(MainShellView), shellArgs);
                 var loginService = ServiceLocator.Current.GetService<ILoginService>();
                 loginService.IsAuthenticated = true;

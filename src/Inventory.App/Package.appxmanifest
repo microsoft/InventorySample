@@ -32,6 +32,5 @@
   <Capabilities>
     <Capability Name="internetClient" />
     <uap:Capability Name="enterpriseAuthentication" />
-    <uap:Capability Name="userAccountInformation" />
   </Capabilities>
 </Package>
