@@ -2,7 +2,7 @@
 
 This repo showcases a sample Windows 10 application (using the Universal Windows Platform) focused in Line of Business scenarios, showing how to use the latest Windows capabilities in Desktop applications. The sample is based around creating and managing customer, orders, and products for the fictitious company VanArsdel.
 
-![VanArsdel Inventory Preview](/docs/Pictures/MultiViews.PNG)
+![VanArsdel Inventory Preview](/docs/Pictures/MultiViewsV1.0.PNG)
 
 ## Features
 This sample highlights:
