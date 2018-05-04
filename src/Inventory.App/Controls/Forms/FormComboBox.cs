@@ -98,11 +98,14 @@ namespace Inventory.Controls
 
         public void SetVisualState(FormVisualState visualState)
         {
-            if (visualState != VisualState)
+            if (IsEnabled)
             {
-                VisualState = visualState;
-                UpdateVisualState();
-                VisualStateChanged?.Invoke(this, visualState);
+                if (visualState != VisualState)
+                {
+                    VisualState = visualState;
+                    UpdateVisualState();
+                    VisualStateChanged?.Invoke(this, visualState);
+                }
             }
         }
 
