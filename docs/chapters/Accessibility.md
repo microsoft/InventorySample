@@ -12,6 +12,7 @@ An inclusive app usually has several ways for the user to interact with it, show
 -	Support for assistive technology (AT) as screen readers or on-screen keyboard for example.
 -	An appropriate design of the visual UI, with different alternatives if needed.
 -	Support for user customization settings, such as font size, high-contrast, color combinations, etc.
+-	Support for Access Keys and Keyboard Accelerators.
 
 To see a more detailed introduction about designing and developing your accessible application, and about the Inclusive Design, you can follow [this](https://docs.microsoft.com/en-us/windows/uwp/design/accessibility/accessibility) link.
 

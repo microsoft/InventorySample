@@ -18,7 +18,7 @@ Every binding process requires of three elements in place to ensure the communic
 
 The property that is the target of a data binding must be a dependency property. These properties are defined in a specific way in order to allow data biding over them. 
 
-Most of the properties of the UI controls we use in the XAML are *Dependency Properties*. You can create your own *Dependency Properties* for your custom controls, but in order to define them, your class has to be a `DependencyObject`. This is an example of a *Dependency Property* that we have defined in the **Van Arsdell Inventory** example app:
+Most of the properties of the UI controls we use in the XAML are *Dependency Properties*. You can create your own *Dependency Properties* for your custom controls, but in order to define them, your class has to be a `DependencyObject`. This is an example of a *Dependency Property* that we have defined in the **Inventory Sample App**:
 
 ```c#
 public CustomerModel Model
@@ -40,7 +40,7 @@ Once we have the *Dependency Property* defined in our custom control, we can bin
     Model="{x:Bind ViewModel.SelectedCustomer, Mode=OneWay}" />
 ```
 
-We could declare *Dependency Properties* even more complex, for instance, we can have a callback mechanism when the value of the property changed:
+We could declare *Dependency Properties* even more complex, for instance, we can have a callback mechanism when the value of the property changes:
 
 ```c#
 public bool IsEditMode
@@ -89,9 +89,9 @@ The `{Binding}` markup extension is converted at XAML load time into an instance
 
 ## x:Bind markup extension
 
-This is the type of binding we are using in the Van Arsdell Inventory app (**PENDING**: Include the final link to the public reporsitory)
+This is the type of binding we are using in most parts of the Inventory Sample app.
 
-Because `{x:Bind}` uses generated code to achieve its benefits, it requires type information at compile time. This means that you cannot bind to properties where you do not know the type ahead of time. Because of this, you cannot use `{x:Bind}` with the `DataContext` property which is of type Object, and is also subject to change at run time. The `{x:Bind}` markup extension—new for Windows 10—is an alternative to `{Binding}`. `{x:Bind}` lacks some of the features of `{Binding}`, but it runs in less time and less memory than `{Binding}` and supports better debugging.
+Because `{x:Bind}` uses generated code to achieve its benefits, it requires type information at compile time. This means that you cannot bind to properties where you do not know the type ahead of time. Because of this, you cannot use `{x:Bind}` with the `DataContext` property which is of type Object, and is also subject to change at run time. The `{x:Bind}` markup extension—new for Windows 10—is an alternative to `{Binding}`. `{x:Bind}` lacks some features of `{Binding}`, but it runs in less time and less memory than `{Binding}` and supports better debugging.
 
 `{x:Bind}` does not use the `DataContext` as a default source, instead, it uses the page or user control itself. One recommended practice is to declare in our pages a property `ViewModel` to bind the data in our UI. This is an example of how we declare the ViewModel property and how it's used in XAML:
 
@@ -247,3 +247,12 @@ Last and before starting using our *ValueConverters* we need to declare them as 
 Please note, that we need to include the namespace where they are defined in order to expose them with the following instruction:
 
 `xmlns:converters="using:VanArsdel.Inventory.Converters"`
+
+
+## Summary
+
+We have 2 binding mechanisims: `{x:Bind}` and `{Binding}`.
+
+The new Windows 10 markup extension `{x:Bind}`, is an alternative to `{Binding}`. `{x:Bind}` lacks some features of `{Binding}`, but it runs in less time and less memory than `{Binding}` and supports better debugging. With `{x:Bind}` we can also bind functions and events. 
+
+*Value Converters* are great tools to be used in our UI binding expressions. Their function is to apply some format over the original values of the ViewModels and display them in our Views. 

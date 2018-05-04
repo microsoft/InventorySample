@@ -13,11 +13,11 @@ Let´s start introducing the concepts of Globalization, Localizability and Local
 - **Localization** is the process of adapting or translating your app's localizable resources to meet the language, cultural, and political requirements of the specific local markets that the app is intended to support. If your app is accurately localizable then you will not have to modify any logic during this process. The localization of an application usually involves the translation of the string resources, the redesign of any culture-dependent images as necessary, and the modification of any other resource files culture or region dependant.
 
 The first step before you start developing a globalized app is to think ahead and identify which elements of your application will be subject to modifications due to the adaptation to different languages, regions and cultures. Avoid assumptions in your code about language, region, character classification, writing system, date/time formatting, numbers, currencies, weights, and sorting rules. Try always to make use of the Globalization APIs to format these data if possible.
-You can find an overview of general rules to make your app localizable in this article: Make your app localizable.
+You can find an overview of general rules to make your app localizable in this article: [Make your app localizable](https://docs.microsoft.com/en-us/windows/uwp/design/globalizing/prepare-your-app-for-localization).
 
 ## Overview of the Globalization APIs
 
-Windows provide a set of Windows Runtime (WinRT) APIs to support you in the process of globalization of your UWP app development. You can find a preview of the classes included in Windows.Globalization namespace in this link [Windows.Globalization Namespace](https://docs.microsoft.com/en-us/uwp/api/windows.globalization). We will discuss some of them in more detail in this script.
+Windows provide a set of Windows Runtime (WinRT) APIs to support you in the process of globalization of your UWP app development. You can find a preview of the classes included in Windows.Globalization namespace in this link [Windows.Globalization Namespace](https://docs.microsoft.com/en-us/uwp/api/windows.globalization). We will discuss some of them in more detail in this chapter.
 
 You may also want to format the information that your app displays to the user based on his particular preferences, region, calendar, currencies or languages. We can check these preferences using the [GlobalizationPreferences](https://docs.microsoft.com/en-us/uwp/api/windows.system.userprofile.globalizationpreferences?branch=live) from the [Windows.System.UserProfile](https://docs.microsoft.com/en-us/uwp/api/windows.system.userprofile) namespace that holds various user globalization preferences.
 
@@ -68,6 +68,11 @@ The third language list of interest is the intersection between the two lists th
 
 In code you can use the ApplicationLanguages.Languages property to access the ranked app runtime language list as a read-only list of strings, where each string is a single BCP-47 language tag.
 
+```c#
+IReadOnlyList<string> runtimeLanguageList = Windows.Globalization.ApplicationLanguages.Languages;
+```
+
+
 ## Using string Resources
 
 In your globalized app, you don´t want to have string literals in your code or XAML markup or app package manifest. We are going to move those strings into a Resources File (.resw), and replace the hardcoded string literals with references to resource identifiers. Now you can make a translated copy of that Resources File for each language that your app supports.
@@ -85,7 +90,7 @@ In each of the Resources.resw files we are going to define the string literals o
 
 ![localization](img/localization_02.png)
 
-In the example above, "Tittle" and “Description” are string resource identifiers that you can refer to from your markup. For the identifier "Tittle", we are providing two strings: "Tittle.Text" and “"Tittle.Width. Those are property identifiers because they correspond to a property of a UI element. The "Description" identifier is a simple string resource identifier; it has no sub-properties and it can be loaded from imperative code, as we'll show.
+In the example above, "Tittle" and “Description” are string resource identifiers that you can refer to from your markup. For the identifier "Tittle", we are providing two strings: "Tittle.Text" and "Tittle.Width". Those are property identifiers because they correspond to a property of a UI element. The "Description" identifier is a simple string resource identifier; it has no sub-properties and it can be loaded from imperative code, as we'll show.
 
 You cannot have a simple string identifier and property identifiers for the same identifier. If we add a “Description.Text” in the example shown, it will cause a Duplicate Entry error when building Resources.resw.
 
@@ -122,8 +127,6 @@ By default, the app's Display name on your app package manifest (the Package.app
 To make a localizable version of this string, open Resources.resw and add a new string resource with the name "AppDisplayName" and the value "Localizable Application Example".
 Then, replace the Display name string literal with a reference to the string resource identifier that you just created ("AppDisplayName"). You use the ms-resource URI (Uniform Resource Identifier) scheme to do this.
  
-For a list of all items in the app package manifest that you can localize, see Localizable manifest items.
-
 ![localization](img/localization_03.png)
 
 To make a localizable version of this string, open Resources.resw and add a new string resource with the name "AppDisplayName" and the value "Localizable Application Example".
@@ -169,7 +172,7 @@ Different regions and cultures use different date and time formats. These includ
 
 **Format dates and times for the app runtime language list**
 
-If you need to allow users to choose a date, or to select a time, then use the standard calendar, date, and time controls. These automatically use the best date and time format for the app runtime language list.
+If you need to allow users to choose a date, or to select a time, then use the standard [calendar, date, and time controls](https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/date-and-time). These automatically use the best date and time format for the app runtime language list.
 
 If you need to display dates or times yourself then you can use the [DateTimeFormatter](https://docs.microsoft.com/en-us/uwp/api/windows.globalization.datetimeformatting.datetimeformatter) class from the [Windows.Globalization.DateTimeFormatting](https://docs.microsoft.com/en-us/uwp/api/windows.globalization.datetimeformatting?branch=live) namespace. By default, DateTimeFormatter automatically uses the best date and time format for the app runtime language list. So, the code below formats a given DateTime in the best way for that list. As an example, assume that your app manifest language list includes English (United States), which is also your default, and German (Germany). If the current date is Mar 30 2018 and the user profile language list contains German (Germany) first, then the formatter gives "30.03.2018" (German format). If the user profile language list contains English (United States) first (or if it contains neither English nor German), then the formatter gives "03/30/2018" (since "en-US" matches, or is used as the default).
 
@@ -188,7 +191,7 @@ If you need to display dates or times yourself then you can use the [DateTimeFor
 ```
 **Format dates and times for other languages**
 
-Remember that, by default, DateTimeFormatter matches the app runtime language list. That way, if you display strings such as "The date is <date>", then the language will match the date format.
+Remember that, by default, DateTimeFormatter matches the app runtime language list. That way, if you display strings such as "The date is \<date>", then the language will match the date format.
 
 If for whatever reason you want to format dates and/or times to another language, for example, for the user profile language list, you can do that using code like the example below.
 
@@ -309,7 +312,7 @@ var traditionalDocumentFont = fonts.TraditionalDocumentFont;
 var modernDocumentFont = fonts.ModernDocumentFont;
 ```
 
-In International fonts you can see a list of the fonts available for UWP apps that are localized into languages other than U.S. English.
+In [International fonts](https://docs.microsoft.com/en-us/windows/uwp/design/globalizing/loc-international-fonts) you can see a list of the fonts available for UWP apps that are localized into languages other than U.S. English.
 
 ## Multilingual App Toolkit 4.0.
 

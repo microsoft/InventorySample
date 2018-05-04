@@ -1,8 +1,8 @@
 # View Models
 
-In a [MVVM](../mvvm.md#mvvm) architecture, and addionally applying *ViewModel first* development, the ViewModels turns into the main core of the app. 
+In a [MVVM](../mvvm.md#mvvm) architecture, the ViewModels turns into the main core of the app. 
 
-Also, because of the choice of ViewModel first approach, the ViewModels doesn't need to know about Views and therefore, the whole app could be defined using ViewModels instead coupling the User Interface to the development.
+Additionally, because of the choice of ViewModel first approach, the ViewModels doesn't need to know about Views and therefore, the whole app could be defined using ViewModels instead coupling the User Interface to the development.
 
 That's why, it's important to define the principal ViewModels that will be the base of the implementation.
 
@@ -154,3 +154,7 @@ This generic ViewModel puts focus on:
 - **Validation** item check when Save changes.
 - **`GetValidationConstraints`** abstract method to be implemented to provide the specific validation constraint for the *Domain Model*.
 - Additional abstract methods to implement: **`SaveItemAsync`**, **`DeleteItemAsync`** and **`ConfirmDeleteAsync`**.
+
+## Summary
+
+The base ViewModels are essential elements to understand the functionality of the Inventory Sample App. We can differentiate 2 kinds of base ViewModels: the infrastructure and the domain ones.   
