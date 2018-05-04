@@ -14,9 +14,7 @@
 
 using System;
 
-using Windows.UI;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Media;
 
 namespace Inventory.Controls
 {
@@ -45,6 +43,7 @@ namespace Inventory.Controls
     public enum FormEditMode
     {
         Auto,
+        ReadOnly,
         ReadWrite
     }
 
@@ -52,6 +51,7 @@ namespace Inventory.Controls
     {
         Idle,
         Ready,
-        Focused
+        Focused,
+        Disabled
     }
 }

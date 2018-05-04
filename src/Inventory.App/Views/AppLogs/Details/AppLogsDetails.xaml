@@ -11,8 +11,8 @@
     <UserControl.Resources>
         <DataTemplate x:Key="DetailsTemplate" x:DataType="viewmodels:AppLogDetailsViewModel">
             <StackPanel Margin="0,12" Spacing="6">
-                <controls:FormTextBox Header="Message" Text="{x:Bind Item.Message, Mode=TwoWay}" IsEnabled="False" />
-                <controls:FormTextBox Header="Description" Text="{x:Bind Item.Description, Mode=TwoWay}" TextWrapping="Wrap" IsEnabled="False" />
+                <controls:FormTextBox Header="Message" Text="{x:Bind Item.Message, Mode=TwoWay}" Mode="ReadOnly" />
+                <controls:FormTextBox Header="Description" Text="{x:Bind Item.Description, Mode=TwoWay}" TextWrapping="Wrap" Mode="ReadOnly" />
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>

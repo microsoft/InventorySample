@@ -95,19 +95,24 @@ namespace Inventory.Controls
                 case FormEditMode.ReadWrite:
                     VisualState = FormVisualState.Ready;
                     break;
+                case FormEditMode.ReadOnly:
+                    VisualState = FormVisualState.Disabled;
+                    break;
             }
         }
 
         public void SetVisualState(FormVisualState visualState)
         {
-            if (IsEnabled)
+            if (Mode == FormEditMode.ReadOnly)
             {
-                if (visualState != VisualState)
-                {
-                    VisualState = visualState;
-                    UpdateVisualState();
-                    VisualStateChanged?.Invoke(this, visualState);
-                }
+                visualState = FormVisualState.Disabled;
+            }
+
+            if (visualState != VisualState)
+            {
+                VisualState = visualState;
+                UpdateVisualState();
+                VisualStateChanged?.Invoke(this, visualState);
             }
         }
 
@@ -128,6 +133,12 @@ namespace Inventory.Controls
                     case FormVisualState.Focused:
                         _backgroundBorder.Opacity = 1.0;
                         _backgroundBorder.Background = OpaqueBrush;
+                        break;
+                    case FormVisualState.Disabled:
+                        _backgroundBorder.Opacity = 1.0;
+                        _backgroundBorder.Background = TransparentBrush;
+                        IsEnabled = false;
+                        Opacity = 0.75;
                         break;
                 }
             }

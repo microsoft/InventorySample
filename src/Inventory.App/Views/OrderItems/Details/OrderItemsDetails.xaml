@@ -13,15 +13,15 @@
         <DataTemplate x:Key="DetailsTemplate" x:DataType="viewmodels:OrderItemDetailsViewModel">
             <controls:FluidGrid Margin="0,12,0,0" Columns="2" ColumnSpacing="12" RowSpacing="12">
                 <controls:FormTextBox Header="Quantity" Text="{x:Bind EditableItem.Quantity, Mode=TwoWay, Converter={StaticResource Int32Converter}}" DataType="Integer" />
-                <controls:FormTextBox Header="Unit Price" Text="{x:Bind EditableItem.UnitPrice, Mode=OneWay, Converter={StaticResource DecimalConverter}}" DataType="Decimal" Format="0.00" IsEnabled="False" />
+                <controls:FormTextBox Header="Unit Price" Text="{x:Bind EditableItem.UnitPrice, Mode=OneWay, Converter={StaticResource DecimalConverter}}" DataType="Decimal" Format="0.00" Mode="ReadOnly" />
 
                 <controls:FormTextBox Header="Discount" Text="{x:Bind EditableItem.Discount, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" DataType="Decimal" Format="0.00" />
-                <controls:FormTextBox Header="Subtotal" Text="{x:Bind EditableItem.Subtotal, Mode=OneWay, Converter={StaticResource DecimalConverter}}" DataType="Decimal" Format="0.00" IsEnabled="False" />
+                <controls:FormTextBox Header="Subtotal" Text="{x:Bind EditableItem.Subtotal, Mode=OneWay, Converter={StaticResource DecimalConverter}}" DataType="Decimal" Format="0.00" Mode="ReadOnly" />
 
                 <controls:FormComboBox Header="Tax Type" ItemsSource="{x:Bind LookupTables.TaxTypes}"
                                                 SelectedValue="{x:Bind EditableItem.TaxType, Mode=TwoWay, Converter={StaticResource Int32Converter}}"
                                                 SelectedValuePath="TaxTypeID" DisplayMemberPath="Name" />
-                <controls:FormTextBox Header="Total" Text="{x:Bind EditableItem.Total, Mode=OneWay, Converter={StaticResource DecimalConverter}}" DataType="Decimal" Format="0.00" IsEnabled="False" />
+                <controls:FormTextBox Header="Total" Text="{x:Bind EditableItem.Total, Mode=OneWay, Converter={StaticResource DecimalConverter}}" DataType="Decimal" Format="0.00" Mode="ReadOnly" />
             </controls:FluidGrid>
         </DataTemplate>
     </UserControl.Resources>

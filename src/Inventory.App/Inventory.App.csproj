@@ -125,7 +125,7 @@
     <Compile Include="Controls\FluidGrid\FluidGrid.cs" />
     <Compile Include="Controls\Forms\FormCalendarDatePicker.cs" />
     <Compile Include="Controls\Forms\FormComboBox.cs" />
-    <Compile Include="Controls\Forms\FormCommon.cs" />
+    <Compile Include="Controls\Forms\FormTypes.cs" />
     <Compile Include="Controls\Forms\FormTextBox.cs" />
     <Compile Include="Controls\Inputs\InputCommon.cs" />
     <Compile Include="Controls\Inputs\LabelCalendar.cs" />
