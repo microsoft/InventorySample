@@ -14,7 +14,9 @@
 
 using System;
 
+using Windows.UI;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Controls;
 
 namespace Inventory.Controls
@@ -252,15 +254,15 @@ namespace Inventory.Controls
                 switch (VisualState)
                 {
                     case FormVisualState.Idle:
-                        _borderElement.Opacity = 0.5;
+                        _borderElement.Opacity = 0.40;
                         _contentElement.Visibility = Visibility.Collapsed;
-                        _displayContent.Background = FormBrushes.TransparentBrush;
+                        _displayContent.Background = TransparentBrush;
                         _displayContent.Visibility = Visibility.Visible;
                         break;
                     case FormVisualState.Ready:
                         _borderElement.Opacity = 1.0;
                         _contentElement.Visibility = Visibility.Collapsed;
-                        _displayContent.Background = FormBrushes.OpaqueBrush;
+                        _displayContent.Background = OpaqueBrush;
                         _displayContent.Visibility = Visibility.Visible;
                         break;
                     case FormVisualState.Focused:
@@ -271,5 +273,8 @@ namespace Inventory.Controls
                 }
             }
         }
+
+        private readonly Brush TransparentBrush = new SolidColorBrush(Colors.Transparent);
+        private readonly Brush OpaqueBrush = new SolidColorBrush(Colors.White);
     }
 }

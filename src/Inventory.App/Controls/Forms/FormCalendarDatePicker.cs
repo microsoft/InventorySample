@@ -14,7 +14,9 @@
 
 using System;
 
+using Windows.UI;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
@@ -107,19 +109,22 @@ namespace Inventory.Controls
                 switch (VisualState)
                 {
                     case FormVisualState.Idle:
-                        _backgroundBorder.Opacity = 0.5;
-                        _backgroundBorder.Background = FormBrushes.TransparentBrush;
+                        _backgroundBorder.Opacity = 0.40;
+                        _backgroundBorder.Background = TransparentBrush;
                         break;
                     case FormVisualState.Ready:
                         _backgroundBorder.Opacity = 1.0;
-                        _backgroundBorder.Background = FormBrushes.OpaqueBrush;
+                        _backgroundBorder.Background = OpaqueBrush;
                         break;
                     case FormVisualState.Focused:
                         _backgroundBorder.Opacity = 1.0;
-                        _backgroundBorder.Background = FormBrushes.OpaqueBrush;
+                        _backgroundBorder.Background = OpaqueBrush;
                         break;
                 }
             }
         }
+
+        private readonly Brush TransparentBrush = new SolidColorBrush(Colors.Transparent);
+        private readonly Brush OpaqueBrush = new SolidColorBrush(Colors.White);
     }
 }

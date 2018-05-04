@@ -54,10 +54,4 @@ namespace Inventory.Controls
         Ready,
         Focused
     }
-
-    public class FormBrushes
-    {
-        static public readonly Brush TransparentBrush = new SolidColorBrush(Colors.Transparent);
-        static public readonly Brush OpaqueBrush = new SolidColorBrush(Colors.White);
-    }
 }

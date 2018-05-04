@@ -13,34 +13,34 @@
         <DataTemplate x:Key="DetailsTemplate" x:DataType="viewmodels:CustomerDetailsViewModel">
             <controls:FluidGrid Columns="2" ColumnSpacing="12" Margin="12,18,6,6" RowSpacing="12">
                 <TextBlock Style="{StaticResource FormsSection}" controls:FluidGrid.ColumnSpan="2" Text="Personal Information"/>
-                <controls:LabelTextBox Label="First Name" Text="{x:Bind EditableItem.FirstName, Mode=TwoWay}" />
-                <controls:LabelTextBox Label="Last Name" Text="{x:Bind EditableItem.LastName, Mode=TwoWay}" />
+                <controls:FormTextBox Header="First Name" Text="{x:Bind EditableItem.FirstName, Mode=TwoWay}" />
+                <controls:FormTextBox Header="Last Name" Text="{x:Bind EditableItem.LastName, Mode=TwoWay}" />
                 <controls:FluidGrid Columns="2" ColumnSpacing="6" RowSpacing="12" MinColumnWidth="60">
-                    <controls:LabelTextBox Label="Middle Name" Text="{x:Bind EditableItem.MiddleName, Mode=TwoWay}" />
-                    <controls:LabelTextBox Label="Sufix" Text="{x:Bind EditableItem.Suffix, Mode=TwoWay}" />
+                    <controls:FormTextBox Header="Middle Name" Text="{x:Bind EditableItem.MiddleName, Mode=TwoWay}" />
+                    <controls:FormTextBox Header="Sufix" Text="{x:Bind EditableItem.Suffix, Mode=TwoWay}" />
                 </controls:FluidGrid>
-                <controls:LabelTextBox Label="Title" Text="{x:Bind EditableItem.Title, Mode=TwoWay}" />
-                <controls:LabelTextBox Label="Email Address" Text="{x:Bind EditableItem.EmailAddress, Mode=TwoWay}" />
-                <controls:LabelTextBox Label="Phone" Text="{x:Bind EditableItem.Phone, Mode=TwoWay}" />
+                <controls:FormTextBox Header="Title" Text="{x:Bind EditableItem.Title, Mode=TwoWay}" />
+                <controls:FormTextBox Header="Email Address" Text="{x:Bind EditableItem.EmailAddress, Mode=TwoWay}" />
+                <controls:FormTextBox Header="Phone" Text="{x:Bind EditableItem.Phone, Mode=TwoWay}" />
 
                 <TextBlock  Style="{StaticResource FormsSection}" controls:FluidGrid.ColumnSpan="2" Text="Customer Address" />
-                <controls:LabelTextBox Label="Address Line 1" Text="{x:Bind EditableItem.AddressLine1, Mode=TwoWay}" />
-                <controls:LabelTextBox Label="Address Line 2" Text="{x:Bind EditableItem.AddressLine2, Mode=TwoWay}" />
-                <controls:LabelTextBox Label="City" Text="{x:Bind EditableItem.City, Mode=TwoWay}" />
-                <controls:LabelTextBox Label="Region" Text="{x:Bind EditableItem.Region, Mode=TwoWay}" />
-                <controls:LabelTextBox Label="Postal Code" Text="{x:Bind EditableItem.PostalCode, Mode=TwoWay}" />
-                <controls:LabelComboBox Label="Country" ItemsSource="{x:Bind LookupTables.CountryCodes}" SelectedValue="{x:Bind EditableItem.CountryCode, Mode=TwoWay}" SelectedValuePath="CountryCodeID" DisplayMemberPath="Name" />
+                <controls:FormTextBox Header="Address Line 1" Text="{x:Bind EditableItem.AddressLine1, Mode=TwoWay}" />
+                <controls:FormTextBox Header="Address Line 2" Text="{x:Bind EditableItem.AddressLine2, Mode=TwoWay}" />
+                <controls:FormTextBox Header="City" Text="{x:Bind EditableItem.City, Mode=TwoWay}" />
+                <controls:FormTextBox Header="Region" Text="{x:Bind EditableItem.Region, Mode=TwoWay}" />
+                <controls:FormTextBox Header="Postal Code" Text="{x:Bind EditableItem.PostalCode, Mode=TwoWay}" />
+                <controls:FormComboBox Header="Country" ItemsSource="{x:Bind LookupTables.CountryCodes}" SelectedValue="{x:Bind EditableItem.CountryCode, Mode=TwoWay}" SelectedValuePath="CountryCodeID" DisplayMemberPath="Name" />
 
                 <TextBlock  Style="{StaticResource FormsSection}" controls:FluidGrid.ColumnSpan="2" Text="Customer Demographic"/>
-                <controls:LabelCalendar Label="Birth Date" Date="{x:Bind EditableItem.BirthDate, Mode=TwoWay}" />
-                <controls:LabelTextBox Label="Education" Text="{x:Bind EditableItem.Education, Mode=TwoWay}" />
+                <controls:FormCalendarDatePicker Header="Birth Date" Date="{x:Bind EditableItem.BirthDate, Mode=TwoWay}" />
+                <controls:FormTextBox Header="Education" Text="{x:Bind EditableItem.Education, Mode=TwoWay}" />
                 <controls:FluidGrid Columns="2" ColumnSpacing="6" RowSpacing="12" MinColumnWidth="80">
-                    <controls:LabelTextBox Label="Occupation" Text="{x:Bind EditableItem.Occupation, Mode=TwoWay}" />
-                    <controls:LabelTextBox Label="Yearly Income" Text="{x:Bind EditableItem.YearlyIncome, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" ValueType="Decimal" />
+                    <controls:FormTextBox Header="Occupation" Text="{x:Bind EditableItem.Occupation, Mode=TwoWay}" />
+                    <controls:FormTextBox Header="Yearly Income" Text="{x:Bind EditableItem.YearlyIncome, Mode=TwoWay}" DataType="Decimal" />
                 </controls:FluidGrid>
                 <controls:FluidGrid Columns="2" ColumnSpacing="6" RowSpacing="12" MinColumnWidth="80">
-                    <controls:LabelTextBox Label="Marital Status" Text="{x:Bind EditableItem.MaritalStatus, Mode=TwoWay}" />
-                    <controls:LabelTextBox Label="Total Children" Text="{x:Bind EditableItem.TotalChildren, Mode=TwoWay, Converter={StaticResource Int32Converter}}" ValueType="Int32" />
+                    <controls:FormTextBox Header="Marital Status" Text="{x:Bind EditableItem.MaritalStatus, Mode=TwoWay}" />
+                    <controls:FormTextBox Header="Total Children" Text="{x:Bind EditableItem.TotalChildren, Mode=TwoWay}" DataType="Integer" />
                 </controls:FluidGrid>
             </controls:FluidGrid>
         </DataTemplate>
