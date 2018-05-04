@@ -24,7 +24,7 @@ namespace Inventory.Converters
         {
             if (value is decimal m)
             {
-                return m == 0m ? "" : m.ToString("0.00");
+                return m == 0 ? "" : m.ToString();
             }
             return "";
         }

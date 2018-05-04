@@ -38,9 +38,9 @@ namespace Inventory.Controls
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            foreach (var input in GetEditableControls())
+            foreach (var ctrl in GetFormControls())
             {
-                input.EnterFocus += OnInputGotFocus;
+                ctrl.VisualStateChanged += OnVisualStateChanged;
             }
             UpdateEditMode();
         }
@@ -172,11 +172,6 @@ namespace Inventory.Controls
         }
         static DependencyExpression ToolbarModeExpression = DependencyExpressions.Register(nameof(ToolbarMode), nameof(IsEditMode), nameof(CanGoBack));
 
-        public void SetFocus()
-        {
-            GetEditableControls().FirstOrDefault()?.SetFocus();
-        }
-
         private void OnToolbarClick(object sender, ToolbarButtonClickEventArgs e)
         {
             switch (e.ClickedButton)
@@ -199,38 +194,53 @@ namespace Inventory.Controls
             }
         }
 
-        private void OnInputGotFocus(object sender, RoutedEventArgs e)
+        public void SetFocus()
         {
-            if (!IsEditMode)
+            GetFormControls().FirstOrDefault()?.Focus(FocusState.Programmatic);
+        }
+
+        private void OnVisualStateChanged(object sender, FormVisualState e)
+        {
+            if (e == FormVisualState.Focused)
             {
-                EditCommand?.TryExecute();
+                if (!IsEditMode)
+                {
+                    EditCommand?.TryExecute();
+                }
             }
         }
 
         private void UpdateEditMode()
         {
-            foreach (var input in GetEditableControls())
+            if (IsEditMode)
             {
-                input.Mode = IsEditMode ? TextEditMode.ReadWrite : TextEditMode.Auto;
+                foreach (var ctrl in GetFormControls().Where(r => r.VisualState != FormVisualState.Focused))
+                {
+                    ctrl.SetVisualState(FormVisualState.Ready);
+                }
             }
-            if (!IsEditMode)
+            else
             {
                 Focus(FocusState.Programmatic);
+                foreach (var ctrl in GetFormControls())
+                {
+                    ctrl.SetVisualState(FormVisualState.Idle);
+                }
             }
         }
 
-        private IEnumerable<IInputControl> GetEditableControls()
+        private IEnumerable<IFormControl> GetFormControls()
         {
             return ElementSet.Children<Control>(container)
                 .Where(r =>
                 {
-                    if (r is IInputControl input)
+                    if (r is IFormControl ctrl)
                     {
-                        return input.Mode != TextEditMode.ReadOnly;
+                        return true;
                     }
                     return false;
                 })
-                .Cast<IInputControl>();
+                .Cast<IFormControl>();
         }
 
         #region NotifyPropertyChanged

@@ -14,31 +14,44 @@
 
 using System;
 
-using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml;
 
-namespace Inventory.Converters
+namespace Inventory.Controls
 {
-    public sealed class DoubleConverter : IValueConverter
+    public interface IFormControl
     {
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            if (value is double d)
-            {
-                return d == 0 ? "" : d.ToString();
-            }
-            return "";
-        }
+        event EventHandler<FormVisualState> VisualStateChanged;
 
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            if (value != null)
-            {
-                if (Double.TryParse(value.ToString(), out double d))
-                {
-                    return d;
-                }
-            }
-            return 0.0;
-        }
+        FormEditMode Mode { get; }
+        FormVisualState VisualState { get; }
+
+        bool IsEnabled { get; }
+
+        bool Focus(FocusState value);
+
+        void SetVisualState(FormVisualState visualState);
+    }
+
+    public enum TextDataType
+    {
+        String,
+        Integer,
+        Decimal,
+        Double
+    }
+
+    public enum FormEditMode
+    {
+        Auto,
+        ReadOnly,
+        ReadWrite
+    }
+
+    public enum FormVisualState
+    {
+        Idle,
+        Ready,
+        Focused,
+        Disabled
     }
 }

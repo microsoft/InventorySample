@@ -12,29 +12,29 @@
     <UserControl.Resources>
         <DataTemplate x:Key="DetailsTemplate" x:DataType="viewmodels:OrderDetailsViewModel">
             <controls:FluidGrid Margin="0,12,0,0" Columns="2" ColumnSpacing="12" RowSpacing="12">
-                <controls:LabelTextBox Label="Ship Address" Text="{x:Bind EditableItem.ShipAddress, Mode=TwoWay}" />
-                <controls:LabelTextBox Label="Ship City" Text="{x:Bind EditableItem.ShipCity, Mode=TwoWay}" />
+                <controls:FormTextBox Header="Ship Address" Text="{x:Bind EditableItem.ShipAddress, Mode=TwoWay}" />
+                <controls:FormTextBox Header="Ship City" Text="{x:Bind EditableItem.ShipCity, Mode=TwoWay}" />
                 <controls:FluidGrid Columns="2" ColumnSpacing="6" RowSpacing="12" MinColumnWidth="120">
-                    <controls:LabelTextBox Label="Ship Postal Code" Text="{x:Bind EditableItem.ShipPostalCode, Mode=TwoWay}" />
-                    <controls:LabelTextBox Label="Ship Region" Text="{x:Bind EditableItem.ShipRegion, Mode=TwoWay}" />
+                    <controls:FormTextBox Header="Ship Postal Code" Text="{x:Bind EditableItem.ShipPostalCode, Mode=TwoWay}" />
+                    <controls:FormTextBox Header="Ship Region" Text="{x:Bind EditableItem.ShipRegion, Mode=TwoWay}" />
                 </controls:FluidGrid>
-                <controls:LabelComboBox Label="Ship Country" ItemsSource="{x:Bind LookupTables.CountryCodes}" VerticalAlignment="Top"
+                <controls:FormComboBox Header="Ship Country" ItemsSource="{x:Bind LookupTables.CountryCodes}" VerticalAlignment="Top"
                                         SelectedValue="{x:Bind EditableItem.ShipCountryCode, Mode=TwoWay}" SelectedValuePath="CountryCodeID" DisplayMemberPath="Name" />
 
-                <controls:LabelComboBox Label="Status" ItemsSource="{x:Bind LookupTables.OrderStatus}"
+                <controls:FormComboBox Header="Status" ItemsSource="{x:Bind LookupTables.OrderStatus}"
                                         SelectedValue="{x:Bind EditableItem.Status, Mode=TwoWay, Converter={StaticResource Int32Converter}}"
                                         SelectedValuePath="Status" DisplayMemberPath="Name" />
-                <controls:LabelComboBox Label="Payment Type" ItemsSource="{x:Bind LookupTables.PaymentTypes}"
+                <controls:FormComboBox Header="Payment Type" ItemsSource="{x:Bind LookupTables.PaymentTypes}"
                                         SelectedValue="{x:Bind EditableItem.PaymentType, Mode=TwoWay, Converter={StaticResource Int32Converter}}"
                                         SelectedValuePath="PaymentTypeID" DisplayMemberPath="Name"
                                         Visibility="{x:Bind EditableItem.CanEditPayment, Mode=OneWay}"/>
-                <controls:LabelCalendar Label="Shipped Date" Date="{x:Bind EditableItem.ShippedDate, Mode=TwoWay}"
+                <controls:FormCalendarDatePicker Header="Shipped Date" Date="{x:Bind EditableItem.ShippedDate, Mode=TwoWay}"
                                         MinDate="{x:Bind EditableItem.OrderDate, Mode=OneWay, Converter={StaticResource DateTimeOffsetConverter}}"
                                         Visibility="{x:Bind EditableItem.CanEditShipping, Mode=OneWay}"/>
-                <controls:LabelComboBox Label="Ship Via" ItemsSource="{x:Bind LookupTables.Shippers}"
+                <controls:FormComboBox Header="Ship Via" ItemsSource="{x:Bind LookupTables.Shippers}"
                                         SelectedValue="{x:Bind EditableItem.ShipVia, Mode=TwoWay, Converter={StaticResource Int32Converter}}" SelectedValuePath="ShipperID" DisplayMemberPath="Name"
                                         Visibility="{x:Bind EditableItem.CanEditShipping, Mode=OneWay}"/>
-                <controls:LabelCalendar Label="Delivered Date" Date="{x:Bind EditableItem.DeliveredDate, Mode=TwoWay}"
+                <controls:FormCalendarDatePicker Header="Delivered Date" Date="{x:Bind EditableItem.DeliveredDate, Mode=TwoWay}"
                                         MinDate="{x:Bind EditableItem.ShippedDate, Mode=OneWay, Converter={StaticResource DateTimeOffsetConverter}}"
                                         Visibility="{x:Bind EditableItem.CanEditDelivery, Mode=OneWay}"/>
             </controls:FluidGrid>

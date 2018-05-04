@@ -214,7 +214,7 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <Viewbox x:Name="ContentViewbox" Height="16" Margin="0,14,0,4" HorizontalAlignment="Stretch" AutomationProperties.AccessibilityView="Raw" >
+                            <Viewbox x:Name="ContentViewbox" Height="20" Margin="0,14,0,4" HorizontalAlignment="Stretch" AutomationProperties.AccessibilityView="Raw" >
                                 <ContentPresenter x:Name="Content" Height="20" Content="{TemplateBinding Icon}" Foreground="{TemplateBinding Foreground}"/>
                             </Viewbox>
                             <TextBlock x:Name="TextLabel" Grid.Row="1" Text="{TemplateBinding Label}" Foreground="{TemplateBinding Foreground}" FontSize="12" FontFamily="{TemplateBinding FontFamily}" TextAlignment="Center" TextWrapping="Wrap" Margin="2,0,2,6" AutomationProperties.AccessibilityView="Raw" />
