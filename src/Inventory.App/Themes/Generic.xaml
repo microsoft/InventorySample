@@ -4,6 +4,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ms-appx:///Themes/Controls/Buttons.xaml" />
+        <ResourceDictionary Source="ms-appx:///Themes/Controls/FormCalendarDatePicker.xaml" />
         <ResourceDictionary Source="ms-appx:///Themes/Controls/FormComboBox.xaml" />
         <ResourceDictionary Source="ms-appx:///Themes/Controls/FormTextBox.xaml" />
         <ResourceDictionary Source="ms-appx:///Themes/Controls/Inputs.xaml" />
