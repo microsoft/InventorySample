@@ -4,6 +4,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ms-appx:///Themes/Controls/Buttons.xaml" />
+        <ResourceDictionary Source="ms-appx:///Themes/Controls/FormText.xaml" />
         <ResourceDictionary Source="ms-appx:///Themes/Controls/Inputs.xaml" />
         <ResourceDictionary Source="ms-appx:///Themes/Controls/Section.xaml" />
     </ResourceDictionary.MergedDictionaries>
