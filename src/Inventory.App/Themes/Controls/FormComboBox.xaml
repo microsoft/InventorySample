@@ -87,9 +87,6 @@
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background" Storyboard.TargetProperty="BorderBrush">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ComboBoxBorderBrushDisabled}" />
                                         </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HeaderContentPresenter" Storyboard.TargetProperty="Foreground">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ComboBoxForegroundDisabled}" />
-                                        </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ComboBoxForegroundDisabled}" />
                                         </ObjectAnimationUsingKeyFrames>
@@ -177,6 +174,7 @@
                             x:DeferLoadStrategy="Lazy"
                             Margin="0,0,0,6"
                             FlowDirection="{TemplateBinding FlowDirection}"
+                            Foreground="{ThemeResource SystemControlForegroundAccentBrush}"
                             FontWeight="{ThemeResource ComboBoxHeaderThemeFontWeight}"
                             Visibility="Collapsed"
                             Content="{TemplateBinding Header}"

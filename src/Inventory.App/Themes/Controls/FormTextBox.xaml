@@ -169,7 +169,7 @@
                             x:DeferLoadStrategy="Lazy"
                             Visibility="Collapsed"
                             Grid.Row="0"
-                            Foreground="{ThemeResource TextControlHeaderForeground}"
+                            Foreground="{ThemeResource SystemControlForegroundAccentBrush}"
                             Margin="0,0,0,6"
                             Grid.ColumnSpan="2"
                             Content="{TemplateBinding Header}"

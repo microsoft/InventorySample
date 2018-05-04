@@ -126,7 +126,7 @@ namespace Inventory.Controls
                         _backgroundBorder.Background = OpaqueBrush;
                         break;
                     case FormVisualState.Disabled:
-                        _backgroundBorder.Opacity = 1.0;
+                        _backgroundBorder.Opacity = 0.40;
                         _backgroundBorder.Background = TransparentBrush;
                         IsEnabled = false;
                         Opacity = 0.75;

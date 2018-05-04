@@ -276,7 +276,7 @@ namespace Inventory.Controls
                         _displayContent.Visibility = Visibility.Collapsed;
                         break;
                     case FormVisualState.Disabled:
-                        _borderElement.Opacity = 1.0;
+                        _borderElement.Opacity = 0.40;
                         _contentElement.Visibility = Visibility.Visible;
                         _displayContent.Visibility = Visibility.Collapsed;
                         IsEnabled = false;
