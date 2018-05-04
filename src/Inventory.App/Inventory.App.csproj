@@ -123,6 +123,7 @@
       <DependentUpon>Details.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\FluidGrid\FluidGrid.cs" />
+    <Compile Include="Controls\Forms\FormComboBox.cs" />
     <Compile Include="Controls\Forms\FormCommon.cs" />
     <Compile Include="Controls\Forms\FormTextBox.cs" />
     <Compile Include="Controls\Inputs\InputCommon.cs" />
@@ -443,6 +444,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\Controls\Buttons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Controls\FormComboBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

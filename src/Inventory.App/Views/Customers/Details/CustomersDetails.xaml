@@ -21,12 +21,18 @@
                 <controls:FormTextBox Header="EMail Address" Text="{x:Bind EditableItem.EmailAddress, Mode=TwoWay}" />
                 <controls:FormTextBox Header="Phone" Text="{x:Bind EditableItem.Phone, Mode=TwoWay}" />
                 <controls:FormTextBox Header="Address" Text="{x:Bind EditableItem.AddressLine1, Mode=TwoWay}" />
-                <controls:FormTextBox Header="Postal Code" Text="{x:Bind EditableItem.PostalCode, Mode=TwoWay}" />
-                <controls:FormTextBox Header="City" Text="{x:Bind EditableItem.City, Mode=TwoWay}" />
-                <controls:FormTextBox Header="Region" Text="{x:Bind EditableItem.Region, Mode=TwoWay}" />
-                <controls:LabelComboBox Label="Country" ItemsSource="{x:Bind LookupTables.CountryCodes}"
-                                        SelectedValue="{x:Bind EditableItem.CountryCode, Mode=TwoWay}"
-                                        SelectedValuePath="CountryCodeID" DisplayMemberPath="Name" />
+
+                <controls:FluidGrid Columns="2" ColumnSpacing="6" RowSpacing="12" MinColumnWidth="60">
+                    <controls:FormTextBox Header="Postal Code" Text="{x:Bind EditableItem.PostalCode, Mode=TwoWay}" />
+                    <controls:FormTextBox Header="City" Text="{x:Bind EditableItem.City, Mode=TwoWay}" />
+                </controls:FluidGrid>
+
+                <controls:FluidGrid Columns="2" ColumnSpacing="6" RowSpacing="12" MinColumnWidth="60">
+                    <controls:FormTextBox Header="Region" Text="{x:Bind EditableItem.Region, Mode=TwoWay}" />
+                    <controls:FormComboBox Header="Country" ItemsSource="{x:Bind LookupTables.CountryCodes}"
+                                           SelectedValue="{x:Bind EditableItem.CountryCode, Mode=TwoWay}"
+                                           SelectedValuePath="CountryCodeID" DisplayMemberPath="Name" />
+                </controls:FluidGrid>
             </controls:FluidGrid>
         </DataTemplate>
     </UserControl.Resources>
