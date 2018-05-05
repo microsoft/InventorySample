@@ -7,9 +7,9 @@
     mc:Ignorable="d" d:DesignWidth="320" d:DesignHeight="600">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel Margin="12">
-            <StackPanel Margin="6,2">
-                <Grid  Margin="6,24,6,0" Height="180">
+        <StackPanel Margin="12,6">
+            <StackPanel Margin="0,12">
+                <Grid  Margin="6" Height="180">
                     <Grid Background="LightGray">
                         <Image Source="{x:Bind Item.PictureSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" 
                            Stretch="UniformToFill" 
@@ -37,7 +37,7 @@
             </StackPanel>
 
             <Rectangle Style="{StaticResource CardSeparator}"/>
-            <TextBlock Style="{StaticResource CardSection}" Margin="0,12" Text="General"  />
+            <TextBlock Style="{StaticResource CardSection}" Text="General" />
 
             <TextBlock Style="{StaticResource CardHeader}" Text="Product ID" />
             <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.ProductID, Mode=OneWay}" />
@@ -52,7 +52,7 @@
             <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.LastModifiedOn, Mode=OneWay, Converter={StaticResource DateTimeFormatConverter}}" />
 
             <Rectangle Style="{StaticResource CardSeparator}"/>
-            <TextBlock Style="{StaticResource CardSection}" Margin="0,12" Text="Price"  />
+            <TextBlock Style="{StaticResource CardSection}" Text="Price"  />
 
             <TextBlock Style="{StaticResource CardHeader}" Text="List Price" />
             <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.ListPrice, Mode=OneWay}" />
@@ -64,7 +64,7 @@
             <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.Discount, Mode=OneWay}" />
 
             <Rectangle Style="{StaticResource CardSeparator}"/>
-            <TextBlock Style="{StaticResource CardSection}" Margin="0,12" Text="Stock"  />
+            <TextBlock Style="{StaticResource CardSection}" Text="Stock"  />
 
             <TextBlock Style="{StaticResource CardHeader}" Text="Stock Units" />
             <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.StockUnits, Mode=OneWay}" />

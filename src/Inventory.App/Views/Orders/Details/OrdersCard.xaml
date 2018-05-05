@@ -18,7 +18,7 @@
             <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.OrderDate, Mode=OneWay, Converter={StaticResource DateTimeFormatConverter}}" />
 
             <Rectangle Style="{StaticResource CardSeparator}"/>
-            <TextBlock Style="{StaticResource CardSection}" Margin="0,12" Text="Customer"  />
+            <TextBlock Style="{StaticResource CardSection}" Text="Customer"  />
 
             <StackPanel Orientation="Horizontal" Margin="0,3,0,9">
                 <PersonPicture ProfilePicture="{x:Bind Item.Customer.PictureSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" 

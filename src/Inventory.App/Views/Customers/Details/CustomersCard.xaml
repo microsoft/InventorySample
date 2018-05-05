@@ -6,37 +6,38 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Inventory.Controls"
     mc:Ignorable="d" d:DesignWidth="260" d:DesignHeight="400">
-    
+
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel>
-            <Grid Margin="0,9,6,18">
+            <Grid Margin="0,12">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <PersonPicture ProfilePicture="{x:Bind Item.PictureSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" 
-                           Initials="{x:Bind Item.Initials, Mode=OneWay}" 
-                           Width="{StaticResource CardPictureRadius}" 
-                           Height="{StaticResource CardPictureRadius}" />
-                <controls:RoundButton Radius="{StaticResource CardPictureRadius}" 
-                                  BorderThickness="1" 
-                                  BorderBrush="White" 
-                                  Background="Transparent" 
-                                  Command="{x:Bind ViewModel.EditPictureCommand}"
-                                  HorizontalAlignment="Center" 
-                                  Visibility="{x:Bind ViewModel.IsEditMode, Mode=OneWay}">
+                <PersonPicture Margin="1"
+                               ProfilePicture="{x:Bind Item.PictureSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}"
+                               Initials="{x:Bind Item.Initials, Mode=OneWay}"
+                               Width="{StaticResource CardPictureRadius}"
+                               Height="{StaticResource CardPictureRadius}" />
+                <controls:RoundButton Radius="{StaticResource CardPictureRadius}"
+                                      BorderThickness="1"
+                                      BorderBrush="White"
+                                      Background="Transparent"
+                                      Command="{x:Bind ViewModel.EditPictureCommand}"
+                                      HorizontalAlignment="Center"
+                                      Visibility="{x:Bind ViewModel.IsEditMode, Mode=OneWay}">
                     <Grid Width="{StaticResource CardPictureRadius}" Height="{StaticResource CardPictureRadius}">
                         <Rectangle Fill="White" Opacity="0.75" />
-                        <TextBlock Text="Edit" 
-                               FontSize="13" 
-                               HorizontalAlignment="Center" 
-                               VerticalAlignment="Center" 
-                               Visibility="{x:Bind ViewModel.IsEnabled, Mode=OneWay}" />
-                        <Image Source="{x:Bind ViewModel.NewPictureSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" 
-                           Stretch="UniformToFill" 
-                           HorizontalAlignment="Center" 
-                           VerticalAlignment="Center"
-                           Visibility="{x:Bind ViewModel.NewPictureSource, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}}" />
+                        <TextBlock Text="Edit"
+                                   FontSize="13"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Visibility="{x:Bind ViewModel.IsEnabled, Mode=OneWay}" />
+                        <Image Source="{x:Bind ViewModel.NewPictureSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}"
+                               Stretch="UniformToFill"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Visibility="{x:Bind ViewModel.NewPictureSource, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}}" />
                     </Grid>
                 </controls:RoundButton>
 

@@ -21,6 +21,7 @@
         <Setter Property="Padding" Value="9" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
     <Style x:Key="ColumnValueRightStyle" TargetType="TextBlock" BasedOn="{StaticResource ColumnValueStyle}">

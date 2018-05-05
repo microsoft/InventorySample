@@ -9,7 +9,7 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto" BorderThickness="0,0,1,0" BorderBrush="LightGray">
         <StackPanel>
 
-            <TextBlock Style="{StaticResource CardSection}" Margin="0,12" Text="Order"  />
+            <TextBlock Style="{StaticResource CardSection}" Text="Order"  />
             <TextBlock Style="{StaticResource CardHeader}" Text="Order ID" />
             <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.OrderID, Mode=OneWay}" />
             
@@ -17,7 +17,7 @@
             <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.OrderLine, Mode=OneWay}" />
 
             <Rectangle Style="{StaticResource CardSeparator}"/>
-            <TextBlock Style="{StaticResource CardSection}" Margin="0,12" Text="Product"  />
+            <TextBlock Style="{StaticResource CardSection}" Text="Product"  />
 
             <StackPanel Orientation="Horizontal" Margin="0,0">
                 <Image Source="{x:Bind Item.Product.ThumbnailSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" 

@@ -27,9 +27,9 @@
                         BorderThickness="0,0,1,0" 
                         BorderBrush="LightGray">
 
-            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Margin="0,12,6,12">
-                <FontIcon Margin="6"
-                              FontSize="32"
+            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Margin="0,12">
+                <FontIcon Margin="0,0,12,6"
+                              FontSize="42"
                               Glyph="{x:Bind ViewModel.Item.Type, Mode=OneWay, Converter={StaticResource LogTypeConverter}}"
                               Foreground="{x:Bind ViewModel.Item.Type, Mode=OneWay, Converter={StaticResource LogTypeConverter}}" />
 
