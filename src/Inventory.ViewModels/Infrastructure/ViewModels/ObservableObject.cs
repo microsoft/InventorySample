@@ -19,13 +19,13 @@ using System.ComponentModel;
 
 namespace Inventory.Models
 {
-    public class ModelBase : INotifyPropertyChanged
+    public class ObservableObject : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
         public bool IsEmpty { get; set; }
 
-        virtual public void Merge(ModelBase source) { }
+        virtual public void Merge(ObservableObject source) { }
 
         protected bool Set<T>(ref T field, T newValue = default(T), [CallerMemberName] string propertyName = null)
         {

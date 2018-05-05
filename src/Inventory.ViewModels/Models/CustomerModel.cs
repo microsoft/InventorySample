@@ -18,7 +18,7 @@ using Inventory.Services;
 
 namespace Inventory.Models
 {
-    public class CustomerModel : ModelBase
+    public class CustomerModel : ObservableObject
     {
         static public CustomerModel CreateEmpty() => new CustomerModel { CustomerID = -1, IsEmpty = true };
 
@@ -73,7 +73,7 @@ namespace Inventory.Models
             }
         }
 
-        public override void Merge(ModelBase source)
+        public override void Merge(ObservableObject source)
         {
             if (source is CustomerModel model)
             {

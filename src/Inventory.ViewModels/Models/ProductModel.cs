@@ -18,7 +18,7 @@ using Inventory.Services;
 
 namespace Inventory.Models
 {
-    public class ProductModel : ModelBase
+    public class ProductModel : ObservableObject
     {
         static public ProductModel CreateEmpty() => new ProductModel { ProductID = "", IsEmpty = true };
 
@@ -54,7 +54,7 @@ namespace Inventory.Models
         public bool IsNew => String.IsNullOrEmpty(ProductID);
         public string CategoryName => LookupTablesProxy.Instance.GetCategory(CategoryID);
 
-        public override void Merge(ModelBase source)
+        public override void Merge(ObservableObject source)
         {
             if (source is ProductModel model)
             {

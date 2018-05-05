@@ -21,7 +21,7 @@ using Inventory.Services;
 
 namespace Inventory.ViewModels
 {
-    public class ViewModelBase : ModelBase
+    public class ViewModelBase : ObservableObject
     {
         private Stopwatch _stopwatch = new Stopwatch();
 

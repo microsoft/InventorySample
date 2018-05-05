@@ -16,7 +16,7 @@ using System;
 
 namespace Inventory.Models
 {
-    public class PaymentTypeModel : ModelBase
+    public class PaymentTypeModel : ObservableObject
     {
         public int PaymentTypeID { get; set; }
         public string Name { get; set; }

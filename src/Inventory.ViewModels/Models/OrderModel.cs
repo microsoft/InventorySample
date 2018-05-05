@@ -18,7 +18,7 @@ using Inventory.Services;
 
 namespace Inventory.Models
 {
-    public class OrderModel : ModelBase
+    public class OrderModel : ObservableObject
     {
         static public OrderModel CreateEmpty() => new OrderModel { OrderID = -1, CustomerID = -1, IsEmpty = true };
 
@@ -102,7 +102,7 @@ namespace Inventory.Models
             NotifyPropertyChanged(nameof(CanEditDelivery));
         }
 
-        public override void Merge(ModelBase source)
+        public override void Merge(ObservableObject source)
         {
             if (source is OrderModel model)
             {

@@ -18,7 +18,7 @@ using Inventory.Data;
 
 namespace Inventory.Models
 {
-    public class AppLogModel : ModelBase
+    public class AppLogModel : ObservableObject
     {
         static public AppLogModel CreateEmpty() => new AppLogModel { Id = -1, IsEmpty = true };
 

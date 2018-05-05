@@ -16,7 +16,7 @@ using System;
 
 namespace Inventory.Models
 {
-    public class OrderStatusModel : ModelBase
+    public class OrderStatusModel : ObservableObject
     {
         public int Status { get; set; }
         public string Name { get; set; }

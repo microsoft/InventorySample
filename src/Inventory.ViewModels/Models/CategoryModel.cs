@@ -16,7 +16,7 @@ using System;
 
 namespace Inventory.Models
 {
-    public class CategoryModel : ModelBase
+    public class CategoryModel : ObservableObject
     {
         public int CategoryID { get; set; }
 

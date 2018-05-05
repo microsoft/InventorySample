@@ -18,7 +18,7 @@ using Inventory.Models;
 
 namespace Inventory.ViewModels
 {
-    public class NavigationItem : ModelBase
+    public class NavigationItem : ObservableObject
     {
         public NavigationItem(Type viewModel)
         {

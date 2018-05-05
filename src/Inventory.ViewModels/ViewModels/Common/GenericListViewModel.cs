@@ -22,7 +22,7 @@ using Inventory.Services;
 
 namespace Inventory.ViewModels
 {
-    abstract public partial class GenericListViewModel<TModel> : ViewModelBase where TModel : ModelBase
+    abstract public partial class GenericListViewModel<TModel> : ViewModelBase where TModel : ObservableObject
     {
         public GenericListViewModel(ICommonServices commonServices) : base(commonServices)
         {

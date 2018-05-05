@@ -18,7 +18,7 @@ using Inventory.Services;
 
 namespace Inventory.Models
 {
-    public class OrderItemModel : ModelBase
+    public class OrderItemModel : ObservableObject
     {
         public long OrderID { get; set; }
         public int OrderLine { get; set; }
@@ -62,7 +62,7 @@ namespace Inventory.Models
             NotifyPropertyChanged(nameof(Total));
         }
 
-        public override void Merge(ModelBase source)
+        public override void Merge(ObservableObject source)
         {
             if (source is OrderItemModel model)
             {

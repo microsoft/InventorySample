@@ -23,7 +23,7 @@ using Inventory.Services;
 
 namespace Inventory.ViewModels
 {
-    abstract public partial class GenericDetailsViewModel<TModel> : ViewModelBase where TModel : ModelBase, new()
+    abstract public partial class GenericDetailsViewModel<TModel> : ViewModelBase where TModel : ObservableObject, new()
     {
         public GenericDetailsViewModel(ICommonServices commonServices) : base(commonServices)
         {

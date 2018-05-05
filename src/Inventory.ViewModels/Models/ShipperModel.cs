@@ -16,7 +16,7 @@ using System;
 
 namespace Inventory.Models
 {
-    public class ShipperModel : ModelBase
+    public class ShipperModel : ObservableObject
     {
         public int ShipperID { get; set; }
         public string Name { get; set; }
