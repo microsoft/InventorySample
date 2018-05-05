@@ -68,13 +68,6 @@ namespace Inventory.Models
 
         public bool IsNew => OrderID <= 0;
 
-        private bool _canEditCustomer = false;
-        public bool CanEditCustomer
-        {
-            get => _canEditCustomer;
-            set => Set(ref _canEditCustomer, value);
-        }
-
         public bool CanEditPayment => Status > 0;
         public bool CanEditShipping => Status > 1;
         public bool CanEditDelivery => Status > 2;

@@ -50,6 +50,8 @@ namespace Inventory.ViewModels
 
         public override bool ItemIsNew => Item?.IsNew ?? true;
 
+        public bool CanEditCustomer => Item?.CustomerID <= 0;
+
         public ICommand CustomerSelectedCommand => new RelayCommand<CustomerModel>(CustomerSelected);
         private void CustomerSelected(CustomerModel customer)
         {
@@ -87,10 +89,6 @@ namespace Inventory.ViewModels
                     LogException("Order", "Load", ex);
                 }
             }
-            if (Item != null)
-            {
-                Item.CanEditCustomer = args.CustomerID <= 0;
-            }
             NotifyPropertyChanged(nameof(ItemIsNew));
         }
         public void Unload()
@@ -127,6 +125,7 @@ namespace Inventory.ViewModels
                 await OrderService.UpdateOrderAsync(model);
                 EndStatusMessage("Order saved");
                 LogInformation("Order", "Save", "Order saved successfully", $"Order #{model.OrderID} was saved successfully.");
+                NotifyPropertyChanged(nameof(CanEditCustomer));
                 return true;
             }
             catch (Exception ex)
