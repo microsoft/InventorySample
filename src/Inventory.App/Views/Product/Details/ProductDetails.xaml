@@ -20,6 +20,13 @@
                 <controls:FormTextBox Header="List Price" Text="{x:Bind EditableItem.ListPrice, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" DataType="Decimal" Format="0.00" />
                 <controls:FormTextBox Header="Dealer Price" Text="{x:Bind EditableItem.DealerPrice, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" DataType="Decimal" Format="0.00" />
                 <controls:FormTextBox Header="Discount" Text="{x:Bind EditableItem.Discount, Mode=TwoWay, Converter={StaticResource DecimalConverter}}" DataType="Decimal" Format="0.00" />
+
+                <TextBlock Style="{StaticResource FormsSection}" controls:FluidGrid.ColumnSpan="2" Text="Stock" />
+                <controls:FormTextBox Header="Stock Units" Text="{x:Bind EditableItem.StockUnits, Mode=TwoWay}" DataType="Integer" />
+                <controls:FormTextBox Header="Safety Stock" Text="{x:Bind EditableItem.SafetyStockLevel, Mode=TwoWay}" DataType="Integer" />
+
+                <TextBlock Style="{StaticResource FormsSection}" controls:FluidGrid.ColumnSpan="2" Text="Details" />
+                <controls:FormTextBox controls:FluidGrid.ColumnSpan="2" Header="Description" Text="{x:Bind EditableItem.Description, Mode=TwoWay}" TextWrapping="Wrap" AcceptsReturn="True" />
             </controls:FluidGrid>
         </DataTemplate>
     </UserControl.Resources>

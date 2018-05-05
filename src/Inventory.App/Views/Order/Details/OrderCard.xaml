@@ -6,8 +6,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" d:DesignWidth="320" d:DesignHeight="600">
 
-    
-
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="12">
 
@@ -24,7 +22,7 @@
             <TextBlock Style="{StaticResource CardSection}" Margin="0,12" Text="Customer"  />
 
             <StackPanel Orientation="Horizontal" Margin="0,6,0,9">
-                <PersonPicture ProfilePicture="{x:Bind Item.Customer.PictureSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" 
+                <PersonPicture ProfilePicture="{x:Bind Item.Customer.ThumbnailSource, Mode=OneWay, Converter={StaticResource ObjectToImageConverter}}" 
                            Initials="{x:Bind Item.Customer.Initials, Mode=OneWay}" 
                            Width="{StaticResource CardPictureRadius}" 
                            Height="{StaticResource CardPictureRadius}" />
@@ -54,7 +52,6 @@
 
             <TextBlock Style="{StaticResource CardHeader}" Text="Delivered Date" />
             <TextBlock Style="{StaticResource CardText}" Text="{x:Bind Item.DeliveredDate, Mode=OneWay, Converter={StaticResource DateTimeFormatConverter}}" />
-
         </StackPanel>
     </ScrollViewer>
 </UserControl>

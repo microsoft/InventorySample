@@ -15,7 +15,7 @@
                 <TextBlock Style="{StaticResource FormsSection}" controls:FluidGrid.ColumnSpan="2" Text="Customer Information" />
                 <controls:CustomerSuggestBox DisplayText="{x:Bind EditableItem.Customer.FullName, Mode=OneWay}"
                                              CustomerSelectedCommand="{x:Bind CustomerSelectedCommand}"
-                                             IsReadOnly="{x:Bind EditableItem.CanEditCustomer, Mode=OneWay, Converter={StaticResource BoolNegationConverter}}" />
+                                             IsReadOnly="{x:Bind CanEditCustomer, Mode=OneWay, Converter={StaticResource BoolNegationConverter}}" />
                 <controls:FormTextBox Header="Ship Address" Text="{x:Bind EditableItem.ShipAddress, Mode=TwoWay}" />
                 <controls:FormTextBox Header="Ship Postal Code" Text="{x:Bind EditableItem.ShipPostalCode, Mode=TwoWay}" />
                 <controls:FormTextBox Header="Ship City" Text="{x:Bind EditableItem.ShipCity, Mode=TwoWay}" />

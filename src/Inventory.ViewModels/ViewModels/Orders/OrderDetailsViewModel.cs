@@ -50,18 +50,20 @@ namespace Inventory.ViewModels
 
         public override bool ItemIsNew => Item?.IsNew ?? true;
 
+        public bool CanEditCustomer => Item?.CustomerID <= 0;
+
         public ICommand CustomerSelectedCommand => new RelayCommand<CustomerModel>(CustomerSelected);
         private void CustomerSelected(CustomerModel customer)
         {
-            Item.CustomerID = customer.CustomerID;
-            Item.ShipAddress = customer.AddressLine1;
-            Item.ShipCity = customer.City;
-            Item.ShipRegion = customer.Region;
-            Item.ShipCountryCode = customer.CountryCode;
-            Item.ShipPostalCode = customer.PostalCode;
-            Item.Customer = customer;
+            EditableItem.CustomerID = customer.CustomerID;
+            EditableItem.ShipAddress = customer.AddressLine1;
+            EditableItem.ShipCity = customer.City;
+            EditableItem.ShipRegion = customer.Region;
+            EditableItem.ShipCountryCode = customer.CountryCode;
+            EditableItem.ShipPostalCode = customer.PostalCode;
+            EditableItem.Customer = customer;
 
-            Item.NotifyChanges();
+            EditableItem.NotifyChanges();
         }
 
         public OrderDetailsArgs ViewModelArgs { get; private set; }
@@ -86,10 +88,6 @@ namespace Inventory.ViewModels
                 {
                     LogException("Order", "Load", ex);
                 }
-            }
-            if (Item != null)
-            {
-                Item.CanEditCustomer = args.CustomerID <= 0;
             }
             NotifyPropertyChanged(nameof(ItemIsNew));
         }
@@ -127,6 +125,7 @@ namespace Inventory.ViewModels
                 await OrderService.UpdateOrderAsync(model);
                 EndStatusMessage("Order saved");
                 LogInformation("Order", "Save", "Order saved successfully", $"Order #{model.OrderID} was saved successfully.");
+                NotifyPropertyChanged(nameof(CanEditCustomer));
                 return true;
             }
             catch (Exception ex)
