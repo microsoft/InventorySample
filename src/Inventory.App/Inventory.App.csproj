@@ -184,6 +184,7 @@
     <Compile Include="Services\VirtualCollections\CustomerCollection.cs" />
     <Compile Include="Services\VirtualCollections\OrderCollection.cs" />
     <Compile Include="Services\VirtualCollections\ProductCollection.cs" />
+    <Compile Include="Controls\Forms\FormAutoSuggestBox.cs" />
     <Compile Include="Tools\BitmapTools.cs" />
     <Compile Include="Tools\DependencyExpressions\DependencyExpression.cs" />
     <Compile Include="Tools\DependencyExpressions\DependencyExpressions.cs" />
@@ -453,6 +454,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\Controls\FormComboBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Controls\FormAutoSuggestBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

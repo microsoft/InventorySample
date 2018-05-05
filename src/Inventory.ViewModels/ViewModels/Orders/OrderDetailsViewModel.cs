@@ -53,15 +53,15 @@ namespace Inventory.ViewModels
         public ICommand CustomerSelectedCommand => new RelayCommand<CustomerModel>(CustomerSelected);
         private void CustomerSelected(CustomerModel customer)
         {
-            Item.CustomerID = customer.CustomerID;
-            Item.ShipAddress = customer.AddressLine1;
-            Item.ShipCity = customer.City;
-            Item.ShipRegion = customer.Region;
-            Item.ShipCountryCode = customer.CountryCode;
-            Item.ShipPostalCode = customer.PostalCode;
-            Item.Customer = customer;
+            EditableItem.CustomerID = customer.CustomerID;
+            EditableItem.ShipAddress = customer.AddressLine1;
+            EditableItem.ShipCity = customer.City;
+            EditableItem.ShipRegion = customer.Region;
+            EditableItem.ShipCountryCode = customer.CountryCode;
+            EditableItem.ShipPostalCode = customer.PostalCode;
+            EditableItem.Customer = customer;
 
-            Item.NotifyChanges();
+            EditableItem.NotifyChanges();
         }
 
         public OrderDetailsArgs ViewModelArgs { get; private set; }

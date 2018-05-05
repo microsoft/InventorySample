@@ -70,7 +70,7 @@ namespace Inventory.Controls
         private static void IsReadOnlyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var control = d as ProductSuggestBox;
-            control.suggestBox.Mode = ((bool)e.NewValue == true) ? TextEditMode.ReadOnly : TextEditMode.Auto;
+            control.suggestBox.Mode = ((bool)e.NewValue == true) ? FormEditMode.ReadOnly : FormEditMode.Auto;
         }
 
         public static readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register(nameof(IsReadOnly), typeof(bool), typeof(ProductSuggestBox), new PropertyMetadata(false, IsReadOnlyChanged));

@@ -30,16 +30,15 @@
         </DataTemplate>
     </UserControl.Resources>
 
-    <controls:LabelSuggestBox x:Name="suggestBox"
-                              ItemsSource="{x:Bind Items, Mode=OneWay}"
-                              ItemTemplate="{StaticResource ItemTemplate}"
-                              ItemContainerStyle="{StaticResource RowItemStyle}"
-                              Label="Customer"
-                              Text="{x:Bind DisplayText, Mode=OneWay}"
-                              PlaceholderText="Search Customer"
-                              TextMemberPath="FullName"
-                              AutoMaximizeSuggestionArea="False"
-                              TextChanged="OnTextChanged"
-                              SuggestionChosen="OnSuggestionChosen"
-                              />
+    <controls:FormAutoSuggestBox x:Name="suggestBox"
+                                 ItemsSource="{x:Bind Items, Mode=OneWay}"
+                                 ItemTemplate="{StaticResource ItemTemplate}"
+                                 ItemContainerStyle="{StaticResource RowItemStyle}"
+                                 Header="Customer"
+                                 DisplayText="{x:Bind DisplayText, Mode=OneWay}"
+                                 PlaceholderText="Search Customer"
+                                 TextMemberPath="FullName"
+                                 AutoMaximizeSuggestionArea="False"
+                                 TextChanged="OnTextChanged"
+                                 SuggestionChosen="OnSuggestionChosen" />
 </UserControl>

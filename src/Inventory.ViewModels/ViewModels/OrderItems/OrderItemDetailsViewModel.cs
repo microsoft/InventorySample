@@ -57,11 +57,11 @@ namespace Inventory.ViewModels
         public ICommand ProductSelectedCommand => new RelayCommand<ProductModel>(ProductSelected);
         private void ProductSelected(ProductModel product)
         {
-            Item.ProductID = product.ProductID;
-            Item.UnitPrice = product.ListPrice;
-            Item.Product = product;
+            EditableItem.ProductID = product.ProductID;
+            EditableItem.UnitPrice = product.ListPrice;
+            EditableItem.Product = product;
 
-            Item.NotifyChanges();
+            EditableItem.NotifyChanges();
         }
 
         public async Task LoadAsync(OrderItemDetailsArgs args)
