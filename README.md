@@ -1,5 +1,7 @@
 # VanArsdel Inventory Sample
 
+[![Build status](https://ci.appveyor.com/api/projects/status/s1gccf5kya2u0m7f?svg=true)](https://ci.appveyor.com/project/rido-min/inventorysample)
+
 This repo showcases a sample Windows 10 application (using the Universal Windows Platform) focused in Line of Business scenarios, showing how to use the latest Windows capabilities in Desktop applications. The sample is based around creating and managing customer, orders, and products for the fictitious company VanArsdel.
 
 ![VanArsdel Inventory Preview](/docs/Pictures/MultiViewsV1.0.PNG)
