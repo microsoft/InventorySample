@@ -5,26 +5,60 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Inventory.Controls"
-    xmlns:inventory="using:Inventory.Views"
-    mc:Ignorable="d">
+    mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="800">
 
-    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="24">
-        <controls:WindowTitle Title="Settings" />
-        <Image Width="320" 
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" VerticalScrollBarVisibility="Auto">
+        <ContentControl IsEnabled="{x:Bind ViewModel.IsBusy, Mode=OneWay, Converter={StaticResource BoolNegationConverter}}">
+            <StackPanel Margin="24,12">
+                <controls:WindowTitle Title="Settings" />
+                <Image Width="320" 
                HorizontalAlignment="Left"
                Source="ms-appx:///Assets/AppLogo.png" 
                Stretch="UniformToFill" />
 
-        <StackPanel Padding="0,12">
-            <TextBlock Text="VanArsdel Inventory Sample"/>
-            <TextBlock Text="{x:Bind ViewModel.Version}" />
-            <TextBlock><Hyperlink NavigateUri="https://github.com/Microsoft/InventorySample">https://github.com/Microsoft/InventorySample</Hyperlink></TextBlock>
-        </StackPanel>
+                <StackPanel Margin="0,12">
+                    <TextBlock Text="VanArsdel Inventory Sample"/>
+                    <TextBlock Text="{x:Bind ViewModel.Version}" />
+                    <TextBlock><Hyperlink NavigateUri="https://github.com/Microsoft/InventorySample">https://github.com/Microsoft/InventorySample</Hyperlink></TextBlock>
+                </StackPanel>
 
-        <StackPanel Padding="0,64">
-            <TextBlock Margin="0,12" Text="Testing" Style="{StaticResource TitleTextBlockStyle}"  />
-            <ToggleSwitch Header="Enable random error generation for testing the Activity Log" 
+                <StackPanel Margin="0,12,0,0">
+                    <TextBlock Margin="0,12" Text="Data Providers" Style="{StaticResource TitleTextBlockStyle}"  />
+                    <TextBlock Text="Select and configure the Data Provider" />
+                    <RadioButton Margin="0,12" GroupName="providers" IsChecked="{x:Bind ViewModel.IsLocalProvider, Mode=TwoWay}">
+                        <ContentControl IsEnabled="{x:Bind ViewModel.IsLocalProvider, Mode=OneWay}">
+                            <StackPanel>
+                                <TextBlock Text="Local Data Provider" LineHeight="26" />
+                                <TextBlock Text="Sample data provider based on a local SQLite database." TextWrapping="Wrap" Foreground="Gray" />
+                                <Border Margin="8" />
+                                <Button Content="Reset data" Command="{x:Bind ViewModel.ResetLocalDataCommand}" />
+                            </StackPanel>
+                        </ContentControl>
+                    </RadioButton>
+                    <RadioButton Margin="0,0,0,20" GroupName="providers" IsChecked="{x:Bind ViewModel.IsSqlProvider, Mode=TwoWay}">
+                        <ContentControl IsEnabled="{x:Bind ViewModel.IsSqlProvider, Mode=OneWay}">
+                            <StackPanel>
+                                <TextBlock Text="SQL Data Provider" LineHeight="26" />
+                                <TextBlock Text="Sample data provider accessing Microsoft SQL Server or Microsoft Azure SQL Database." TextWrapping="Wrap" Foreground="Gray" />
+                                <Border Margin="4" />
+                                <TextBlock Text="Connection string" LineHeight="26" />
+                                <TextBox Text="{x:Bind ViewModel.SqlConnectionString, Mode=TwoWay}" />
+                                <Border Margin="8" />
+                                <StackPanel Orientation="Horizontal" Spacing="24">
+                                    <Button Content="Validate connection" Command="{x:Bind ViewModel.ValidateSqlConnectionCommand}" />
+                                    <Button Content="Create Database" Command="{x:Bind ViewModel.CreateDatabaseCommand}" />
+                                </StackPanel>
+                            </StackPanel>
+                        </ContentControl>
+                    </RadioButton>
+                </StackPanel>
+
+                <StackPanel Margin="0,12">
+                    <TextBlock Margin="0,12" Text="Testing" Style="{StaticResource TitleTextBlockStyle}"  />
+                    <ToggleSwitch Header="Enable random error generation for testing the Activity Log" 
                           IsOn="{x:Bind ViewModel.IsRandomErrorsEnabled, Mode=TwoWay}" />
-        </StackPanel>
-    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </ContentControl>
+    </ScrollViewer>
 </Page>
