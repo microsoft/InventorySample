@@ -87,5 +87,35 @@ namespace Inventory.ViewModels
         {
             MessageService.Send(this, "StatusError", message);
         }
+
+        public void EnableThisView(string message = null)
+        {
+            message = message ?? "Ready";
+            MessageService.Send(this, "EnableThisView", message);
+        }
+        public void DisableThisView(string message)
+        {
+            MessageService.Send(this, "DisableThisView", message);
+        }
+
+        public void EnableOtherViews(string message = null)
+        {
+            message = message ?? "Ready";
+            MessageService.Send(this, "EnableOtherViews", message);
+        }
+        public void DisableOtherViews(string message)
+        {
+            MessageService.Send(this, "DisableOtherViews", message);
+        }
+
+        public void EnableAllViews(string message = null)
+        {
+            message = message ?? "Ready";
+            MessageService.Send(this, "EnableAllViews", message);
+        }
+        public void DisableAllViews(string message)
+        {
+            MessageService.Send(this, "DisableAllViews", message);
+        }
     }
 }

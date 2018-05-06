@@ -164,10 +164,10 @@
                         SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay}" 
                         SelectionChanged="OnSelectionChanged"
                         IsPaneOpen="{x:Bind ViewModel.IsPaneOpen, Mode=TwoWay}"
-                        AlwaysShowHeader="False">
+                        AlwaysShowHeader="False"
+                        IsEnabled="{x:Bind ViewModel.IsEnabled, Mode=OneWay}">
 
             <Grid>
-                <ProgressRing IsActive="{x:Bind ViewModel.IsBusy}" />
                 <Frame x:Name="frame">
                     <Frame.ContentTransitions>
                         <TransitionCollection>

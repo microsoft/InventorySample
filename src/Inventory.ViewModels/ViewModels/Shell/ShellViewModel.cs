@@ -40,11 +40,11 @@ namespace Inventory.ViewModels
             set => Set(ref _isLocked, value);
         }
 
-        private bool _isBusy = false;
-        public bool IsBusy
+        private bool _isEnabled = true;
+        public bool IsEnabled
         {
-            get => _isBusy;
-            set => Set(ref _isBusy, value);
+            get => _isEnabled;
+            set => Set(ref _isEnabled, value);
         }
 
         private string _message = "Ready";
@@ -81,28 +81,13 @@ namespace Inventory.ViewModels
 
         virtual public void Subscribe()
         {
-            MessageService.Subscribe<ViewModelBase, String>(this, OnMessage);
             MessageService.Subscribe<ILoginService, bool>(this, OnLoginMessage);
+            MessageService.Subscribe<ViewModelBase, string>(this, OnMessage);
         }
 
         virtual public void Unsubscribe()
         {
             MessageService.Unsubscribe(this);
-        }
-
-        private void OnMessage(ViewModelBase viewModel, string message, string status)
-        {
-            if (viewModel.ContextService.ContextID != ContextService.ContextID)
-                return;
-
-            switch (message)
-            {
-                case "StatusMessage":
-                case "StatusError":
-                    IsError = message == "StatusError";
-                    Message = status;
-                    break;
-            }
         }
 
         private async void OnLoginMessage(ILoginService loginService, string message, bool isAuthenticated)
@@ -113,6 +98,51 @@ namespace Inventory.ViewModels
                 {
                     IsLocked = !isAuthenticated;
                 });
+            }
+        }
+
+        private async void OnMessage(ViewModelBase viewModel, string message, string status)
+        {
+            switch (message)
+            {
+                case "StatusMessage":
+                case "StatusError":
+                    if (viewModel.ContextService.ContextID == ContextService.ContextID)
+                    {
+                        IsError = message == "StatusError";
+                        Message = status;
+                    }
+                    break;
+
+                case "EnableThisView":
+                case "DisableThisView":
+                    if (viewModel.ContextService.ContextID == ContextService.ContextID)
+                    {
+                        IsEnabled = message == "EnableThisView";
+                        Message = status;
+                    }
+                    break;
+
+                case "EnableOtherViews":
+                case "DisableOtherViews":
+                    if (viewModel.ContextService.ContextID != ContextService.ContextID)
+                    {
+                        await ContextService.RunAsync(() =>
+                        {
+                            IsEnabled = message == "EnableOtherViews";
+                            Message = status;
+                        });
+                    }
+                    break;
+
+                case "EnableAllViews":
+                case "DisableAllViews":
+                    await ContextService.RunAsync(() =>
+                    {
+                        IsEnabled = message == "EnableAllViews";
+                        Message = status;
+                    });
+                    break;
             }
         }
     }

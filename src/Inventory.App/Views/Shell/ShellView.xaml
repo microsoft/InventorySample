@@ -14,8 +14,7 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
-                <ProgressRing IsActive="{x:Bind ViewModel.IsBusy}" />
-                <Frame x:Name="frame">
+                <Frame x:Name="frame" IsEnabled="{x:Bind ViewModel.IsEnabled, Mode=OneWay}">
                     <Frame.ContentTransitions>
                         <TransitionCollection>
                             <NavigationThemeTransition/>
