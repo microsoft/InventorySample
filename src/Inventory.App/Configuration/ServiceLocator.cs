@@ -73,6 +73,8 @@ namespace Inventory
             serviceCollection.AddTransient<AppLogsViewModel>();
 
             serviceCollection.AddTransient<SettingsViewModel>();
+            serviceCollection.AddTransient<ValidateConnectionViewModel>();
+            serviceCollection.AddTransient<CreateDatabaseViewModel>();
 
             _rootServiceProvider = serviceCollection.BuildServiceProvider();
         }

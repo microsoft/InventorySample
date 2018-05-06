@@ -15,6 +15,7 @@
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+
 using Inventory.Services;
 
 namespace Inventory.ViewModels
@@ -102,16 +103,15 @@ namespace Inventory.ViewModels
             StatusReady();
             IsBusy = true;
             StatusMessage("Validating connection string...");
-            await Task.Delay(2500);
-            bool ok = false;
+            var result = await SettingsService.ValidateConnectionAsync(SqlConnectionString);
             IsBusy = false;
-            if (ok)
+            if (result.IsOk)
             {
-                StatusMessage("Connection to the database succeeded");
+                StatusMessage(result.Message);
             }
             else
             {
-                StatusError("Error");
+                StatusMessage(result.Message);
             }
         }
 
@@ -119,17 +119,17 @@ namespace Inventory.ViewModels
         {
             StatusReady();
             DisableAllViews("Waiting for the database to be created...");
-            await Task.Delay(2500);
-            bool ok = false;
+            var result = await SettingsService.CreateDabaseAsync(SqlConnectionString);
             EnableOtherViews();
             EnableThisView("");
             await Task.Delay(100);
-            if (ok)
+            if (result.IsOk)
             {
-                StatusMessage("Database created successfully");
+                StatusMessage(result.Message);
             }
             else
             {
+                LogError("Settings", "Create Database", result.Message, result.Description);
                 StatusError("Error creating database, please, check activity log for details");
             }
         }

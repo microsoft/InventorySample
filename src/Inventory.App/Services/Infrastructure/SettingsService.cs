@@ -13,12 +13,19 @@
 #endregion
 
 using System;
+using System.Threading.Tasks;
+
+using Windows.UI.Xaml.Controls;
+
+using Inventory.Views;
 
 namespace Inventory.Services
 {
     public class SettingsService : ISettingsService
     {
         public string Version => AppSettings.Current.Version;
+
+        public string DbVersion => AppSettings.Current.DbVersion;
 
         public string UserName
         {
@@ -42,6 +49,39 @@ namespace Inventory.Services
         {
             get => AppSettings.Current.IsRandomErrorsEnabled;
             set => AppSettings.Current.IsRandomErrorsEnabled = value;
+        }
+
+        public async Task<Result> ResetLocalDataProviderAsync()
+        {
+            return await Task.FromResult(Result.Ok());
+        }
+
+        public async Task<Result> ValidateConnectionAsync(string connectionString)
+        {
+            var dialog = new ValidateConnectionView(connectionString);
+            var res = await dialog.ShowAsync();
+            switch (res)
+            {
+                case ContentDialogResult.Secondary:
+                    return Result.Ok("Operation canceled by user");
+                default:
+                    break;
+            }
+            return dialog.Result;
+        }
+
+        public async Task<Result> CreateDabaseAsync(string connectionString)
+        {
+            var dialog = new CreateDatabaseView();
+            var res = await dialog.ShowAsync();
+            switch (res)
+            {
+                case ContentDialogResult.Primary:
+                    return Result.Ok("Operation canceled by user");
+                default:
+                    break;
+            }
+            return dialog.Result;
         }
     }
 }

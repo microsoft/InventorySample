@@ -19,7 +19,6 @@ namespace Inventory
     public class Result
     {
         public bool IsOk { get; set; }
-        public bool IsInfo { get; set; }
         public string Message { get; set; }
         public string Description { get; set; }
         public Exception Exception { get; set; }

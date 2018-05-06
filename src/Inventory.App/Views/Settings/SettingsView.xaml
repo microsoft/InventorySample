@@ -45,7 +45,7 @@
                                 <TextBox Text="{x:Bind ViewModel.SqlConnectionString, Mode=TwoWay}" />
                                 <Border Margin="8" />
                                 <StackPanel Orientation="Horizontal" Spacing="24">
-                                    <Button Content="Validate connection" Command="{x:Bind ViewModel.ValidateSqlConnectionCommand}" />
+                                    <Button Content="Validate Connection" Command="{x:Bind ViewModel.ValidateSqlConnectionCommand}" />
                                     <Button Content="Create Database" Command="{x:Bind ViewModel.CreateDatabaseCommand}" />
                                 </StackPanel>
                             </StackPanel>

@@ -13,6 +13,7 @@
 #endregion
 
 using System;
+using System.Threading.Tasks;
 
 namespace Inventory.Services
 {
@@ -26,11 +27,17 @@ namespace Inventory.Services
     public interface ISettingsService
     {
         string Version { get; }
+        string DbVersion { get; }
 
         string UserName { get; set; }
 
         DataProviderType DataProvider { get; set; }
         string SQLServerConnectionString { get; set; }
         bool IsRandomErrorsEnabled { get; set; }
+
+        Task<Result> ResetLocalDataProviderAsync();
+
+        Task<Result> ValidateConnectionAsync(string connectionString);
+        Task<Result> CreateDabaseAsync(string connectionString);
     }
 }

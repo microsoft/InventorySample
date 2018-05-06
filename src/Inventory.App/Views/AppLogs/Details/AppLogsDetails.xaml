@@ -11,7 +11,7 @@
     <UserControl.Resources>
         <DataTemplate x:Key="DetailsTemplate" x:DataType="viewmodels:AppLogDetailsViewModel">
             <StackPanel Margin="0,12" Spacing="6">
-                <controls:FormTextBox Header="Message" Text="{x:Bind Item.Message, Mode=TwoWay}" Mode="ReadOnly" />
+                <controls:FormTextBox Header="Message" Text="{x:Bind Item.Message, Mode=TwoWay}" TextWrapping="Wrap" Mode="ReadOnly" />
                 <controls:FormTextBox Header="Description" Text="{x:Bind Item.Description, Mode=TwoWay}" TextWrapping="Wrap" Mode="ReadOnly" />
             </StackPanel>
         </DataTemplate>
@@ -23,9 +23,9 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Margin="12" 
-                        BorderThickness="0,0,1,0" 
-                        BorderBrush="LightGray">
+        <StackPanel Margin="12,12,0,12"
+                    BorderThickness="0,0,1,0"
+                    BorderBrush="LightGray">
 
             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Margin="0,12">
                 <FontIcon Margin="0,0,12,6"

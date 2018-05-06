@@ -61,6 +61,8 @@ namespace Inventory
             }
         }
 
+        public string DbVersion => DB_VERSION;
+
         public string UserName
         {
             get => GetSettingsValue("UserName", default(String));
