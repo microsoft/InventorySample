@@ -48,8 +48,8 @@ namespace Inventory.ViewModels
         private bool _isLocalProvider;
         public bool IsLocalProvider
         {
-            get => _isLocalProvider;
-            set => Set(ref _isLocalProvider, value);
+            get { return _isLocalProvider; }
+            set { if (Set(ref _isLocalProvider, value)) UpdateProvider(); }
         }
 
         private bool _isSqlProvider;
@@ -93,6 +93,14 @@ namespace Inventory.ViewModels
             return Task.CompletedTask;
         }
 
+        private void UpdateProvider()
+        {
+            if (IsLocalProvider && !IsSqlProvider)
+            {
+                SettingsService.DataProvider = DataProviderType.SQLite;
+            }
+        }
+
         private async void OnResetLocalData()
         {
             IsBusy = true;
@@ -101,7 +109,7 @@ namespace Inventory.ViewModels
             IsBusy = false;
             if (result.IsOk)
             {
-                StatusMessage(result.Message);
+                StatusReady();
             }
             else
             {
