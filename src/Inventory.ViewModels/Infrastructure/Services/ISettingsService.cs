@@ -32,6 +32,7 @@ namespace Inventory.Services
         string UserName { get; set; }
 
         DataProviderType DataProvider { get; set; }
+        string PatternConnectionString { get; }
         string SQLServerConnectionString { get; set; }
         bool IsRandomErrorsEnabled { get; set; }
 

@@ -42,10 +42,6 @@ namespace Inventory.Views
         {
             await ViewModel.ExecuteAsync(_connectionString);
             Result = ViewModel.Result;
-            if (Result.IsOk)
-            {
-                Hide();
-            }
         }
 
         private void OnOkClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

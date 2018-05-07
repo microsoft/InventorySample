@@ -43,14 +43,14 @@ namespace Inventory.ViewModels
             set => Set(ref _progressStatus, value);
         }
 
-        private string _errorMessage = null;
-        public string ErrorMessage
+        private string _message = null;
+        public string Message
         {
-            get { return _errorMessage; }
-            set { if (Set(ref _errorMessage, value)) NotifyPropertyChanged(nameof(HasErrors)); }
+            get { return _message; }
+            set { if (Set(ref _message, value)) NotifyPropertyChanged(nameof(HasMessage)); }
         }
 
-        public bool HasErrors => _errorMessage != null;
+        public bool HasMessage => _message != null;
 
         private string _primaryButtonText;
         public string PrimaryButtonText
@@ -65,6 +65,7 @@ namespace Inventory.ViewModels
             get => _secondaryButtonText;
             set => Set(ref _secondaryButtonText, value);
         }
+
         public async Task ExecuteAsync(string connectionString)
         {
             try
@@ -77,34 +78,34 @@ namespace Inventory.ViewModels
                         var version = db.DbVersion.FirstOrDefault();
                         if (version != null)
                         {
-                            if (version.Version == SettingsService.Version)
+                            if (version.Version == SettingsService.DbVersion)
                             {
-                                Result = Result.Ok("Database connection succeeded and up to date.");
-                                return;
+                                Message = $"Database connection succeeded and version is up to date.";
+                                Result = Result.Ok("Database connection succeeded");
                             }
                             else
                             {
-                                ErrorMessage = $"Database version mismatch. Current version is {version.Version}, expected version is {SettingsService.DbVersion}. Please, recreate the database.";
+                                Message = $"Database version mismatch. Current version is {version.Version}, expected version is {SettingsService.DbVersion}. Please, recreate the database.";
                                 Result = Result.Error("Database version mismatch");
                             }
                         }
                         else
                         {
-                            ErrorMessage = $"Database schema mismatch.";
+                            Message = $"Database schema mismatch.";
                             Result = Result.Error("Database schema mismatch");
                         }
                     }
                     else
                     {
-                        ErrorMessage = $"Database does not exists. Please, create the database.";
+                        Message = $"Database does not exists. Please, create the database.";
                         Result = Result.Error("Database does not exist");
                     }
                 }
             }
             catch (Exception ex)
             {
-                Result = Result.Error("Error validating connection");
-                ErrorMessage = $"Error validating connection: {ex.Message}";
+                Result = Result.Error("Error creating database. See details in Activity Log");
+                Message = $"Error validating connection: {ex.Message}";
                 LogException("Settings", "Validate Connection", ex);
             }
             PrimaryButtonText = "Ok";

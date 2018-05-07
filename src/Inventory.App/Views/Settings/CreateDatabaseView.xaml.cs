@@ -24,8 +24,11 @@ namespace Inventory.Views
 {
     public sealed partial class CreateDatabaseView : ContentDialog
     {
-        public CreateDatabaseView()
+        private string _connectionString = null;
+
+        public CreateDatabaseView(string connectionString)
         {
+            _connectionString = connectionString;
             ViewModel = ServiceLocator.Current.GetService<CreateDatabaseViewModel>();
             InitializeComponent();
             Loaded += OnLoaded;
@@ -37,9 +40,12 @@ namespace Inventory.Views
 
         private async void OnLoaded(object sender, RoutedEventArgs e)
         {
-            await ViewModel.ExecuteAsync();
+            await ViewModel.ExecuteAsync(_connectionString);
             Result = ViewModel.Result;
-            Hide();
+        }
+
+        private void OnOkClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
         }
 
         private void OnCancelClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

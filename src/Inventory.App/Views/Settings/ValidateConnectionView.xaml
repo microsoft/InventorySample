@@ -12,10 +12,10 @@
     mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="840">
 
     <StackPanel Margin="0,24" MinWidth="480">
-        <StackPanel Spacing="12" Visibility="{x:Bind ViewModel.HasErrors, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+        <StackPanel Spacing="12" Visibility="{x:Bind ViewModel.HasMessage, Mode=OneWay, Converter={StaticResource InverseBoolToVisibilityConverter}}">
             <TextBlock Text="{x:Bind ViewModel.ProgressStatus, Mode=OneWay}" />
             <ProgressBar IsIndeterminate="True" />
         </StackPanel>
-        <TextBlock Text="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}" Visibility="{x:Bind ViewModel.HasErrors, Mode=OneWay}" TextWrapping="WrapWholeWords" Foreground="{StaticResource Error}" />
+        <TextBlock Text="{x:Bind ViewModel.Message, Mode=OneWay}" Visibility="{x:Bind ViewModel.HasMessage, Mode=OneWay}" TextWrapping="WrapWholeWords" />
     </StackPanel>
 </ContentDialog>

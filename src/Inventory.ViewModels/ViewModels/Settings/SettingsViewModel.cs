@@ -45,14 +45,14 @@ namespace Inventory.ViewModels
             set => Set(ref _isBusy, value);
         }
 
-        private bool _isLocalProvider = false;
+        private bool _isLocalProvider;
         public bool IsLocalProvider
         {
             get => _isLocalProvider;
             set => Set(ref _isLocalProvider, value);
         }
 
-        private bool _isSqlProvider = false;
+        private bool _isSqlProvider;
         public bool IsSqlProvider
         {
             get => _isSqlProvider;
@@ -75,6 +75,7 @@ namespace Inventory.ViewModels
         public ICommand ResetLocalDataCommand => new RelayCommand(OnResetLocalData);
         public ICommand ValidateSqlConnectionCommand => new RelayCommand(OnValidateSqlConnection);
         public ICommand CreateDatabaseCommand => new RelayCommand(OnCreateDatabase);
+        public ICommand SaveChangesCommand => new RelayCommand(OnSaveChanges);
 
         public SettingsArgs ViewModelArgs { get; private set; }
 
@@ -82,23 +83,38 @@ namespace Inventory.ViewModels
         {
             ViewModelArgs = args ?? SettingsArgs.CreateDefault();
 
-            IsLocalProvider = SettingsService.DataProvider == DataProviderType.SQLite;
-            IsSqlProvider = SettingsService.DataProvider == DataProviderType.SQLServer;
-            SqlConnectionString = SettingsService.SQLServerConnectionString;
-
             StatusReady();
+
+            IsLocalProvider = SettingsService.DataProvider == DataProviderType.SQLite;
+
+            SqlConnectionString = SettingsService.SQLServerConnectionString;
+            IsSqlProvider = SettingsService.DataProvider == DataProviderType.SQLServer;
+
             return Task.CompletedTask;
         }
 
         private async void OnResetLocalData()
         {
-            StatusReady();
-            DisableAllViews("Waiting database reset...");
-            await Task.Delay(2500);
-            EnableAllViews();
+            IsBusy = true;
+            StatusMessage("Waiting database reset...");
+            var result = await SettingsService.ResetLocalDataProviderAsync();
+            IsBusy = false;
+            if (result.IsOk)
+            {
+                StatusMessage(result.Message);
+            }
+            else
+            {
+                StatusMessage(result.Message);
+            }
         }
 
         private async void OnValidateSqlConnection()
+        {
+            await ValidateSqlConnectionAsync();
+        }
+
+        private async Task<bool> ValidateSqlConnectionAsync()
         {
             StatusReady();
             IsBusy = true;
@@ -108,10 +124,12 @@ namespace Inventory.ViewModels
             if (result.IsOk)
             {
                 StatusMessage(result.Message);
+                return true;
             }
             else
             {
                 StatusMessage(result.Message);
+                return false;
             }
         }
 
@@ -129,8 +147,23 @@ namespace Inventory.ViewModels
             }
             else
             {
-                LogError("Settings", "Create Database", result.Message, result.Description);
-                StatusError("Error creating database, please, check activity log for details");
+                StatusError("Error creating database");
+            }
+        }
+
+        private async void OnSaveChanges()
+        {
+            if (IsSqlProvider)
+            {
+                if (await ValidateSqlConnectionAsync())
+                {
+                    SettingsService.SQLServerConnectionString = SqlConnectionString;
+                    SettingsService.DataProvider = DataProviderType.SQLServer;
+                }
+            }
+            else
+            {
+                SettingsService.DataProvider = DataProviderType.SQLite;
             }
         }
     }

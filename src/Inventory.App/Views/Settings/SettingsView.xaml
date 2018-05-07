@@ -9,7 +9,7 @@
 
     <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" VerticalScrollBarVisibility="Auto">
         <ContentControl IsEnabled="{x:Bind ViewModel.IsBusy, Mode=OneWay, Converter={StaticResource BoolNegationConverter}}">
-            <StackPanel Margin="24,12">
+            <StackPanel Margin="24,12" MaxWidth="620">
                 <controls:WindowTitle Title="Settings" />
                 <Image Width="320" 
                HorizontalAlignment="Left"
@@ -42,7 +42,7 @@
                                 <TextBlock Text="Sample data provider accessing Microsoft SQL Server or Microsoft Azure SQL Database." TextWrapping="Wrap" Foreground="Gray" />
                                 <Border Margin="4" />
                                 <TextBlock Text="Connection string" LineHeight="26" />
-                                <TextBox Text="{x:Bind ViewModel.SqlConnectionString, Mode=TwoWay}" />
+                                <TextBox Text="{x:Bind ViewModel.SqlConnectionString, Mode=TwoWay}" IsTextPredictionEnabled="False" IsSpellCheckEnabled="False" />
                                 <Border Margin="8" />
                                 <StackPanel Orientation="Horizontal" Spacing="24">
                                     <Button Content="Validate Connection" Command="{x:Bind ViewModel.ValidateSqlConnectionCommand}" />
@@ -52,6 +52,8 @@
                         </ContentControl>
                     </RadioButton>
                 </StackPanel>
+
+                <Button Content="Save Changes" HorizontalAlignment="Right" Command="{x:Bind ViewModel.SaveChangesCommand}" />
 
                 <StackPanel Margin="0,12">
                     <TextBlock Margin="0,12" Text="Testing" Style="{StaticResource TitleTextBlockStyle}"  />

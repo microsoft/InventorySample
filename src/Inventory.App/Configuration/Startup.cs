@@ -90,10 +90,6 @@ namespace Inventory
         static private async Task EnsureDatabaseAsync()
         {
             await EnsureSQLiteDatabaseAsync();
-            if (AppSettings.Current.DataProvider == DataProviderType.SQLServer)
-            {
-                await SQLServerDbTools.EnsureDatabaseAsync();
-            }
         }
 
         private static async Task EnsureSQLiteDatabaseAsync()

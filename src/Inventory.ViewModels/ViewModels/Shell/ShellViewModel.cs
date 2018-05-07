@@ -110,7 +110,7 @@ namespace Inventory.ViewModels
                     if (viewModel.ContextService.ContextID == ContextService.ContextID)
                     {
                         IsError = message == "StatusError";
-                        Message = status;
+                        SetStatus(status);
                     }
                     break;
 
@@ -119,7 +119,7 @@ namespace Inventory.ViewModels
                     if (viewModel.ContextService.ContextID == ContextService.ContextID)
                     {
                         IsEnabled = message == "EnableThisView";
-                        Message = status;
+                        SetStatus(status);
                     }
                     break;
 
@@ -130,7 +130,7 @@ namespace Inventory.ViewModels
                         await ContextService.RunAsync(() =>
                         {
                             IsEnabled = message == "EnableOtherViews";
-                            Message = status;
+                            SetStatus(status);
                         });
                     }
                     break;
@@ -140,10 +140,17 @@ namespace Inventory.ViewModels
                     await ContextService.RunAsync(() =>
                     {
                         IsEnabled = message == "EnableAllViews";
-                        Message = status;
+                        SetStatus(status);
                     });
                     break;
             }
+        }
+
+        private void SetStatus(string message)
+        {
+            message = message ?? "";
+            message = message.Replace("\r\n", " ").Replace("\r", " ").Replace("\n", " ");
+            Message = message;
         }
     }
 }
