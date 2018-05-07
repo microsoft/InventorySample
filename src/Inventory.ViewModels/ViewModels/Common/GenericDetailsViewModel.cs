@@ -151,6 +151,7 @@ namespace Inventory.ViewModels
         virtual public async Task SaveAsync()
         {
             IsEnabled = false;
+            bool isNew = ItemIsNew;
             if (await SaveItemAsync(EditableItem))
             {
                 Item.Merge(EditableItem);
@@ -158,8 +159,14 @@ namespace Inventory.ViewModels
                 NotifyPropertyChanged(nameof(Title));
                 EditableItem = Item;
 
-                // TODO: Discrimine if New or Modified
-                MessageService.Send(this, "ItemChanged", Item);
+                if (isNew)
+                {
+                    MessageService.Send(this, "NewItemSaved", Item);
+                }
+                else
+                {
+                    MessageService.Send(this, "ItemChanged", Item);
+                }
                 IsEditMode = false;
 
                 NotifyPropertyChanged(nameof(ItemIsNew));

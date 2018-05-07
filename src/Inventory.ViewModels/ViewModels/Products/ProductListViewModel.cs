@@ -231,7 +231,7 @@ namespace Inventory.ViewModels
         {
             switch (message)
             {
-                case "ItemChanged":
+                case "NewItemSaved":
                 case "ItemDeleted":
                 case "ItemsDeleted":
                 case "ItemRangesDeleted":
