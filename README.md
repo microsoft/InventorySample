@@ -8,10 +8,10 @@ This repo showcases a sample Windows 10 application (using the Universal Windows
 
 ## Features
 This sample highlights:
-- Using dotNet Standard.
+- Using [.NET Standard](https://docs.microsoft.com/en-us/dotnet/standard/net-standard).
 - The master/details UI pattern.
 - Forms layouts.
-- Using the repository pattern to connect to Sqlite.
+- Using the repository pattern to connect to SQLite.
 - Example of Multiples views of the app 
 
 ## <a name="supported"/> Supported SDKs
@@ -30,4 +30,4 @@ Do you want to contribute? We would love to have you help out. Here are our [con
 This code is distributed under the terms and conditions of the MIT license.
 
 ## .NET Foundation
-This project is supported by the .NET Foundation.
+This project is supported by the [.NET Foundation](http://dotnetfoundation.org/).
