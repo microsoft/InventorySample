@@ -72,7 +72,7 @@ namespace Inventory.ViewModels
         public void EndStatusMessage(string message)
         {
             _stopwatch.Stop();
-            StatusMessage($"{message} ({_stopwatch.Elapsed.TotalSeconds:#0.000} seconds)");
+            StatusMessage($"{message} ({_stopwatch.Elapsed.TotalSeconds:#0.000} seconds)");            
         }
 
         public void StatusReady()
@@ -81,10 +81,12 @@ namespace Inventory.ViewModels
         }
         public void StatusMessage(string message)
         {
+            Microsoft.AppCenter.Analytics.Analytics.TrackEvent(message);
             MessageService.Send(this, "StatusMessage", message);
         }
         public void StatusError(string message)
         {
+            Microsoft.AppCenter.Analytics.Analytics.TrackEvent(message);
             MessageService.Send(this, "StatusError", message);
         }
 
