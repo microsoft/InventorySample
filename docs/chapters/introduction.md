@@ -24,7 +24,7 @@ This guide not only explain in detail each of the patterns used, it also shows y
 
 ## The Inventory Sample app
 
-The purpose of the Invetory Sample app is to provide an example of Windows 10 enterprise app implementation. This app manages the Van Arsdel store, including customers, products, orders, etc. 
+The purpose of the Inventory Sample app is to provide an example of Windows 10 enterprise app implementation. This app manages the Van Arsdel store, including customers, products, orders, etc. 
 
  ![solution](img/solution.png)
 
