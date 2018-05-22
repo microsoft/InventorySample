@@ -1,6 +1,6 @@
 # Infrastructure services
 
-There are two types of services we are going to use in the Inventory App: *domain* and *infrastructure* services. The *infrastructure* ones are services that typically talk to external resources and are not part of the primary problem domain, but at the same tiem they are also essential services to make the app works as expected.
+There are two types of services we are going to use in the Inventory App: *domain* and *infrastructure* services. The *infrastructure* ones are services that typically talk to external resources and are not part of the primary problem domain, but at the same time they are also essential services to make the app works as expected.
 
 | Service | Description |
 | ------- | ----------- |
