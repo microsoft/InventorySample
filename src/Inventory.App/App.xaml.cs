@@ -27,18 +27,12 @@ using Inventory.Views;
 using Inventory.ViewModels;
 using Inventory.Services;
 
-using Microsoft.AppCenter;
-using Microsoft.AppCenter.Analytics;
-using Microsoft.AppCenter.Crashes;
-
 namespace Inventory
 {
     sealed partial class App : Application
     {
         public App()
         {
-            AppCenter.Start("7b48b5c7-768f-49e3-a2e4-7293abe8b0ca", typeof(Analytics), typeof(Crashes));
-
             InitializeComponent();
 
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
@@ -46,7 +40,6 @@ namespace Inventory
 
             this.Suspending += OnSuspending;
             this.UnhandledException += OnUnhandledException;
-            Analytics.TrackEvent("AppStarted");
         }
 
         protected override async void OnLaunched(LaunchActivatedEventArgs e)
@@ -66,10 +59,11 @@ namespace Inventory
             var frame = Window.Current.Content as Frame;
             if (frame == null)
             {
-                await Startup.ConfigureAsync();
-
                 frame = new Frame();
                 Window.Current.Content = frame;
+
+                await Startup.ConfigureAsync();
+
                 var shellArgs = new ShellArgs
                 {
                     ViewModel = activationInfo.EntryViewModel,
