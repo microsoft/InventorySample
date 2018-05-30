@@ -92,7 +92,7 @@
                         <Grid HorizontalAlignment="Left" 
                               Margin="0,0,0,8" 
                               VerticalAlignment="Top"
-                              Width="{StaticResource PaneToggleButtonSize}" 
+                              Width="48" 
                               Canvas.ZIndex="100">
                             <Grid.RowDefinitions>
                                 <!-- Moving the Hamburger button 48px down -->
