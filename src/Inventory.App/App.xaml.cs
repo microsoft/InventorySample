@@ -12,20 +12,15 @@
 // ******************************************************************
 #endregion
 
-using System;
 using System.Threading.Tasks;
-
-using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.ViewManagement;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
-
-using Inventory.Views;
-using Inventory.ViewModels;
 using Inventory.Services;
+using Inventory.Views.SplashScreen;
 
 namespace Inventory
 {
@@ -59,24 +54,9 @@ namespace Inventory
             var frame = Window.Current.Content as Frame;
             if (frame == null)
             {
-                frame = new Frame();
-                Window.Current.Content = frame;
-
-                await Startup.ConfigureAsync();
-
-                var shellArgs = new ShellArgs
-                {
-                    ViewModel = activationInfo.EntryViewModel,
-                    Parameter = activationInfo.EntryArgs,
-                    UserInfo = await TryGetUserInfoAsync(e as IActivatedEventArgsWithUser)
-                };
-#if SKIP_LOGIN
-                frame.Navigate(typeof(MainShellView), shellArgs);
-                var loginService = ServiceLocator.Current.GetService<ILoginService>();
-                loginService.IsAuthenticated = true;
-#else
-                frame.Navigate(typeof(LoginView), shellArgs);
-#endif
+                bool loadState = (e.PreviousExecutionState == ApplicationExecutionState.Terminated);
+                ExtendedSplash extendedSplash = new ExtendedSplash(e, loadState);
+                Window.Current.Content = extendedSplash;
                 Window.Current.Activate();
             }
             else
@@ -84,34 +64,6 @@ namespace Inventory
                 var navigationService = ServiceLocator.Current.GetService<INavigationService>();
                 await navigationService.CreateNewViewAsync(activationInfo.EntryViewModel, activationInfo.EntryArgs);
             }
-        }
-
-        private async Task<UserInfo> TryGetUserInfoAsync(IActivatedEventArgsWithUser argsWithUser)
-        {
-            if (argsWithUser != null)
-            {
-                var user = argsWithUser.User;
-                var userInfo = new UserInfo
-                {
-                    AccountName = await user.GetPropertyAsync(KnownUserProperties.AccountName) as String,
-                    FirstName = await user.GetPropertyAsync(KnownUserProperties.FirstName) as String,
-                    LastName = await user.GetPropertyAsync(KnownUserProperties.LastName) as String
-                };
-                if (!userInfo.IsEmpty)
-                {
-                    if (String.IsNullOrEmpty(userInfo.AccountName))
-                    {
-                        userInfo.AccountName = $"{userInfo.FirstName} {userInfo.LastName}";
-                    }
-                    var pictureStream = await user.GetPictureAsync(UserPictureSize.Size64x64);
-                    if (pictureStream != null)
-                    {
-                        userInfo.PictureSource = await BitmapTools.LoadBitmapAsync(pictureStream);
-                    }
-                    return userInfo;
-                }
-            }
-            return UserInfo.Default;
         }
 
         private async void OnSuspending(object sender, SuspendingEventArgs e)

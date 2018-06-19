@@ -326,6 +326,9 @@
     <Compile Include="Views\Settings\ValidateConnectionView.xaml.cs">
       <DependentUpon>ValidateConnectionView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SplashScreen\ExtendedSplash.xaml.cs">
+      <DependentUpon>ExtendedSplash.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -663,6 +666,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Settings\ValidateConnectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SplashScreen\ExtendedSplash.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
