@@ -109,7 +109,7 @@ namespace Inventory
                 {
                     using (var cli = new WebClient())
                     {
-                        var bytes = cli.DownloadData(AppSettings.DatabaseUrl);
+                        var bytes = await Task.Run(() => cli.DownloadData(AppSettings.DatabaseUrl));
                         var file = await databaseFolder.CreateFileAsync(AppSettings.DatabasePattern, CreationCollisionOption.ReplaceExisting);
                         using (var stream = await file.OpenStreamForWriteAsync())
                         {
