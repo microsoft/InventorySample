@@ -33,7 +33,7 @@ This code is distributed under the terms and conditions of the MIT license.
 This project is supported by the [.NET Foundation](http://dotnetfoundation.org/).
 
 # Architecture Overview
-**VanArsdel Inventory Sample** is based on a VMMV architecture pattern to facilitate the separation of the user interface from the business logic of the application. You can read more details about the MVVM pattern in the MVVM section of this documentation.
+**VanArsdel Inventory Sample** is based on a MVVM architecture pattern to facilitate the separation of the user interface from the business logic of the application. You can read more details about the MVVM pattern in the MVVM section of this documentation.
 
 The following diagram shows the different layers in the application.
 
@@ -313,7 +313,7 @@ Dependency Injection is not only used to resolve services, it is also used to re
 > Only classes registered in the ServiceCollection can be resolved by using the ServiceLocator.
 
 # Summary
-VanArsdel Inventory Sample architecture is designed following the VMMV pattern, separating the user interface from the business logic of the application.
+VanArsdel Inventory Sample architecture is designed following the MVVM pattern, separating the user interface from the business logic of the application.
 -	Views represents the user interface of the application.
 -	ViewModels contains the user interface logic.
 -	Models represents the business data of the application.
