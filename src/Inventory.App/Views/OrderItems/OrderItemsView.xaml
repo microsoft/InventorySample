@@ -11,7 +11,7 @@
     <UserControl.Resources>
         <DataTemplate x:Key="ListHeaderTemplate">
             <StackPanel Margin="6,4,0,0" Orientation="Horizontal" VerticalAlignment="Center">
-                <TextBlock Text="Orders" FontSize="18" />
+                <TextBlock Text="VanArsdel Inventory - Orders" FontSize="18" />
                 <TextBlock Text="{Binding}" FontSize="18" Foreground="Gray" />
             </StackPanel>
         </DataTemplate>

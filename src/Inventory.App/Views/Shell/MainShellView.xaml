@@ -158,7 +158,7 @@
         </Grid.RowDefinitions>
 
         <NavigationView Style="{StaticResource BackButtonNavigationViewStyle}" x:Name="navigationView" 
-                        Background="#EBEBEB"
+                        Background="#FFF"
                         MenuItemsSource="{x:Bind ViewModel.Items}" 
                         MenuItemTemplate="{StaticResource NavigationViewItem}"
                         SelectedItem="{x:Bind ViewModel.SelectedItem, Mode=TwoWay}" 
@@ -167,7 +167,9 @@
                         AlwaysShowHeader="False"
                         IsEnabled="{x:Bind ViewModel.IsEnabled, Mode=OneWay}">
 
-            <Grid>
+            <Grid Padding="0,30,0,0"
+                  BorderBrush="LightGray"
+                  BorderThickness="1,0,0,0">
                 <Frame x:Name="frame">
                     <Frame.ContentTransitions>
                         <TransitionCollection>
@@ -176,7 +178,7 @@
                     </Frame.ContentTransitions>
                 </Frame>
             </Grid>
-
+            
             <NavigationView.PaneFooter>
                 <NavigationViewItem ContentTemplate="{StaticResource NavigationViewItemProfile}" Content="{x:Bind ViewModel.UserInfo}" />
             </NavigationView.PaneFooter>

@@ -8,6 +8,9 @@ using Inventory.Services;
 using Inventory.ViewModels;
 using System.Threading.Tasks;
 using Windows.System;
+using Windows.ApplicationModel.Core;
+using Windows.UI;
+using Windows.UI.ViewManagement;
 
 namespace Inventory.Views.SplashScreen
 {
@@ -35,6 +38,14 @@ namespace Inventory.Views.SplashScreen
                 // Retrieve the window coordinates of the splash screen image.
                 splashImageRect = splashScreen.ImageLocation;
             }
+
+            // Extend the Window area into title bar for a more immersive design
+            CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
+
+            // Remove the solid-colored backgrounds behind the caption controls and system back button
+            ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
+            titleBar.ButtonBackgroundColor = Colors.Transparent;
+            titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
 
             Resize();
             rootFrame = new Frame();

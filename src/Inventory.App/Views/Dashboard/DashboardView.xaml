@@ -6,7 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:Inventory.Views"
     xmlns:controls="using:Inventory.Controls"
-    mc:Ignorable="d">
+    mc:Ignorable="d" 
+    Margin="0,-30,0,0">
 
     <Page.Resources>
         <Style x:Key="GridItemStyle" TargetType="GridViewItem">
@@ -29,7 +30,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="1" Margin="12,0" Text="Dashboard" FontSize="22" Foreground="Gray" />
+            <TextBlock Grid.Row="1" Margin="12,30,12,10" Text="VanArsdel Inventory - Dashboard" FontSize="22" Foreground="Gray" />
 
 
             <GridView Grid.Row="2" 

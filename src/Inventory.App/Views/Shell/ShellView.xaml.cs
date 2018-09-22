@@ -29,6 +29,9 @@ namespace Inventory.Views
     {
         public ShellView()
         {
+            // Extend the Window area into title bar for a more immersive design
+            CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
+
             ViewModel = ServiceLocator.Current.GetService<ShellViewModel>();
             InitializeContext();
             InitializeComponent();

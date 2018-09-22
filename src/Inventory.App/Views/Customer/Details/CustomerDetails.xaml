@@ -56,7 +56,7 @@
             <views:CustomerCard Margin="6" ViewModel="{x:Bind ViewModel}" Item="{x:Bind ViewModel.Item, Mode=OneWay}" />
         </Border>
 
-        <controls:Details x:Name="details" Grid.Column="1" Margin="6"
+        <controls:Details x:Name="details" Grid.Column="1" Margin="6,30,6,6"
                           DetailsContent="{x:Bind ViewModel}"
                           DetailsTemplate="{StaticResource DetailsTemplate}"
                           CanGoBack="{x:Bind ViewModel.CanGoBack}"

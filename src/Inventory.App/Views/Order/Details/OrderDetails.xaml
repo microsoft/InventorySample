@@ -68,7 +68,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <controls:Details x:Name="details" Margin="6" Grid.RowSpan="{x:Bind GetRowSpan(ViewModel.OrderDetails.ItemIsNew), Mode=OneWay}"
+            <controls:Details x:Name="details" Margin="6,30,6,6" Grid.RowSpan="{x:Bind GetRowSpan(ViewModel.OrderDetails.ItemIsNew), Mode=OneWay}"
                           DetailsContent="{x:Bind ViewModel.OrderDetails}"
                           DetailsTemplate="{StaticResource DetailsTemplate}"
                           CanGoBack="{x:Bind ViewModel.OrderDetails.CanGoBack}"

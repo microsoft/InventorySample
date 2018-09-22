@@ -40,7 +40,7 @@
             <views:OrderItemCard Margin="6" Item="{x:Bind ViewModel.Item, Mode=OneWay}" />
         </Grid>
 
-        <controls:Details x:Name="details" Grid.Column="1" Margin="6"
+        <controls:Details x:Name="details" Grid.Column="1" Margin="6,30,6,6"
                           DetailsContent="{x:Bind ViewModel}"
                           DetailsTemplate="{StaticResource DetailsTemplate}"
                           CanGoBack="{x:Bind ViewModel.CanGoBack}"
