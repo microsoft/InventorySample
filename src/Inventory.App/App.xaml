@@ -25,7 +25,7 @@
             
             <!-- Acrylic brushes -->
             <AcrylicBrush x:Key="ShellViewFooterBackground" BackgroundSource="HostBackdrop" TintColor="DarkGray" TintOpacity=".8"/>
-            <AcrylicBrush x:Key="WindowDetailsViewBackgroundColor" BackgroundSource="HostBackdrop" TintOpacity=".8"/>
+            <AcrylicBrush x:Key="WindowDetailsViewBackgroundColor" BackgroundSource="HostBackdrop" FallbackColor="#F5F5F5" TintOpacity=".8"/>
             <SolidColorBrush x:Key="DetailsViewBackgroundColor" Color="#F5F5F5" />
 
             <!--  Converters  -->
