@@ -18,12 +18,15 @@
                 <ResourceDictionary Source="/Styles/Cards.xaml" />
             </ResourceDictionary.MergedDictionaries>
             
-            <SolidColorBrush x:Key="DetailsViewBackgroundColor" Color="#F5F5F5" />
-
             <!--  Colors  -->
             <SolidColorBrush x:Key="Information" Color="RoyalBlue" />
             <SolidColorBrush x:Key="Warning" Color="#ffff00" />
             <SolidColorBrush x:Key="Error" Color="#ce0e0e" />
+            
+            <!-- Acrylic brushes -->
+            <AcrylicBrush x:Key="ShellViewFooterBackground" BackgroundSource="HostBackdrop" TintColor="DarkGray" TintOpacity=".8"/>
+            <AcrylicBrush x:Key="WindowDetailsViewBackgroundColor" BackgroundSource="HostBackdrop" TintOpacity=".8"/>
+            <SolidColorBrush x:Key="DetailsViewBackgroundColor" Color="#F5F5F5" />
 
             <!--  Converters  -->
             <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" FalseValue="Collapsed" TrueValue="Visible" />

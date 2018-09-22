@@ -39,7 +39,7 @@
 
         <Grid BorderBrush="LightGray" 
               BorderThickness="0,1,1,0"                                   
-              Background="{StaticResource DetailsViewBackgroundColor}">
+              Background="{StaticResource WindowDetailsViewBackgroundColor}">
             <views:ProductCard Margin="6" ViewModel="{x:Bind ViewModel}" Item="{x:Bind ViewModel.Item, Mode=OneWay}" />
         </Grid>
 

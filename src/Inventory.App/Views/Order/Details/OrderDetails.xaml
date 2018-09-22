@@ -58,7 +58,7 @@
 
         <Grid BorderBrush="LightGray" 
               BorderThickness="0,1,1,0"                                   
-              Background="{StaticResource DetailsViewBackgroundColor}">
+              Background="{StaticResource WindowDetailsViewBackgroundColor}">
             <views:OrderCard Margin="6" Item="{x:Bind ViewModel.OrderDetails.Item, Mode=OneWay}" />
         </Grid>
 

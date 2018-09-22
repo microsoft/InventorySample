@@ -52,7 +52,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Border BorderBrush="LightGray" BorderThickness="0,1,1,0" Background="{StaticResource DetailsViewBackgroundColor}">
+        <Border BorderBrush="LightGray" BorderThickness="0,1,1,0" Background="{StaticResource WindowDetailsViewBackgroundColor}">
             <views:CustomerCard Margin="6" ViewModel="{x:Bind ViewModel}" Item="{x:Bind ViewModel.Item, Mode=OneWay}" />
         </Border>
 
