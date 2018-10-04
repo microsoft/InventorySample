@@ -12,7 +12,7 @@ This sample highlights:
 - The master/details UI pattern.
 - Forms layouts.
 - Using the repository pattern to connect to SQLite.
-- Example of Multiples views of the app 
+- Example of Multiples views of the app
 
 ## <a name="supported"/> Supported SDKs
 - Fall Creators Update (16299)
@@ -84,12 +84,11 @@ For example, the CustomersView consists on the following subviews:
 -	**CustomersDetails** – contains the details of a selected customer with input controls to enable the edition of the selected customer in the list. It also contains the common actions available for a customer, such as: Edit or delete.
 -	**CustomersCard** – shows the main properties of the selected customer as a quick and read only view.
 -	**CustomersOrders** – contains the list of orders associated to the selected customer.
--	**CustomersView** – is the top-level view containing all the subviews described before. 
+-	**CustomersView** – is the top-level view containing all the subviews described before.
 
 The following image shows the diferent subviews contained in the CustomersView.
 
 ![Views and Subviews](docs/Architecture/img/ovw-views-subviews.png)
-
 
 ## Shell views
 A Shell view is a special type of view. This view is the shell of a window and serves as a container for other views.
@@ -266,10 +265,10 @@ The ServiceLocator uses a ServiceCollection class where services are registered 
 
 To register a service in the ServiceCollection we can use the following code:
 ```csharp
-    serviceCollection.AddSingletone<ILogService, LogService>();
+    serviceCollection.AddSingleton<ILogService, LogService>();
 ```
 
-In this case, we are registering the ILogService interface to use the LogService implementation as a singletone. This means that the next time we request a ILogService, the ServiceLocator will return an instance of the LogService class and will reuse the same instance for all the future requests.
+In this case, we are registering the ILogService interface to use the LogService implementation as a singleton. This means that the next time we request a ILogService, the ServiceLocator will return an instance of the LogService class and will reuse the same instance for all the future requests.
 
 If we want the ServiceLocator to return a new instance for every request, we can register the ILogService as transient:
 ```csharp
@@ -324,4 +323,4 @@ View-models make use of services to execute the operation requested by the user.
 
 View-models and services are instantiated using a ServiceLocator following the Dependency Injection pattern.
 -	We request a service to the ServiceLocator by specifying an interface.
--	ServiceLocator can be configured to instantiate services as Singletone, Transient or Scoped.
+-	ServiceLocator can be configured to instantiate services as Singleton, Transient or Scoped.
