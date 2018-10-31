@@ -32,9 +32,10 @@ namespace Inventory.Services
         public readonly int RangeSize;
 
         private DispatcherTimer _timer = null;
-
-        public VirtualCollection(ILogService logService, int rangeSize = 16)
+        bool MustExploreDeepExceptions { get;  set; }
+        public VirtualCollection(ILogService logService, int rangeSize = 16, bool mustExploreDeepExceptions=false)
         {
+            MustExploreDeepExceptions = mustExploreDeepExceptions;
             LogService = logService;
 
             RangeSize = rangeSize;
@@ -146,7 +147,14 @@ namespace Inventory.Services
 
         protected async void LogException(string source, string action, Exception exception)
         {
-            await LogService.WriteAsync(LogType.Error, source, action, exception.Message, exception.ToString());
+            if (MustExploreDeepExceptions == false)
+            {
+                await LogService.WriteAsync(LogType.Error, source, action, exception.Message, exception.ToString());
+            }
+            else
+            {
+                await LogService.WriteAsync(LogType.Error, source, action, exception);
+            }
         }
 
         virtual public void Dispose() { }

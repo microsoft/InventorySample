@@ -30,7 +30,16 @@ namespace Inventory.Services
         }
 
         public IMessageService MessageService { get; }
-
+        public async Task WriteAsync(LogType type, string source, string action, Exception ex)
+        {
+            await WriteAsync(LogType.Error, source, action, ex.Message, ex.ToString());
+            Exception deepException = ex.InnerException;
+            while(deepException!=null)
+            {
+                await WriteAsync(LogType.Error, source, action, deepException.Message, deepException.ToString());
+                deepException = deepException.InnerException;
+            }
+        }
         public async Task WriteAsync(LogType type, string source, string action, string message, string description)
         {
             var appLog = new AppLog()
@@ -145,5 +154,7 @@ namespace Inventory.Services
                 Description = source.Description,
             };
         }
+
+        
     }
 }
