@@ -24,7 +24,7 @@ namespace Inventory.Services
     public interface ILogService
     {
         Task WriteAsync(LogType type, string source, string action, string message, string description);
-
+        Task WriteAsync(LogType type, string source, string action, Exception ex);
         Task<AppLogModel> GetLogAsync(long id);
         Task<IList<AppLogModel>> GetLogsAsync(DataRequest<AppLog> request);
         Task<IList<AppLogModel>> GetLogsAsync(int skip, int take, DataRequest<AppLog> request);

@@ -445,3 +445,16 @@ public void Send<TSender, TArgs>(TSender sender, string message, TArgs args) whe
     }
 }
 ```
+## Log Service
+Allows for top exception and optionally all the InnerExceptions Logging
+- **WriteAsync**: Logs the top exception when MustExploreDeepExceptions property in the class VirtualCollection<T> is false (by default) or the top Exception and all InnerExceptions when true. MustExploreDeepExceptions is optionally set in the constructor:
+```csharp
+VirtualCollection(ILogService logService, int rangeSize = 16, bool mustExploreDeepExceptions=false)
+
+
+// log top Exception only
+WriteAsync(LogType type, string source, string action, string message, string description)
+
+
+// log top Exception and all Inner ones 
+WriteAsync(LogType type, string source, string action, Exception ex)
