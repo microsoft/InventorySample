@@ -140,6 +140,7 @@
     <Compile Include="Controls\Toolbars\ToolbarCommon.cs" />
     <Compile Include="Controls\WindowTitle\WindowTitle.cs" />
     <Compile Include="Controls\WrapPanel\WrapPanel.cs" />
+    <Compile Include="Converters\BindingTypeConverter.cs" />
     <Compile Include="Converters\BoolNegationConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\DateTimeFormatConverter.cs" />
