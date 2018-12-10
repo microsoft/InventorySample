@@ -1,3 +1,12 @@
+﻿---
+topic: sample
+languages:
+- csharp
+products:
+- windows
+- uwp
+---
+
 # VanArsdel Inventory Sample
 
 [![Build status](https://ci.appveyor.com/api/projects/status/s1gccf5kya2u0m7f?svg=true)](https://ci.appveyor.com/project/rido-min/inventorysample)
