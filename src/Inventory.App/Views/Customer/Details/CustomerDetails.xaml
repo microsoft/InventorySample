@@ -7,9 +7,11 @@
     xmlns:controls="using:Inventory.Controls"
     xmlns:views="using:Inventory.Views"
     xmlns:viewmodels="using:Inventory.ViewModels"
+    xmlns:converters="using:Inventory.Converters"
     mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600">
 
     <UserControl.Resources>
+        <converters:BindingTypeConverter x:Key="BindingTypeConverter"/>
         <DataTemplate x:Key="DetailsTemplate" x:DataType="viewmodels:CustomerDetailsViewModel">
             <controls:FluidGrid Columns="2" ColumnSpacing="12" Margin="12,18,6,6" RowSpacing="12">
                 <TextBlock Style="{StaticResource FormsSection}" controls:FluidGrid.ColumnSpan="2" Text="Personal Information"/>
@@ -36,11 +38,11 @@
                 <controls:FormTextBox Header="Education" Text="{x:Bind EditableItem.Education, Mode=TwoWay}" />
                 <controls:FluidGrid Columns="2" ColumnSpacing="6" RowSpacing="12" MinColumnWidth="80">
                     <controls:FormTextBox Header="Occupation" Text="{x:Bind EditableItem.Occupation, Mode=TwoWay}" />
-                    <controls:FormTextBox Header="Yearly Income" Text="{x:Bind EditableItem.YearlyIncome, Mode=TwoWay}" DataType="Decimal" />
+                    <controls:FormTextBox Header="Yearly Income" Text="{x:Bind EditableItem.YearlyIncome, Mode=TwoWay, Converter={StaticResource BindingTypeConverter}}" DataType="Decimal" />
                 </controls:FluidGrid>
                 <controls:FluidGrid Columns="2" ColumnSpacing="6" RowSpacing="12" MinColumnWidth="80">
                     <controls:FormTextBox Header="Marital Status" Text="{x:Bind EditableItem.MaritalStatus, Mode=TwoWay}" />
-                    <controls:FormTextBox Header="Total Children" Text="{x:Bind EditableItem.TotalChildren, Mode=TwoWay}" DataType="Integer" />
+                    <controls:FormTextBox Header="Total Children" Text="{x:Bind EditableItem.TotalChildren, Mode=TwoWay, Converter={StaticResource BindingTypeConverter}}" DataType="Integer" />
                 </controls:FluidGrid>
             </controls:FluidGrid>
         </DataTemplate>
