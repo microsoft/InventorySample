@@ -77,7 +77,7 @@ The following image identifies the different elements in the MainShell view.
 # ViewModels
 View-models are another essential part in the MVVM architecture pattern. You can read more details about the concepts of the View-model in the MVVM – View Model section of this documentation.
 
-The view-model contains the UI logic of the application, so it is reasonable to believe that there will be, at least, on view-model for each View. In some cases, where the view requires more complexity, more than one view-model are used for a single view.
+The view-model contains the UI logic of the application, so it is reasonable to believe that there will be, at least, one view-model for each View. In some cases, where the view requires more complexity, more than one view-model are used for a single view.
 
 To see how view-models are related to views, let’s see an example with the Customers view. The Customers view is associated with a Customers view-model and this view-model references two other view-models: CustomersList view-model and CustomersDetails view-model.
 
