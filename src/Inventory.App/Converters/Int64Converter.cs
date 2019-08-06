@@ -26,7 +26,7 @@ namespace Inventory.Converters
             {
                 if (targetType == typeof(String))
                 {
-                    return n64 == 0 ? "" : n64.ToString();
+                    return n64 == 0L ? "" : n64.ToString();
                 }
                 return n64;
             }
@@ -34,7 +34,7 @@ namespace Inventory.Converters
             {
                 return "";
             }
-            return 0;
+            return 0L;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -46,7 +46,7 @@ namespace Inventory.Converters
                     return n64;
                 }
             }
-            return 0;
+            return 0L;
         }
     }
 }

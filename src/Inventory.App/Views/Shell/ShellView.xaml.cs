@@ -65,7 +65,6 @@ namespace Inventory.Views
             var appView = ApplicationView.GetForCurrentView();
             appView.Consolidated -= OnViewConsolidated;
             ServiceLocator.DisposeCurrent();
-            Window.Current.Close();
         }
 
         private async void OnUnlockClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
