@@ -1,11 +1,14 @@
 ---
-topic: sample
+page_type: sample
 languages:
-- csharp
+  - csharp
+  - xaml
 products:
-- windows
-- windows-uwp
+  - windows
+  - windows-uwp
+description: Demonstrates how to use the latest UWP capabilities for LOB scenarios in Desktop apps. The sample is based around creating and managing customers, orders, and products for the fictitious company VanArsdel.
 ---
+
 
 # VanArsdel Inventory Sample
 

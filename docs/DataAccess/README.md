@@ -1,6 +1,6 @@
 # Data Access
 
-The data we use in the Van Arsdel Inventory app is located in a SQLite local database and we are usnig *Entity Framework Core* to manage the data access.
+The data we use in the Van Arsdel Inventory app is located in a SQLite local database and we are using *Entity Framework Core* to manage the data access.
 
 We will explain the arquitecture of the [.NET Standard](netstandard.md) project **VanArsdelData** included in the app. This project holds the data access logic of the app and it's a cross-platform library that can be shared for example with a Xamarin mobile app, a WPF desktop app, etc. 
 
