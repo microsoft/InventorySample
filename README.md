@@ -1,17 +1,17 @@
 ---
 page_type: sample
-name: Van Arsdel Inventory Sample
+name: XAML Van Arsdel Inventory Sample
 languages:
   - csharp
   - xaml
 products:
   - windows
   - windows-uwp
-description: Demonstrates how to use the latest UWP capabilities for LOB scenarios in Desktop apps. The sample is based around creating and managing customers, orders, and products for the fictitious company VanArsdel.
+description: Demonstrates how to use the UWP XAML capabilities for LOB scenarios in Desktop apps. The sample is based around creating and managing customers, orders, and products for the fictitious company VanArsdel.
 ---
 
 
-# VanArsdel Inventory Sample
+# XAML VanArsdel Inventory Sample
 
 [![Build status](https://ci.appveyor.com/api/projects/status/s1gccf5kya2u0m7f?svg=true)](https://ci.appveyor.com/project/rido-min/inventorysample)
 
