@@ -1,5 +1,6 @@
 ---
 page_type: sample
+name: Van Arsdel Inventory Sample
 languages:
   - csharp
   - xaml
